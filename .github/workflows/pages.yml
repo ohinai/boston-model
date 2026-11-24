@@ -47,6 +47,10 @@ jobs:
         working-directory: web
       - run: npm run build
         working-directory: web
+        env:
+          # Notes left in the viewer are filed as issues in this repository.
+          VITE_REPO: ${{ github.repository }}
+          VITE_COMMIT: ${{ github.sha }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

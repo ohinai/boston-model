@@ -6,6 +6,8 @@ import {
   type Material,
   Mesh,
   MeshStandardMaterial,
+  type Object3D,
+  Raycaster,
   type Scene,
   Vector3,
 } from 'three';
@@ -29,13 +31,33 @@ interface Street {
 }
 
 interface Named {
+  id: string;
   name?: string;
   pos: [number, number];
 }
 
+/** A building as described in a tile's data file. */
+export interface BuildingInfo extends Named {
+  /** For a part of a larger building: that building's id. */
+  part_of?: string;
+  height: number;
+  /** Where the height came from: a measured tag, a storey count, a guess, or a fix in the repository. */
+  height_source: 'height' | 'levels' | 'default' | 'override';
+}
+
+/** What a ray from the eye hits first. */
+export interface Pick {
+  /** Scene position of the hit. */
+  point: Vector3;
+  distance: number;
+  /** Tile layer that was hit, for example `green` or `building_walls`. */
+  layer: string;
+  building?: BuildingInfo;
+}
+
 interface Semantics {
   streets: Street[];
-  buildings: Named[];
+  buildings: BuildingInfo[];
   pois: Named[];
 }
 
@@ -137,6 +159,8 @@ export class City {
   private readonly tiles = new Map<string, Tile>();
   private readonly materials = new Map<string, Material>();
   private readonly loader = new GLTFLoader();
+  private readonly raycaster = new Raycaster();
+  private readonly tileOfGroup = new WeakMap<Object3D, Tile>();
   private loading = 0;
   private readonly box = new Box3();
   private readonly trianglePoint = new Vector3();
@@ -241,6 +265,31 @@ export class City {
     }
   }
 
+  /**
+   * What a ray hits first, tested against the drawn geometry of every loaded tile.
+   * Thorough rather than fast: meant for a single look, not for every frame.
+   */
+  pick(origin: Vector3, direction: Vector3, far = 600): Pick | null {
+    this.raycaster.set(origin, direction);
+    this.raycaster.far = far;
+    const groups: Group[] = [];
+    for (const tile of this.tiles.values()) if (tile.group) groups.push(tile.group);
+    const hit = this.raycaster.intersectObjects(groups, true)[0];
+    if (!hit) return null;
+    const mesh = hit.object as Mesh;
+    // Building vertices carry their building's index in the tile's data file.
+    const ids = mesh.geometry.getAttribute('_feature_id_0');
+    const semantics = mesh.parent ? this.tileOfGroup.get(mesh.parent)?.semantics : undefined;
+    const building = ids && hit.face && semantics ? semantics.buildings[Math.round(ids.getX(hit.face.a))] : undefined;
+    return { point: hit.point.clone(), distance: hit.distance, layer: mesh.name, building };
+  }
+
+  /** The tile indices of a world-metre position. */
+  tileIndex(x: number, y: number): [number, number] {
+    const size = this.frame.tile_size;
+    return [Math.floor(x / size), Math.floor(y / size)];
+  }
+
   /** The street and the nearest named place at a world-metre position. */
   describe(x: number, y: number): { street?: string; nearby?: string } {
     const size = this.frame.tile_size;
@@ -313,6 +362,7 @@ export class City {
       group.matrixAutoUpdate = false;
       tile.group = group;
       tile.semantics = semantics;
+      this.tileOfGroup.set(group, tile);
       tile.state = 'ready';
       this.scene.add(group);
     } catch (error) {

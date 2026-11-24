@@ -20,7 +20,9 @@ import {
 } from 'three';
 import { City } from './city';
 import { Geo } from './geo';
-import { Input, Player } from './player';
+import { Notepad } from './notepad';
+import { type NoteContext, buildCommit, siteUrl } from './notes';
+import { Input, Player, isTyping } from './player';
 
 const HORIZON = new Color('#c5d6e4');
 const ZENITH = new Color('#3d76bf');
@@ -214,6 +216,77 @@ async function boot(): Promise<void> {
   const start = city.places[0];
   go(readHash() ?? (start ? { ...start, altitude: 0, pitch: 0 } : { lat: 42.3587, lon: -71.063, heading: 0, altitude: 0, pitch: 0 }));
 
+  const lookDirection = new Vector3();
+  const round = (value: number, digits: number): number => Number(value.toFixed(digits));
+  const notepad = new Notepad({
+    scene,
+    notice,
+    // Everything a person or a tool needs to find the spot again and see what the author saw.
+    capture: () => {
+      const x = player.position.x;
+      const y = -player.position.z;
+      const z = player.position.y;
+      const [lon, lat] = geo.toLonLat(x, y);
+      const { street, nearby } = city.describe(x, y);
+      player.applyTo(camera);
+      camera.updateMatrixWorld();
+      const hit = city.pick(camera.position, camera.getWorldDirection(lookDirection));
+      let lookingAt: NoteContext['looking_at'];
+      if (hit) {
+        const [hitLon, hitLat] = geo.toLonLat(hit.point.x, -hit.point.z);
+        lookingAt = {
+          lat: round(hitLat, 7),
+          lon: round(hitLon, 7),
+          x: round(hit.point.x, 2),
+          y: round(-hit.point.z, 2),
+          z: round(hit.point.y, 2),
+          distance: round(hit.distance, 2),
+          layer: hit.layer,
+          building: hit.building && {
+            id: hit.building.id,
+            part_of: hit.building.part_of,
+            name: hit.building.name,
+            height: hit.building.height,
+            height_source: hit.building.height_source,
+          },
+        };
+      }
+      const altitude = player.flying ? z.toFixed(0) : '0';
+      const view = [lat.toFixed(6), lon.toFixed(6), player.heading.toFixed(0), altitude, player.pitch.toFixed(0)];
+      return {
+        standing: {
+          lat: round(lat, 7),
+          lon: round(lon, 7),
+          x: round(x, 2),
+          y: round(y, 2),
+          z: round(z, 2),
+          heading: round(player.heading, 1),
+          pitch: round(player.pitch, 1),
+          flying: player.flying,
+        },
+        looking_at: lookingAt,
+        tile: city.tileIndex(x, y),
+        street,
+        near: nearby,
+        link: `${siteUrl()}#${view.join(',')}`,
+        data: city.sourceDate,
+        build: buildCommit,
+      };
+    },
+    go: ({ standing }) =>
+      go({
+        lat: standing.lat,
+        lon: standing.lon,
+        heading: standing.heading,
+        altitude: standing.flying ? standing.z : 0,
+        pitch: standing.pitch,
+      }),
+    releaseInput: () => {
+      input.release();
+      if (document.pointerLockElement) document.exitPointerLock();
+    },
+  });
+
   // Pasting or editing a location link moves the player without a reload.
   window.addEventListener('hashchange', () => {
     const view = readHash();
@@ -237,8 +310,11 @@ async function boot(): Promise<void> {
   });
   document.addEventListener('pointerlockchange', () => (element('crosshair').hidden = !input.locked));
   window.addEventListener('keydown', (event) => {
-    if (!started || event.repeat || event.target instanceof HTMLSelectElement) return;
-    if (event.code === 'KeyF') {
+    if (!started || event.repeat || isTyping(event.target)) return;
+    if (event.code === 'KeyN') {
+      event.preventDefault(); // or the N would be typed into the note
+      notepad.open();
+    } else if (event.code === 'KeyF') {
       setFlying(!player.flying);
       notice(player.flying ? 'Flying: Space rises, C sinks, Shift is fast' : 'Walking');
     } else if (/^Digit[1-9]$/.test(event.code)) {
@@ -274,11 +350,10 @@ async function boot(): Promise<void> {
       const y = -player.position.z;
       const [lon, lat] = geo.toLonLat(x, y);
       element('coords').textContent = `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
-      element<HTMLAnchorElement>('osm').href =
-        `https://www.openstreetmap.org/edit#map=20/${lat.toFixed(6)}/${lon.toFixed(6)}`;
       const { street, nearby } = city.describe(x, y);
       element('street').textContent = street ?? city.name;
       element('nearby').textContent = nearby ? `near ${nearby}` : '';
+      notepad.update(player.position);
 
       if (!started) {
         const { ready, wanted } = city.progress(player.position);

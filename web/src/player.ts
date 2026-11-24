@@ -16,6 +16,13 @@ const LOOK_RATE = 0.11; // degrees per pixel of mouse travel
 const SUBSTEPS = 5;
 const WATER_LEVEL = -0.35; // standing lower than this means standing in water
 
+/** True when a key press belongs to a form control rather than to the walker. */
+export function isTyping(target: EventTarget | null): boolean {
+  return (
+    target instanceof HTMLTextAreaElement || target instanceof HTMLInputElement || target instanceof HTMLSelectElement
+  );
+}
+
 /** Keyboard and mouse state. Mouse look works with pointer lock or by dragging. */
 export class Input {
   private readonly keys = new Set<string>();
@@ -25,7 +32,7 @@ export class Input {
 
   constructor(private readonly canvas: HTMLCanvasElement) {
     window.addEventListener('keydown', (event) => {
-      if (event.target instanceof HTMLSelectElement || event.target instanceof HTMLInputElement) return;
+      if (isTyping(event.target)) return;
       this.keys.add(event.code);
       if (event.code === 'Space' || event.code.startsWith('Arrow')) event.preventDefault();
     });
@@ -52,6 +59,12 @@ export class Input {
   /** +1, 0 or -1 from a pair of opposing key groups. */
   axis(negative: string[], positive: string[]): number {
     return Number(this.down(...positive)) - Number(this.down(...negative));
+  }
+
+  /** Forget every held key, for when focus moves to a form. */
+  release(): void {
+    this.keys.clear();
+    this.dragging = false;
   }
 
   takeLook(): [number, number] {

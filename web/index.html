@@ -12,11 +12,13 @@
     <div id="where" class="panel" hidden>
       <div id="street"></div>
       <div id="nearby"></div>
+      <div id="notehint"></div>
     </div>
 
     <div id="tools" class="panel">
       <select id="places" aria-label="Jump to a place"></select>
       <button id="mode" type="button" title="Toggle walking and flying (F)">Walk</button>
+      <button id="notes-toggle" type="button" title="Notes left here and open tickets">Notes</button>
     </div>
 
     <div id="crosshair" hidden></div>
@@ -33,13 +35,42 @@
         <dt>Space</dt><dd>jump</dd>
         <dt>F</dt><dd>fly, then Space and C to rise and sink</dd>
         <dt>1 – 9</dt><dd>jump to a landmark</dd>
+        <dt>N</dt><dd>leave a note about something that looks wrong</dd>
         <dt>Esc</dt><dd>release the mouse</dd>
       </dl>
     </div>
 
+    <form id="note" class="panel" hidden>
+      <h2>Leave a note</h2>
+      <p id="note-where" class="muted"></p>
+      <textarea
+        id="note-text"
+        rows="5"
+        required
+        placeholder="What looks wrong here, or what should be here instead?"
+      ></textarea>
+      <p class="muted">Your exact position and what you are looking at are saved with the note.</p>
+      <div class="row">
+        <button type="submit" class="primary" title="Ctrl + Enter">Save and open a ticket</button>
+        <button id="note-save" type="button">Save for later</button>
+        <button id="note-cancel" type="button">Cancel</button>
+      </div>
+    </form>
+
+    <div id="notes" class="panel" hidden>
+      <h2>Notes</h2>
+      <p id="notes-empty" class="muted">
+        Nothing yet. Stand where something looks wrong, look at it and press N.
+      </p>
+      <ul id="notes-list"></ul>
+      <div class="row">
+        <button id="notes-download" type="button">Download my notes</button>
+      </div>
+    </div>
+
     <div id="footer">
       <span id="coords"></span>
-      <a id="osm" target="_blank" rel="noopener">Fix this spot in OpenStreetMap</a>
+      <button id="note-open" type="button">Leave a note (N)</button>
       <span id="attribution"></span>
     </div>
 
