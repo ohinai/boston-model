@@ -5,12 +5,12 @@ the pipeline's output or writing a new client.
 
 ## The idea
 
-Source data and hand corrections go in, tiles come out, and clients only read
-tiles.
+Source data and the corrections in `fixes/` go in, tiles come out, and clients
+only read tiles.
 
 ```
 OpenStreetMap ─┐
-overrides/ ────┼─► pipeline ─► tileset.json + tiles/*.glb + tiles/*.json ─► viewers
+fixes/ ────────┼─► pipeline ─► tileset.json + tiles/*.glb + tiles/*.json ─► viewers
 (more sources) ┘
 ```
 
@@ -20,8 +20,8 @@ Three consequences follow from this:
   holds text that can be reviewed and merged.
 - **Clients stay thin.** The browser viewer and any game-engine project load the
   same files and add only what is specific to them: rendering, controls, physics.
-- **Accuracy improves at the source.** A fix made in OpenStreetMap or in
-  `overrides/` reaches every client on the next build.
+- **Accuracy improves in one place.** A fix added to `fixes/` reaches every
+  client on the next build, and survives every later data update.
 
 ## World frame
 
@@ -44,7 +44,7 @@ a metre here, which is below the accuracy of the source data, and skipping the
 datum shift makes the Python pipeline and the browser agree to the millimetre.
 
 Changing the origin or the projection moves everything ever built, including
-positions in `overrides/`. Treat these constants as permanent.
+the positions recorded in notes. Treat these constants as permanent.
 
 ## Tiles
 
@@ -92,6 +92,11 @@ with the same name:
 Clients may rely on these names. The browser viewer uses them to decide what is
 solid (everything except `trees`) and to swap in its own materials.
 
+Building vertices carry a `_FEATURE_ID_0` attribute (declared with the
+`EXT_mesh_features` extension): the building's position in the `buildings`
+list of the tile's data file. That is how a client tells which building a
+click or a line of sight has hit.
+
 Ground layers never overlap. Where two meet, the higher priority one wins:
 roads, then rail, paths, water, green, ground. Carriageways are also kept at
 least a metre away from building footprints, so a street estimated too wide
@@ -118,7 +123,10 @@ repeating a pattern or texture once per unit. Walls too short for a bay have
 }
 ```
 
-Ids are OpenStreetMap ids with a type prefix (`n` node, `w` way, `r` relation).
+Ids are OpenStreetMap ids with a type prefix (`n` node, `w` way, `r` relation),
+or `fix:<file>#<n>` for a feature added by a file in `fixes/`. A building part
+also has `part_of`, the id of the building it belongs to, and takes that
+building's name.
 `height_source` is `height` (a measured height tag), `levels` (storey count),
 `default` (a guess by building type) or `override`. This file is where
 simulation will hang: signals, shop fronts and transit stops are positions and
@@ -127,9 +135,14 @@ facts here long before they are models.
 ## Pipeline
 
 `boston-pipeline fetch <area>` downloads OpenStreetMap data through the Overpass
-API into `data/raw/<area>/`. `boston-pipeline build <area>` then runs three
+API into `data/raw/<area>/`. `boston-pipeline build <area>` then runs four
 stages:
 
+0. **Apply fixes** ([`fixes.py`](../pipeline/boston_pipeline/fixes.py)). Read
+   every file under [`fixes/`](../fixes) and apply it to the downloaded
+   elements: change tags, delete features, add new ones. Fixes use the same
+   tag vocabulary as the source data, so everything after this point treats
+   corrected and original data alike.
 1. **Classify** ([`features.py`](../pipeline/boston_pipeline/features.py)).
    Interpret tags: what is a road, how wide, how tall is a building with no
    height. All tagging conventions and default values live here.
@@ -142,6 +155,11 @@ stages:
 Each tile is built from index lookups alone, so build time grows with the
 number of tiles rather than the size of the city, and tiles can later be built
 in parallel or one at a time.
+
+`boston-pipeline inspect <lat>,<lon>`
+([`lookup.py`](../pipeline/boston_pipeline/lookup.py)) runs the first two stages
+and reports what is at a position: each source feature's id and tags, and the
+layer the spot is drawn in. It is the starting point for fixing anything.
 
 [`mesh.py`](../pipeline/boston_pipeline/mesh.py) holds the geometry helpers and
 [`gltf.py`](../pipeline/boston_pipeline/gltf.py) a small glTF writer. The
@@ -159,10 +177,49 @@ any address given as `?tileset=<url>`.
   plus a fly mode. Collision is against the real tile geometry, so anything a
   future build adds (terrain, steps, bridges) is walkable without viewer changes.
 - [`main.ts`](../web/src/main.ts) sets up lighting, sky and the on-screen text.
+- [`notes.ts`](../web/src/notes.ts) and [`notepad.ts`](../web/src/notepad.ts)
+  handle notes, described next.
 
 The page address carries `#lat,lon,heading` (and altitude and pitch when
 flying). Positions are latitude and longitude so links survive any future
 change to the world frame.
+
+## Notes
+
+A note is how someone walking the model reports a problem. Pressing `N`
+records the position and view at that instant, then asks for a sentence or
+two. The viewer has no server, so a note is kept in the browser's local
+storage and filed by opening GitHub's new-issue page with the title and text
+already filled in.
+
+The ticket ends with a JSON block that tools read:
+
+```json
+{
+ "boston_note": 1,
+ "id": "n-mwuwi5s5-npqu",
+ "standing": {"lat": 42.3544, "lon": -71.0702, "x": -590.29, "y": -477.24, "z": 0,
+              "heading": 200, "pitch": -6, "flying": false},
+ "looking_at": {"lat": 42.3542698, "lon": -71.0702649, "x": -595.56, "y": -491.73, "z": 0,
+                "distance": 15.5, "layer": "paths"},
+ "tile": [-3, -2],
+ "street": "Lagoon Path",
+ "near": "Japanese Lantern",
+ "link": "https://ohinai.github.io/boston-model/#42.354400,-71.070200,200,0,-6",
+ "data": "2026-11-24T14:25:35Z"
+}
+```
+
+`standing` is where the author stood; `heading` is degrees clockwise from north
+and `pitch` degrees above the horizon. `looking_at` is the first thing straight
+ahead: its position, the tile layer it belongs to, and for a building its id,
+name and height. `data` is the timestamp of the source data the author saw.
+These field names are a contract with [AGENTS.md](../AGENTS.md); add fields
+rather than renaming them, and raise `boston_note` if the meaning changes.
+
+A workflow labels such tickets `note`. On load the viewer reads the
+repository's open issues through GitHub's public API and shows each note as a
+marker where it was left.
 
 ## Desktop engines
 

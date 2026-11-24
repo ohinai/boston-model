@@ -20,6 +20,8 @@ this page in the same pull request.
   3D mesh counts as a "produced work" or a "derivative database" is not settled
   by any OSM Foundation guideline, so this project takes the cautious reading.
   The pipeline being public satisfies the requirement to share the method.
+- **Corrections:** errors and gaps are fixed in this repository's `fixes/`
+  folder, not upstream, and those files are ODbL as well.
 - **How it is fetched:** the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API)
   for single districts. Its usage policy asks for fewer than 10 000 queries and
   1 GB per day, and no parallel requests. For the whole city, use the
