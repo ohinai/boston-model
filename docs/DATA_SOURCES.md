@@ -53,6 +53,42 @@ this page in the same pull request.
   continuously, so a fresh download can differ from the one a build used. Trees
   missing from it or removed since are corrected in `fixes/`.
 
+### USGS NAIP aerial imagery
+
+- **Used for:** checking the model against a leaf-on photograph: whether a tree
+  crown exists and how wide it is, and the colour of surfaces. The `audit`
+  command draws the model on it and finds tree canopy from its near-infrared
+  band (see [ARCHITECTURE.md](ARCHITECTURE.md)). It is not built into the tiles.
+- **What:** National Agriculture Imagery Program, 0.3 m, acquired 7 July 2023,
+  four bands. The service gives natural colour, false colour and a vegetation
+  index through its `renderingRule`. Only this one acquisition is served for
+  Boston.
+- **Licence:** public domain.
+- **Access:** the
+  [USGS NAIP ImageServer](https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer),
+  `exportImage`. The audit asks for EPSG:26986, so the picture lines up with the
+  model with no reprojection.
+- **Caveats:** tall things lean a few metres away from the camera. Shadows can
+  be mistaken for crowns, so work out which way they fall in each picture
+  before judging. A tree planted since 2023 is not in it. Tree heights cannot
+  be read from it.
+
+### MassGIS aerial imagery
+
+- **Used for:** measuring things that are clear with the leaves off, such as the
+  width of the Public Garden footbridge and of paths, and telling evergreen
+  trees from bare ones in early spring (a dense evergreen is solid, with a sharp
+  shadow). It is not yet built into the `audit` command; that is on the
+  [roadmap](ROADMAP.md).
+- **What:** 15 cm, leaf-off, spring 2019, 2021, 2023 and 2025. Services
+  `USGS_Orthos_2019`, `orthos2021`, `orthos2023` and
+  `Massachusetts_Aerial_Imagery_2025` under
+  `https://tiles.arcgis.com/tiles/hGdibHYSPO59RG1h/arcgis/rest/services/`.
+- **Licence:** the ArcGIS items say "No restrictions apply to these data", and
+  that acknowledgement of MassGIS is appreciated. Credit MassGIS.
+- **Access:** Web Mercator map tiles only, with no token. Level 20 is the native
+  resolution.
+
 ## Planned
 
 These are open, verified and not yet wired into the pipeline. They are listed
@@ -84,15 +120,6 @@ roughly in the order they would improve accuracy.
   [TNM Access API](https://tnmaccess.nationalmap.gov/api/v1/products).
 - **Caveat:** the files are LAZ, so the pipeline needs a LAZ reader before it
   can use them.
-
-### Crown reference: USGS NAIP aerial imagery
-
-- **Use:** a reference for checking tree crowns, because it was taken with the
-  leaves on. Not wired into the pipeline.
-- **What:** National Agriculture Imagery Program, 0.3 m, acquired 7 July 2023.
-- **Licence:** public domain.
-- **Access:** the
-  [USGS NAIP ImageServer](https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer).
 
 ### Building heights: Boston buildings with roof breaks
 
@@ -168,6 +195,10 @@ Ground photographs are for looking at, to see what a tree, statue or fence is
 like. Openly licensed ones, such as those on Wikimedia Commons (mostly
 CC BY-SA), are fine as visual reference. Do not use a photograph as a texture
 or as data.
+
+Open street-level imagery inside the parks is close to non-existent. Mapillary
+needs an account, and Panoramax has a single image there. The aerial surveys
+above are the practical check.
 
 ## Not usable
 

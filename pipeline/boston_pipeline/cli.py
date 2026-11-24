@@ -93,6 +93,7 @@ def cmd_build(args) -> None:
         print(
             f"  trees: {counts['inventory']:,} from the city inventory, {counts['kept_osm']:,} from OpenStreetMap only"
             f" ({counts['merged']:,} duplicates merged, {counts['dropped']:,} dropped)"
+            + (f", {counts['added']:,} added by fixes" if counts.get("added") else "")
         )
     if applied.unmatched:
         print(
@@ -131,6 +132,28 @@ def cmd_inspect(args) -> None:
     print(json.dumps(report, indent=1) if args.json else lookup.format_report(report, args.radius))
 
 
+def cmd_audit(args) -> None:
+    from . import audit
+    from .tiles import prepare
+
+    if bool(args.park) == bool(args.around):
+        raise SystemExit("give exactly one of --park NAME or --around LAT,LON")
+    area = _area(args.area)
+    scene, _, _ = _scene(args.area)
+    if args.park:
+        geometry = audit.park_geometry(scene, args.park)
+    else:
+        lat, lon = _parse_position([args.around])
+        geometry = audit.square_around(lat, lon, args.size)
+    # Which footbridges are raised is decided while preparing tiles, so ask the same code.
+    ctx = prepare(scene, world.tiles_covering(tuple(area["bbox"])))
+    decks = [pair for pairs in ctx.decks.values() for pair in pairs]
+    audit.run(
+        args.area, scene, geometry, decks, ROOT / "data" / "raw" / args.area, Path(args.out), args.cell, args.pixels, args.force,
+        canopy=not args.no_canopy,
+    )
+
+
 def cmd_info(_args) -> None:
     lon, lat = (float(v) for v in world.to_lonlat(0.0, 0.0))
     print(f"world CRS      {world.WORLD_CRS}")
@@ -163,6 +186,20 @@ def main(argv: list[str] | None = None) -> None:
     inspect.add_argument("--area", help="area name (default: the area containing the point)")
     inspect.add_argument("--json", action="store_true", help="print machine-readable JSON")
     inspect.set_defaults(run=cmd_inspect)
+
+    audit = commands.add_parser(
+        "audit", help="draw the model over an aerial photograph, cell by cell, to spot where it is wrong"
+    )
+    audit.add_argument("area")
+    audit.add_argument("--park", help="audit every cell overlapping the park with this name")
+    audit.add_argument("--around", help="audit a square centred on LAT,LON")
+    audit.add_argument("--size", type=float, default=240.0, help="side of the --around square, in metres")
+    audit.add_argument("--cell", type=float, default=120.0, help="side of a cell, in metres")
+    audit.add_argument("--pixels", type=int, default=1000, help="width and height of each picture")
+    audit.add_argument("--out", default=ROOT / "data" / "audit", help="output directory (default: data/audit)")
+    audit.add_argument("--force", action="store_true", help="download the photographs again")
+    audit.add_argument("--no-canopy", action="store_true", help="skip the canopy picture (proposed trees, measured crowns)")
+    audit.set_defaults(run=cmd_audit)
 
     commands.add_parser("info", help="print the world frame and areas").set_defaults(run=cmd_info)
     args = parser.parse_args(argv)

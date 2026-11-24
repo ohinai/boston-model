@@ -11,7 +11,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8"]
+dev = ["pytest>=8", "pillow"]
+audit = ["pillow"]
 
 [project.scripts]
 boston-pipeline = "boston_pipeline.cli:main"

@@ -162,25 +162,34 @@ def describe(tags: dict, seed: int = 0) -> TreeShape:
             common = exception[3] or common
     name = tags.get("species:en") or common
 
+    stated = _number(tags.get("height"))
+    measured = stated is not None and 1.5 <= stated <= 60
+    crown = _number(tags.get("diameter_crown"))
+    has_crown = crown is not None and 1 <= crown <= 40
+    # A tree known only by its crown width (one seen in a photograph) has no trunk or height to go by.
+    # The default trunk would make it tall and narrow, so size it from the crown instead.
+    from_crown = has_crown and not measured and _number(tags.get("circumference")) is None
+
     # Trunk diameter at breast height, cm.
     girth = _number(tags.get("circumference"))
-    if girth is not None and 0.05 <= girth <= 8:
+    if from_crown:
+        d = crown * 3.5  # the inverse of the crown cap below (0.28 d + 1.5 is about the crown width)
+    elif girth is not None and 0.05 <= girth <= 8:
         d = girth / math.pi * 100
     else:
         d = DENOTATION_CM.get(str(tags.get("denotation", "")).lower(), DEFAULT_CM) * _vary(seed, 1, 0.2)
 
     # Height: mapped, else a saturating curve of trunk diameter towards the mature height.
-    stated = _number(tags.get("height"))
-    measured = stated is not None and 1.5 <= stated <= 60
     if measured:
         height = stated
+    elif from_crown:
+        height = max(2.0, min(mature, crown / spread))  # the crown is the evidence: invert the spread ratio
     else:
         height = 1.3 + (mature - 1.3) * (1 - math.exp(-d / (1.9 * mature)))
         height = max(2.0, height * _vary(seed, 2, 0.06))
 
     # Crown: mapped, else height times the genus spread; a thin young trunk cannot carry a wide crown.
-    crown = _number(tags.get("diameter_crown"))
-    if crown is None or not 1 <= crown <= 40:
+    if not has_crown:
         crown = max(1.2, min(height * spread * _vary(seed, 3, 0.08), 0.28 * d + 1.5))
 
     # Park and street trees are limbed up, except conifers (branches to the ground).

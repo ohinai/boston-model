@@ -68,7 +68,7 @@ def _scene(inventory_trees, osm_trees, park=None):
 def test_reconcile_merges_close_pairs_and_keeps_distant_ones():
     scene = _scene([(0, 0), (100, 0)], [(3, 0, {}), (106, 0, {})])
     counts = inventory.reconcile(scene)
-    assert counts == {"inventory": 2, "osm": 2, "merged": 1, "dropped": 0, "kept_osm": 1}
+    assert counts == {"inventory": 2, "osm": 2, "merged": 1, "dropped": 0, "kept_osm": 1, "added": 0}
     assert sorted(t.id for t in scene.trees) == ["bprd:0", "bprd:1", "n1"]
     assert next(t for t in scene.trees if t.id == "bprd:0").tags["osm"] == "n0"
 
@@ -96,6 +96,17 @@ def test_reconcile_drops_unmatched_osm_trees_only_in_inventoried_parks():
     counts = inventory.reconcile(scene)
     assert counts["dropped"] == 1 and counts["kept_osm"] == 1
     assert [t.id for t in scene.trees if not t.id.startswith("bprd:")] == ["n1"]
+
+
+def test_reconcile_leaves_trees_added_by_fixes_alone():
+    grid = [(x * 5.0, y * 5.0) for x in range(5) for y in range(5)]
+    scene = _scene(grid, [], park=(-10, -10, 100, 100))
+    # One right beside an inventory tree, one in open lawn inside the inventoried park.
+    scene.trees += [Point("fix:park/trees#0", 1.0, 1.0, tags={"natural": "tree"}), Point("fix:park/trees#1", 60.0, 60.0, tags={"natural": "tree"})]
+    counts = inventory.reconcile(scene)
+    assert (counts["merged"], counts["dropped"], counts["added"]) == (0, 0, 2)
+    assert {t.id for t in scene.trees if t.id.startswith("fix:")} == {"fix:park/trees#0", "fix:park/trees#1"}
+    assert len(scene.trees) == 27
 
 
 def test_reconcile_trusts_a_park_only_when_enough_trees_are_inventoried():

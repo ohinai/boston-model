@@ -207,8 +207,11 @@ Tree size and shape come from [`trees.py`](../pipeline/boston_pipeline/trees.py)
 a table of genera gives each a form, a typical mature height and spread, and
 leaf and bark colours. Height is the `height` tag if there is one, otherwise it
 is estimated from trunk diameter along a curve that levels off at the genus's
-mature height. Crown width is `diameter_crown` or the genus's spread. These are
-estimates, not measurements. Shapes for furniture and monuments are in
+mature height. Crown width is `diameter_crown` or the genus's spread. A tree
+with a `diameter_crown` and neither a `height` nor a trunk size is sized from
+the crown instead: its height is the crown width over the genus's spread. Except
+where `height` or `diameter_crown` is set, these are estimates, not
+measurements. Shapes for furniture and monuments are in
 [`furniture.py`](../pipeline/boston_pipeline/furniture.py), and footbridge decks
 in [`bridges.py`](../pipeline/boston_pipeline/bridges.py). A footbridge that
 crosses water on its own is raised in a gentle arch over the water (2.5% of the
@@ -221,6 +224,39 @@ levels.
 [`mesh.py`](../pipeline/boston_pipeline/mesh.py) holds the geometry helpers and
 [`gltf.py`](../pipeline/boston_pipeline/gltf.py) a small glTF writer. The
 pipeline depends only on numpy, shapely, pyproj and mapbox-earcut.
+
+## Auditing
+
+`boston-pipeline audit <area>` ([`audit.py`](../pipeline/boston_pipeline/audit.py))
+checks the model against an aerial photograph. It runs the same first two stages
+as `inspect`, then cuts the part of the area it was asked for (`--park` or
+`--around`) into a grid of 120 m cells aligned to the world frame. For each cell
+it writes, under `data/audit/<area>/c_<i>_<j>/`:
+
+```
+aerial.jpg      the photograph
+overlay.jpg     the photograph with the model drawn on it
+canopy.jpg      the photograph with the detected canopy outlined
+features.json   what every number and outline on the overlay is
+```
+
+The photograph is the USGS NAIP survey of 7 July 2023, requested from the
+service in EPSG:26986. That is the world frame's own projection, so a north-up
+picture lines up with the model with no reprojection. Photographs are cached in
+`data/raw/<area>/aerial/`. The overlay shows trees as numbered crowns, path
+edges, beds, water, raised footbridges, buildings and furniture.
+
+Canopy comes from the same survey's near-infrared band, read through the
+service's vegetation-index picture. A pixel is canopy when it is clearly green
+and dark in red; the constants are at the top of `audit.py`. Compact canopy blobs
+with no tree under them become proposed trees (`C1`, `C2`, ...), and blobs that
+belong to exactly one tree give that tree's measured crown width. Blobs touching
+the picture's edge are skipped.
+
+The audit never changes the model. Proposals and measurements are suggestions
+to be checked by eye (the `/audit` command in
+[`.claude/commands/audit.md`](../.claude/commands/audit.md) is the procedure)
+and only then become files in `fixes/`.
 
 ## Browser viewer
 

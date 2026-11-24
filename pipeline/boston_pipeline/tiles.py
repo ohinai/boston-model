@@ -44,7 +44,7 @@ MATERIALS = {
     "green": Material("#ffffff", 1.0),
     "beds": Material("#ffffff", 1.0),
     "water": Material("#2e5a6e", 0.15),
-    "roads": Material("#3d3f42", 0.9),
+    "roads": Material("#6b6d70", 0.9),
     "paths": Material("#ffffff", 0.9),
     "rail": Material("#6b6259", 1.0),
     "curbs": Material("#8d8c88", 0.8),
@@ -58,11 +58,16 @@ MATERIALS = {
 # The colour of each kind of surface within a layer (see path_cover and
 # green_cover in features.py). Where two kinds of path overlap, the one listed
 # first is drawn.
+#
+# How light each is relative to grass was checked against aerial photographs
+# (USGS NAIP, July 2023): sunlit asphalt paths and carriageways are about one
+# and a half times as bright as lawn, and concrete nearer twice. Weathered
+# asphalt is a mid grey, not black.
 COVERS = {
     "paths": {
-        "wood": "#8b7355", "brick": "#96604c", "sett": "#85817b", "metal": "#7f8386",
-        "paving_stones": "#aaa49b", "concrete": "#bdb9b0", "gravel": "#b3a688", "sand": "#cdbb93",
-        "dirt": "#9c8566", "asphalt": "#6e6f70", "paved": "#b9b4a8",
+        "wood": "#9c8566", "brick": "#a8705a", "sett": "#94908a", "metal": "#7f8386",
+        "paving_stones": "#b3ada3", "concrete": "#bdb9b0", "gravel": "#b3a688", "sand": "#cdbb93",
+        "dirt": "#9c8566", "asphalt": "#96968f", "paved": "#b9b4a8",
     },
     "green": {
         "grass": "#6d8c4c", "lawn": "#6d8c4c", "pitch": "#74964e", "turf": "#4f8a4a", "court": "#3f6f5c",
@@ -72,7 +77,7 @@ COVERS = {
 }
 BED_SOIL = "#5a4a3a"
 # Planting colours, picked per bed: mostly foliage, some in flower.
-BED_PLANTING = ["#5f7f3f", "#6d8a45", "#587a4a", "#66803c", "#8c5a6e", "#a8873a", "#9a4a4a", "#7a6a9a"]
+BED_PLANTING = ["#5f7f3f", "#6d8a45", "#587a4a", "#66803c", "#7d6a72", "#9a8448", "#8a5650", "#6f6a8a"]
 BRIDGE_STRUCTURE = "#7d8a8c"
 BRIDGE_RAILS = "#3a4648"
 # Something mapped in the water right beside a raised footbridge (typically a

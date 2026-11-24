@@ -1,0 +1,829 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "1.9",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 1.9 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0689358,
+     42.3543495
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.2",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.2 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0690512,
+     42.3543187
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.7",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.7 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0693893,
+     42.3542936
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.4",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.4 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0694839,
+     42.3542025
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "3.6",
+    "leaf_type": "broadleaved",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 3.6 m across, shows in the USGS NAIP infrared image of 7 July 2023; it is bare in the MassGIS spring 2023 aerial image, so it is deciduous. Species not known."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710851,
+     42.3546455
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.6",
+    "leaf_type": "broadleaved",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.6 m across, shows in the USGS NAIP infrared image of 7 July 2023; it is bare in the MassGIS spring 2023 aerial image, so it is deciduous. Species not known."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0714815,
+     42.3544624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0712104,
+     42.3542745
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710133,
+     42.3542603
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.8",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.8 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0706896,
+     42.3542482
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0708956,
+     42.3542428
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.3",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.3 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0707745,
+     42.3542253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.7",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.7 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710704,
+     42.3541903
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.7",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.7 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0712896,
+     42.3541807
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.8",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.8 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0711567,
+     42.3541654
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.9",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.9 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0706439,
+     42.3541601
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.7",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.7 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0707272,
+     42.3541369
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.8",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.8 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710166,
+     42.3540818
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.1",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.1 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0713487,
+     42.3540829
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "3.0",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 3.0 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0706,
+     42.3540689
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.6",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.6 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.071101,
+     42.3540588
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.6",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.6 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0706844,
+     42.3540468
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.7",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.7 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0704326,
+     42.3540144
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.070553,
+     42.3539811
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.2",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.2 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0709659,
+     42.3539763
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.3",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.3 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0713147,
+     42.3539762
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0706404,
+     42.3539567
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.4",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.4 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0704048,
+     42.3539534
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710468,
+     42.3539537
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0712154,
+     42.3539269
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.4",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.4 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0705215,
+     42.3539213
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.4",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.4 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0707745,
+     42.3539206
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.2",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.2 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0706097,
+     42.3538978
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.0",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.0 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0711386,
+     42.3538857
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.1",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.1 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0707488,
+     42.3538614
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.9",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.9 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0704768,
+     42.3538342
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.8",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.8 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0705636,
+     42.3538116
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.9",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.9 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0704298,
+     42.353746
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "3.0",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 3.0 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0708436,
+     42.3537277
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0705193,
+     42.3537197
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.6",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.6 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0709242,
+     42.3537062
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.8",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.8 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0705862,
+     42.353653
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.5",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.5 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710746,
+     42.3536407
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.8",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.8 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0708794,
+     42.3536187
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.9",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.9 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.070669,
+     42.3535954
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "2.6",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 2.6 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0708384,
+     42.353534
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "3.0",
+    "leaf_type": "needleleaved",
+    "leaf_cycle": "evergreen",
+    "height": "3.5",
+    "why": "A tree stands here that is in neither the city inventory nor OpenStreetMap. Its crown, 3.0 m across, shows in the USGS NAIP infrared image of 7 July 2023, and it is solid with a sharp shadow in the MassGIS spring 2023 aerial image, so it is evergreen. Height about 3.5 m, from its shadow against those of the 4.9 m lamp posts nearby."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0707477,
+     42.3534406
+    ]
+   }
+  }
+ ]
+}

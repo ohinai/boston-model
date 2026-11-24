@@ -21,10 +21,11 @@ first. See [docs/ROADMAP.md](docs/ROADMAP.md).
 ```sh
 python -m venv .venv
 .venv\Scripts\activate               # Windows; elsewhere: source .venv/bin/activate
-pip install -e "./pipeline[dev]"
+pip install -e "./pipeline[dev]"      # the dev extra includes Pillow, which audit needs
 boston-pipeline fetch pilot          # download source data once (cached in data/)
 boston-pipeline build pilot          # build tiles into web/public/tiles
 boston-pipeline inspect LAT,LON      # what is at a spot, with ids and tags
+boston-pipeline audit pilot --park "Boston Public Garden"   # model drawn on aerial photographs (see below)
 pytest pipeline                      # pipeline tests
 
 cd web && npm install
@@ -86,6 +87,41 @@ The note is usually about `looking_at`, not about where the author stood.
 7. **Open a pull request** whose description says `Fixes #<number>` and where
    the correct information came from.
 
+## Checking the model against photographs
+
+Notes are not the only way to find mistakes. `boston-pipeline audit` draws the
+model on top of an aerial photograph so that a person or an assistant can see
+where the two disagree.
+
+```sh
+boston-pipeline audit pilot --park "Boston Public Garden"     # or: --around LAT,LON --size METRES
+```
+
+It writes one folder per 120 m cell under `data/audit/pilot/`:
+
+| File | What it is |
+|---|---|
+| `aerial.jpg` | The photograph, north up, in the model's own projection |
+| `overlay.jpg` | The photograph with the model drawn on it: numbered tree crowns, path edges, planted beds, water, raised footbridges, buildings, furniture |
+| `canopy.jpg` | The photograph with the detected tree canopy outlined (not written with `--no-canopy`) |
+| `features.json` | What each number and outline is, and the cell's bounds and `metres_per_pixel` |
+
+The audit also finds tree canopy in the survey's near-infrared band. It
+proposes a tree (`C1`, `C2`, ...) where a compact crown stands with no tree in
+the data, and measures the crown width of trees that stand alone. It cannot
+separate trees inside dense canopy, reads deep shade as canopy and very light
+foliage as lawn, so treat every proposal and measurement as a suggestion.
+
+In Claude Code, `/audit "Boston Public Garden"` checks each cell and writes a
+`findings.json` beside it, with a verdict on every proposal and measurement.
+[.claude/commands/audit.md](.claude/commands/audit.md) is the procedure and the
+format of that file. It is written so that a cheaper model can do the checking.
+
+Checking and fixing are separate steps. The audit never changes the model. Look
+again at each confident finding, then write it up as a file in `fixes/` as
+described above. Cite the photograph in `why`, with its source and date (see
+below), and say how it was measured.
+
 ### Working out coordinates
 
 Fix files use longitude and latitude. To place something relative to a note,
@@ -106,7 +142,10 @@ JSON: each element has `type`, `id`, `tags` and `geometry`).
 
 The contributor's own observation and photos, and the open sources listed in
 [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md), including the City of Boston tree
-inventory (ids like `bprd:1416`). Photographs, including openly licensed ones,
+inventory (ids like `bprd:1416`). Two aerial surveys may be used as data:
+USGS NAIP, 7 July 2023, leaf-on (what `audit` draws on), and MassGIS aerial
+imagery, 15 cm, leaf-off, spring 2019 to 2025. Name the survey and date in
+`why`, and credit MassGIS when using its imagery. Ground photographs, including openly licensed ones,
 are visual reference only: look at them, but do not use them as textures or as
 data. Never Google Maps, Street View or Google Earth. If the note does not say
 how the author knows, ask on the ticket before inventing detail.
@@ -120,7 +159,10 @@ trunk size, so they are often a little off.
 - A tree that is gone: delete it by id in a `.toml` file.
 - A wrong species: set `species` (botanical, for example `Quercus palustris`)
   and `species:en` (the common name, `Pin oak`). The species decides the shape.
-- A measured size: set `height` or `diameter_crown` (metres) on the tree.
+- A measured size: set `height` or `diameter_crown` (metres) on the tree. A
+  tree with a `diameter_crown` and neither `height` nor a trunk size gets its
+  height from the crown, so a tree seen only in a photograph looks right. Tree
+  heights cannot be read from aerial photographs.
 - A missing tree: add a `.geojson` point tagged `natural=tree`, with `species`
   and `circumference` if known.
 
@@ -177,6 +219,8 @@ smaller one shows (a pitch inside a lawn inside a park).
 | `pipeline/boston_pipeline/furniture.py` | Shapes for benches, lamps, bins, statues, fountains and the rest |
 | `pipeline/boston_pipeline/bridges.py` | Raised footbridge decks and railings |
 | `pipeline/boston_pipeline/lookup.py` | The `inspect` command |
+| `pipeline/boston_pipeline/audit.py` | The `audit` command: aerial photographs, overlays, canopy detection |
+| `.claude/commands/audit.md` | How to check an audit and write `findings.json` |
 | `web/src/city.ts` | Tile loading, collision, picking |
 | `web/src/notes.ts`, `notepad.ts` | Notes: data format, tickets, on-screen form |
 | `docs/ARCHITECTURE.md` | Coordinate system and file formats |

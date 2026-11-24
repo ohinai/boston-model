@@ -50,6 +50,18 @@ def test_tags_win_and_set_measured():
     assert not s.measured and s.height < 30 and s.crown_width < 40
 
 
+def test_crown_only_tree_is_sized_from_the_crown_not_a_default_trunk():
+    s = describe({"natural": "tree", "diameter_crown": "3"})
+    assert s.height == pytest.approx(4.0, abs=0.01)  # 3 / 0.75, not the ~13 m a default trunk gives
+    assert s.crown_width == 3 and not s.measured
+    assert describe({"diameter_crown": "40"}).height == 18  # capped at mature
+    assert describe({"diameter_crown": "1"}).height >= 2.0
+    # A mapped height still wins, and a trunk size keeps the old estimate.
+    assert describe({"diameter_crown": "3", "height": "9"}).height == 9
+    with_girth = {"diameter_crown": "3", "circumference": "1.0"}
+    assert describe(with_girth, 5).height == describe({"circumference": "1.0"}, 5).height > 8
+
+
 def test_genus_from_species_taxon_or_tag_case_insensitively():
     assert describe({"species": "ULMUS americana"}).form == "vase"
     assert describe({"taxon": "tilia cordata"}).form == "oval"

@@ -45,6 +45,8 @@ What works today:
   and what you were looking at attached. Open tickets appear in the model as markers.
 - Fixes as text files in [`fixes/`](fixes), and a `boston-pipeline inspect`
   command that shows what the data holds at any spot.
+- A `boston-pipeline audit` command that draws the model on aerial photographs
+  and proposes missing trees, so an area can be checked without walking it.
 - Output as standard [3D Tiles](https://www.ogc.org/standards/3dtiles/), so the
   same files are meant to load in Unreal Engine through Cesium for Unreal. That
   path is documented in [docs/UNREAL.md](docs/UNREAL.md) but has not been run yet.
@@ -126,7 +128,8 @@ tile format and the reasoning behind them.
 The simplest contribution needs no setup: walk the model, press `N` where
 something looks wrong, and file the ticket. Fixing a ticket means adding a
 small text file under `fixes/`, which is set up to be done with an AI coding
-assistant. All fixes go through this repository. See
+assistant. You can also check an area against aerial photographs with
+`boston-pipeline audit`. All fixes go through this repository. See
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licence

@@ -2,7 +2,7 @@
 
 The goal is a Boston that feels real to walk through. Every correction goes
 through this repository, so it is reviewed, kept, and reaches everyone on the
-next build. There are three ways to help, from least to most involved.
+next build. There are four ways to help, from least to most involved.
 
 ## 1. Leave a note
 
@@ -51,7 +51,24 @@ By hand, the same steps apply:
 Some notes cannot be fixed with a fix file because the pipeline does not draw
 that kind of thing yet, or draws it wrongly everywhere. Those are code changes.
 
-## 3. Work on the code
+## 3. Check an area against aerial photographs
+
+You do not have to wait for a note. `boston-pipeline audit` draws the model on
+top of an aerial photograph, one 120 m cell at a time, and proposes trees the
+data lacks:
+
+```sh
+pip install -e "./pipeline[audit]"     # Pillow; the dev extra has it too
+boston-pipeline audit pilot --park "Boston Common"
+```
+
+Look at `overlay.jpg` in each folder under `data/audit/pilot/`. In Claude Code,
+`/audit "Boston Common"` does the checking and writes a `findings.json` for each
+cell. Either way, a finding is only a lead: look at it again, then write a fix
+file that cites the photograph in `why`. The audit never changes the model by
+itself. [AGENTS.md](AGENTS.md) has the details.
+
+## 4. Work on the code
 
 [docs/ROADMAP.md](docs/ROADMAP.md) lists what is planned, with parks and
 gardens first. [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) explains how the

@@ -146,10 +146,13 @@ def elements(payload: dict) -> list[dict]:
 
 def reconcile(scene) -> dict:
     """Merge inventory trees and OpenStreetMap trees in `scene.trees`, in place; returns counts."""
+    # A tree added by a file in fixes/ was put there on purpose: it is never merged or dropped.
+    added = [t for t in scene.trees if t.id.startswith("fix:")]
     inventory = [t for t in scene.trees if t.id.startswith("bprd:")]
-    osm = [t for t in scene.trees if not t.id.startswith("bprd:")]
-    inv_pts = points([(t.x, t.y) for t in inventory])
-    osm_pts = points([(t.x, t.y) for t in osm])
+    osm = [t for t in scene.trees if not t.id.startswith(("bprd:", "fix:"))]
+    # Reshaped so that an empty list is still a list of 2D points.
+    inv_pts = points(np.array([(t.x, t.y) for t in inventory], dtype=float).reshape(-1, 2))
+    osm_pts = points(np.array([(t.x, t.y) for t in osm], dtype=float).reshape(-1, 2))
 
     # Nearest pairs first, each tree used once.
     pairs = []
@@ -195,5 +198,8 @@ def reconcile(scene) -> dict:
         else:
             kept.append(tree)
 
-    scene.trees[:] = merged_trees + kept
-    return {"inventory": len(inventory), "osm": len(osm), "merged": len(matched_inv), "dropped": dropped, "kept_osm": len(kept)}
+    scene.trees[:] = merged_trees + kept + added
+    return {
+        "inventory": len(inventory), "osm": len(osm), "merged": len(matched_inv), "dropped": dropped,
+        "kept_osm": len(kept), "added": len(added),
+    }

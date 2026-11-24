@@ -1,0 +1,48 @@
+# Crown widths measured from the air, for trees that stand alone.
+# Source: USGS NAIP aerial imagery of 7 July 2023 (infrared band), each one checked by eye
+# against the photograph. Made by the audit described in .claude/commands/audit.md.
+
+["bprd:900092749"]
+why = "Crown measured as 2.8 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Sweetbay) stands alone; the estimate from its trunk was 6.11 m."
+at = [42.354540, -71.071377]
+set = { diameter_crown = "2.8" }
+
+["bprd:900092846"]
+why = "Crown measured as 8.5 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Chinese crabapple) stands alone; the estimate from its trunk was 5.71 m."
+at = [42.355203, -71.071142]
+set = { diameter_crown = "8.5" }
+
+["bprd:900092848"]
+why = "Crown measured as 2.5 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Crabapple) stands alone; the estimate from its trunk was 5.43 m."
+at = [42.355430, -71.070804]
+set = { diameter_crown = "2.5" }
+
+["bprd:900092989"]
+why = "Crown measured as 4.2 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Ginkgo) stands alone; the estimate from its trunk was 2.06 m."
+at = [42.352476, -71.069390]
+set = { diameter_crown = "4.2" }
+
+["bprd:900093430"]
+why = "Crown measured as 9.9 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Silver linden) stands alone; the estimate from its trunk was 8.04 m."
+at = [42.354641, -71.067707]
+set = { diameter_crown = "9.9" }
+
+["bprd:900093474"]
+why = "Crown measured as 2.0 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Scarlet oak) stands alone; the estimate from its trunk was 2.93 m."
+at = [42.353871, -71.067915]
+set = { diameter_crown = "2.0" }
+
+["bprd:900093480"]
+why = "Crown measured as 7.2 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Sawtooth oak) stands alone; the estimate from its trunk was 2.93 m."
+at = [42.354962, -71.068517]
+set = { diameter_crown = "7.2" }
+
+["bprd:900093509"]
+why = "Crown measured as 11.6 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Chinese crabapple) stands alone; the estimate from its trunk was 6.32 m."
+at = [42.355029, -71.071211]
+set = { diameter_crown = "11.6" }
+
+["bprd:900093538"]
+why = "Crown measured as 12.3 m across in the USGS NAIP infrared image of 7 July 2023, where this tree (Golden larch) stands alone; the estimate from its trunk was 9.43 m."
+at = [42.352934, -71.069061]
+set = { diameter_crown = "12.3" }

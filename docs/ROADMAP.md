@@ -27,6 +27,15 @@ recognises them at eye level.
 - **Footbridges over water** raised as arched decks with railings, with the
   water continuing beneath them. 35 are raised in the pilot, including the
   Public Garden's.
+- **Checking against aerial photographs.** `boston-pipeline audit` draws the
+  model on a leaf-on photograph, finds tree canopy from its infrared band, and
+  proposes missing trees and measures crowns. A person or an assistant checks
+  each cell before anything becomes a fix. The first audit of the Public Garden
+  showed the footbridge was 4.9 m wide, not 3.2 m, and that roads and asphalt
+  paths were drawn far too dark, so the palette was lightened. It also found
+  rows of small clipped evergreens along the walks that are in neither the city
+  inventory nor OpenStreetMap. These are being added as fixes, and crown
+  widths of free-standing trees set from measurements, all from the photograph.
 - **Know where you are.** The viewer shows the name of the park you are in, and
   notes record it and what you were looking at, down to the tree or statue.
 
@@ -39,11 +48,19 @@ recognises them at eye level.
 - Likenesses for statues, and hand-made models of landmarks, in place of the
   placeholders.
 
+**Checking against photographs**
+
+- Audit Boston Common and the rest of the pilot's parks, and turn what the
+  checks confirm into fixes.
+- Build the MassGIS leaf-off imagery into the audit. With the leaves off, path
+  widths, beds, benches and trunk positions can be checked, which the leaf-on
+  photograph cannot show.
+
 **Trees that read as trees**
 
 - Measured heights and crown widths, from the 2021 USGS lidar point cloud. This
-  needs a reader for LAZ files. Leaf-on aerial imagery is the reference for
-  checking crowns.
+  needs a reader for LAZ files. Heights cannot be read from the aerial
+  photographs, which only give crown width and whether a crown exists.
 - Trunks you can bump into. Trees are not solid yet.
 - More varied, less blocky canopies.
 
