@@ -2,6 +2,9 @@
 
 An open, walkable 3D model of Boston, built from open data.
 
+**[Walk it in your browser](https://ohinai.github.io/boston-model/)** (needs a
+keyboard and mouse; about 26 MB to load).
+
 ![Downtown Boston from the air: the Common, the Public Garden lagoon, Beacon Hill and the Financial District](docs/images/aerial.jpg)
 
 | | |
