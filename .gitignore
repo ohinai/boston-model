@@ -1,0 +1,20 @@
+# Downloaded source data and built tiles are reproducible: never commit them.
+data/
+web/public/tiles/
+
+# Python
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# Node
+node_modules/
+web/dist/
+
+# Editors and local settings
+.vscode/
+.idea/
+.claude/settings.local.json
+.DS_Store
+Thumbs.db

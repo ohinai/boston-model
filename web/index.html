@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="An open, walkable 3D model of Boston built from open data." />
+    <title>Boston Model</title>
+  </head>
+  <body>
+    <canvas id="view"></canvas>
+
+    <div id="where" class="panel" hidden>
+      <div id="street"></div>
+      <div id="nearby"></div>
+    </div>
+
+    <div id="tools" class="panel">
+      <select id="places" aria-label="Jump to a place"></select>
+      <button id="mode" type="button" title="Toggle walking and flying (F)">Walk</button>
+    </div>
+
+    <div id="crosshair" hidden></div>
+    <div id="notice" class="panel" hidden></div>
+
+    <div id="start" class="panel">
+      <h1>Boston Model</h1>
+      <p id="area">Loading the city…</p>
+      <button id="enter" type="button" disabled>Loading…</button>
+      <dl>
+        <dt>W A S D</dt><dd>walk</dd>
+        <dt>Mouse</dt><dd>look around (or arrow keys)</dd>
+        <dt>Shift</dt><dd>run</dd>
+        <dt>Space</dt><dd>jump</dd>
+        <dt>F</dt><dd>fly, then Space and C to rise and sink</dd>
+        <dt>1 – 9</dt><dd>jump to a landmark</dd>
+        <dt>Esc</dt><dd>release the mouse</dd>
+      </dl>
+    </div>
+
+    <div id="footer">
+      <span id="coords"></span>
+      <a id="osm" target="_blank" rel="noopener">Fix this spot in OpenStreetMap</a>
+      <span id="attribution"></span>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

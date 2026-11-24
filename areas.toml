@@ -1,0 +1,56 @@
+# Named areas the pipeline can build. bbox is WGS84 [west, south, east, north];
+# the build rounds it outward to whole tiles. Places become teleport targets in
+# the viewer.
+
+[pilot]
+name = "Downtown pilot"
+description = "Boston Common, Beacon Hill, Downtown Crossing, Government Center, the Financial District and the waterfront"
+bbox = [-71.0760, 42.3500, -71.0480, 42.3640]
+
+[[pilot.places]]
+name = "Massachusetts State House"
+lat = 42.35745
+lon = -71.06368
+heading = 0
+
+[[pilot.places]]
+name = "Boston Common (Brewer Fountain)"
+lat = 42.35606
+lon = -71.06262
+heading = 240
+
+[[pilot.places]]
+name = "Public Garden"
+lat = 42.35405
+lon = -71.07010
+heading = 300
+
+[[pilot.places]]
+name = "Downtown Crossing"
+lat = 42.35550
+lon = -71.06045
+heading = 40
+
+[[pilot.places]]
+name = "Old State House"
+lat = 42.35868
+lon = -71.05790
+heading = 270
+
+[[pilot.places]]
+name = "Faneuil Hall"
+lat = 42.36000
+lon = -71.05690
+heading = 90
+
+[[pilot.places]]
+name = "Long Wharf"
+lat = 42.36020
+lon = -71.05080
+heading = 90
+
+[[pilot.places]]
+name = "Acorn Street, Beacon Hill"
+lat = 42.35762
+lon = -71.06905
+heading = 250

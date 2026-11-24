@@ -1,0 +1,19 @@
+# Corrections to individual buildings, applied on top of OpenStreetMap data.
+#
+# Prefer fixing OpenStreetMap itself: a height or colour added there improves
+# every map and model that uses it, and reaches this project on the next build.
+# Use this file only for things OSM cannot hold or where OSM is right for maps
+# but wrong for a 3D model.
+#
+# Keys are OSM element ids: "w" + way id, or "r" + relation id. The viewer's
+# "Fix this spot in OpenStreetMap" link opens the editor where you are standing,
+# which is the quickest way to find an id.
+#
+# Every field is optional:
+#
+#   ["w123456789"]
+#   height = 61.0            # metres, ground to the top of the roof
+#   colour = "#b5651d"       # wall colour, hex
+#   roof_colour = "#4f5052"
+#   hide = true              # drop the building entirely
+#   source = "where the correct value comes from (required in review)"
