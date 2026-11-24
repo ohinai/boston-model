@@ -34,6 +34,10 @@ delete = true
   feature entirely.
 - A feature can be changed in one file only.
 
+Trees from the City of Boston tree inventory have ids like `bprd:1416` and are
+changed or deleted in exactly the same way, for example with `delete = true` for
+a tree that has been cut down. `inspect` shows these ids.
+
 ## Add something, or redraw it: `.geojson`
 
 A standard GeoJSON `FeatureCollection` in longitude and latitude (WGS84). Each

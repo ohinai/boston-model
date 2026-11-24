@@ -11,7 +11,7 @@ from pathlib import Path
 
 from shapely.geometry import box
 
-from . import fixes, lookup, osm, world
+from . import fixes, inventory, lookup, osm, world
 from .features import Scene, classify
 from .tiles import build, sea_polygons
 
@@ -35,23 +35,38 @@ def _raw_path(name: str) -> Path:
     return ROOT / "data" / "raw" / name / "osm.json"
 
 
+def _trees_path(name: str) -> Path:
+    return ROOT / "data" / "raw" / name / "trees.json"
+
+
 def _scene(name: str) -> tuple[Scene, dict, fixes.Applied]:
     """Source data for an area with this repository's fixes applied, interpreted."""
     raw = _raw_path(name)
     if not raw.exists():
         raise SystemExit(f"{raw} not found; run `boston-pipeline fetch {name}` first")
     payload = osm.load(raw)
+    elements = list(payload["elements"])
+    trees = _trees_path(name)
+    if trees.exists():
+        elements += inventory.elements(json.loads(trees.read_text(encoding="utf-8")))
+    else:
+        print(f"{trees} not found; using OpenStreetMap trees only (run `boston-pipeline fetch {name}` for the city inventory)")
     try:
-        applied = fixes.apply(payload["elements"], fixes.load(FIXES))
+        applied = fixes.apply(elements, fixes.load(FIXES))
     except fixes.FixError as error:
         raise SystemExit(f"error in a fix file:\n  {error}") from error
-    return classify(applied.elements), payload, applied
+    scene = classify(applied.elements)
+    # The tree counts travel with the source payload, for the build summary.
+    payload["tree_counts"] = inventory.reconcile(scene)
+    return scene, payload, applied
 
 
 def cmd_fetch(args) -> None:
     tiles = world.tiles_covering(tuple(_area(args.area)["bbox"]))
     # A margin so features straddling the outermost tiles arrive whole.
-    osm.fetch(world.lonlat_bounds(tiles, margin=60.0), _raw_path(args.area), force=args.force)
+    bounds = world.lonlat_bounds(tiles, margin=60.0)
+    osm.fetch(bounds, _raw_path(args.area), force=args.force)
+    inventory.fetch(bounds, _trees_path(args.area), force=args.force)
 
 
 def cmd_build(args) -> None:
@@ -67,11 +82,18 @@ def cmd_build(args) -> None:
     total = max(1, stats["buildings"])
     print(
         f"done: {stats['tiles']} tiles, {stats['triangles']:,} triangles, {stats['megabytes']} MB\n"
-        f"  {stats['buildings']:,} buildings, {stats['trees']:,} trees, {stats['streets']:,} street and path segments\n"
+        f"  {stats['buildings']:,} buildings, {stats['trees']:,} trees, {stats['objects']:,} benches, lamps and monuments,"
+        f" {stats['bridges']} raised footbridges, {stats['streets']:,} street and path segments\n"
         "  building heights: "
         + ", ".join(f"{sources.get(k, 0) * 100 // total}% from {k}" for k in ("height", "levels", "default", "override"))
         + f"\n  fixes applied: {applied.patched} changed, {applied.removed} removed, {applied.added} added"
     )
+    counts = payload["tree_counts"]
+    if counts["inventory"]:
+        print(
+            f"  trees: {counts['inventory']:,} from the city inventory, {counts['kept_osm']:,} from OpenStreetMap only"
+            f" ({counts['merged']:,} duplicates merged, {counts['dropped']:,} dropped)"
+        )
     if applied.unmatched:
         print(
             f"  {len(applied.unmatched)} fixes name features this area does not contain "

@@ -45,6 +45,25 @@ export interface BuildingInfo extends Named {
   height_source: 'height' | 'levels' | 'default' | 'override';
 }
 
+/** Something drawn in a tile that is not a building: a bench, a statue, a bridge, a tree. */
+export interface ObjectInfo extends Named {
+  /** bench, lamp, waste_basket, drinking_water, flagpole, plaque, stele, obelisk, column, statue, sculpture, monument, fountain, bridge, tree, ... */
+  kind: string;
+  species?: string;
+  height?: number;
+}
+
+/** A named park, garden, playground, pitch or pond, clipped to one tile. */
+interface NamedArea {
+  id: string;
+  name: string;
+  kind: string;
+  /** Size in square metres of the whole feature, not just the part in this tile. */
+  area: number;
+  /** Outer outlines of the part inside the tile, in world metres. */
+  rings: [number, number][][];
+}
+
 /** What a ray from the eye hits first. */
 export interface Pick {
   /** Scene position of the hit. */
@@ -53,12 +72,18 @@ export interface Pick {
   /** Tile layer that was hit, for example `green` or `building_walls`. */
   layer: string;
   building?: BuildingInfo;
+  /** For furniture, monuments, bridges and trees: the object that was hit. */
+  object?: ObjectInfo;
 }
 
 interface Semantics {
   streets: Street[];
   buildings: BuildingInfo[];
   pois: Named[];
+  /** Absent in tiles built before objects were added. */
+  objects?: ObjectInfo[];
+  /** Absent in tiles built before named areas were added. */
+  areas?: NamedArea[];
 }
 
 interface TilesetJson {
@@ -94,7 +119,7 @@ interface Tile {
 
 /** Layers a walker passes straight through. */
 const NOT_SOLID = new Set(['trees']);
-const CASTS_SHADOW = new Set(['building_walls', 'building_roofs', 'trees']);
+const CASTS_SHADOW = new Set(['building_walls', 'building_roofs', 'trees', 'furniture', 'monuments', 'bridges']);
 
 // Building walls carry UVs counted in facade cells: one unit of u is a window
 // bay, one unit of v a storey. This draws glazing into each cell and fades to
@@ -142,6 +167,17 @@ function distanceToPath(x: number, y: number, path: [number, number][]): number 
     best = Math.min(best, Math.hypot(x - ax - t * dx, y - ay - t * dy));
   }
   return best;
+}
+
+/** Even-odd test: is the point inside the ring? */
+function insideRing(x: number, y: number, ring: [number, number][]): boolean {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [ax, ay] = ring[i];
+    const [bx, by] = ring[j];
+    if (ay > y !== by > y && x < ((bx - ax) * (y - ay)) / (by - ay) + ax) inside = !inside;
+  }
+  return inside;
 }
 
 /** The streamed city: loads tiles around a focus point and answers questions about them. */
@@ -277,11 +313,17 @@ export class City {
     const hit = this.raycaster.intersectObjects(groups, true)[0];
     if (!hit) return null;
     const mesh = hit.object as Mesh;
-    // Building vertices carry their building's index in the tile's data file.
+    // Vertices carry an index into the tile's data file: buildings for building layers, objects for the rest.
     const ids = mesh.geometry.getAttribute('_feature_id_0');
     const semantics = mesh.parent ? this.tileOfGroup.get(mesh.parent)?.semantics : undefined;
-    const building = ids && hit.face && semantics ? semantics.buildings[Math.round(ids.getX(hit.face.a))] : undefined;
-    return { point: hit.point.clone(), distance: hit.distance, layer: mesh.name, building };
+    let building: BuildingInfo | undefined;
+    let object: ObjectInfo | undefined;
+    if (ids && hit.face && semantics) {
+      const index = Math.round(ids.getX(hit.face.a));
+      if (mesh.name === 'building_walls' || mesh.name === 'building_roofs') building = semantics.buildings?.[index];
+      else object = semantics.objects?.[index];
+    }
+    return { point: hit.point.clone(), distance: hit.distance, layer: mesh.name, building, object };
   }
 
   /** The tile indices of a world-metre position. */
@@ -290,13 +332,22 @@ export class City {
     return [Math.floor(x / size), Math.floor(y / size)];
   }
 
-  /** The street and the nearest named place at a world-metre position. */
-  describe(x: number, y: number): { street?: string; nearby?: string } {
+  /** The street, the park (smallest named area) and the nearest named place at a world-metre position. */
+  describe(x: number, y: number): { street?: string; park?: string; nearby?: string } {
     const size = this.frame.tile_size;
     const tx = Math.floor(x / size);
     const ty = Math.floor(y / size);
     let street: string | undefined;
+    let park: string | undefined;
     let nearby: string | undefined;
+    let parkArea = Infinity;
+    // Areas are clipped per tile, so only the tile the point is in can contain it.
+    for (const area of this.tiles.get(`${tx}_${ty}`)?.semantics?.areas ?? []) {
+      if (area.area < parkArea && area.rings.some((ring) => insideRing(x, y, ring))) {
+        parkArea = area.area;
+        park = area.name;
+      }
+    }
     let streetDistance = 30;
     let nearbyDistance = 40;
     for (let dx = -1; dx <= 1; dx++) {
@@ -320,7 +371,7 @@ export class City {
         }
       }
     }
-    return { street, nearby };
+    return { street, park, nearby };
   }
 
   private tileAt(x: number, y: number): Tile | undefined {
@@ -391,9 +442,12 @@ export class City {
         roughness: source.roughness,
         metalness: source.metalness,
         vertexColors: source.vertexColors,
+        // Tiles carry no normals: every face is shaded flat, as the loader has already worked out.
+        flatShading: source.flatShading,
       });
       if (layer === 'building_walls') facade(created);
       if (layer === 'water') created.metalness = 0.55;
+      // Tree meshes ship smooth indexed normals; facet them.
       material = created;
       this.materials.set(layer, material);
     }

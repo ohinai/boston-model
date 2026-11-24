@@ -1,4 +1,9 @@
-"""A minimal binary glTF 2.0 (.glb) writer: one node, mesh and material per layer."""
+"""A minimal binary glTF 2.0 (.glb) writer: one node, mesh and material per layer.
+
+Meshes are written without normals. Every surface in the model is flat-shaded,
+and glTF says a client must then shade each triangle by its own face normal.
+That lets vertices be shared between faces, which roughly halves the files.
+"""
 
 from __future__ import annotations
 
@@ -9,9 +14,9 @@ from pathlib import Path
 
 import numpy as np
 
-from .mesh import Mesh, srgb_to_linear
+from .mesh import Mesh, srgb_to_linear, weld
 
-FLOAT, UNSIGNED_BYTE, UNSIGNED_INT = 5126, 5121, 5125
+FLOAT, UNSIGNED_BYTE, UNSIGNED_SHORT, UNSIGNED_INT = 5126, 5121, 5123, 5125
 ARRAY_BUFFER, ELEMENT_ARRAY_BUFFER = 34962, 34963
 
 
@@ -40,12 +45,12 @@ def write_glb(path: Path, layers: list[tuple[Mesh, Material]], copyright: str, e
     meshes, materials, nodes = [], [], []
     extensions: set[str] = set()
     for mesh, material in layers:
+        mesh = weld(mesh)
         attributes = {
             "POSITION": accessor(
                 mesh.positions, FLOAT, "VEC3", ARRAY_BUFFER,
                 min=mesh.positions.min(axis=0).tolist(), max=mesh.positions.max(axis=0).tolist(),
             ),
-            "NORMAL": accessor(mesh.normals, FLOAT, "VEC3", ARRAY_BUFFER),
         }
         if mesh.uvs is not None:
             attributes["TEXCOORD_0"] = accessor(mesh.uvs, FLOAT, "VEC2", ARRAY_BUFFER)
@@ -58,7 +63,10 @@ def write_glb(path: Path, layers: list[tuple[Mesh, Material]], copyright: str, e
             count = int(mesh.features.max()) + 1
             primitive_extensions["EXT_mesh_features"] = {"featureIds": [{"featureCount": count, "attribute": 0}]}
             extensions.add("EXT_mesh_features")
-        indices = accessor(mesh.indices, UNSIGNED_INT, "SCALAR", ELEMENT_ARRAY_BUFFER)
+        if len(mesh.positions) <= 65535:
+            indices = accessor(mesh.indices.astype(np.uint16), UNSIGNED_SHORT, "SCALAR", ELEMENT_ARRAY_BUFFER)
+        else:
+            indices = accessor(mesh.indices, UNSIGNED_INT, "SCALAR", ELEMENT_ARRAY_BUFFER)
         materials.append(
             {
                 "name": mesh.name,

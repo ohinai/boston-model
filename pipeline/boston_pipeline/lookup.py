@@ -13,9 +13,11 @@ from shapely.geometry import Polygon
 from . import world
 from .features import Scene
 
-LAYER_OF_SURFACE = {"road": "roads", "path": "paths", "rail": "rail", "water": "water", "green": "green"}
+LAYER_OF_SURFACE = {
+    "road": "roads", "path": "paths", "rail": "rail", "water": "water", "bed": "beds", "green": "green",
+}
 # Highest priority first; mirrors the ground partition in tiles.py.
-GROUND_PRIORITY = ["building", "roads", "rail", "paths", "water", "green"]
+GROUND_PRIORITY = ["building", "roads", "rail", "paths", "water", "beds", "green"]
 
 
 def inspect(scene: Scene, x: float, y: float, radius: float = 10.0, sea: list[Polygon] | None = None) -> dict:
@@ -38,6 +40,8 @@ def inspect(scene: Scene, x: float, y: float, radius: float = 10.0, sea: list[Po
     for surface, areas in scene.areas.items():
         for area in areas:
             add(LAYER_OF_SURFACE[surface], area.id, area.polygon.distance(point), area.tags)
+    for thing in scene.objects:
+        add(thing.kind, thing.id, point.distance(ShapelyPoint(thing.x, thing.y)), thing.tags)
     for layer, points in (("tree", scene.trees), ("signal", scene.signals), ("place", scene.pois)):
         for item in points:
             add(layer, item.id, point.distance(ShapelyPoint(item.x, item.y)), item.tags)
