@@ -38,6 +38,7 @@ def write_glb(path: Path, layers: list[tuple[Mesh, Material]], copyright: str, e
         return len(accessors) - 1
 
     meshes, materials, nodes = [], [], []
+    extensions: set[str] = set()
     for mesh, material in layers:
         attributes = {
             "POSITION": accessor(
@@ -50,6 +51,13 @@ def write_glb(path: Path, layers: list[tuple[Mesh, Material]], copyright: str, e
             attributes["TEXCOORD_0"] = accessor(mesh.uvs, FLOAT, "VEC2", ARRAY_BUFFER)
         if mesh.colours is not None:
             attributes["COLOR_0"] = accessor(mesh.colours, UNSIGNED_BYTE, "VEC4", ARRAY_BUFFER, normalized=True)
+        primitive_extensions = {}
+        if mesh.features is not None:
+            # Which feature each vertex belongs to, as an index into the tile's data file.
+            attributes["_FEATURE_ID_0"] = accessor(mesh.features, FLOAT, "SCALAR", ARRAY_BUFFER)
+            count = int(mesh.features.max()) + 1
+            primitive_extensions["EXT_mesh_features"] = {"featureIds": [{"featureCount": count, "attribute": 0}]}
+            extensions.add("EXT_mesh_features")
         indices = accessor(mesh.indices, UNSIGNED_INT, "SCALAR", ELEMENT_ARRAY_BUFFER)
         materials.append(
             {
@@ -64,7 +72,14 @@ def write_glb(path: Path, layers: list[tuple[Mesh, Material]], copyright: str, e
         meshes.append(
             {
                 "name": mesh.name,
-                "primitives": [{"attributes": attributes, "indices": indices, "material": len(materials) - 1}],
+                "primitives": [
+                    {
+                        "attributes": attributes,
+                        "indices": indices,
+                        "material": len(materials) - 1,
+                        **({"extensions": primitive_extensions} if primitive_extensions else {}),
+                    }
+                ],
             }
         )
         nodes.append({"name": mesh.name, "mesh": len(meshes) - 1})
@@ -80,6 +95,8 @@ def write_glb(path: Path, layers: list[tuple[Mesh, Material]], copyright: str, e
         "bufferViews": views,
         "buffers": [{"byteLength": len(binary)}],
     }
+    if extensions:
+        document["extensionsUsed"] = sorted(extensions)
     if extras:
         document["scenes"][0]["extras"] = extras
 

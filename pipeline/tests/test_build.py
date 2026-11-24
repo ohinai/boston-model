@@ -6,7 +6,7 @@ import pytest
 from shapely.geometry import LineString, Polygon, box
 
 from boston_pipeline import world
-from boston_pipeline.features import Building, Point, Scene, Way
+from boston_pipeline.features import Area, Building, Point, Scene, Way
 from boston_pipeline.mesh import MeshBuilder, add_flat, add_skirt, add_walls, colour_bytes, triangulate
 from boston_pipeline.tiles import build, sea_polygons
 
@@ -83,8 +83,8 @@ def test_build_writes_a_loadable_tile_and_tileset(tmp_path):
     scene = Scene()
     scene.buildings.append(Building("w1", box(100, 100, 120, 130), 20.0, 0.0, "height", "#8a4b3c", "#5a5a5c", {"name": "Test Hall"}))
     scene.ways.append(Way("w2", LineString([(0, 50), (256, 50)]), "residential", "road", 7.0, "Test Street"))
-    scene.areas["green"].append(box(150, 150, 250, 250))
-    scene.areas["water"].append(box(10, 150, 60, 250))
+    scene.areas["green"].append(Area("w5", box(150, 150, 250, 250)))
+    scene.areas["water"].append(Area("w6", box(10, 150, 60, 250)))
     scene.trees.append(Point("n3", 200.0, 200.0))
     scene.pois.append(Point("n4", 110.0, 95.0, "A Bookshop", "shop=books"))
     area = {"name": "Test", "places": [{"name": "Here", "lat": 42.3587, "lon": -71.063, "heading": 0}]}
@@ -96,6 +96,12 @@ def test_build_writes_a_loadable_tile_and_tileset(tmp_path):
     layers = {mesh["name"]: mesh["primitives"][0] for mesh in document["meshes"]}
     assert set(layers) == {"ground", "green", "water", "roads", "curbs", "building_walls", "building_roofs", "trees"}
     assert "TEXCOORD_0" in layers["building_walls"]["attributes"]
+    # Building vertices say which entry of the tile's data file they belong to.
+    for layer in ("building_walls", "building_roofs"):
+        ids = document["accessors"][layers[layer]["attributes"]["_FEATURE_ID_0"]]
+        assert ids["type"] == "SCALAR" and ids["count"] == document["accessors"][layers[layer]["attributes"]["POSITION"]]["count"]
+        assert layers[layer]["extensions"]["EXT_mesh_features"]["featureIds"] == [{"featureCount": 1, "attribute": 0}]
+    assert document["extensionsUsed"] == ["EXT_mesh_features"]
     assert "© OpenStreetMap" in document["asset"]["copyright"]
     road = document["accessors"][layers["roads"]["attributes"]["POSITION"]]
     assert road["min"][1] == pytest.approx(-0.12) and road["max"][1] == pytest.approx(-0.12)

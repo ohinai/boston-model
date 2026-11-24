@@ -99,7 +99,7 @@ class Context:
 
 
 def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
-    surfaces: dict[str, list[Polygon]] = {name: list(polys) for name, polys in scene.areas.items()}
+    surfaces: dict[str, list[Polygon]] = {name: [a.polygon for a in areas] for name, areas in scene.areas.items()}
     surfaces["rail"] = []
     for way in scene.ways:
         surfaces[way.surface].extend(polygons_of(way.line.buffer(way.width / 2, quad_segs=3)))
@@ -182,8 +182,10 @@ def _semantics(ctx: Context, tx: int, ty: int, tile_box: Polygon) -> dict:
             "height": _round(building.height),
             "height_source": building.height_source,
         }
-        if building.tags.get("name"):
-            entry["name"] = building.tags["name"]
+        if building.tags.get("name") or building.part_of_name:
+            entry["name"] = building.tags.get("name") or building.part_of_name
+        if building.part_of:
+            entry["part_of"] = building.part_of
         buildings.append(entry)
     return {
         "tile": [tx, ty],
@@ -215,15 +217,18 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             if z < 0:
                 add_skirt(curbs, polygon, z, 0.0, origin, bounds)
 
-    walls = MeshBuilder("building_walls", uvs=True, colours=True)
-    roofs = MeshBuilder("building_roofs", colours=True)
-    for building in ctx.buildings.get((tx, ty), []):
+    # Each building vertex carries the building's index in this tile's data
+    # file, so a client can tell which building a ray or a click has hit.
+    walls = MeshBuilder("building_walls", uvs=True, colours=True, features=True)
+    roofs = MeshBuilder("building_roofs", colours=True, features=True)
+    for index, building in enumerate(ctx.buildings.get((tx, ty), [])):
         wall = colour_bytes(building.wall_colour)
         roof = colour_bytes(building.roof_colour)
-        add_walls(walls, building.polygon, building.min_height, building.height, origin, wall)
-        add_flat(roofs, building.polygon, building.height, origin, roof)
+        add_walls(walls, building.polygon, building.min_height, building.height, origin, wall, feature=index)
+        add_flat(roofs, building.polygon, building.height, origin, roof, feature=index)
         if building.min_height > 0.5:
-            add_flat(roofs, building.polygon, building.min_height, origin, colour_bytes(building.wall_colour, 0.6), up=False)
+            underside = colour_bytes(building.wall_colour, 0.6)
+            add_flat(roofs, building.polygon, building.min_height, origin, underside, up=False, feature=index)
 
     trees = MeshBuilder("trees", colours=True)
     for tree in ctx.trees.get((tx, ty), []):

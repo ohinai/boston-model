@@ -77,14 +77,23 @@ def test_classify_sorts_elements_into_features():
     assert [(p.name, p.kind) for p in scene.pois] == [("A Bookshop", "shop=books")]
 
 
-def test_outline_with_parts_is_dropped_and_overrides_apply():
+def test_outline_with_parts_is_dropped():
     elements = [
-        _way(1, {"building": "yes", "height": "10"}, _square(0, 0, 20)),
+        _way(1, {"building": "yes", "height": "10", "name": "The Hall"}, _square(0, 0, 20)),
         _way(2, {"building:part": "yes", "height": "30"}, _square(2, 2, 6)),
         _way(3, {"building": "yes"}, _square(100, 0, 20)),
-        _way(4, {"building": "yes"}, _square(200, 0, 20)),
     ]
-    scene = classify(elements, {"w3": {"height": 77.0, "colour": "#112233"}, "w4": {"hide": True}})
-    by_id = {b.id: b for b in scene.buildings}
-    assert set(by_id) == {"w2", "w3"}
-    assert (by_id["w3"].height, by_id["w3"].height_source, by_id["w3"].wall_colour) == (77.0, "override", "#112233")
+    buildings = {b.id: b for b in classify(elements).buildings}
+    assert set(buildings) == {"w2", "w3"}
+    assert (buildings["w2"].part_of, buildings["w2"].part_of_name) == ("w1", "The Hall")
+    assert buildings["w3"].part_of is None
+
+
+def test_features_keep_their_source_id_and_tags():
+    elements = [
+        _way(1, {"leisure": "park", "name": "A Park"}, _square(0, 0, 20)),
+        {**_way(2, {"natural": "water"}, _square(100, 0, 20)), "ident": "fix:ponds#0"},
+    ]
+    scene = classify(elements)
+    assert [(a.id, a.tags["name"]) for a in scene.areas["green"]] == [("w1", "A Park")]
+    assert [a.id for a in scene.areas["water"]] == ["fix:ponds#0"]

@@ -39,12 +39,14 @@ class Mesh:
     indices: np.ndarray  # uint32 (m,)
     uvs: np.ndarray | None = None  # float32 (n, 2)
     colours: np.ndarray | None = None  # uint8 (n, 4), linear RGBA
+    features: np.ndarray | None = None  # float32 (n,), index of the feature each vertex belongs to
 
 
 class MeshBuilder:
-    def __init__(self, name: str, uvs: bool = False, colours: bool = False):
+    def __init__(self, name: str, uvs: bool = False, colours: bool = False, features: bool = False):
         self.name = name
-        self._has_uvs, self._has_colours = uvs, colours
+        self._has_uvs, self._has_colours, self._has_features = uvs, colours, features
+        self._features: list[np.ndarray] = []
         self._positions: list[np.ndarray] = []
         self._normals: list[np.ndarray] = []
         self._indices: list[np.ndarray] = []
@@ -56,7 +58,7 @@ class MeshBuilder:
     def empty(self) -> bool:
         return self._count == 0
 
-    def add(self, positions, normals, indices, uvs=None, colour=None) -> None:
+    def add(self, positions, normals, indices, uvs=None, colour=None, feature: int = 0) -> None:
         """Append vertices. `normals` may be one vector; `colour` one RGBA or per vertex."""
         positions = np.asarray(positions, dtype=np.float64).reshape(-1, 3)
         count = len(positions)
@@ -69,6 +71,8 @@ class MeshBuilder:
             self._uvs.append(np.zeros((count, 2)) if uvs is None else np.asarray(uvs, dtype=np.float64))
         if self._has_colours:
             self._colours.append(np.broadcast_to(np.asarray(colour, dtype=np.uint8), (count, 4)))
+        if self._has_features:
+            self._features.append(np.full(count, feature, dtype=np.float32))
         self._count += count
 
     def finish(self) -> Mesh:
@@ -85,6 +89,7 @@ class MeshBuilder:
             np.concatenate(self._indices).astype(np.uint32),
             np.concatenate(self._uvs).astype(np.float32) if self._has_uvs else None,
             np.concatenate(self._colours) if self._has_colours else None,
+            np.concatenate(self._features) if self._has_features else None,
         )
 
 
@@ -101,7 +106,9 @@ def triangulate(polygon: Polygon) -> tuple[np.ndarray, np.ndarray]:
     return vertices, triangles[np.abs(cross) > 1e-9]
 
 
-def add_flat(builder: MeshBuilder, polygon: Polygon, z: float, origin, colour=None, up: bool = True) -> None:
+def add_flat(
+    builder: MeshBuilder, polygon: Polygon, z: float, origin, colour=None, up: bool = True, feature: int = 0
+) -> None:
     """A horizontal face covering `polygon` at height z, facing up or down."""
     vertices, triangles = triangulate(polygon)
     if not len(triangles):
@@ -109,10 +116,12 @@ def add_flat(builder: MeshBuilder, polygon: Polygon, z: float, origin, colour=No
     positions = np.column_stack([vertices - origin, np.full(len(vertices), z)])
     if not up:
         triangles = triangles[:, ::-1]
-    builder.add(positions, (0, 0, 1 if up else -1), triangles, colour=colour)
+    builder.add(positions, (0, 0, 1 if up else -1), triangles, colour=colour, feature=feature)
 
 
-def add_walls(builder: MeshBuilder, polygon: Polygon, z0: float, z1: float, origin, colour=None) -> None:
+def add_walls(
+    builder: MeshBuilder, polygon: Polygon, z0: float, z1: float, origin, colour=None, feature: int = 0
+) -> None:
     """Outward-facing vertical walls around every ring of `polygon`.
 
     UVs count facade cells: u runs 0..bays along each wall and v runs 0..floors
@@ -162,6 +171,7 @@ def add_walls(builder: MeshBuilder, polygon: Polygon, z0: float, z1: float, orig
             indices,
             uvs=uvs.reshape(-1, 2),
             colour=colour,
+            feature=feature,
         )
 
 

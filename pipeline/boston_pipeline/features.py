@@ -86,6 +86,9 @@ class Building:
     roof_colour: str
     tags: dict
     part: bool = False
+    # For a part: the building it belongs to, whose own outline is not drawn.
+    part_of: str | None = None
+    part_of_name: str | None = None
 
 
 @dataclass
@@ -96,6 +99,14 @@ class Way:
     surface: str  # "road", "path" or "rail"
     width: float
     name: str | None
+    tags: dict = field(default_factory=dict)
+
+
+@dataclass
+class Area:
+    id: str
+    polygon: Polygon
+    tags: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -105,13 +116,14 @@ class Point:
     y: float
     name: str | None = None
     kind: str | None = None
+    tags: dict = field(default_factory=dict)
 
 
 @dataclass
 class Scene:
     buildings: list[Building] = field(default_factory=list)
     ways: list[Way] = field(default_factory=list)
-    areas: dict[str, list[Polygon]] = field(
+    areas: dict[str, list[Area]] = field(
         default_factory=lambda: {"road": [], "path": [], "water": [], "green": []}
     )
     coastlines: list[LineString] = field(default_factory=list)
@@ -291,19 +303,13 @@ def _poi_kind(tags: dict) -> str | None:
     return None
 
 
-def _add_building(scene: Scene, ident: str, tags: dict, polygons: list[Polygon], overrides: dict) -> None:
+def _add_building(scene: Scene, ident: str, tags: dict, polygons: list[Polygon], patched: set) -> None:
     if tags.get("building") == "no" or tags.get("location") == "underground":
         return
-    override = overrides.get(ident, {})
-    if override.get("hide"):
-        return
     height, base, source = building_height(tags)
-    if "height" in override:
-        height, source = float(override["height"]), "override"
-        base = min(base, height - 0.5)
+    if {"height": "height", "levels": "building:levels"}.get(source) in patched:
+        source = "override"  # the figure comes from a fix in this repository
     wall, roof = building_colours(ident, tags, height)
-    wall = parse_colour(override.get("colour")) or wall
-    roof = parse_colour(override.get("roof_colour")) or roof
     for polygon in polygons:
         if polygon.area >= 2.0:
             scene.buildings.append(
@@ -314,87 +320,100 @@ def _add_building(scene: Scene, ident: str, tags: dict, polygons: list[Polygon],
 def _add_way(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> None:
     """Classify one OSM way. A way has exactly one role; the first match wins."""
     closed_polygons = _way_polygons(coords)
+
+    def areas(polygons: list[Polygon]) -> list[Area]:
+        return [Area(ident, polygon, tags) for polygon in polygons]
+
     if "highway" in tags:
         kind = tags["highway"]
         if _is_underground(tags) or kind in ("proposed", "construction", "corridor", "elevator", "razed"):
             return
         surface = "path" if kind in PATH_WIDTHS else "road"
         if tags.get("area") == "yes" and closed_polygons:
-            scene.areas[surface].extend(closed_polygons)
+            scene.areas[surface].extend(areas(closed_polygons))
             return
         width = PATH_WIDTHS[kind] if surface == "path" else _road_width(tags, kind)
         if surface == "path":
             width = parse_length(tags.get("width")) or width
         if len(coords) >= 2:
-            scene.ways.append(Way(ident, LineString(coords), kind, surface, width, tags.get("name")))
+            scene.ways.append(Way(ident, LineString(coords), kind, surface, width, tags.get("name"), tags))
     elif "railway" in tags:
         if _is_underground(tags):
             return
         if tags["railway"] == "platform":
             if closed_polygons:
-                scene.areas["path"].extend(closed_polygons)
+                scene.areas["path"].extend(areas(closed_polygons))
             elif len(coords) >= 2:
-                scene.ways.append(Way(ident, LineString(coords), "platform", "path", 3.0, tags.get("name")))
+                scene.ways.append(Way(ident, LineString(coords), "platform", "path", 3.0, tags.get("name"), tags))
         elif len(coords) >= 2:
-            scene.ways.append(Way(ident, LineString(coords), tags["railway"], "rail", RAIL_WIDTH, tags.get("name")))
+            scene.ways.append(Way(ident, LineString(coords), tags["railway"], "rail", RAIL_WIDTH, tags.get("name"), tags))
     elif tags.get("natural") == "coastline":
         if len(coords) >= 2:
             scene.coastlines.append(LineString(coords))
     elif tags.get("man_made") in ("pier", "breakwater", "groyne"):
         if closed_polygons:
-            scene.areas["path"].extend(closed_polygons)
+            scene.areas["path"].extend(areas(closed_polygons))
         elif len(coords) >= 2:
             width = parse_length(tags.get("width")) or PIER_WIDTH
-            scene.areas["path"].extend(polygons_of(LineString(coords).buffer(width / 2, cap_style="flat")))
+            scene.areas["path"].extend(areas(polygons_of(LineString(coords).buffer(width / 2, cap_style="flat"))))
     else:
-        _add_area(scene, tags, closed_polygons)
+        _add_area(scene, ident, tags, closed_polygons)
 
 
-def _add_area(scene: Scene, tags: dict, polygons: list[Polygon]) -> None:
+def _add_area(scene: Scene, ident: str, tags: dict, polygons: list[Polygon]) -> None:
     if not polygons or _is_underground(tags):
         return
     if tags.get("natural") == "water" or tags.get("waterway") in ("dock", "riverbank"):
-        scene.areas["water"].extend(polygons)
+        surface = "water"
     elif (
         tags.get("leisure") in GREEN_LEISURE
         or tags.get("landuse") in GREEN_LANDUSE
         or tags.get("natural") in GREEN_NATURAL
     ):
-        scene.areas["green"].extend(polygons)
+        surface = "green"
     elif tags.get("man_made") == "pier":
-        scene.areas["path"].extend(polygons)
+        surface = "path"
+    else:
+        return
+    scene.areas[surface].extend(Area(ident, polygon, tags) for polygon in polygons)
 
 
-def classify(elements: list[dict], overrides: dict | None = None) -> Scene:
-    """Interpret raw Overpass elements. `overrides` maps OSM ids to building fixes."""
-    overrides = overrides or {}
+def element_id(element: dict) -> str:
+    """The id used everywhere for a source element: n, w or r plus the OpenStreetMap
+    id, or the name a fix in this repository gave the feature it added."""
+    return element.get("ident") or f"{element['type'][0]}{element['id']}"
+
+
+def classify(elements: list[dict]) -> Scene:
+    """Interpret source elements: OpenStreetMap data with this repository's fixes applied."""
     scene = Scene()
     for element in elements:
         tags = element.get("tags") or {}
         kind = element["type"]
-        ident = f"{kind[0]}{element['id']}"
+        ident = element_id(element)
+        patched = set(element.get("patched", ()))
         if kind == "node":
             x, y = (float(v) for v in world.to_local(element["lon"], element["lat"]))
             if tags.get("natural") == "tree":
-                scene.trees.append(Point(ident, x, y))
+                scene.trees.append(Point(ident, x, y, tags=tags))
             elif tags.get("highway") == "traffic_signals":
-                scene.signals.append(Point(ident, x, y))
+                scene.signals.append(Point(ident, x, y, tags=tags))
             elif tags.get("name") and _poi_kind(tags):
-                scene.pois.append(Point(ident, x, y, tags["name"], _poi_kind(tags)))
+                scene.pois.append(Point(ident, x, y, tags["name"], _poi_kind(tags), tags))
         elif kind == "way":
             if not element.get("geometry"):
                 continue
             coords = _coords(element["geometry"])
             if "building" in tags or "building:part" in tags:
-                _add_building(scene, ident, tags, _way_polygons(coords), overrides)
+                _add_building(scene, ident, tags, _way_polygons(coords), patched)
             else:
                 _add_way(scene, ident, tags, coords)
         elif kind == "relation" and tags.get("type") == "multipolygon":
             polygons = _relation_polygons(element)
             if "building" in tags or "building:part" in tags:
-                _add_building(scene, ident, tags, polygons, overrides)
+                _add_building(scene, ident, tags, polygons, patched)
             else:
-                _add_area(scene, tags, polygons)
+                _add_area(scene, ident, tags, polygons)
     _drop_outlines_with_parts(scene)
     return scene
 
@@ -407,7 +426,13 @@ def _drop_outlines_with_parts(scene: Scene) -> None:
     tree = STRtree([p.polygon.representative_point() for p in parts])
     kept = []
     for building in scene.buildings:
-        if not building.part and len(tree.query(building.polygon, predicate="contains")):
-            continue
+        if not building.part:
+            inside = tree.query(building.polygon, predicate="contains")
+            if len(inside):
+                # The outline goes, but its parts remember whose they are.
+                for index in inside:
+                    parts[index].part_of = building.id
+                    parts[index].part_of_name = building.tags.get("name")
+                continue
         kept.append(building)
     scene.buildings = kept
