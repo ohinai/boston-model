@@ -42,7 +42,8 @@ Each ticket ends with a JSON block (it contains `"boston_note": 1`):
 | Field | Meaning |
 |---|---|
 | `standing` | Where the author stood. `lat`, `lon`; `x`, `y`, `z` in world metres (east, north, up); `heading` in degrees clockwise from north; `pitch` in degrees above the horizon; `flying`. |
-| `looking_at` | The first thing straight ahead of them: its position, `distance`, the `layer` it is drawn in, and for buildings the `building` id, name and height. Absent if they were looking at the sky. |
+| `looking_at` | The first thing straight ahead of them: its position, `distance`, the `layer` it is drawn in, and for buildings the `building` id, name and height. For a tree, bench, lamp post, statue, bridge and the like it also has `object`: `id`, `kind`, and `name` and `species` where known. Absent if they were looking at the sky. |
+| `park` | The named park, garden or playground the author stood in, if any. |
 | `tile` | The tile they stood in, as `[i, j]`; its files are `web/public/tiles/tiles/i_j.glb` and `.json`. |
 | `street`, `near` | Human-readable place names. |
 | `link` | Opens the viewer at the same position and view. |
@@ -57,18 +58,23 @@ The note is usually about `looking_at`, not about where the author stood.
    `boston-pipeline inspect <looking_at.lat>,<looking_at.lon>` (fall back to
    `standing`; widen with `--radius 30`; add `--json` for full tags). This lists
    every source feature at and near the spot with its id, its tags, and which
-   layer it is drawn in.
+   layer it is drawn in. That includes trees (OpenStreetMap or city inventory),
+   benches, lamps and statues.
 3. **Decide what kind of problem it is.** This matters more than anything else:
 
    | What is wrong | Where the fix goes |
    |---|---|
    | The data is wrong or missing for one place: a wrong height, a missing path, a pond with the wrong outline, a tree that is gone | A file in `fixes/` |
    | The data is right but drawn wrongly everywhere: all paths too wide, lawns the wrong colour | `pipeline/boston_pipeline/features.py` (interpretation) or `tiles.py` (geometry) |
-   | The data has it but nothing draws it: benches, fountains, fences, statues | New interpretation in `features.py` and geometry in `tiles.py`, with a test |
+   | The data has it but nothing draws it: fences, walls, hedges, gates | New interpretation in `features.py` and geometry in `tiles.py` (or a module like `furniture.py`), with a test |
    | It is about look or behaviour in the browser: lighting, shading, controls | `web/src/` |
 
    If a note needs a pipeline change, say so on the ticket rather than faking it
    with a one-off fix file.
+
+   Trees are a data problem, so they go in `fixes/` by id (see "Fixing a tree"
+   below). Fences, walls, hedges and gates are not in the downloaded data yet,
+   so a note about one is a request for new drawing code, not a fix file.
 4. **Write the fix.** [fixes/README.md](fixes/README.md) has both formats:
    `.toml` to change or delete an existing feature by id, `.geojson` to add or
    redraw one. Every entry needs a `why`.
@@ -99,9 +105,24 @@ JSON: each element has `type`, `id`, `tags` and `geometry`).
 ### Where correct information may come from
 
 The contributor's own observation and photos, and the open sources listed in
-[docs/DATA_SOURCES.md](docs/DATA_SOURCES.md). Never Google Maps, Street View or
-Google Earth. If the note does not say how the author knows, ask on the ticket
-before inventing detail.
+[docs/DATA_SOURCES.md](docs/DATA_SOURCES.md), including the City of Boston tree
+inventory (ids like `bprd:1416`). Photographs, including openly licensed ones,
+are visual reference only: look at them, but do not use them as textures or as
+data. Never Google Maps, Street View or Google Earth. If the note does not say
+how the author knows, ask on the ticket before inventing detail.
+
+### Fixing a tree
+
+Trees come from the city inventory (`bprd:<n>`) and from OpenStreetMap (`n<n>`);
+`inspect` shows both. Heights and crown widths are estimated from species and
+trunk size, so they are often a little off.
+
+- A tree that is gone: delete it by id in a `.toml` file.
+- A wrong species: set `species` (botanical, for example `Quercus palustris`)
+  and `species:en` (the common name, `Pin oak`). The species decides the shape.
+- A measured size: set `height` or `diameter_crown` (metres) on the tree.
+- A missing tree: add a `.geojson` point tagged `natural=tree`, with `species`
+  and `circumference` if known.
 
 ## What the pipeline draws today
 
@@ -111,17 +132,25 @@ Tags not listed here are kept in the data and ignored when drawing.
 |---|---|
 | Buildings | `building`, `building:part`, `height`, `building:levels`, `min_height`, `building:min_level`, `building:colour`, `roof:colour`, `building:material` |
 | Roads | `highway` (vehicle classes), `lanes`, `width`, `parking:left/right/both`, `area=yes`, `name` |
-| Paths | `highway=footway/path/pedestrian/steps/cycleway`, `width`, `area=yes`; `railway=platform`; `man_made=pier` |
+| Paths | `highway=footway/path/pedestrian/steps/cycleway`, `width`, `area=yes`; `railway=platform`; `man_made=pier`. Coloured by `surface`: `asphalt`, `concrete`, `paving_stones`, `brick`, `sett`, `wood`, `gravel`, `dirt`, `sand`, `metal` (and common synonyms). No `surface` is plain "paved"; a pier is wood. |
+| Footbridges | A `highway=footway/path/cycleway/pedestrian` way with `bridge` set, at least 4 m long, that crosses water and is not a road bridge's sidewalk (`footway=sidewalk` or `crossing`, or running beside a carriageway). Drawn as a raised deck with railings over the water only: the ends on the banks stay ordinary path, so paths along the bank still cross. A lamp mapped in the water beside it stands on a stone pier. Other bridges are still drawn at ground level |
 | Rail | `railway=rail/light_rail/subway/tram` |
 | Water | `natural=water`, `waterway=dock/riverbank`, `natural=coastline` |
-| Grass and planting | `leisure=park/garden/pitch/playground/common/dog_park/golf_course`, `landuse=grass/forest/meadow/cemetery/recreation_ground/village_green/flowerbed`, `natural=wood/scrub/grassland` |
-| Trees | a point tagged `natural=tree` |
+| Grass and planting | `leisure=park/garden/pitch/playground/common/dog_park/golf_course`, `landuse=grass/forest/meadow/cemetery/recreation_ground/village_green/flowerbed`, `natural=wood/scrub/grassland`. Told apart as lawn, pitch, artificial turf, hard court, playground surface, bare dirt, garden, scrub, wood and meadow, using `surface`, `leisure`, `landuse` and `natural` |
+| Planted beds | `leisure=garden` with `garden:type=flowerbed`, or `landuse=flowerbed`. Drawn in the `beds` layer: soil at the edge, planting 0.35 m high |
+| Trees | a point tagged `natural=tree`, from OpenStreetMap, the city inventory or a fix. `species`, `genus`, `species:en`, `leaf_type` (shape and colour); `height`, `diameter_crown`; `circumference`, `denotation` (trunk size) |
+| Park furniture | Points: `amenity=bench` (`backrest`, `seats`, `length`), `highway=street_lamp` (`lamp_mount`, `support`, `height`), `amenity=waste_basket`, `amenity=drinking_water`, `man_made=flagpole`. Also `direction`, `colour`, `material` |
+| Monuments | Points: `historic=monument` (drawn as a statue when `memorial` or `artwork_type` says it is one); `historic=memorial` or `tourism=artwork` with `memorial` or `artwork_type` (`statue`, `bust`, `plaque`, `obelisk`, `column`, `stele`, `war_memorial`; anything else becomes a sculpture or memorial stone); `amenity=fountain` (`fountain=nozzle`, `diameter`). `height` and `name` are used. These are placeholders of the right kind and size, not likenesses |
 | Named places (data only) | `shop`, `amenity`, `tourism`, `historic`, stations, with a `name` |
 | Traffic signals (data only) | `highway=traffic_signals` |
 
+Tree height and crown width are estimates from species and trunk size unless
+`height` or `diameter_crown` is set. Trees are not solid; everything else is.
+
 Anything with `tunnel`, `indoor`, `location=underground` or a negative `layer`
 is skipped. Where ground layers overlap, the order is roads, rail, paths,
-water, grass, plain ground.
+water, planted beds, grass, plain ground. Where grass areas overlap, the
+smaller one shows (a pitch inside a lawn inside a park).
 
 ## Rules
 
@@ -143,6 +172,10 @@ water, grass, plain ground.
 | `pipeline/boston_pipeline/features.py` | Tags to typed features: what is a road, how tall is a building |
 | `pipeline/boston_pipeline/tiles.py` | Features to tile geometry and data files |
 | `pipeline/boston_pipeline/fixes.py` | Loads and applies `fixes/` |
+| `pipeline/boston_pipeline/trees.py` | Tree species and trunk size to shape, size and colour |
+| `pipeline/boston_pipeline/inventory.py` | Downloads the city tree inventory and merges it with OpenStreetMap trees |
+| `pipeline/boston_pipeline/furniture.py` | Shapes for benches, lamps, bins, statues, fountains and the rest |
+| `pipeline/boston_pipeline/bridges.py` | Raised footbridge decks and railings |
 | `pipeline/boston_pipeline/lookup.py` | The `inspect` command |
 | `web/src/city.ts` | Tile loading, collision, picking |
 | `web/src/notes.ts`, `notepad.ts` | Notes: data format, tickets, on-screen form |

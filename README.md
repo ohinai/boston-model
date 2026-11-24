@@ -3,7 +3,7 @@
 An open, walkable 3D model of Boston, built from open data.
 
 **[Walk it in your browser](https://ohinai.github.io/boston-model/)** (needs a
-keyboard and mouse; about 26 MB to load).
+keyboard and mouse; about 22 MB to load).
 
 ![Downtown Boston from the air: the Common, the Public Garden lagoon, Beacon Hill and the Financial District](docs/images/aerial.jpg)
 
@@ -28,14 +28,21 @@ the Financial District and the waterfront.
 
 What works today:
 
-- Real building footprints, streets with curbs, footpaths, parks, water and
-  mapped trees, all from OpenStreetMap.
+- Real building footprints, streets with curbs, footpaths, parks and water
+  from OpenStreetMap.
+- About 5,800 trees, mostly from the City of Boston tree inventory, drawn by
+  species and trunk size.
+- Park detail: paths in the colour of their surface, lawns, pitches and
+  playgrounds told apart, planted beds, benches, lamp posts, litter bins,
+  drinking fountains, and statues, memorials and fountains as placeholders of
+  the right kind and size.
+- Footbridges over water drawn as raised decks with railings.
 - Walking in a browser with collision against buildings and curbs, plus a fly
   mode for an overview.
-- The street you are on and the nearest named place, read from a data layer
-  that ships alongside the geometry.
+- The street you are on, the park you are in and the nearest named place, read
+  from a data layer that ships alongside the geometry.
 - Notes: press `N` anywhere to report something, with your exact position
-  attached. Open tickets appear in the model as markers.
+  and what you were looking at attached. Open tickets appear in the model as markers.
 - Fixes as text files in [`fixes/`](fixes), and a `boston-pipeline inspect`
   command that shows what the data holds at any spot.
 - Output as standard [3D Tiles](https://www.ogc.org/standards/3dtiles/), so the
@@ -49,7 +56,12 @@ What is not accurate yet:
   estimated from storey counts and 48% are a default guess by building type.
 - Roofs are flat and facades are a generic window grid.
 - Street widths are estimated from lane counts.
-- Bridges and elevated roads are drawn at ground level, and tunnels are left out.
+- Tree heights and crown widths are estimates from species and trunk size, not
+  measurements, and you can walk through trees.
+- Statues and fountains are placeholders, not likenesses. Fences, walls,
+  hedges and gates are not drawn.
+- Road bridges, bridges over roads and rail, and elevated roads are drawn at
+  ground level, and tunnels are left out.
 
 [docs/ROADMAP.md](docs/ROADMAP.md) lists what closes each of these gaps. Parks
 and gardens come first.
@@ -63,7 +75,7 @@ You need Python 3.11 or newer and Node.js 22 or newer.
 python -m venv .venv
 .venv\Scripts\activate            # Windows; on macOS or Linux: source .venv/bin/activate
 pip install -e "./pipeline[dev]"
-boston-pipeline fetch pilot       # downloads about 11 MB of OpenStreetMap data
+boston-pipeline fetch pilot       # downloads about 13 MB: OpenStreetMap and the city tree inventory
 boston-pipeline build pilot       # writes web/public/tiles
 
 # 2. Walk around
@@ -82,7 +94,8 @@ same spot.
 ```mermaid
 flowchart LR
     osm[OpenStreetMap] --> pipeline
-    city[City and state open data<br/><i>planned</i>] -.-> pipeline
+    trees[City of Boston<br/>tree inventory] --> pipeline
+    city[More city and state open data<br/><i>planned</i>] -.-> pipeline
     fixes[fixes/<br/>corrections] --> pipeline
     pipeline[pipeline/<br/>Python] --> tiles[3D Tiles<br/>tileset.json, .glb, .json]
     tiles --> web[web/<br/>browser viewer]
@@ -123,5 +136,7 @@ Code is under the [MIT licence](LICENSE).
 Built tiles contain OpenStreetMap data, © OpenStreetMap contributors, and are
 distributed under the [Open Database License 1.0](https://opendatacommons.org/licenses/odbl/1-0/),
 as are the files in `fixes/`.
+Tree positions and species also come from the City of Boston tree inventory,
+released under the Open Data Commons Public Domain Dedication and License.
 Anything that displays the model must show that credit, as the viewer does.
 [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) lists every source and its terms.

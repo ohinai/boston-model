@@ -10,45 +10,54 @@ Boston Common and the Public Garden first, then the other parks in the pilot
 district. Done means someone who knows these places walks through and
 recognises them at eye level.
 
-The map data for the two parks already holds far more than the model draws:
-about 1,180 trees, 570 lamp posts, 400 benches, nearly 70 planted beds, 28
-statues and artworks, 20 memorials, 7 monuments, 4 fountains, and a surface
-for nearly every path.
+### Done so far
 
-**Draw what the data already has**
+- **Trees from the city inventory**, merged with OpenStreetMap's. The pilot has
+  5,791 trees, 4,728 of them from the inventory. Each is drawn by species and
+  trunk size. Heights and crown widths are estimates, not measurements.
+- **Ground by surface.** Paths are coloured by what they are made of. Lawns,
+  sports pitches, artificial turf, hard courts, playgrounds, bare dirt,
+  gardens, scrub, woods and meadows are told apart. 100 planted beds are drawn
+  as beds, not lawn.
+- **Park furniture.** 1,191 lamp posts, 988 benches, 394 litter bins and 30
+  drinking fountains.
+- **Statues, sculptures, memorials, monuments and fountains** (48 statues, 36
+  sculptures, 33 plaques, 17 fountains, 15 monuments), as placeholders of the
+  right kind and size in the right place.
+- **Footbridges over water** raised as arched decks with railings, with the
+  water continuing beneath them. 35 are raised in the pilot, including the
+  Public Garden's.
+- **Know where you are.** The viewer shows the name of the park you are in, and
+  notes record it and what you were looking at, down to the tree or statue.
 
-- Planted beds as beds, not lawn. Sports pitches, playgrounds and dog parks
-  with their own surfaces.
-- Path surfaces: asphalt, concrete, brick, paving stones, wood and gravel each
-  look different.
-- Benches, waste baskets, drinking fountains and lamp posts as shared models.
-- Fountains, statues, memorials and monuments, at first as plinths of the
-  right size in the right place.
-- Fences, walls, hedges and gates. These are barely mapped, so most will come
-  from notes and fixes.
+### Still to do
+
+**Draw what the data has, and what it does not**
+
+- Fences, walls, hedges and gates. They are not in the downloaded data yet, so
+  most will come from notes and fixes.
+- Likenesses for statues, and hand-made models of landmarks, in place of the
+  placeholders.
 
 **Trees that read as trees**
 
-- Shape by leaf type (broadleaved or needleleaved is known for almost every
-  tree; species for very few).
-- Species, trunk size and missing trees from the city's tree inventory.
+- Measured heights and crown widths, from the 2021 USGS lidar point cloud. This
+  needs a reader for LAZ files. Leaf-on aerial imagery is the reference for
+  checking crowns.
+- Trunks you can bump into. Trees are not solid yet.
 - More varied, less blocky canopies.
 
 **Water**
 
-- The Public Garden lagoon with a soft bank instead of a wall, the footbridge
-  raised over the water, and the Swan Boat dock.
-- Frog Pond on the Common.
+- The Public Garden lagoon with a soft bank instead of a wall, and the Swan
+  Boat dock.
+- Frog Pond on the Common, which is not mapped as water.
 
 **Ground**
 
 - Real terrain from USGS elevation, so the Common slopes up to Beacon Street.
   This is the largest single item and benefits the whole model.
 - Grass that is not one flat colour.
-
-**Know where you are**
-
-- Show the park's name while you are in it.
 
 After that, parks improve through notes: walk, press N, fix.
 
@@ -58,12 +67,14 @@ After that, parks improve through notes: walk, press N, fix.
   roof-break dataset. 48% are a guess today.
 - **Roof shapes.** Read `roof:shape`, then take detailed roofs from the city's
   3D model where it has them.
-- **Bridges and tunnels.** Raise bridges and elevated roads to their real level
-  and let walkers pass under them. Open up building passages.
+- **Bridges and tunnels.** Footbridges over water are raised already. Raise
+  bridges over roads and rail, road bridges and elevated roads to their real
+  level and let walkers pass under them. Open up building passages.
 - **Sidewalks.** Use mapped sidewalks and the city's sidewalk inventory instead
   of treating everything beside a road as pavement.
-- **Street furniture.** Traffic signals, street lights and hydrants from the
-  city inventories.
+- **Street furniture.** Lamp posts, benches and bins are drawn from
+  OpenStreetMap. Traffic signals, the city's street lights and hydrants are not,
+  and should come from the city inventories.
 - **Facades.** Storey counts and materials from data; then a way to contribute
   a hand-made facade or a whole landmark model.
 

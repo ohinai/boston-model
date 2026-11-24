@@ -72,6 +72,27 @@ set = { height = "10" }
     assert scene.trees == []
 
 
+def test_inventory_tree_ids_can_be_changed_and_deleted(tmp_path):
+    _write(
+        tmp_path,
+        "trees.toml",
+        """
+["bprd:1416"]
+why = "Cut down in 2025; seen on site"
+delete = true
+
+["bprd:7"]
+why = "Species corrected on site"
+set = { "species:en" = "American elm" }
+""",
+    )
+    lon, lat = _lonlat(0, 0)
+    source = [{"type": "node", "ident": f"bprd:{n}", "lon": lon, "lat": lat, "tags": {"natural": "tree"}} for n in (1416, 7)]
+    applied = fixes.apply(source, fixes.load(tmp_path))
+    assert (applied.patched, applied.removed, applied.unmatched) == (1, 1, [])
+    assert [e["ident"] for e in applied.elements] == ["bprd:7"]
+
+
 def test_geojson_adds_and_replaces_features(tmp_path):
     park = [_square(200, 0, 60)]
     pond = [_square(300, 0, 30), _square(310, 10, 5)]  # a pond with an island

@@ -22,7 +22,8 @@ from pathlib import Path
 from .features import element_id
 
 PATCH_KEYS = {"why", "at", "set", "unset", "delete"}
-RESERVED = {"why", "replaces"}  # GeoJSON properties that are not tags
+ID_PATTERN = r"[nwr]\d+|[a-z]+:\d+"  # OpenStreetMap ids, or <source>:<number> such as bprd:1416
+RESERVED ={"why", "replaces"}  # GeoJSON properties that are not tags
 
 
 class FixError(ValueError):
@@ -64,8 +65,8 @@ def _load_patches(path: Path, name: str, fixes: Fixes) -> None:
         raise FixError(f"fixes/{name}: not valid TOML: {error}") from error
     for ident, entry in entries.items():
         where = f'fixes/{name}: ["{ident}"]'
-        if not re.fullmatch(r"[nwr]\d+", ident):
-            raise FixError(f"{where} is not a feature id; ids look like w123456, n123456 or r123456")
+        if not re.fullmatch(ID_PATTERN, ident):
+            raise FixError(f"{where} is not a feature id; ids look like w123456, n123456, r123456 or bprd:1416")
         if not isinstance(entry, dict):
             raise FixError(f"{where} must be a table of why/set/unset/delete")
         if unknown := set(entry) - PATCH_KEYS:
@@ -137,8 +138,8 @@ def _load_features(path: Path, name: str, fixes: Fixes) -> None:
         if not feature.get("geometry"):
             raise FixError(f"{where} has no geometry")
         for ident in replaces:
-            if not re.fullmatch(r"[nwr]\d+", str(ident)):
-                raise FixError(f"{where} replaces {ident!r}, which is not a feature id like w123456")
+            if not re.fullmatch(ID_PATTERN, str(ident)):
+                raise FixError(f"{where} replaces {ident!r}, which is not a feature id like w123456 or bprd:1416")
             fixes.replaced[str(ident)] = name
         fixes.added.extend(_elements(feature["geometry"], f"fix:{stem}#{index}", tags, where))
 

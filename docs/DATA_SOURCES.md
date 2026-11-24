@@ -28,6 +28,31 @@ this page in the same pull request.
   [Geofabrik Massachusetts extract](https://download.geofabrik.de/north-america/us/massachusetts-latest.osm.pbf)
   (about 300 MB) instead.
 
+### City of Boston tree inventory
+
+- **Used for:** the position, species and trunk size of street and park trees.
+  Drawn by species and trunk size; see [ARCHITECTURE.md](ARCHITECTURE.md).
+- **Licence:** Open Data Commons Public Domain Dedication and License (PDDL).
+- **What it gives:** position, botanical and common name, and trunk diameter at
+  breast height in inches. It has no height and no crown width.
+- **How it is fetched:** `boston-pipeline fetch <area>` pages through the
+  Parks and Recreation (BPRD Trees)
+  [feature service](https://services.arcgis.com/sFnw0xNflSi8J0uh/arcgis/rest/services/BPRD_Trees/FeatureServer/0)
+  for the area's box and saves it as `data/raw/<area>/trees.json`. The same
+  data is listed on data.boston.gov as `bprd-trees`.
+- **Ids:** `bprd:<n>`, so fixes can change or delete a tree like any other
+  feature.
+- **Merging with OpenStreetMap:** an inventory tree and an OpenStreetMap tree
+  within 4 m are one tree, and the inventory's is kept. In a park the inventory
+  covers, OpenStreetMap trees it does not list are dropped. Elsewhere they are
+  kept. In the pilot this gives 5,791 trees: 4,728 from the inventory and 1,063
+  from OpenStreetMap only (1,480 duplicates merged, 267 dropped).
+- **Caveats:** positions are good to about a metre. Species names are
+  inconsistent between records, and some records are only a genus. Records for
+  empty planting sites and stumps are ignored. It is a living dataset edited
+  continuously, so a fresh download can differ from the one a build used. Trees
+  missing from it or removed since are corrected in `fixes/`.
+
 ## Planned
 
 These are open, verified and not yet wired into the pipeline. They are listed
@@ -45,6 +70,29 @@ roughly in the order they would improve accuracy.
   [TNM Access API](https://tnmaccess.nationalmap.gov/api/v1/products).
 - **Alternative:** [MassGIS lidar terrain](https://www.mass.gov/info-details/massgis-data-lidar-terrain-data),
   0.5 m, public domain.
+
+### Tree heights and crowns: USGS 2021 lidar point cloud
+
+- **Would fix:** the estimated heights and crown widths of trees. Today both
+  come from species and trunk size, not from measurement.
+- **What:** the 2021 airborne lidar for eastern Massachusetts, project
+  `MA_CentralEastern_1_2021`. It was flown with the leaves off, so it shows the
+  tops of branches rather than full summer crowns.
+- **Licence:** public domain
+  ([USGS terms](https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map)).
+- **Access:** point cloud tiles listed by the
+  [TNM Access API](https://tnmaccess.nationalmap.gov/api/v1/products).
+- **Caveat:** the files are LAZ, so the pipeline needs a LAZ reader before it
+  can use them.
+
+### Crown reference: USGS NAIP aerial imagery
+
+- **Use:** a reference for checking tree crowns, because it was taken with the
+  leaves on. Not wired into the pipeline.
+- **What:** National Agriculture Imagery Program, 0.3 m, acquired 7 July 2023.
+- **Licence:** public domain.
+- **Access:** the
+  [USGS NAIP ImageServer](https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer).
 
 ### Building heights: Boston buildings with roof breaks
 
@@ -76,11 +124,11 @@ roughly in the order they would improve accuracy.
 
 ### Street detail: Analyze Boston
 
-All PDDL, at `https://data.boston.gov/dataset/<name>`:
+All PDDL, at `https://data.boston.gov/dataset/<name>`. The tree dataset,
+`bprd-trees`, is already in use (see above).
 
 | Dataset | Use |
 |---|---|
-| `bprd-trees` | Street and park trees with species and trunk size |
 | `traffic-signals` | Signal locations |
 | `streetlight-locations` | About 74 000 street lights |
 | `sidewalk-inventory`, `sidewalk-centerline` | Sidewalk geometry (2014) |
@@ -111,6 +159,15 @@ No open curb-line dataset was found.
 - **Overture Maps buildings:** ODbL, combines OSM with other footprints.
   Height fields exist but are optional and their coverage in Boston has not
   been measured. <https://docs.overturemaps.org/attribution/>
+
+## Reference only
+
+### Photographs
+
+Ground photographs are for looking at, to see what a tree, statue or fence is
+like. Openly licensed ones, such as those on Wikimedia Commons (mostly
+CC BY-SA), are fine as visual reference. Do not use a photograph as a texture
+or as data.
 
 ## Not usable
 

@@ -6,7 +6,6 @@ counter-clockwise front faces. MeshBuilder.finish converts to glTF's y-up axes.
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 
 import mapbox_earcut as earcut
@@ -91,6 +90,32 @@ class MeshBuilder:
             np.concatenate(self._colours) if self._has_colours else None,
             np.concatenate(self._features) if self._has_features else None,
         )
+
+
+def weld(mesh: Mesh) -> Mesh:
+    """Merge vertices that agree in position, colour, UV and feature, so each is
+    stored once. Normals are ignored: tiles are written without them."""
+    count = len(mesh.positions)
+    parts = [np.ascontiguousarray(mesh.positions, dtype=np.float32).view(np.uint8).reshape(count, -1)]
+    for extra, kind in ((mesh.uvs, np.float32), (mesh.colours, np.uint8), (mesh.features, np.float32)):
+        if extra is not None:
+            parts.append(np.ascontiguousarray(extra, dtype=kind).view(np.uint8).reshape(count, -1))
+    rows = np.ascontiguousarray(np.hstack(parts))
+    keys = rows.view([("", np.void, rows.shape[1])]).ravel()
+    _, first, inverse = np.unique(keys, return_index=True, return_inverse=True)
+    # Keep vertices in the order they first appeared.
+    order = np.argsort(first)
+    rank = np.empty(len(order), dtype=np.int64)
+    rank[order] = np.arange(len(order))
+    keep = first[order]
+
+    def pick(array):
+        return None if array is None else array[keep]
+
+    return Mesh(
+        mesh.name, mesh.positions[keep], mesh.normals[keep], rank[inverse.ravel()][mesh.indices].astype(np.uint32),
+        pick(mesh.uvs), pick(mesh.colours), pick(mesh.features),
+    )
 
 
 def triangulate(polygon: Polygon) -> tuple[np.ndarray, np.ndarray]:
@@ -209,55 +234,3 @@ def add_skirt(builder: MeshBuilder, polygon: Polygon, z0: float, z1: float, orig
         )
         indices = np.arange(count)[:, None] * 4 + np.array([0, 1, 2, 0, 2, 3])
         builder.add(positions.reshape(-1, 3), np.repeat(normal, 4, axis=0), indices)
-
-
-def _tree_template() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """A unit low-poly tree: (positions, normals, is_canopy), flat shaded, unindexed."""
-    triangles: list[tuple] = []
-    sides, radius, height = 6, 0.03, 0.42
-    ring = [(radius * math.cos(2 * math.pi * i / sides), radius * math.sin(2 * math.pi * i / sides)) for i in range(sides)]
-    for i in range(sides):
-        (ax, ay), (bx, by) = ring[i], ring[(i + 1) % sides]
-        triangles += [((ax, ay, 0), (bx, by, 0), (bx, by, height)), ((ax, ay, 0), (bx, by, height), (ax, ay, height))]
-    trunk_count = len(triangles)
-
-    phi = (1 + 5**0.5) / 2
-    corners = np.array(
-        [(-1, phi, 0), (1, phi, 0), (-1, -phi, 0), (1, -phi, 0), (0, -1, phi), (0, 1, phi),
-         (0, -1, -phi), (0, 1, -phi), (phi, 0, -1), (phi, 0, 1), (-phi, 0, -1), (-phi, 0, 1)]
-    )
-    corners = corners / np.linalg.norm(corners[0]) * np.array([0.36, 0.36, 0.34]) + np.array([0, 0, 0.66])
-    faces = [(0, 11, 5), (0, 5, 1), (0, 1, 7), (0, 7, 10), (0, 10, 11), (1, 5, 9), (5, 11, 4),
-             (11, 10, 2), (10, 7, 6), (7, 1, 8), (3, 9, 4), (3, 4, 2), (3, 2, 6), (3, 6, 8),
-             (3, 8, 9), (4, 9, 5), (2, 4, 11), (6, 2, 10), (8, 6, 7), (9, 8, 1)]
-    triangles += [tuple(tuple(corners[i]) for i in face) for face in faces]
-
-    positions = np.array(triangles, dtype=np.float64)  # (t, 3, 3)
-    normals = np.cross(positions[:, 1] - positions[:, 0], positions[:, 2] - positions[:, 0])
-    normals /= np.linalg.norm(normals, axis=1)[:, None]
-    # Make every face point away from the tree's axis, whatever its winding was.
-    centroid = positions.mean(axis=1)
-    outward = centroid - np.array([0, 0, 1]) * np.where(np.arange(len(positions)) < trunk_count, centroid[:, 2], 0.66)[:, None]
-    flip = np.einsum("ij,ij->i", normals, outward) < 0
-    positions[flip] = positions[flip][:, ::-1]
-    normals[flip] *= -1
-    is_canopy = np.repeat(np.arange(len(positions)) >= trunk_count, 3)
-    return positions.reshape(-1, 3), np.repeat(normals, 3, axis=0), is_canopy
-
-
-_TREE = _tree_template()
-_TRUNK = colour_bytes("#5b4636")
-_CANOPIES = [colour_bytes(c) for c in ("#4f7a3a", "#5d8a45", "#456e36", "#6a9450", "#557f3e")]
-
-
-def add_tree(builder: MeshBuilder, x: float, y: float, seed: int) -> None:
-    """A stylised street tree at (x, y), 7 to 12 m tall depending on `seed`."""
-    positions, normals, is_canopy = _TREE
-    height = 7.0 + (seed % 50) / 10
-    spread = height * (0.9 + ((seed >> 8) % 30) / 100)
-    angle = (seed >> 16) % 360 * math.pi / 180
-    cos, sin = math.cos(angle), math.sin(angle)
-    rotation = np.array([[cos, -sin, 0], [sin, cos, 0], [0, 0, 1]])
-    scaled = positions * np.array([spread, spread, height])
-    colours = np.where(is_canopy[:, None], _CANOPIES[(seed >> 4) % len(_CANOPIES)], _TRUNK)
-    builder.add(scaled @ rotation.T + np.array([x, y, 0]), normals @ rotation.T, np.arange(len(positions)), colour=colours)

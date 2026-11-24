@@ -227,7 +227,7 @@ async function boot(): Promise<void> {
       const y = -player.position.z;
       const z = player.position.y;
       const [lon, lat] = geo.toLonLat(x, y);
-      const { street, nearby } = city.describe(x, y);
+      const { street, park, nearby } = city.describe(x, y);
       player.applyTo(camera);
       camera.updateMatrixWorld();
       const hit = city.pick(camera.position, camera.getWorldDirection(lookDirection));
@@ -249,6 +249,12 @@ async function boot(): Promise<void> {
             height: hit.building.height,
             height_source: hit.building.height_source,
           },
+          object: hit.object && {
+            id: hit.object.id,
+            kind: hit.object.kind,
+            name: hit.object.name,
+            species: hit.object.species,
+          },
         };
       }
       const altitude = player.flying ? z.toFixed(0) : '0';
@@ -267,6 +273,7 @@ async function boot(): Promise<void> {
         looking_at: lookingAt,
         tile: city.tileIndex(x, y),
         street,
+        park,
         near: nearby,
         link: `${siteUrl()}#${view.join(',')}`,
         data: city.sourceDate,
@@ -350,9 +357,10 @@ async function boot(): Promise<void> {
       const y = -player.position.z;
       const [lon, lat] = geo.toLonLat(x, y);
       element('coords').textContent = `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
-      const { street, nearby } = city.describe(x, y);
-      element('street').textContent = street ?? city.name;
-      element('nearby').textContent = nearby ? `near ${nearby}` : '';
+      const { street, park, nearby } = city.describe(x, y);
+      element('street').textContent = street ?? park ?? city.name;
+      // The park is on the second line only when the first line is showing a street.
+      element('nearby').textContent = [street ? park : undefined, nearby && `near ${nearby}`].filter(Boolean).join(' · ');
       notepad.update(player.position);
 
       if (!started) {

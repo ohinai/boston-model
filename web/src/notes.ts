@@ -1,4 +1,4 @@
-import type { BuildingInfo } from './city';
+import type { BuildingInfo, ObjectInfo } from './city';
 
 /**
  * Notes: what someone walking the model wants fixed, with exactly where they
@@ -36,12 +36,19 @@ export interface NoteContext {
     y: number;
     z: number;
     distance: number;
-    /** Tile layer hit: ground, green, water, roads, paths, rail, curbs, building_walls, building_roofs or trees. */
+    /**
+     * Tile layer hit: ground, green, beds, water, roads, paths, rail, curbs, building_walls,
+     * building_roofs, trees, furniture, monuments or bridges.
+     */
     layer: string;
     building?: Pick<BuildingInfo, 'id' | 'part_of' | 'name' | 'height' | 'height_source'>;
+    /** For furniture, monuments, bridges and trees: the thing that was hit. */
+    object?: Pick<ObjectInfo, 'id' | 'kind' | 'name' | 'species'>;
   };
   tile: [number, number];
   street?: string;
+  /** The named park, garden or playground the author stood in. */
+  park?: string;
   near?: string;
   /** Opens the viewer at the same position and view. */
   link: string;
@@ -71,6 +78,29 @@ const LAYER_NAMES: Record<string, string> = {
   building_walls: 'a building wall',
   building_roofs: 'a roof',
   trees: 'a tree',
+  beds: 'a planted bed',
+  furniture: 'park furniture',
+  monuments: 'a monument',
+  bridges: 'a bridge',
+};
+
+/** What to call an object, by kind. Kinds not listed fall back to the layer's wording. */
+const KIND_NAMES: Record<string, string> = {
+  bench: 'a bench',
+  lamp: 'a lamp post',
+  waste_basket: 'a litter bin',
+  drinking_water: 'a drinking fountain',
+  flagpole: 'a flagpole',
+  plaque: 'a plaque',
+  stele: 'a memorial',
+  obelisk: 'an obelisk',
+  column: 'a column',
+  monument: 'a monument',
+  statue: 'a statue',
+  sculpture: 'a sculpture',
+  fountain: 'a fountain',
+  bridge: 'a bridge',
+  tree: 'a tree',
 };
 
 export function newNoteId(): string {
@@ -90,14 +120,17 @@ export function siteUrl(): string {
 export function describeTarget(context: NoteContext): string {
   const target = context.looking_at;
   if (!target) return 'nothing in range';
-  const what = LAYER_NAMES[target.layer] ?? target.layer;
-  const name = target.building?.name ? ` (${target.building.name})` : '';
+  const object = target.object;
+  const what = (object && KIND_NAMES[object.kind]) ?? LAYER_NAMES[target.layer] ?? target.layer;
+  const label = object ? (object.name ?? object.species) : target.building?.name;
+  const name = label ? ` (${label})` : '';
   return `${what}${name}, ${target.distance < 10 ? target.distance.toFixed(1) : target.distance.toFixed(0)} m ahead`;
 }
 
-/** "Lafayette Mall, near Brewer Fountain" */
+/** "Lagoon Path, Boston Public Garden, near Japanese Lantern" */
 export function describePlace(context: NoteContext): string {
-  const parts = [context.street ?? 'unnamed ground'];
+  const parts = [context.street ?? context.park ?? 'unnamed ground'];
+  if (context.street && context.park) parts.push(context.park);
   if (context.near) parts.push(`near ${context.near}`);
   return parts.join(', ');
 }

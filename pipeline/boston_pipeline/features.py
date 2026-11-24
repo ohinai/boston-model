@@ -50,6 +50,31 @@ GREEN_LEISURE = {"park", "garden", "pitch", "playground", "common", "dog_park", 
 GREEN_LANDUSE = {"grass", "forest", "meadow", "cemetery", "recreation_ground", "village_green", "flowerbed"}
 GREEN_NATURAL = {"wood", "scrub", "grassland"}
 
+# What a path is made of, from its `surface` tag. Each cover is drawn in its own
+# colour; anything not listed is "paved", a neutral light grey.
+PATH_COVERS = {
+    "asphalt": "asphalt", "concrete": "concrete", "concrete:plates": "concrete", "concrete:lanes": "concrete",
+    "paving_stones": "paving_stones", "brick": "brick", "bricks": "brick", "sett": "sett",
+    "cobblestone": "sett", "unhewn_cobblestone": "sett", "wood": "wood", "metal": "metal",
+    "gravel": "gravel", "fine_gravel": "gravel", "compacted": "gravel", "pebblestone": "gravel",
+    "dirt": "dirt", "ground": "dirt", "earth": "dirt", "unpaved": "dirt", "woodchips": "dirt", "sand": "sand",
+}
+# Sports and play surfaces that are not grass, by `surface` tag.
+HARD_COURTS = {"asphalt", "concrete", "acrylic", "tartan", "hard", "paved", "rubber"}
+BARE_GROUND = {"dirt", "clay", "sand", "earth", "ground", "gravel", "fine_gravel", "woodchips"}
+
+# A footbridge with no stated height rises this share of its length at mid-span,
+# within these limits (metres): enough to read as a bridge, gentle enough to walk.
+BRIDGE_RISE = 0.025
+BRIDGE_RISE_LIMITS = (0.3, 0.8)
+
+COMPASS = {
+    name: index * 22.5
+    for index, name in enumerate(
+        ["n", "nne", "ne", "ene", "e", "ese", "se", "sse", "s", "ssw", "sw", "wsw", "w", "wnw", "nw", "nnw"]
+    )
+}
+
 POI_AMENITIES = {
     "restaurant", "cafe", "bar", "pub", "fast_food", "bank", "pharmacy", "library",
     "theatre", "cinema", "place_of_worship", "school", "university", "college",
@@ -100,12 +125,33 @@ class Way:
     width: float
     name: str | None
     tags: dict = field(default_factory=dict)
+    cover: str = "paved"  # for paths: what the surface is made of (see PATH_COVERS)
+    bridge: bool = False
 
 
 @dataclass
 class Area:
     id: str
     polygon: Polygon
+    tags: dict = field(default_factory=dict)
+    cover: str = ""  # which kind of path or green surface this is; picks its colour
+
+
+@dataclass
+class Object:
+    """Something standing at a point: a bench, a lamp post, a statue, a fountain."""
+
+    id: str
+    x: float
+    y: float
+    kind: str  # one of furniture.KINDS
+    name: str | None = None
+    direction: float = 0.0  # degrees clockwise from north that it faces
+    height: float | None = None  # metres, where the data states it
+    size: float | None = None  # length of a bench or width of a fountain basin, where stated
+    colour: str | None = None
+    material: str | None = None
+    variant: str | None = None
     tags: dict = field(default_factory=dict)
 
 
@@ -124,8 +170,9 @@ class Scene:
     buildings: list[Building] = field(default_factory=list)
     ways: list[Way] = field(default_factory=list)
     areas: dict[str, list[Area]] = field(
-        default_factory=lambda: {"road": [], "path": [], "water": [], "green": []}
+        default_factory=lambda: {"road": [], "path": [], "water": [], "bed": [], "green": []}
     )
+    objects: list[Object] = field(default_factory=list)
     coastlines: list[LineString] = field(default_factory=list)
     trees: list[Point] = field(default_factory=list)
     signals: list[Point] = field(default_factory=list)
@@ -289,6 +336,108 @@ def _road_width(tags: dict, kind: str) -> float:
     return ROAD_WIDTHS.get(kind, 6.5)
 
 
+def path_cover(tags: dict) -> str:
+    return PATH_COVERS.get(tags.get("surface", ""), "wood" if tags.get("man_made") == "pier" else "paved")
+
+
+def green_cover(tags: dict) -> tuple[str, str]:
+    """(surface, cover) for a park or planting area: which layer it joins and how it looks."""
+    leisure, landuse, natural = tags.get("leisure"), tags.get("landuse"), tags.get("natural")
+    surface = tags.get("surface", "")
+    if landuse == "flowerbed" or (leisure == "garden" and tags.get("garden:type") == "flowerbed"):
+        return "bed", "flowers"
+    if leisure in ("pitch", "playground", "dog_park"):
+        if surface == "artificial_turf":
+            return "green", "turf"
+        if surface in HARD_COURTS:
+            return "green", "court"
+        if surface in BARE_GROUND:
+            return "green", "dirt"
+        if leisure == "playground" and surface != "grass":
+            return "green", "playground"  # a soft play surface unless the data says otherwise
+        return "green", "pitch" if leisure == "pitch" else "grass"
+    if landuse in ("grass", "meadow") or natural == "grassland":
+        return "green", "meadow" if landuse == "meadow" else "grass"
+    if natural == "wood" or landuse == "forest":
+        return "green", "wood"
+    if natural == "scrub":
+        return "green", "scrub"
+    if leisure == "garden":
+        return "green", "garden"
+    # Parks, commons, cemeteries and the like: the lawn everything else sits on.
+    return "green", "lawn"
+
+
+def bridge_rise(length: float) -> float:
+    """How far a footbridge of this length arches above its ends, in metres."""
+    low, high = BRIDGE_RISE_LIMITS
+    return min(high, max(low, length * BRIDGE_RISE))
+
+
+def parse_direction(value) -> float | None:
+    """An OSM direction ("165", "NE", "10;190") as degrees clockwise from north."""
+    if value is None:
+        return None
+    first = str(value).split(";")[0].strip().lower()
+    if first in COMPASS:
+        return COMPASS[first]
+    number = parse_number(first)
+    return number % 360 if number is not None else None
+
+
+# How a memorial or artwork is drawn, by its `memorial` or `artwork_type` tag.
+MEMORIAL_FORMS = {
+    "statue": "statue", "bust": "statue", "plaque": "plaque", "blue_plaque": "plaque",
+    "obelisk": "obelisk", "column": "column", "stele": "stele", "stone": "stele", "tablet": "stele",
+    "war_memorial": "monument",
+}
+
+
+def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
+    """Interpret a point as park or street furniture, or as a monument."""
+    if _is_underground(tags) or tags.get("location") == "indoor":
+        return None
+    kind = variant = size = None
+    height = parse_length(tags.get("height"))
+    if tags.get("amenity") == "fountain":
+        kind, variant = "fountain", "nozzle" if tags.get("fountain") == "nozzle" else None
+        size = parse_length(tags.get("diameter") or tags.get("width"))
+    elif tags.get("historic") in ("monument", "memorial") or tags.get("tourism") == "artwork":
+        form = tags.get("memorial") or tags.get("artwork_type") or ""
+        if tags.get("historic") == "monument":
+            # A monument that is a statue (a rider on a tall pedestal, say) is drawn as one.
+            kind = MEMORIAL_FORMS.get(form, "monument")
+        else:
+            kind = MEMORIAL_FORMS.get(form, "sculpture" if "tourism" in tags or form else "stele")
+        if kind == "plaque" and height is None and tags.get("support") in ("wall", "fence", "building"):
+            return None  # fixed to something else, with nothing of its own to draw
+    elif tags.get("amenity") == "bench":
+        kind, variant = "bench", "backless" if tags.get("backrest") == "no" else None
+        seats = parse_number(tags.get("seats"))
+        size = parse_length(tags.get("length")) or (seats * 0.6 if seats else None)
+        height = None  # a bench's height tag is its seat height, which the shape already has
+    elif tags.get("highway") == "street_lamp":
+        mount = tags.get("lamp_mount", "")
+        if mount in ("ground", "wall") or tags.get("support") in ("wall", "ceiling", "ground"):
+            return None
+        if height is not None and height < 1.5:
+            return None  # a light set into the ground
+        kind, variant = "lamp", "arm" if "bent" in mount or "arm" in mount else "post"
+    elif tags.get("amenity") == "waste_basket":
+        kind = "waste_basket"
+    elif tags.get("amenity") == "drinking_water":
+        kind = "drinking_water"
+    elif tags.get("man_made") == "flagpole":
+        kind = "flagpole"
+    if kind is None:
+        return None
+    material = (tags.get("material") or "").split(";")[0] or None
+    return Object(
+        ident, x, y, kind, tags.get("name"), parse_direction(tags.get("direction")) or 0.0,
+        height if height and height > 0 else None, size, parse_colour(tags.get("colour")), material, variant, tags,
+    )
+
+
 def _poi_kind(tags: dict) -> str | None:
     if "shop" in tags:
         return f"shop={tags['shop']}"
@@ -322,7 +471,7 @@ def _add_way(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> None:
     closed_polygons = _way_polygons(coords)
 
     def areas(polygons: list[Polygon]) -> list[Area]:
-        return [Area(ident, polygon, tags) for polygon in polygons]
+        return [Area(ident, polygon, tags, path_cover(tags)) for polygon in polygons]
 
     if "highway" in tags:
         kind = tags["highway"]
@@ -336,7 +485,9 @@ def _add_way(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> None:
         if surface == "path":
             width = parse_length(tags.get("width")) or width
         if len(coords) >= 2:
-            scene.ways.append(Way(ident, LineString(coords), kind, surface, width, tags.get("name"), tags))
+            cover = path_cover(tags) if surface == "path" else ""
+            bridge = tags.get("bridge", "no") != "no"
+            scene.ways.append(Way(ident, LineString(coords), kind, surface, width, tags.get("name"), tags, cover, bridge))
     elif "railway" in tags:
         if _is_underground(tags):
             return
@@ -344,7 +495,9 @@ def _add_way(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> None:
             if closed_polygons:
                 scene.areas["path"].extend(areas(closed_polygons))
             elif len(coords) >= 2:
-                scene.ways.append(Way(ident, LineString(coords), "platform", "path", 3.0, tags.get("name"), tags))
+                scene.ways.append(
+                    Way(ident, LineString(coords), "platform", "path", 3.0, tags.get("name"), tags, path_cover(tags))
+                )
         elif len(coords) >= 2:
             scene.ways.append(Way(ident, LineString(coords), tags["railway"], "rail", RAIL_WIDTH, tags.get("name"), tags))
     elif tags.get("natural") == "coastline":
@@ -363,6 +516,7 @@ def _add_way(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> None:
 def _add_area(scene: Scene, ident: str, tags: dict, polygons: list[Polygon]) -> None:
     if not polygons or _is_underground(tags):
         return
+    cover = ""
     if tags.get("natural") == "water" or tags.get("waterway") in ("dock", "riverbank"):
         surface = "water"
     elif (
@@ -370,12 +524,12 @@ def _add_area(scene: Scene, ident: str, tags: dict, polygons: list[Polygon]) -> 
         or tags.get("landuse") in GREEN_LANDUSE
         or tags.get("natural") in GREEN_NATURAL
     ):
-        surface = "green"
+        surface, cover = green_cover(tags)
     elif tags.get("man_made") == "pier":
-        surface = "path"
+        surface, cover = "path", path_cover(tags)
     else:
         return
-    scene.areas[surface].extend(Area(ident, polygon, tags) for polygon in polygons)
+    scene.areas[surface].extend(Area(ident, polygon, tags, cover) for polygon in polygons)
 
 
 def element_id(element: dict) -> str:
@@ -398,8 +552,13 @@ def classify(elements: list[dict]) -> Scene:
                 scene.trees.append(Point(ident, x, y, tags=tags))
             elif tags.get("highway") == "traffic_signals":
                 scene.signals.append(Point(ident, x, y, tags=tags))
-            elif tags.get("name") and _poi_kind(tags):
-                scene.pois.append(Point(ident, x, y, tags["name"], _poi_kind(tags), tags))
+            else:
+                # A statue is both something to draw and a named place to be near.
+                thing = _object(ident, tags, x, y)
+                if thing:
+                    scene.objects.append(thing)
+                if tags.get("name") and _poi_kind(tags):
+                    scene.pois.append(Point(ident, x, y, tags["name"], _poi_kind(tags), tags))
         elif kind == "way":
             if not element.get("geometry"):
                 continue

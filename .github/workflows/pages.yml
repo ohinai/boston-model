@@ -34,7 +34,7 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: data/raw
-          key: osm-${{ hashFiles('areas.toml', 'pipeline/boston_pipeline/osm.py') }}
+          key: osm-${{ hashFiles('areas.toml', 'pipeline/boston_pipeline/osm.py', 'pipeline/boston_pipeline/inventory.py') }}
       - run: boston-pipeline fetch pilot
       - run: boston-pipeline build pilot
 
