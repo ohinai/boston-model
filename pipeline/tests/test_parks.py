@@ -159,6 +159,20 @@ def _read_glb(path):
     return json.loads(data[20 : 20 + length])
 
 
+def _mesh_data(path, document, primitive):
+    """Positions (n, 3) and triangles (m, 3) of one mesh, read from the .glb's binary part."""
+    data = path.read_bytes()
+    start = 20 + struct.unpack_from("<I", data, 12)[0] + 8
+
+    def read(index, dtype, width):
+        accessor = document["accessors"][index]
+        view = document["bufferViews"][accessor["bufferView"]]
+        return np.frombuffer(data, dtype, accessor["count"] * width, start + view["byteOffset"]).reshape(-1, width)
+
+    kind = {5123: np.uint16, 5125: np.uint32}[document["accessors"][primitive["indices"]]["componentType"]]
+    return read(primitive["attributes"]["POSITION"], np.float32, 3), read(primitive["indices"], kind, 1).reshape(-1, 3)
+
+
 def test_build_draws_a_park(tmp_path):
     scene = Scene()
     scene.areas["water"].append(Area("w10", box(50, 50, 150, 110), {"natural": "water"}))
@@ -195,6 +209,12 @@ def test_build_draws_a_park(tmp_path):
         return document["accessors"][layers[name]["attributes"]["POSITION"]]["max"][1]
 
     assert top("beds") == pytest.approx(BED_HEIGHT)
+    # The 10 m x 10 m bed has soil under all of it, planting included: no hole to fall through.
+    positions, triangles = _mesh_data(tmp_path / "tiles" / "0_0.glb", document, layers["beds"])
+    corners = positions[triangles]
+    flat = np.abs(corners[:, :, 1]).max(axis=1) < 1e-6
+    areas = 0.5 * np.linalg.norm(np.cross(corners[:, 1] - corners[:, 0], corners[:, 2] - corners[:, 0]), axis=1)
+    assert areas[flat].sum() == pytest.approx(100.0, rel=1e-3)
     assert top("bridges") == pytest.approx(0.03 + 0.8 + 1.125, abs=0.01)  # the top rail at mid-span
     # Only the stretch over the pond (y 50 to 110, plus a short landing) is raised;
     # the rest of the bridge way lies on the banks as ordinary path. glTF z is -north.

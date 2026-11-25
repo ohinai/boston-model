@@ -39,7 +39,9 @@ QUERY = """
   relation["leisure"~"^(park|garden|common)$"]({{bbox}});
   way["landuse"~"^(grass|forest|meadow|cemetery|recreation_ground|village_green|flowerbed)$"]({{bbox}});
   relation["landuse"~"^(grass|forest|meadow|cemetery|recreation_ground)$"]({{bbox}});
+  way["barrier"~"^(fence|wall|retaining_wall|hedge|chain|guard_rail|kerb|gate|bollard|city_wall)$"]({{bbox}});
   node["natural"="tree"]({{bbox}});
+  node["barrier"~"^(bollard|block)$"]({{bbox}});
   node["highway"~"^(traffic_signals|crossing|street_lamp|bus_stop|stop)$"]({{bbox}});
   node["shop"]({{bbox}});
   node["amenity"]({{bbox}});

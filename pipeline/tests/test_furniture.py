@@ -4,7 +4,7 @@ import pytest
 from boston_pipeline.furniture import KINDS, add_object
 from boston_pipeline.mesh import MeshBuilder
 
-BUDGETS = {"bench": 80, "lamp": 80, "waste_basket": 40}
+BUDGETS = {"bench": 80, "lamp": 80, "waste_basket": 40, "bollard": 40, "block": 13}
 
 
 def _build(kind, x=10.0, y=20.0, **options):
@@ -68,6 +68,9 @@ def test_nothing_is_below_ground_and_the_object_stands_at_its_position(kind, opt
         ("flagpole", {}, 12.0),
         ("flagpole", {"height": 20}, 20.0),
         ("waste_basket", {}, 0.95),
+        ("bollard", {}, 0.9),
+        ("bollard", {"height": 1.0}, 1.0),
+        ("block", {}, 0.5),
         ("stele", {"height": 2.2}, 2.2),
         ("obelisk", {}, 6.0),
         ("obelisk", {"height": 12}, 12.0),

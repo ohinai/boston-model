@@ -18,6 +18,7 @@ import {
   Vector3,
   WebGLRenderer,
 } from 'three';
+import { runCapture } from './capture';
 import { City } from './city';
 import { Geo } from './geo';
 import { Notepad } from './notepad';
@@ -45,7 +46,22 @@ renderer.shadowMap.enabled = true;
 
 const scene = new Scene();
 scene.fog = new FogExp2(HORIZON, 0.00028);
-const camera = new PerspectiveCamera(70, 1, 0.2, 16000);
+const NEAR = 0.2; // metres: the closest thing drawn when on foot
+const camera = new PerspectiveCamera(70, 1, NEAR, 16000);
+
+/**
+ * Push the near plane out as the camera climbs. Depth precision is spent between the
+ * near and far planes, and from high up with a 20 cm near plane it runs out: surfaces
+ * a few tens of centimetres apart, such as water and the land plane under it, flicker
+ * in stripes. Nothing is ever closer than a few metres to a camera that high.
+ */
+function fitNearPlane(): void {
+  const wanted = MathUtils.clamp(camera.position.y * 0.02, NEAR, 40);
+  if (Math.abs(wanted - camera.near) > camera.near * 0.1) {
+    camera.near = wanted;
+    camera.updateProjectionMatrix();
+  }
+}
 
 const azimuth = MathUtils.degToRad(SUN_AZIMUTH);
 const elevation = MathUtils.degToRad(SUN_ELEVATION);
@@ -136,10 +152,14 @@ function updateShadows(position: Vector3): void {
 // Featureless land out to the horizon, just below the lowest built surface.
 const beyond = new Mesh(new CircleGeometry(15000, 48), new MeshStandardMaterial({ color: '#8c9086', roughness: 1 }));
 beyond.rotation.x = -Math.PI / 2;
-beyond.position.y = -0.8;
+beyond.position.y = -3; // well under the water surface, so the two never fight for the same pixels
 scene.add(beyond);
 
+// Capture mode (?capture=<url>) fixes the picture size itself.
+const captureUrl = new URLSearchParams(window.location.search).get('capture');
+
 function resize(): void {
+  if (captureUrl) return;
   renderer.setSize(window.innerWidth, window.innerHeight, false);
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -177,8 +197,32 @@ async function boot(): Promise<void> {
   const tilesetUrl = new URL(query.get('tileset') ?? 'tiles/tileset.json', document.baseURI);
   const city = await City.open(tilesetUrl, scene);
   const geo = new Geo(city.frame);
-  const input = new Input(canvas);
   const player = new Player(city);
+  if (captureUrl) {
+    await runCapture(
+      {
+        renderer,
+        scene,
+        camera,
+        sky,
+        city,
+        player,
+        geo,
+        resize: (width, height, fov) => {
+          renderer.setPixelRatio(1);
+          renderer.setSize(width, height, false);
+          camera.aspect = width / height;
+          camera.fov = fov;
+          camera.updateProjectionMatrix();
+        },
+        updateShadows,
+        resetShadows: () => shadowCentre.set(Infinity, 0, 0),
+      },
+      captureUrl,
+    );
+    return;
+  }
+  const input = new Input(canvas);
   player.onRescue = () => notice('Splash. Back on dry land.');
   if (import.meta.env.DEV) Object.assign(window, { debug: { city, player, scene, renderer } });
 
@@ -346,6 +390,7 @@ async function boot(): Promise<void> {
     if (started) player.update(dt, input);
     else input.takeLook();
     player.applyTo(camera);
+    fitNearPlane();
     sky.position.copy(camera.position);
 
     updateShadows(player.position);

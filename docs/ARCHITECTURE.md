@@ -81,7 +81,7 @@ with the same name:
 |---|---|---|
 | `ground` | Paved ground not covered by anything else | 0 |
 | `green` | Parks, lawns, pitches, playgrounds, cemeteries, with per-vertex colour by kind of surface | 0 |
-| `beds` | Planted beds: bare soil at the edge, a low mass of planting in from it, with per-vertex colour. Solid | 0, planting 0.35 m |
+| `beds` | Planted beds: soil under the whole bed, bare at the edge, and a low mass of planting in from it, with per-vertex colour. Solid | 0, planting 0.35 m |
 | `paths` | Footpaths, plazas, piers, platforms, with per-vertex colour by surface (asphalt, brick, gravel and so on) | 0 |
 | `roads` | Carriageways | −0.12 m |
 | `rail` | Surface track | 0 |
@@ -93,6 +93,7 @@ with the same name:
 | `furniture` | Benches, lamp posts, litter bins, drinking fountains, flagpoles, with per-vertex colour | |
 | `monuments` | Statues, sculptures, memorials, monuments, plaques and fountains. Placeholders of the right kind and size in the right place, not likenesses | |
 | `bridges` | Raised footbridge decks with railings, and the stone piers of things standing in the water beside them | up to about 2 m |
+| `barriers` | Fences, walls, retaining walls, hedges, post-and-chain fences, guard rails, kerbs and rows of bollards, with per-vertex colour. Solid. Bollards on their own and stone blocks are in `furniture` | up to about 1.2 m by default |
 
 Clients may rely on these names. The browser viewer uses them to decide what is
 solid (everything except `trees`) and to swap in its own materials.
@@ -100,7 +101,7 @@ solid (everything except `trees`) and to swap in its own materials.
 Vertices in `building_walls` and `building_roofs` carry a `_FEATURE_ID_0`
 attribute (declared with the `EXT_mesh_features` extension): the building's
 position in the `buildings` list of the tile's data file. Vertices in `trees`,
-`furniture`, `monuments` and `bridges` carry it too, as a position in the
+`furniture`, `monuments`, `bridges` and `barriers` carry it too, as a position in the
 `objects` list. That is how a client tells what a click or a line of sight has
 hit.
 
@@ -150,10 +151,13 @@ for a feature added by a file in `fixes/`. A building part also has `part_of`,
 the id of the building it belongs to, and takes that building's name.
 
 `objects` lists everything drawn as a thing standing in the tile: each tree,
-piece of furniture, monument and raised bridge. Each entry has `id`, `kind`
+piece of furniture, monument, raised bridge, fence and wall. Each entry has `id`, `kind`
 (`tree`, `bench`, `lamp`, `waste_basket`, `drinking_water`, `flagpole`,
-`plaque`, `stele`, `obelisk`, `column`, `statue`, `sculpture`, `monument`,
-`fountain` or `bridge`), `pos`, and where known `name`. A tree also has
+`bollard`, `block`, `plaque`, `stele`, `obelisk`, `column`, `statue`,
+`sculpture`, `monument`, `fountain`, `bridge`, or a barrier: `fence`, `chain`,
+`wall`, `retaining_wall`, `hedge`, `guard_rail`, `kerb` or `bollards`), `pos`,
+and where known `name`. A barrier is listed once per tile, at the middle of its
+longest piece. A tree also has
 `species` (a common name) and `height` in metres. The height is an estimate
 unless the data gave one. `areas` lists the named parks, gardens, pitches and
 playgrounds that overlap the tile: `id`, `name`, `kind`, `area` in square metres
@@ -190,8 +194,8 @@ stages:
    street centre lines into surfaces, derive the sea from coastline ways, pick
    out the footbridges that will be raised, and index everything spatially.
 3. **Build tiles.** For each tile, look up what touches it, split the ground
-   into layers, extrude buildings, place trees, furniture, monuments and
-   bridges, and write the `.glb` and `.json`.
+   into layers, extrude buildings, place trees, furniture, monuments,
+   bridges and barriers, and write the `.glb` and `.json`.
 
 Each tile is built from index lookups alone, so build time grows with the
 number of tiles rather than the size of the city, and tiles can later be built
@@ -220,6 +224,25 @@ parts of the bridge way that lie on the banks stay ordinary path, so paths that
 run along the bank can still cross. Bridges over roads and
 rail, road bridges and their sidewalks stay at ground level until the model has
 levels.
+
+Barriers come from `barrier` ways in the OpenStreetMap download (fence, wall,
+retaining wall, hedge, chain, guard rail, kerb, bollard and city wall), with
+shapes in [`barriers.py`](../pipeline/boston_pipeline/barriers.py). A single
+bollard or stone block is a point and goes in `furniture`. Gate ways are not
+drawn, so a gate stands open. Each barrier is opened where it would block a
+walker. A path that crosses it cuts a gap as wide as the path plus 0.4 m, and no
+barrier is drawn within 0.5 m of a path's centre line. It is also cut where it
+lies in a carriageway, inside a building or under a raised footbridge deck, and
+where it runs through the inside of a paved area such as a plaza (but not along
+its edge). A path that only runs beside a fence does not cut it, because fences
+usually stand right at a path's edge. A kerb is not opened by paths. A water
+area tagged `edge=kerb` (a tag this project made up, set through `fixes/`) gets
+a low stone kerb along its outer shore, on the land side.
+
+Trees whose form is weeping (willows, and any tree whose common name says
+"weeping" or whose botanical name has the cultivar 'Pendula') are drawn as a
+broad dome with a hanging skirt that a walker can stand under, at least as wide
+as they are tall. The species name *Betula pendula* does not count.
 
 [`mesh.py`](../pipeline/boston_pipeline/mesh.py) holds the geometry helpers and
 [`gltf.py`](../pipeline/boston_pipeline/gltf.py) a small glTF writer. The
@@ -258,6 +281,29 @@ to be checked by eye (the `/audit` command in
 [`.claude/commands/audit.md`](../.claude/commands/audit.md) is the procedure)
 and only then become files in `fixes/`.
 
+### From the ground
+
+`boston-pipeline ground <area> --park <name>`
+([`ground.py`](../pipeline/boston_pipeline/ground.py)) is the audit's sibling at
+eye level. It finds openly licensed, geotagged photographs inside the park on
+Wikimedia Commons and, for each, writes under `data/ground/<area>/<id>/` the
+photograph, pictures of the model from the same position, a `sheet.jpg` that
+puts them together, and an `info.json` with the author, licence, date and
+position.
+
+The model pictures come from the viewer itself, so they show the same tiles a
+visitor sees. [`capture.py`](../pipeline/boston_pipeline/capture.py) serves the
+built viewer (`web/dist`) from a small local server and opens it in a headless
+browser at `/?capture=/__capture/views.json`. That file lists each view (id,
+latitude, longitude, heading, pitch). The viewer
+([`capture.ts`](../web/src/capture.ts)) stands the walker on the ground at each
+one, renders, and sends one POST per picture, then a final POST to say it is
+done. This needs a Chromium-based browser (Chrome, Edge or Chromium) already
+installed on the machine, and a viewer built after the tiles. As with the
+audit, nothing here changes the model; the `/ground` command in
+[`.claude/commands/ground.md`](../.claude/commands/ground.md) is the procedure
+for checking a sheet.
+
 ## Browser viewer
 
 [`web/`](../web) is a static site: TypeScript, three.js and Vite, with no
@@ -268,11 +314,17 @@ any address given as `?tileset=<url>`.
   collision structure for each, and answers "what street is this" and "what
   did that ray hit".
 - [`player.ts`](../web/src/player.ts) is a capsule-shaped walker with gravity,
-  plus a fly mode. Collision is against the real tile geometry, so anything a
+  plus a fly mode. A walker who arrives on foot starts a metre up and drops onto
+  whatever is there, since a bridge deck or a bed stands above the ground around it. Collision is against the real tile geometry, so anything a
   future build adds (terrain, steps, bridges) is walkable without viewer changes.
 - [`main.ts`](../web/src/main.ts) sets up lighting, sky and the on-screen text.
+  The camera's near plane moves out as the camera climbs, and the plain land
+  plane under the model sits well below the water. Without both, seen from high
+  up the water broke into stripes where the depth buffer ran out of precision.
 - [`notes.ts`](../web/src/notes.ts) and [`notepad.ts`](../web/src/notepad.ts)
   handle notes, described next.
+- [`capture.ts`](../web/src/capture.ts) is the capture mode (`?capture=<url>`)
+  that takes pictures for the ground check, described above.
 
 The page address carries `#lat,lon,heading` (and altitude and pitch when
 flying). Positions are latitude and longitude so links survive any future
@@ -339,6 +391,6 @@ where the city is edited.
   16-bit indices where they fit. Quantisation and mesh compression are standard
   glTF extensions and are not applied yet.
 - **Trees are not solid** and their sizes are estimates. Bridges over roads and
-  rail, road bridges and tunnels are not modelled.
+  rail, road bridges and tunnels are not modelled. Gates are not drawn.
 - **Overpass for downloads.** Fine for a district. A whole-city build should
   read a regional extract instead.

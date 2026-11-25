@@ -97,7 +97,7 @@ SPECIES: dict[str, tuple] = {
 }
 
 # Lowest foliage as a share of tree height, by form.
-CROWN_BASE = {"vase": 0.42, "round": 0.30, "oval": 0.28, "columnar": 0.25, "weeping": 0.35, "small": 0.30, "conifer": 0.12}
+CROWN_BASE = {"vase": 0.42, "round": 0.30, "oval": 0.28, "columnar": 0.25, "weeping": 0.12, "small": 0.30, "conifer": 0.12}
 
 # Trunk diameter (cm) to assume when no girth is mapped.
 DENOTATION_CM = {"park": 45, "garden": 45, "avenue": 45, "landmark": 45, "street": 25, "urban": 25}
@@ -160,6 +160,16 @@ def describe(tags: dict, seed: int = 0) -> TreeShape:
         if exception:
             form, mature, spread = exception[:3]
             common = exception[3] or common
+    # A weeping cultivar of any genus (inventory names such as "Weeping European beech" or a
+    # botanical name with 'Pendula') is drawn as a weeping tree, keeping the genus's size and colour.
+    cultivar = f"{botanical} {str(tags.get('species:en') or '').lower()}"
+    # 'Pendula' counts as a cultivar name only: as a species epithet (Betula pendula, the
+    # silver birch) it does not mean a weeping tree.
+    words = botanical.replace("'", " ").replace('"', " ").split()
+    if "weeping" in cultivar or "pendula" in words[2:]:
+        form = "weeping"
+    if form == "weeping":
+        spread = max(spread, 1.05)  # a mature weeping tree is at least as wide as it is tall
     name = tags.get("species:en") or common
 
     stated = _number(tags.get("height"))
@@ -190,11 +200,15 @@ def describe(tags: dict, seed: int = 0) -> TreeShape:
 
     # Crown: mapped, else height times the genus spread; a thin young trunk cannot carry a wide crown.
     if not has_crown:
-        crown = max(1.2, min(height * spread * _vary(seed, 3, 0.08), 0.28 * d + 1.5))
+        # A weeping crown is carried on long drooping branches, so the trunk cap is looser for it.
+        cap = 0.45 * d + 2.0 if form == "weeping" else 0.28 * d + 1.5
+        crown = max(1.2, min(height * spread * _vary(seed, 3, 0.08), cap))
 
     # Park and street trees are limbed up, except conifers (branches to the ground).
     base = CROWN_BASE[form] * height
-    if form != "conifer":
+    if form == "weeping":
+        base = min(1.75, 0.45 * height)  # curtains hang to head height whatever the tree's size
+    elif form != "conifer":
         base = max(base, min(2.2, 0.45 * height))
 
     # Root flare makes the base wider than the diameter at breast height.
@@ -224,6 +238,7 @@ class _Part:
     faces: np.ndarray
     centre: np.ndarray | None = None  # canopy lobes: the point every face must face away from
     colours: np.ndarray | None = None
+    tint: np.ndarray | None = None  # per-vertex brightness multiplier (weeping skirt: one value per side)
 
 
 def _lobe(centre, radii, seed: int, coarse: bool = False) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -282,6 +297,70 @@ def _cone(z0: float, z1: float, radius: float, sides: int = 8, phase: float = 0.
     return positions, normals, faces
 
 
+_SKIRT_SIDES = 10
+_HEM_LOW, _HEM_HIGH = 1.2, 3.0  # the ragged hem of a weeping curtain, metres above the ground
+
+
+def _skirt(top_z: float, top_r: float, bottom_r: float, seed: int):
+    """A hanging curtain: an open tapering tube with a ragged hem, drawn facing out and facing in.
+
+    Returns (positions, normals, faces, tint). The inward copy has its own vertices (so its
+    normals can point inward) at the same positions; tint is one value per side."""
+    n = _SKIRT_SIDES
+    theta = 2 * math.pi * (np.arange(n) + 0.3 * np.array([_unit(seed, 70 + k) - 0.5 for k in range(n)])) / n
+    grow = np.array([_vary(seed, 80 + k, 0.04) for k in range(n)])
+    hem = np.array([_HEM_LOW + (_HEM_HIGH - _HEM_LOW) * _unit(seed, 60 + k) for k in range(n)])
+    cos, sin = np.cos(theta), np.sin(theta)
+    bottom = np.column_stack([bottom_r * grow * cos, bottom_r * grow * sin, hem])
+    top = np.column_stack([top_r * grow * cos, top_r * grow * sin, np.full(n, top_z)])
+    radial = np.column_stack([cos, sin, np.zeros(n)])
+    i, nxt = np.arange(n), (np.arange(n) + 1) % n
+    out = np.concatenate([np.column_stack([i, nxt, n + nxt]), np.column_stack([i, n + nxt, n + i])])
+    positions = np.concatenate([bottom, top])
+    normals = np.concatenate([radial, radial])
+    tint = np.array([_vary(seed, 90 + k, 0.06) for k in range(n)])
+    tint = np.concatenate([tint, tint])
+    inward = out[:, ::-1] + 2 * n
+    return (np.concatenate([positions, positions]), np.concatenate([normals, -normals]),
+            np.concatenate([out, inward]), np.concatenate([tint, tint]))
+
+
+def _weeping_parts(shape: TreeShape, seed: int) -> list[_Part]:
+    """A mature weeping tree: trunk to half height, limbs, a broad flattened dome, a hanging skirt."""
+    height, r = shape.height, shape.crown_width / 2
+    start = _unit(seed, 11) * 2 * math.pi
+    parts: list[_Part] = []
+    top = 0.5 * height
+    trunk_top = shape.trunk_radius * 0.55
+    p, n, f = _tube((0, 0, 0), (0, 0, top), shape.trunk_radius, trunk_top, 6)
+    parts.append(_Part("trunk", p, n, f))
+
+    # The dome: one wide main lobe and three overlapping ones pushed outward.
+    rz = 0.32 * height
+    lobes = [((0, 0, height - rz), (0.9 * r, 0.9 * r, rz), False)]
+    for k, coarse in enumerate((False, False, True)):
+        angle = start + k * 2 * math.pi / 3 + (_unit(seed, 20 + k) - 0.5) * 0.7
+        rk = 0.55 * r * _vary(seed, 25 + k, 0.1)
+        lobes.append(((0.36 * r * math.cos(angle), 0.36 * r * math.sin(angle), 0.70 * height),
+                      (rk, rk, 0.22 * height), coarse))
+    for k, (centre, radii, coarse) in enumerate(lobes):
+        c = np.array(centre, float)
+        p, n, f = _lobe(c, radii, seed * 31 + k, coarse)
+        parts.append(_Part("canopy", p, n, f, c))
+
+    # Three thin limbs from the top of the trunk up into the dome.
+    limb_r = 0.6 * trunk_top
+    for k in range(3):
+        angle = start + 0.9 + k * 2 * math.pi / 3
+        end = (0.45 * r * math.cos(angle), 0.45 * r * math.sin(angle), 0.78 * height)
+        p, n, f = _tube((0, 0, top), end, limb_r, max(0.03, 0.4 * limb_r), 4)
+        parts.append(_Part("limb", p, n, f))
+
+    p, n, f, tint = _skirt(height - rz - 0.05 * height, 0.94 * r, 0.80 * r, seed)
+    parts.append(_Part("skirt", p, n, f, tint=tint))
+    return parts
+
+
 def _lobes_for(shape: TreeShape, seed: int) -> list[tuple]:
     """Canopy lobes as (cx, cy, cz, rx, ry, rz, coarse) for the tree's form."""
     height, base = shape.height, shape.crown_base
@@ -337,12 +416,20 @@ def _assemble(shape: TreeShape, seed: int = 0) -> list[_Part]:
     parts: list[_Part] = []
     young = shape.trunk_radius < 0.08
 
+    weeping = shape.form == "weeping" and not young
     top = 0.6 * height if shape.form == "vase" and not young else base + (0.2 if young or shape.form == "conifer" else 0.15) * ch
+    if weeping:
+        top = 0.5 * height
     trunk_top = (shape.trunk_radius * 0.55)
-    p, n, f = _tube((0, 0, 0), (0, 0, top), shape.trunk_radius, trunk_top, 6)
-    parts.append(_Part("trunk", p, n, f))
+    if weeping:
+        parts = _weeping_parts(shape, seed)
+    else:
+        p, n, f = _tube((0, 0, 0), (0, 0, top), shape.trunk_radius, trunk_top, 6)
+        parts.append(_Part("trunk", p, n, f))
 
-    if shape.form == "conifer" and not young:
+    if weeping:
+        pass
+    elif shape.form == "conifer" and not young:
         # Three stacked cones, each narrower than the one below and overlapping it.
         starts, radii = (0.0, 0.28, 0.55), (1.0, 0.74, 0.48)
         for k in range(3):
@@ -368,11 +455,16 @@ def _assemble(shape: TreeShape, seed: int = 0) -> list[_Part]:
         if part.kind != "trunk":
             part.positions[:, 2] = np.clip(part.positions[:, 2], 0.0, height)
             rho = np.hypot(part.positions[:, 0], part.positions[:, 1])
-            part.positions[:, :2] *= np.minimum(1.0, 1.25 * r / np.maximum(rho, 1e-9))[:, None]
+            part.positions[:, :2] *= np.minimum(1.0, (1.1 if weeping else 1.25) * r / np.maximum(rho, 1e-9))[:, None]
         z = part.positions[:, 2]
         if part.kind in ("trunk", "limb"):
             shades = np.clip(0.8 + 0.2 * z / max(top, 1e-6), 0.8, 1.0)
             part.colours = np.array([colour_bytes(shape.bark, s) for s in shades])
+        elif weeping:
+            # Light dome, darker hanging foliage: x1.08 at the top to x0.70 at the lowest hem.
+            t = np.clip((z - _HEM_LOW) / max(height - _HEM_LOW, 1e-6), 0, 1)
+            tint = part.tint if part.tint is not None else 1 + 0.05 * (2 * _unit(seed, 50 + index) - 1)
+            part.colours = np.array([colour_bytes(shape.leaf, (0.70 + 0.38 * s) * m) for s, m in zip(t, np.broadcast_to(tint, t.shape))])
         else:
             # Fake the shadow inside a canopy: darker low down, brighter at the top.
             t = np.clip((z - base) / max(ch, 1e-6), 0, 1)

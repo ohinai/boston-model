@@ -317,3 +317,8 @@ h2 {
 #footer button {
   color: var(--accent);
 }
+
+/* Capture mode: only the picture, none of the interface. */
+body.capture > :not(canvas):not(script) {
+  display: none !important;
+}

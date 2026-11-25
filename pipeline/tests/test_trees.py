@@ -200,8 +200,27 @@ def test_conifer_is_darker_and_pointed():
     assert max(p.positions[:, 2].max() for p in parts) == pytest.approx(14.0)
 
 
+FOLIAGE = ("canopy", "cone", "skirt")
+
+
 def foliage_z(s, seed=0):
-    return np.concatenate([p.positions[:, 2] for p in _assemble(s, seed) if p.kind in ("canopy", "cone")])
+    return np.concatenate([p.positions[:, 2] for p in _assemble(s, seed) if p.kind in FOLIAGE])
+
+
+def foliage_radius_at(s, z, seed=0):
+    """Widest distance from the trunk where foliage triangles cross the height z."""
+    best = 0.0
+    for part in _assemble(s, seed):
+        if part.kind not in FOLIAGE:
+            continue
+        for face in part.faces:
+            pts = part.positions[face]
+            for a, b in ((0, 1), (1, 2), (2, 0)):
+                za, zb = pts[a, 2], pts[b, 2]
+                if (za - z) * (zb - z) <= 0 and za != zb:
+                    q = pts[a] + (z - za) / (zb - za) * (pts[b] - pts[a])
+                    best = max(best, math.hypot(q[0], q[1]))
+    return best
 
 
 def test_vase_foliage_is_higher_than_round_and_trunk_and_limbs_show():
@@ -212,9 +231,93 @@ def test_vase_foliage_is_higher_than_round_and_trunk_and_limbs_show():
     assert parts[0].positions[:, 2].max() == pytest.approx(0.6 * 20.0)
 
 
+# Changed: the weeping form is now a dome plus a hanging skirt (not lobes plus narrow cones), so
+# "foliage" includes the skirt and the lowest foliage is its hem.
 def test_weeping_foliage_reaches_low():
     for seed in range(5):
-        assert foliage_z(shape("weeping", 15.0), seed).min() < 2.5
+        assert 1.0 <= foliage_z(shape("weeping", 15.0), seed).min() <= 3.2
+
+
+@pytest.mark.parametrize("height", [8.0, 15.0, 22.0])
+def test_weeping_is_one_broad_drooping_mound_not_a_cone(height):
+    s = shape("weeping", height, width=1.0 * height, trunk=0.3)
+    for seed in range(6):
+        parts = _assemble(s, seed)
+        pos = np.concatenate([p.positions for p in parts if p.kind in FOLIAGE])
+        widest = 2 * np.hypot(pos[:, 0], pos[:, 1]).max()
+        assert widest >= 0.85 * s.crown_width and widest <= 1.1 * s.crown_width + 1e-6
+        assert 1.0 <= pos[:, 2].min() <= 3.2
+        assert 2 * foliage_radius_at(s, 0.45 * height, seed) >= 0.7 * s.crown_width
+        assert pos[:, 2].max() == pytest.approx(height, abs=0.05 * height)
+
+
+def test_weeping_hem_is_ragged_and_skirt_is_visible_from_inside():
+    s = shape("weeping", 15.0, trunk=0.3)
+    parts = _assemble(s, 4)
+    skirt = [p for p in parts if p.kind == "skirt"]
+    assert len(skirt) == 1
+    p = skirt[0]
+    hem = np.unique(np.round(p.positions[p.positions[:, 2] < 4, 2], 3))
+    assert len(hem) >= 5 and hem.min() >= 1.2 - 1e-6 and hem.max() <= 3.0 + 1e-6
+    # Every triangle has a twin with the same three positions and the opposite winding.
+    def key(face):
+        return tuple(sorted(tuple(np.round(p.positions[i], 6)) for i in face))
+    def signed(face):
+        a, b, c = p.positions[face]
+        return np.cross(b - a, c - a)
+    seen = {}
+    for face in p.faces:
+        seen.setdefault(key(face), []).append(signed(face))
+    assert all(len(v) == 2 and np.allclose(v[0], -v[1]) for v in seen.values())
+    # Outward-facing half faces away from the axis; the skirt tapers (wider at the top).
+    for face in p.faces[: len(p.faces) // 2]:
+        a, b, c = p.positions[face]
+        centroid = (a + b + c) / 3
+        assert np.dot(signed(face), [centroid[0], centroid[1], 0]) > 0
+    top, bottom = p.positions[:, 2] > 5, p.positions[:, 2] < 5
+    assert np.hypot(*p.positions[top, :2].T).mean() > np.hypot(*p.positions[bottom, :2].T).mean()
+
+
+def test_weeping_trunk_rises_to_half_height_with_limbs_and_colours_darken_downward():
+    s = shape("weeping", 15.0, trunk=0.3)
+    parts = _assemble(s, 1)
+    assert parts[0].kind == "trunk" and parts[0].positions[:, 2].max() == pytest.approx(7.5)
+    assert sum(p.kind == "limb" for p in parts) == 3
+    skirt = next(p for p in parts if p.kind == "skirt")
+    z = skirt.positions[:, 2]
+    brightness = skirt.colours[:, :3].sum(axis=1, dtype=float)
+    assert brightness[z > 8].mean() > brightness[z < 4].mean()
+
+
+def test_weeping_geometry_is_deterministic_and_within_budget_for_big_and_small_trees():
+    for height, trunk in ((15.0, 0.3), (6.0, 0.15), (6.0, 0.06)):
+        s = shape("weeping", height, width=height, trunk=trunk)
+        a, b = build(s, seed=2), build(s, seed=2)
+        assert np.array_equal(a.positions, b.positions) and np.array_equal(a.colours, b.colours)
+        assert len(a.indices) // 3 <= 150
+        assert not np.array_equal(a.positions, build(s, seed=3).positions)
+
+
+@pytest.mark.parametrize("tags", [{"genus": "Salix", "circumference": "2.5"}, {"species": "Salix alba", "circumference": "3.5"}])
+def test_willow_is_big_and_at_least_as_wide_as_tall(tags):
+    for seed in range(8):
+        s = describe(tags, seed)
+        assert s.form == "weeping" and s.crown_width >= 0.9 * s.height
+        assert 1.5 <= s.crown_base <= 2.0
+    mid = describe({"genus": "Salix", "circumference": "2.5"}, 0)
+    assert 13.0 <= mid.height <= 16.5 and 13.0 <= mid.crown_width <= 17.0
+
+
+def test_weeping_in_the_name_gives_the_weeping_form_whatever_the_genus():
+    cherry = describe({"genus": "Prunus", "species:en": "Weeping Higan cherry", "circumference": "1.5"})
+    assert cherry.form == "weeping" and cherry.height < 9 and cherry.name == "Weeping Higan cherry"
+    assert cherry.leaf == "#55823f"
+    assert describe({"genus": "Prunus", "species:en": "Higan cherry"}).form == "small"
+    beech = describe({"species": "Fagus sylvatica", "species:en": "Weeping European beech", "circumference": "2.5"})
+    assert beech.form == "weeping" and beech.height > 15
+    assert describe({"species": "Fagus sylvatica 'Pendula'"}).form == "weeping"
+    assert describe({"species": "Fagus sylvatica"}).form == "round"
+    assert describe({"species:en": "WEEPING willow", "genus": "Salix"}).form == "weeping"
 
 
 def test_small_tree_is_as_wide_as_it_is_tall():
@@ -247,4 +350,12 @@ def test_species_wins_over_a_genus_tag_that_disagrees():
     assert (corrected.form, corrected.name) == ("oval", "Pin oak")
     # A record that names only a genus still works.
     assert describe({"genus": "Ulmus"}).form == "vase"
+
+
+def test_pendula_as_a_species_name_is_not_a_weeping_tree():
+    from boston_pipeline.trees import describe
+
+    assert describe({"species": "Betula pendula"}).form != "weeping"  # silver birch
+    assert describe({"species": "Fagus sylvatica 'Pendula'"}).form == "weeping"
+    assert describe({"species": "Fagus sylvatica f. pendula"}).form == "weeping"
 

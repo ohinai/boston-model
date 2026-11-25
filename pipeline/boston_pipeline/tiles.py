@@ -10,7 +10,7 @@ import json
 import math
 import zlib
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
@@ -22,6 +22,7 @@ from shapely.ops import polygonize, substring, unary_union
 from shapely.strtree import STRtree
 
 from . import world
+from .barriers import add_barrier
 from .bridges import add_bridge, deck_height
 from .features import Building, Scene, bridge_rise, polygons_of
 from .furniture import add_object
@@ -54,6 +55,7 @@ MATERIALS = {
     "furniture": Material("#ffffff", 0.7),
     "monuments": Material("#ffffff", 0.8),
     "bridges": Material("#ffffff", 0.85),
+    "barriers": Material("#ffffff", 0.8),
 }
 # The colour of each kind of surface within a layer (see path_cover and
 # green_cover in features.py). Where two kinds of path overlap, the one listed
@@ -90,6 +92,14 @@ PIER_LAMP = 2.8  # a lamp on a pier is a lantern on a short post, not a full lam
 # Objects drawn in the `monuments` layer; every other kind goes in `furniture`.
 MONUMENT_KINDS = {"plaque", "stele", "obelisk", "column", "statue", "sculpture", "monument", "fountain"}
 MIN_AREA = 0.05  # square metres; smaller slivers are dropped
+# A fence, wall or hedge is opened where a path crosses it, so nobody is walled in
+# by one mapped straight over a gateway, and cut where it lies in a carriageway.
+# This is the margin left each side of such a gap; pieces shorter than the
+# minimum are dropped.
+BARRIER_GAP = 0.4
+BARRIER_INSIDE = 0.3  # a barrier this far inside a paved area is cut; one along its edge is kept
+PATH_CLEAR = 0.5  # no barrier is drawn this close to a path's centre line
+BARRIER_MIN_PIECE = 0.5
 
 
 class PolygonIndex:
@@ -151,6 +161,9 @@ class Context:
     named: list[tuple]  # (area, kind, whole size in square metres) for every named park-like area
     scene: Scene
     ways_tree: STRtree
+    barriers: dict[tuple[int, int], list] = field(default_factory=dict)  # (barrier, its line cut to the tile) by tile
+    path_areas: PolygonIndex | None = None  # paths drawn as areas (docks, piers, plazas)
+    deck_strips: PolygonIndex | None = None  # the footprint of every raised footbridge deck
 
 
 ROAD_BRIDGE_REACH = 6.0  # a footway this close to a carriageway is part of a road bridge
@@ -233,6 +246,12 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
     for thing in scene.objects:
         objects[world.tile_of(thing.x, thing.y)].append(thing)
 
+    barriers = defaultdict(list)
+    for barrier in scene.barriers:
+        for tile, piece in _split_by_tile(barrier.line, tiles):
+            barriers[tile].append((barrier, piece))
+    strips = [polygon for decks in decks.values() for way, line in decks for polygon in polygons_of(line.buffer(way.width / 2, quad_segs=2))]
+
     sizes: dict[str, float] = defaultdict(float)
     named = [a for a in (*scene.areas["green"], *scene.areas["bed"]) if a.tags.get("name")]
     for area in named:
@@ -249,7 +268,73 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
         named=[(area, kind(area.tags), sizes[area.id]) for area in named],
         scene=scene,
         ways_tree=STRtree([w.line for w in scene.ways]),
+        barriers=barriers,
+        path_areas=PolygonIndex([a.polygon for a in scene.areas["path"]]),
+        deck_strips=PolygonIndex(strips),
     )
+
+
+def _lines(geom) -> list:
+    """The line strings in any geometry."""
+    if geom.is_empty:
+        return []
+    if geom.geom_type == "LineString":
+        return [geom]
+    return [line for part in getattr(geom, "geoms", []) for line in _lines(part)]
+
+
+def _split_by_tile(line, tiles: list[tuple[int, int]]) -> list[tuple[tuple[int, int], object]]:
+    """The part of a line inside each of the given tiles that it crosses."""
+    wanted = set(tiles)
+    x0, y0, x1, y1 = line.bounds
+    size = world.TILE_SIZE
+    out = []
+    for tx in range(math.floor(x0 / size), math.floor(x1 / size) + 1):
+        for ty in range(math.floor(y0 / size), math.floor(y1 / size) + 1):
+            if (tx, ty) not in wanted:
+                continue
+            piece = line.intersection(box(*world.tile_bounds(tx, ty)))
+            if _lines(piece):
+                out.append(((tx, ty), piece))
+    return out
+
+
+def _openings(ctx: Context, tile_box: Polygon) -> tuple:
+    """(what every barrier in this tile is cut by, the inside of paved areas).
+
+    Carriageways, buildings and the decks of raised footbridges cut a barrier outright. A paved
+    area (a plaza, a dock) cuts one only where it runs through the area's inside, not along its edge.
+    """
+    reach = tile_box.buffer(BARRIER_GAP + 1)
+
+    def union(index, buffer: float):
+        return unary_union([polygon.buffer(buffer, quad_segs=2) for polygon in index.near(reach)])
+
+    cut = unary_union([
+        union(ctx.layers["road"], BARRIER_GAP), union(ctx.deck_strips, BARRIER_GAP),
+        unary_union(ctx.footprints.near(reach)),
+    ])
+    return cut, union(ctx.path_areas, -BARRIER_INSIDE)
+
+
+def _path_crossings(ctx: Context, line):
+    """Gaps where paths cross a barrier, each as wide as the path plus a margin.
+
+    Only a crossing opens a fence. A path that merely runs beside one does not: fences
+    usually stand right at a path's edge, and cutting everything near a path removed
+    almost half of all fence length.
+    """
+    gaps = []
+    for index in ctx.ways_tree.query(line, predicate="dwithin", distance=PATH_CLEAR):
+        way = ctx.scene.ways[index]
+        if way.surface != "path":
+            continue
+        # The middle of a path is always kept clear, even of a wall mapped along its centre line.
+        gaps.append(way.line.buffer(PATH_CLEAR, quad_segs=2))
+        crossing = way.line.intersection(line)
+        if not crossing.is_empty:
+            gaps.append(crossing.buffer(way.width / 2 + BARRIER_GAP, quad_segs=2))
+    return unary_union(gaps)
 
 
 def _pier(ctx: Context, thing) -> tuple | None:
@@ -451,7 +536,9 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
         for polygon in _pieces(planted):
             add_flat(beds, polygon, BED_HEIGHT, origin, planting)
             add_walls(beds, polygon, 0.0, BED_HEIGHT, origin, side)
-        for polygon in _pieces(patch.difference(planted)):
+        # Soil under the whole bed, planting included: the ground must have no holes,
+        # or a walker who arrives inside a bed falls through the world.
+        for polygon in _pieces(patch):
             add_flat(beds, polygon, 0.0, origin, colour_bytes(BED_SOIL))
 
     # Each building vertex carries the building's index in this tile's data
@@ -519,9 +606,34 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             feature=register(thing.id, thing.kind, thing.x, thing.y, thing.name), base=base,
         )
 
+    # Fences, walls and the like: each is listed once in this tile however many pieces are left of it.
+    barriers = MeshBuilder("barriers", colours=True, features=True)
+    wanted = ctx.barriers.get((tx, ty), [])
+    if wanted:
+        cut, paved = _openings(ctx, tile_box)
+        listed_barriers: dict[tuple[str, str], int] = {}
+        for barrier, piece in wanted:
+            # A kerb may have a path running along it, so paths never open it.
+            through = piece.intersection(paved)  # the stretch that crosses a paved area, plus a margin
+            left = piece.difference(cut).difference(through.buffer(BARRIER_INSIDE + BARRIER_GAP, quad_segs=2))
+            if barrier.kind != "kerb":
+                left = left.difference(_path_crossings(ctx, piece))
+            pieces = [p for p in _lines(left) if p.length >= BARRIER_MIN_PIECE]
+            if not pieces:
+                continue
+            key = (barrier.id, barrier.kind)
+            if key not in listed_barriers:
+                middle = max(pieces, key=lambda p: p.length).interpolate(0.5, normalized=True)
+                listed_barriers[key] = register(barrier.id, barrier.kind, middle.x, middle.y, barrier.tags.get("name"))
+            for p in pieces:
+                add_barrier(
+                    barriers, barrier.kind, np.asarray(p.coords)[:, :2] - origin, barrier.height, barrier.width,
+                    barrier.colour, barrier.material, feature=listed_barriers[key],
+                )
+
     layers = [
         (builder.finish(), MATERIALS[builder.name])
-        for builder in (*flat.values(), beds, curbs, walls, roofs, trees, furniture, monuments, bridges)
+        for builder in (*flat.values(), beds, curbs, walls, roofs, trees, furniture, monuments, bridges, barriers)
         if not builder.empty
     ]
     name = f"{tx}_{ty}"
@@ -607,6 +719,7 @@ def build(scene: Scene, tiles: list[tuple[int, int]], out_dir: Path, area: dict,
         "trees": len(scene.trees),
         "objects": len(scene.objects),
         "bridges": sum(len(decks) for decks in ctx.decks.values()),
+        "barriers": len(scene.barriers),
         "streets": len(scene.ways),
         "megabytes": round(sum(f.stat().st_size for f in (out_dir / "tiles").glob("*.glb")) / 1e6, 1),
     }

@@ -37,6 +37,9 @@ What works today:
   drinking fountains, and statues, memorials and fountains as placeholders of
   the right kind and size.
 - Footbridges over water drawn as raised decks with railings.
+- Fences, walls, retaining walls, hedges, post-and-chain fences, guard rails,
+  kerbs and bollards, opened where paths cross them. The Public Garden lagoon
+  has its stone edge, and willows are drawn weeping.
 - Walking in a browser with collision against buildings and curbs, plus a fly
   mode for an overview.
 - The street you are on, the park you are in and the nearest named place, read
@@ -47,6 +50,8 @@ What works today:
   command that shows what the data holds at any spot.
 - A `boston-pipeline audit` command that draws the model on aerial photographs
   and proposes missing trees, so an area can be checked without walking it.
+- A `boston-pipeline ground` command that sets openly licensed photographs of a
+  park beside the model's view from the same spots, at eye level.
 - Output as standard [3D Tiles](https://www.ogc.org/standards/3dtiles/), so the
   same files are meant to load in Unreal Engine through Cesium for Unreal. That
   path is documented in [docs/UNREAL.md](docs/UNREAL.md) but has not been run yet.
@@ -60,8 +65,8 @@ What is not accurate yet:
 - Street widths are estimated from lane counts.
 - Tree heights and crown widths are estimates from species and trunk size, not
   measurements, and you can walk through trees.
-- Statues and fountains are placeholders, not likenesses. Fences, walls,
-  hedges and gates are not drawn.
+- Statues and fountains are placeholders, not likenesses. Lamp posts are not
+  drawn in their real styles. Gates are not drawn: a gate stands open.
 - Road bridges, bridges over roads and rail, and elevated roads are drawn at
   ground level, and tunnels are left out.
 

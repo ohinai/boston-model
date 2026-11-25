@@ -44,6 +44,9 @@ MONUMENT_HEIGHT, MONUMENT_MIN_BASE = 9.0, 2.5
 FOUNTAIN_DIAMETER, FOUNTAIN_DIAMETER_RANGE = 3.0, (1.2, 20.0)
 FOUNTAIN_WALL, FOUNTAIN_WALL_HEIGHT, FOUNTAIN_WATER_Z = 0.25, 0.5, 0.38
 FOUNTAIN_HEIGHT = 1.6
+BOLLARD_HEIGHT, BOLLARD_RANGE = 0.9, (0.3, 2.0)
+BOLLARD_RADIUS, BOLLARD_CAP_RADIUS, BOLLARD_CAP_HEIGHT = 0.09, 0.105, 0.07
+BLOCK_SIZE, BLOCK_HEIGHT = 0.6, 0.5
 
 # --- Colours -------------------------------------------------------------------
 WOOD, IRON = "#6b4a2f", "#2b2b2d"
@@ -53,6 +56,7 @@ WATER_FOUNTAIN, FLAGPOLE_COLOUR = "#6f7275", "#d8d8d4"
 PLAQUE_STONE, PLAQUE_BRONZE = "#8f8b84", "#5b4a34"
 STELE_STONE, PLINTH_STONE, MONUMENT_STONE = "#a9a59b", "#b3aea3", "#b3aea3"
 FOUNTAIN_STONE, FOUNTAIN_WATER = "#a9a59b", "#3f6f85"
+BOLLARD_COLOUR, BLOCK_STONE = "#23262a", "#a9a59b"
 FIGURE_COLOURS = {
     "bronze": "#4b4f44",
     "marble": "#d9d6cf",
@@ -274,6 +278,18 @@ def _flagpole(p, x, y, d, o: _Opts) -> None:
     octahedron(p, colour_bytes("#c9a24a"), x, y, top - ball, ball)
 
 
+def _bollard(p, x, y, d, o: _Opts) -> None:
+    top = o.tall(BOLLARD_HEIGHT, *BOLLARD_RANGE)
+    colour = o.paint(BOLLARD_COLOUR)
+    cap = min(BOLLARD_CAP_HEIGHT, 0.3 * top)
+    prism(p, colour, x, y, 0.0, top - cap, BOLLARD_RADIUS, sides=8)
+    prism(p, colour, x, y, top - cap, top, BOLLARD_CAP_RADIUS, sides=8, top=True)
+
+
+def _block(p, x, y, d, o: _Opts) -> None:
+    box(p, o.paint(BLOCK_STONE), x, y, 0.0, o.tall(BLOCK_HEIGHT, 0.2, 2.0), BLOCK_SIZE, BLOCK_SIZE, d)
+
+
 def _plaque(p, x, y, d, o: _Opts) -> None:
     w, deep, tall = PLAQUE_SIZE
     box(p, o.paint(PLAQUE_STONE), x, y, 0.0, tall, w, deep, d)
@@ -380,6 +396,8 @@ _KINDS = {
     "waste_basket": _waste_basket,
     "drinking_water": _drinking_water,
     "flagpole": _flagpole,
+    "bollard": _bollard,
+    "block": _block,
     "plaque": _plaque,
     "stele": _stele,
     "obelisk": _obelisk,

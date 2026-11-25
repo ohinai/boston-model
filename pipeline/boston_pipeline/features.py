@@ -68,6 +68,28 @@ BARE_GROUND = {"dirt", "clay", "sand", "earth", "ground", "gravel", "fine_gravel
 BRIDGE_RISE = 0.025
 BRIDGE_RISE_LIMITS = (0.3, 0.8)
 
+# Barriers along a line, by their `barrier` tag: (kind, default height, default
+# width) in metres. A `height` or `width` tag wins when it is within BARRIER_LIMITS.
+# `barrier=gate` ways are left out on purpose: a gate is mapped across a way in
+# and is drawn open, so nobody is walled in. Nodes (bollard, block) are objects.
+BARRIERS = {
+    "fence": ("fence", 1.2, 0.06),  # a railing or paling, mostly 1 to 1.5 m in the parks
+    "chain": ("chain", 0.6, 0.05),  # low posts joined by a hanging chain, along paths
+    "wall": ("wall", 1.0, 0.4),  # a low masonry wall
+    "city_wall": ("wall", 1.0, 0.4),
+    "retaining_wall": ("retaining_wall", 1.0, 0.4),
+    "hedge": ("hedge", 1.2, 0.8),
+    "guard_rail": ("guard_rail", 0.7, 0.1),  # a steel beam on posts
+    "kerb": ("kerb", 0.15, 0.3),  # a stone edge, not a full-height curb
+    "bollard": ("bollards", 0.9, 0.0),  # a row of bollards; no width of its own
+}
+BARRIER_LIMITS = {"height": (0.05, 6.0), "width": (0.01, 3.0)}
+# A stone edge round water. OpenStreetMap has no agreed tag for the masonry edge
+# of a pond, so this repository uses `edge=kerb` on the water area (set through
+# a file in fixes/), with `edge:width` and `edge:height` in metres.
+EDGE_WIDTH, EDGE_HEIGHT = 0.4, 0.15
+EDGE_MATERIAL = "granite"
+
 COMPASS = {
     name: index * 22.5
     for index, name in enumerate(
@@ -138,6 +160,20 @@ class Area:
 
 
 @dataclass
+class Barrier:
+    """A fence, wall, hedge, chain, kerb or row of bollards along a line."""
+
+    id: str
+    line: LineString
+    kind: str  # one of the kinds in BARRIERS (the first item of each entry)
+    height: float  # metres
+    width: float  # metres across; 0 for a row of bollards
+    colour: str | None = None
+    material: str | None = None
+    tags: dict = field(default_factory=dict)
+
+
+@dataclass
 class Object:
     """Something standing at a point: a bench, a lamp post, a statue, a fountain."""
 
@@ -173,6 +209,7 @@ class Scene:
         default_factory=lambda: {"road": [], "path": [], "water": [], "bed": [], "green": []}
     )
     objects: list[Object] = field(default_factory=list)
+    barriers: list[Barrier] = field(default_factory=list)
     coastlines: list[LineString] = field(default_factory=list)
     trees: list[Point] = field(default_factory=list)
     signals: list[Point] = field(default_factory=list)
@@ -429,6 +466,8 @@ def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
         kind = "drinking_water"
     elif tags.get("man_made") == "flagpole":
         kind = "flagpole"
+    elif tags.get("barrier") in ("bollard", "block"):
+        kind = tags["barrier"]
     if kind is None:
         return None
     material = (tags.get("material") or "").split(";")[0] or None
@@ -466,9 +505,45 @@ def _add_building(scene: Scene, ident: str, tags: dict, polygons: list[Polygon],
             )
 
 
+def _sized(tags: dict, key: str, default: float, prefix: str = "") -> float:
+    """A length from a tag when it is a sensible figure, else the default."""
+    low, high = BARRIER_LIMITS[key]
+    value = parse_length(tags.get(prefix + key))
+    return value if value is not None and low <= value <= high else default
+
+
+def _add_barrier(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> None:
+    """A way tagged `barrier` becomes a Barrier along its line; a closed way is its outline, not an area."""
+    entry = BARRIERS.get(tags.get("barrier", ""))
+    if entry is None or len(coords) < 2 or _is_underground(tags):
+        return
+    kind, height, width = entry
+    material = ((tags.get("material") or tags.get("wall") or "").split(";")[0].strip().lower()) or None
+    scene.barriers.append(
+        Barrier(
+            ident, LineString(coords), kind, _sized(tags, "height", height), _sized(tags, "width", width) if width else 0.0,
+            parse_colour(tags.get("colour")), material, tags,
+        )
+    )
+
+
+def _add_edge(scene: Scene, ident: str, tags: dict, polygons: list[Polygon]) -> None:
+    """A stone kerb along the outer boundary of each water polygon (not round islands), on the land side."""
+    width = _sized(tags, "width", EDGE_WIDTH, "edge:")
+    height = _sized(tags, "height", EDGE_HEIGHT, "edge:")
+    for polygon in polygons:
+        # Offset by half the width so the strip lies on land, from the shoreline outward.
+        for ring in polygons_of(Polygon(polygon.exterior).buffer(width / 2, quad_segs=2)):
+            scene.barriers.append(
+                Barrier(ident, LineString(ring.exterior.coords), "kerb", height, width, None, EDGE_MATERIAL, tags)
+            )
+
+
 def _add_way(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> None:
     """Classify one OSM way. A way has exactly one role; the first match wins."""
     closed_polygons = _way_polygons(coords)
+    if "barrier" in tags and "highway" not in tags and "railway" not in tags:
+        _add_barrier(scene, ident, tags, coords)
 
     def areas(polygons: list[Polygon]) -> list[Area]:
         return [Area(ident, polygon, tags, path_cover(tags)) for polygon in polygons]
@@ -519,6 +594,8 @@ def _add_area(scene: Scene, ident: str, tags: dict, polygons: list[Polygon]) -> 
     cover = ""
     if tags.get("natural") == "water" or tags.get("waterway") in ("dock", "riverbank"):
         surface = "water"
+        if tags.get("edge") == "kerb":
+            _add_edge(scene, ident, tags, polygons)
     elif (
         tags.get("leisure") in GREEN_LEISURE
         or tags.get("landuse") in GREEN_LANDUSE

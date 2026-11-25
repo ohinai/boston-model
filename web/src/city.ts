@@ -119,7 +119,7 @@ interface Tile {
 
 /** Layers a walker passes straight through. */
 const NOT_SOLID = new Set(['trees']);
-const CASTS_SHADOW = new Set(['building_walls', 'building_roofs', 'trees', 'furniture', 'monuments', 'bridges']);
+const CASTS_SHADOW = new Set(['building_walls', 'building_roofs', 'trees', 'furniture', 'monuments', 'bridges', 'barriers']);
 
 // Building walls carry UVs counted in facade cells: one unit of u is a window
 // bay, one unit of v a storey. This draws glazing into each cell and fades to

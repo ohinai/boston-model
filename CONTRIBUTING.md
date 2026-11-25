@@ -68,6 +68,14 @@ cell. Either way, a finding is only a lead: look at it again, then write a fix
 file that cites the photograph in `why`. The audit never changes the model by
 itself. [AGENTS.md](AGENTS.md) has the details.
 
+To check at eye level instead, `boston-pipeline ground pilot --park "Boston
+Public Garden"` finds openly licensed photographs taken in the park and sets
+each beside the model's view from the same spot. It needs the built viewer
+(`npm run build` in `web/`) and a Chrome, Edge or Chromium on your machine. In
+Claude Code, `/ground "Boston Public Garden"` does the comparing. The
+photographs show what to look into; they are visual reference only, so a fix
+still needs a source listed in [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
+
 ## 4. Work on the code
 
 [docs/ROADMAP.md](docs/ROADMAP.md) lists what is planned, with parks and

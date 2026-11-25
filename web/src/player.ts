@@ -4,6 +4,9 @@ import type { City } from './city';
 const RADIUS = 0.3;
 const HEIGHT = 1.75;
 const EYE_HEIGHT = 1.62;
+// On foot, arrive this far above the ground and drop onto whatever is there:
+// a bridge deck or a planted bed stands higher than the ground around it.
+const ARRIVAL_HEIGHT = 1.0;
 const WALK_SPEED = 2.6; // metres per second; a brisk walk
 const RUN_SPEED = 8;
 const FLY_SPEED = 35;
@@ -99,7 +102,7 @@ export class Player {
 
   /** Place the player at a world-metre position. Altitude > 0 starts in the air. */
   teleport(x: number, y: number, heading: number, altitude = 0, pitch = 0): void {
-    this.position.set(x, altitude, -y);
+    this.position.set(x, this.flying ? altitude : Math.max(altitude, ARRIVAL_HEIGHT), -y);
     this.heading = heading;
     this.pitch = pitch;
     this.velocity.set(0, 0, 0);

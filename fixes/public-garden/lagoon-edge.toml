@@ -1,0 +1,6 @@
+# The lagoon's stone edge.
+
+["r1404341"]
+why = "The lagoon has a narrow masonry edge round its shore, not a bare bank: a light band about 0.45 m wide sits on the mapped shoreline at 64 of 100 places sampled on the MassGIS 15 cm aerial imagery of spring 2023, when the lagoon was drained. Its height cannot be read from above."
+at = [42.35390, -71.06985]
+set = { edge = "kerb", "edge:width" = "0.45" }

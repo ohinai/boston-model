@@ -82,6 +82,7 @@ const LAYER_NAMES: Record<string, string> = {
   furniture: 'park furniture',
   monuments: 'a monument',
   bridges: 'a bridge',
+  barriers: 'a fence or wall',
 };
 
 /** What to call an object, by kind. Kinds not listed fall back to the layer's wording. */
@@ -101,6 +102,16 @@ const KIND_NAMES: Record<string, string> = {
   fountain: 'a fountain',
   bridge: 'a bridge',
   tree: 'a tree',
+  fence: 'a fence',
+  chain: 'a post-and-chain fence',
+  wall: 'a wall',
+  retaining_wall: 'a retaining wall',
+  hedge: 'a hedge',
+  guard_rail: 'a guard rail',
+  kerb: 'a stone kerb',
+  bollards: 'a row of bollards',
+  bollard: 'a bollard',
+  block: 'a stone block',
 };
 
 export function newNoteId(): string {

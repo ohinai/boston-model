@@ -10,7 +10,8 @@ this page in the same pull request.
 ### OpenStreetMap
 
 - **Used for:** building footprints and heights, streets, paths, parks, water,
-  coastline, trees, shops and other named places, traffic signals.
+  coastline, trees, fences, walls, hedges, chains, guard rails, kerbs and
+  bollards (`barrier` features), shops and other named places, traffic signals.
 - **Licence:** [Open Database License 1.0](https://opendatacommons.org/licenses/odbl/1-0/).
 - **Credit required:** "© OpenStreetMap contributors", linked to
   <https://www.openstreetmap.org/copyright>. For games and simulations a
@@ -196,9 +197,43 @@ like. Openly licensed ones, such as those on Wikimedia Commons (mostly
 CC BY-SA), are fine as visual reference. Do not use a photograph as a texture
 or as data.
 
-Open street-level imagery inside the parks is close to non-existent. Mapillary
-needs an account, and Panoramax has a single image there. The aerial surveys
-above are the practical check.
+### Wikimedia Commons
+
+- **Used for:** the ground check. `boston-pipeline ground` collects geotagged
+  photographs taken inside a park and lays them beside the model's view from the
+  same spot (see [ARCHITECTURE.md](ARCHITECTURE.md)). They are looked at, never
+  used as data. Each sheet records the photograph's author and licence.
+- **Access:** the Commons API, which needs no key. The pipeline keeps JPEG files
+  from 2015 or later, inside the park's outline, and thins them so the park is
+  covered evenly.
+- **Licences:** mostly CC BY-SA and CC BY, a few public domain or CC0.
+- **Coverage (24 November 2026):** 250 geotagged files within 230 m of the
+  Public Garden's centre, and at least 500 around Boston Common (the query caps
+  at 500). Of 325 geotagged files found over the Public Garden, 89 passed the
+  filters.
+- **Caveats:** positions are often tens of metres out, and most files do not
+  record which way the camera faced.
+
+Looked at the same day and not used: iNaturalist has thousands of plant
+observations with photographs in the two parks, but almost all carry a
+non-commercial licence. KartaView's API answers without a token, but its
+coverage in the parks was not established.
+
+### Mapillary
+
+Mapillary has street-level photographs along most paths of the Public Garden
+and across parts of Boston Common (seen on its public coverage map, November
+2026). The photographs are CC BY-SA 4.0, so they may be looked at like any
+other openly licensed photograph. They may not be used as data here: Mapillary's
+terms (effective 15 February 2024) allow deriving data from its images for
+OpenStreetMap and the Overture Maps Foundation only, and reserve its own
+detected objects (benches, street lights and so on). Do not copy positions,
+measurements or detected objects from Mapillary into `fixes/` without written
+permission from Mapillary. Its API needs an access token from a registered
+application.
+
+Panoramax has a single image in the parks. For data, the aerial surveys above
+are the practical check.
 
 ## Not usable
 

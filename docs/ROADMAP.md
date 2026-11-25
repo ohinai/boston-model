@@ -36,6 +36,34 @@ recognises them at eye level.
   rows of small clipped evergreens along the walks that are in neither the city
   inventory nor OpenStreetMap. These are being added as fixes, and crown
   widths of free-standing trees set from measurements, all from the photograph.
+- **Checking from the ground.** `boston-pipeline ground` collects openly
+  licensed photographs taken inside a park and shows the model from the same
+  spots, standing on the ground, so what a walker would notice can be compared.
+  The first run covered the Public Garden. It also found a bug: planted beds had
+  no ground under the planting, so a walker who arrived inside one fell through
+  the world. Beds now have soil under all of them, and a walker arriving on foot
+  starts a metre up and drops onto whatever is there, such as a bridge deck or a
+  bed.
+- **Fences, walls and hedges.** The pipeline had never asked OpenStreetMap for
+  `barrier` features. It does now, and draws them in a `barriers` layer: 227
+  fences (12.0 km), 90 walls (4.2 km), 52 retaining walls (4.9 km), 51
+  post-and-chain fences (2.2 km), 19 guard rails (3.8 km) and rows of bollards
+  (8 rows and 58 single bollards), plus 11 stone blocks. They are opened where
+  paths cross them and cut where they lie in a carriageway, a building or under
+  a footbridge deck. Gates are not drawn.
+- **The lagoon's stone edge.** The Public Garden lagoon has a low stone kerb
+  along its shore, set in `fixes/` with the project's own `edge=kerb` tag. It
+  comes from MassGIS spring 2023 imagery, where a light band about 0.45 m wide
+  sits on the shoreline at 64 of 100 places sampled.
+- **Weeping trees.** Willows and other weeping trees are drawn as a broad dome
+  with a hanging skirt a walker can stand under.
+- **Water seen from the air.** Water used to break into stripes from high up
+  because the depth buffer ran out of precision. The camera's near plane now
+  moves out as it climbs.
+
+  The fences, the lagoon's edge and the willows came out of the first ground
+  check of the Public Garden (23 usable photographs of 29), where they were
+  among the gaps seen most often.
 - **Know where you are.** The viewer shows the name of the park you are in, and
   notes record it and what you were looking at, down to the tree or statue.
 
@@ -43,8 +71,12 @@ recognises them at eye level.
 
 **Draw what the data has, and what it does not**
 
-- Fences, walls, hedges and gates. They are not in the downloaded data yet, so
-  most will come from notes and fixes.
+- Gates. A gate stands open for now, and is not drawn.
+- Lamp posts in their real styles. The ones in the parks have globes.
+- Pedestals and likenesses for statues.
+- The skyline and landmark buildings, such as the Arlington Street Church
+  spire.
+- Check whether asphalt paths are now drawn too light.
 - Likenesses for statues, and hand-made models of landmarks, in place of the
   placeholders.
 
@@ -52,6 +84,8 @@ recognises them at eye level.
 
 - Audit Boston Common and the rest of the pilot's parks, and turn what the
   checks confirm into fixes.
+- Run the ground check on Boston Common, and act on what the Public Garden
+  check finds. Most of it will be things the pipeline does not draw yet.
 - Build the MassGIS leaf-off imagery into the audit. With the leaves off, path
   widths, beds, benches and trunk positions can be checked, which the leaf-on
   photograph cannot show.
@@ -66,8 +100,8 @@ recognises them at eye level.
 
 **Water**
 
-- The Public Garden lagoon with a soft bank instead of a wall, and the Swan
-  Boat dock.
+- The Swan Boat dock. It is drawn as a brick box; it is an open pavilion on a
+  floating dock.
 - Frog Pond on the Common, which is not mapped as water.
 
 **Ground**

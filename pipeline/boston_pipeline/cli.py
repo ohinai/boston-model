@@ -83,7 +83,8 @@ def cmd_build(args) -> None:
     print(
         f"done: {stats['tiles']} tiles, {stats['triangles']:,} triangles, {stats['megabytes']} MB\n"
         f"  {stats['buildings']:,} buildings, {stats['trees']:,} trees, {stats['objects']:,} benches, lamps and monuments,"
-        f" {stats['bridges']} raised footbridges, {stats['streets']:,} street and path segments\n"
+        f" {stats['bridges']} raised footbridges, {stats.get('barriers', 0):,} fences and walls,"
+        f" {stats['streets']:,} street and path segments\n"
         "  building heights: "
         + ", ".join(f"{sources.get(k, 0) * 100 // total}% from {k}" for k in ("height", "levels", "default", "override"))
         + f"\n  fixes applied: {applied.patched} changed, {applied.removed} removed, {applied.added} added"
@@ -154,6 +155,18 @@ def cmd_audit(args) -> None:
     )
 
 
+def cmd_ground(args) -> None:
+    from . import audit, ground
+
+    _area(args.area)
+    scene, _, _ = _scene(args.area)
+    geometry = audit.park_geometry(scene, args.park)
+    ground.run(
+        args.area, args.park, geometry, ROOT / "data" / "raw" / args.area, Path(args.out), ROOT / "web" / "dist",
+        limit=args.limit, force=args.force, do_capture=not args.no_capture,
+    )
+
+
 def cmd_info(_args) -> None:
     lon, lat = (float(v) for v in world.to_lonlat(0.0, 0.0))
     print(f"world CRS      {world.WORLD_CRS}")
@@ -200,6 +213,17 @@ def main(argv: list[str] | None = None) -> None:
     audit.add_argument("--force", action="store_true", help="download the photographs again")
     audit.add_argument("--no-canopy", action="store_true", help="skip the canopy picture (proposed trees, measured crowns)")
     audit.set_defaults(run=cmd_audit)
+
+    ground = commands.add_parser(
+        "ground", help="lay ground-level photographs of a park beside the model's views from the same spots"
+    )
+    ground.add_argument("area")
+    ground.add_argument("--park", required=True, help="name of the park, as in the data")
+    ground.add_argument("--limit", type=int, default=40, help="most photographs to use (default: 40)")
+    ground.add_argument("--out", default=ROOT / "data" / "ground", help="output directory (default: data/ground)")
+    ground.add_argument("--force", action="store_true", help="query and download again, and capture every view again")
+    ground.add_argument("--no-capture", action="store_true", help="write the photographs and sheets without the model's pictures")
+    ground.set_defaults(run=cmd_ground)
 
     commands.add_parser("info", help="print the world frame and areas").set_defaults(run=cmd_info)
     args = parser.parse_args(argv)

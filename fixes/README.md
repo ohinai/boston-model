@@ -85,6 +85,19 @@ Any GeoJSON editor works, for example <https://geojson.io>. Do not trace from
 Google Maps, Street View or Google Earth; see
 [docs/DATA_SOURCES.md](../docs/DATA_SOURCES.md) for what may be used.
 
+Fences, walls, hedges and the like can be added or corrected the same way, with
+ordinary `barrier=` tags (`fence`, `wall`, `hedge`, `chain` and so on).
+
+A water area can be given a low stone edge along its outer shore with a tag the
+project made up, `edge=kerb`, because OpenStreetMap has no agreed tag for a
+pond's masonry edge. `edge:width` and `edge:height` (metres) are optional.
+
+```toml
+["r1404341"]
+why = "Narrow masonry edge round the lagoon, seen in the 2023 MassGIS aerial photographs."
+set = { edge = "kerb", "edge:width" = "0.45" }
+```
+
 ## Check a fix
 
 ```sh

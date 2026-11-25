@@ -40,6 +40,9 @@ def inspect(scene: Scene, x: float, y: float, radius: float = 10.0, sea: list[Po
     for surface, areas in scene.areas.items():
         for area in areas:
             add(LAYER_OF_SURFACE[surface], area.id, area.polygon.distance(point), area.tags)
+    for barrier in scene.barriers:
+        # A kerb round water is placed on the land side of its shore; the line is where it stands.
+        add(barrier.kind, barrier.id, barrier.line.distance(point) - barrier.width / 2, barrier.tags, **({"width": round(barrier.width, 2)} if barrier.width else {}))
     for thing in scene.objects:
         add(thing.kind, thing.id, point.distance(ShapelyPoint(thing.x, thing.y)), thing.tags)
     for layer, points in (("tree", scene.trees), ("signal", scene.signals), ("place", scene.pois)):
