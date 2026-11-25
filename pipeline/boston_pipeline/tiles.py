@@ -23,12 +23,14 @@ from shapely.strtree import STRtree
 
 from . import world
 from .barriers import add_barrier
-from .bridges import add_bridge, deck_height
+from .bridges import SUSPENSION, add_bridge, bridge_style, deck_height
 from .facing import bench_facings
-from .features import Building, Scene, bridge_rise, polygons_of
+from .features import MULCH_MIN_PARK, MULCH_PARKS, Building, Scene, bridge_rise, parse_colour, polygons_of
 from .furniture import add_object
 from .gltf import Material, write_glb
+from .groundlook import add_bed_planting, add_lawn, add_mulch, bed_style, mulch_radius
 from .mesh import MeshBuilder, add_flat, add_skirt, add_walls, colour_bytes
+from .pavilions import add_dock_edge, add_pavilion, painted_pier, roof_shape
 from .trees import add_tree, describe
 
 ATTRIBUTION = "© OpenStreetMap contributors (ODbL 1.0)"
@@ -45,7 +47,7 @@ MATERIALS = {
     "ground": Material("#a09d96", 0.95),
     "green": Material("#ffffff", 1.0),
     "beds": Material("#ffffff", 1.0),
-    "water": Material("#2e5a6e", 0.15),
+    "water": Material("#ffffff", 0.15),
     "roads": Material("#6b6d70", 0.9),
     "paths": Material("#ffffff", 0.9),
     "rail": Material("#6b6259", 1.0),
@@ -65,22 +67,30 @@ MATERIALS = {
 # How light each is relative to grass was checked against aerial photographs
 # (USGS NAIP, July 2023): sunlit asphalt paths and carriageways are about one
 # and a half times as bright as lawn, and concrete nearer twice. Weathered
-# asphalt is a mid grey, not black.
+# asphalt is a mid grey, not black. In the viewer, though, an asphalt path drawn
+# at the aerial's ratio comes out a washed-out lavender next to the lawn, which
+# in photographs taken from the ground it is not (there asphalt is about as light
+# as the lawn beside it, and warmer); the colour here is the compromise.
 COVERS = {
     "paths": {
-        "wood": "#9c8566", "brick": "#a8705a", "sett": "#94908a", "metal": "#7f8386",
+        "wood": "#8b7f6b", "brick": "#a8705a", "sett": "#94908a", "metal": "#7f8386",
         "paving_stones": "#b3ada3", "concrete": "#bdb9b0", "gravel": "#b3a688", "sand": "#cdbb93",
-        "dirt": "#9c8566", "asphalt": "#96968f", "paved": "#b9b4a8",
+        "dirt": "#9c8566", "asphalt": "#928e84", "paved": "#b9b4a8",
     },
     "green": {
         "grass": "#6d8c4c", "lawn": "#6d8c4c", "pitch": "#74964e", "turf": "#4f8a4a", "court": "#3f6f5c",
         "playground": "#b79f7b", "dirt": "#9c8566", "garden": "#62824a", "scrub": "#5f7a48",
         "wood": "#55703f", "meadow": "#7f9455",
     },
+    # Ponds and lagoons are dark olive, not blue: in the NAIP aerial the Public Garden
+    # lagoon is (44, 57, 49) on a 0 to 255 scale, and in photographs it is a dark green-grey
+    # that reflects the trees. The last entry is the default (rivers, the harbour, the sea).
+    "water": {"pond": "#3a4d37", "open": "#2e5a6e"},
 }
-BED_SOIL = "#5a4a3a"
-# Planting colours, picked per bed: mostly foliage, some in flower.
-BED_PLANTING = ["#5f7f3f", "#6d8a45", "#587a4a", "#66803c", "#7d6a72", "#9a8448", "#8a5650", "#6f6a8a"]
+# Greens drawn with patches of lighter and darker, yellower and bluer (see groundlook.py).
+# Courts, artificial turf, playground surfaces and bare ground are not.
+PATCHY_GREEN = {"grass": 1.0, "lawn": 1.0, "pitch": 0.6, "garden": 0.8, "scrub": 0.8, "wood": 0.8, "meadow": 1.2}
+BED_SOIL = "#5a4837"  # mulch: the same as groundlook.MULCH
 BRIDGE_STRUCTURE = "#7d8a8c"
 BRIDGE_RAILS = "#3a4648"
 # Something mapped in the water right beside a raised footbridge (typically a
@@ -166,6 +176,8 @@ class Context:
     path_areas: PolygonIndex | None = None  # paths drawn as areas (docks, piers, plazas)
     deck_strips: PolygonIndex | None = None  # the footprint of every raised footbridge deck
     facing: dict[str, float] = field(default_factory=dict)  # direction of each bench that states none, by id
+    towers: dict[str, list] = field(default_factory=dict)  # pylons of each suspension footbridge, by way id (see _towers)
+    docks: dict[tuple[int, int], list] = field(default_factory=dict)  # painted pier areas, by the tile of a point inside each
 
 
 ROAD_BRIDGE_REACH = 6.0  # a footway this close to a carriageway is part of a road bridge
@@ -206,7 +218,7 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
     y1 = (max(t[1] for t in tiles) + 1) * world.TILE_SIZE
     sea = sea_polygons(scene.coastlines, box(x0, y0, x1, y1))
     surfaces["water"].extend(sea)
-    labels["water"].extend([""] * len(sea))
+    labels["water"].extend(["open"] * len(sea))
     water = PolygonIndex(surfaces["water"])
 
     def lay(way, line=None) -> None:
@@ -274,6 +286,8 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
         path_areas=PolygonIndex([a.polygon for a in scene.areas["path"]]),
         deck_strips=PolygonIndex(strips),
         facing=bench_facings(scene.objects, scene.ways, [a.polygon for a in scene.areas["path"]], surfaces["water"]),
+        towers=_towers(decks, water, scene.objects),
+        docks=_docks(scene.areas["path"]),
     )
 
 
@@ -340,24 +354,61 @@ def _path_crossings(ctx: Context, line):
     return unary_union(gaps)
 
 
+def _beside_deck(decks: dict, water: PolygonIndex, thing) -> tuple | None:
+    """(bridge, its raised line, distance along it, direction of travel there, side) of something that
+    stands over water beside a raised footbridge, or None for things on the ground. The side is +1
+    when the thing is left of the bridge going along its line and -1 when it is right."""
+    point = ShapelyPoint(thing.x, thing.y)
+    for deck_list in decks.values():
+        for way, line in deck_list:
+            if line.distance(point) > way.width / 2 + PIER_REACH:
+                continue
+            if not any(polygon.contains(point) for polygon in water.near(point)):
+                return None
+            along = line.project(point)
+            a, b = line.interpolate(max(0.0, along - 1)), line.interpolate(min(line.length, along + 1))
+            heading = math.atan2(b.y - a.y, b.x - a.x)
+            left = (b.x - a.x) * (thing.y - a.y) - (b.y - a.y) * (thing.x - a.x)
+            return way, line, along, heading, 1 if left >= 0 else -1
+    return None
+
+
 def _pier(ctx: Context, thing) -> tuple | None:
     """(bridge, top height, outline) of the pier under something that stands
     over water beside a raised footbridge, or None for things on the ground."""
-    point = ShapelyPoint(thing.x, thing.y)
-    for decks in ctx.decks.values():
-        for way, line in decks:
-            if line.distance(point) > way.width / 2 + PIER_REACH:
-                continue
-            if not any(polygon.contains(point) for polygon in ctx.layers["water"].near(point)):
-                return None
-            length = line.length
-            along = line.project(point)
-            top = deck_height(along, length, bridge_rise(length)) + PIER_ABOVE_DECK
-            a, b = line.interpolate(max(0.0, along - 1)), line.interpolate(min(length, along + 1))
-            half = PIER_SIZE / 2
-            square = box(thing.x - half, thing.y - half, thing.x + half, thing.y + half)
-            return way, top, rotate(square, math.degrees(math.atan2(b.y - a.y, b.x - a.x)), origin=(thing.x, thing.y))
-    return None
+    found = _beside_deck(ctx.decks, ctx.layers["water"], thing)
+    if found is None:
+        return None
+    way, line, along, heading, _ = found
+    top = deck_height(along, line.length, bridge_rise(line.length)) + PIER_ABOVE_DECK
+    half = PIER_SIZE / 2
+    square = box(thing.x - half, thing.y - half, thing.x + half, thing.y + half)
+    return way, top, rotate(square, math.degrees(heading), origin=(thing.x, thing.y))
+
+
+def _towers(decks: dict, water: PolygonIndex, objects: list) -> dict[str, list]:
+    """The pylons of each suspension footbridge, as (distance along its raised line, side, lamp height):
+    one for every lamp mapped in the water right beside the deck, where such a bridge has its lamp-topped
+    pylons. The bridge draws the pylon and the globe lamp on it; a lamp is not drawn separately."""
+    suspension = {key: [(w, l) for w, l in found if bridge_style(w.tags) == SUSPENSION] for key, found in decks.items()}
+    suspension = {key: found for key, found in suspension.items() if found}
+    towers: dict[str, list] = defaultdict(list)
+    for thing in objects if suspension else ():
+        found = _beside_deck(suspension, water, thing) if thing.kind == "lamp" else None
+        if found:
+            way, line, along, _, side = found
+            towers[way.id].append((along, side, thing.height))
+    return dict(towers)
+
+
+def _docks(areas: list) -> dict[tuple[int, int], list]:
+    """Painted pier areas (see pavilions.painted_pier), each in the tile of a point inside it."""
+    found = defaultdict(list)
+    for area in areas:
+        if painted_pier(area.tags):
+            point = area.polygon.representative_point()
+            found[world.tile_of(point.x, point.y)].append(area)
+    return dict(found)
 
 
 def _pieces(geom) -> list[Polygon]:
@@ -408,11 +459,29 @@ def _partition(ctx: Context, tile_box: Polygon) -> dict[str, list[tuple[Polygon,
     taken = unary_union([taken, beds])
     green = ctx.layers["green"].clip(tile_box).difference(taken)
     ground = tile_box.difference(unary_union([taken, green]))
-    plain = {"roads": roads, "rail": rail, "water": water, "beds": beds, "ground": ground}
+    plain = {"roads": roads, "rail": rail, "beds": beds, "ground": ground}
     surfaces = {name: [(p, "") for p in _pieces(g)] for name, g in plain.items()}
+    surfaces["water"] = _by_size(water, ctx.layers["water"].labelled(tile_box), "open")
     surfaces["paths"] = _by_cover(paths, ctx.layers["path"].labelled(tile_box), list(COVERS["paths"]))
     surfaces["green"] = _by_size(green, ctx.layers["green"].labelled(tile_box), "lawn")
     return surfaces
+
+
+def _mulched_lawn(ctx: Context, surfaces: dict, tile_box: Polygon):
+    """The lawn in this tile that lies in a large named park, where trees stand in mulch; None if there is none."""
+    parks = [
+        area.polygon
+        for area, kind, size in ctx.named
+        if kind in MULCH_PARKS and size >= MULCH_MIN_PARK and area.polygon.intersects(tile_box)
+    ]
+    lawn = [polygon for polygon, cover in surfaces["green"] if cover in ("lawn", "grass")]
+    if not parks or not lawn:
+        return None
+    ground = unary_union(lawn).intersection(unary_union(parks))
+    if ground.is_empty:
+        return None
+    shapely.prepare(ground)
+    return ground
 
 
 def _round(value: float) -> float:
@@ -518,8 +587,15 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             continue
         z = heights.get(name, 0.0)
         for polygon, cover in pieces:
-            add_flat(flat[name], polygon, z, origin, _cover_colour(name, cover) if name in COVERS else None)
-            if z < 0:
+            if name == "green" and cover in PATCHY_GREEN:
+                add_lawn(flat[name], polygon, z, origin, COVERS[name][cover], PATCHY_GREEN[cover])
+            else:
+                add_flat(flat[name], polygon, z, origin, _cover_colour(name, cover) if name in COVERS else None)
+            if z < 0 and name != "water":
+                add_skirt(curbs, polygon, z, 0.0, origin, bounds)
+        if name == "water":
+            # One wall round the water's whole outline, not round each kind of water.
+            for polygon in _pieces(unary_union([polygon for polygon, _ in pieces])):
                 add_skirt(curbs, polygon, z, 0.0, origin, bounds)
 
     # Planted beds: bare soil at the edge, and a low mass of planting in from it.
@@ -531,24 +607,32 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
         if patch.is_empty:
             continue
         drawn.append(outline)
-        seed = zlib.crc32(bed.id.encode())
-        planting = colour_bytes(BED_PLANTING[seed % len(BED_PLANTING)])
-        side = colour_bytes(BED_PLANTING[seed % len(BED_PLANTING)], 0.7)
+        side = colour_bytes(bed_style(bed.id)[0], 0.7)
         # The planting is set in from the whole bed's outline, not the tile's cut of it.
         planted = outline.buffer(-BED_EDGE).intersection(patch)
         for polygon in _pieces(planted):
-            add_flat(beds, polygon, BED_HEIGHT, origin, planting)
+            add_bed_planting(beds, polygon, BED_HEIGHT, origin, bed.id)
             add_walls(beds, polygon, 0.0, BED_HEIGHT, origin, side)
         # Soil under the whole bed, planting included: the ground must have no holes,
         # or a walker who arrives inside a bed falls through the world.
         for polygon in _pieces(patch):
             add_flat(beds, polygon, 0.0, origin, colour_bytes(BED_SOIL))
 
+    # A ring of mulch round the foot of each tree on the lawn of a large park (see groundlook.py).
+    lawn = _mulched_lawn(ctx, surfaces, tile_box)
+    if lawn is not None:
+        for tree in ctx.trees.get((tx, ty), []):
+            if shapely.contains_xy(lawn, tree.x, tree.y) and tree.tags.get("tree_surround") != "none":
+                add_mulch(beds, tree.x, tree.y, mulch_radius(tree.tags), origin, lawn)
+
     # Each building vertex carries the building's index in this tile's data
     # file, so a client can tell which building a ray or a click has hit.
     walls = MeshBuilder("building_walls", uvs=True, colours=True, features=True)
     roofs = MeshBuilder("building_roofs", colours=True, features=True)
     for index, building in enumerate(ctx.buildings.get((tx, ty), [])):
+        if roof_shape(building.tags):  # an open roof on posts, not a box (see pavilions.py)
+            add_pavilion(walls, roofs, building, origin, feature=index)
+            continue
         wall = colour_bytes(building.wall_colour)
         roof = colour_bytes(building.roof_colour)
         add_walls(walls, building.polygon, building.min_height, building.height, origin, wall, feature=index)
@@ -588,6 +672,14 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             bridges, np.asarray(line.coords)[:, :2] - origin, way.width, rise=bridge_rise(line.length),
             deck_colour=_cover_colour("paths", way.cover), structure_colour=colour_bytes(BRIDGE_STRUCTURE),
             rail_colour=colour_bytes(BRIDGE_RAILS), feature=bridge_feature(way),
+            style=bridge_style(way.tags), towers=ctx.towers.get(way.id, ()), water_z=WATER_Z,
+        )
+
+    for area in ctx.docks.get((tx, ty), []):  # the painted sides of docks
+        add_dock_edge(
+            bridges, [polygon for polygon, _ in surfaces["water"]], area.polygon, parse_colour(area.tags.get("colour")),
+            WATER_Z, origin, bounds,
+            feature=register(area.id, "dock", *area.polygon.representative_point().coords[0], area.tags.get("name")),
         )
 
     furniture = MeshBuilder("furniture", colours=True, features=True)
@@ -597,6 +689,10 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
         # What the data says, else what the thing would look at (benches), else north.
         direction = thing.direction if thing.direction is not None else ctx.facing.get(thing.id, 0.0)
         pier = _pier(ctx, thing)
+        if pier and bridge_style(pier[0].tags) == SUSPENSION:
+            # A suspension bridge draws its own pylons and globe lamps (see bridges.py).
+            register(thing.id, thing.kind, thing.x, thing.y, thing.name)
+            continue
         if pier:
             way, base, outline = pier
             stone = colour_bytes(PIER_STONE)

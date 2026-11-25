@@ -394,6 +394,7 @@ export class City {
         if (!(node instanceof Mesh)) return;
         const layer = node.name;
         node.material = this.materialFor(layer, node.material as MeshStandardMaterial);
+        if (layer === 'trees') node.geometry.computeVertexNormals(); // crowns are lumpy skins: smooth them, not faceted
         node.castShadow = CASTS_SHADOW.has(layer);
         node.receiveShadow = true;
         if (!NOT_SOLID.has(layer)) {
@@ -443,7 +444,7 @@ export class City {
         metalness: source.metalness,
         vertexColors: source.vertexColors,
         // Tiles carry no normals: every face is shaded flat, as the loader has already worked out.
-        flatShading: source.flatShading,
+        flatShading: layer === 'trees' ? false : source.flatShading, // trees are smooth-shaded, everything else flat
       });
       if (layer === 'building_walls') facade(created);
       if (layer === 'water') created.metalness = 0.55;

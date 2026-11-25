@@ -1,0 +1,88 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "highway": "pedestrian",
+    "area": "yes",
+    "why": "A paved circle 6 m across surrounds the Edward Everett Hale statue (n4408379857): in the USGS NAIP aerial photograph of 7 July 2023 the pavement is about one and a half times as bright as the lawn out to a radius of 2.5 m and falls to lawn brightness by 3.5 m, centred on the statue. The paving material is not stated, so it is drawn as ordinary pavement."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.0687218,
+       42.3545284
+      ],
+      [
+       -71.0687245,
+       42.3545387
+      ],
+      [
+       -71.0687323,
+       42.3545475
+      ],
+      [
+       -71.0687441,
+       42.3545534
+      ],
+      [
+       -71.068758,
+       42.3545555
+      ],
+      [
+       -71.068772,
+       42.3545535
+      ],
+      [
+       -71.0687838,
+       42.3545477
+      ],
+      [
+       -71.0687918,
+       42.354539
+      ],
+      [
+       -71.0687946,
+       42.3545286
+      ],
+      [
+       -71.0687919,
+       42.3545183
+      ],
+      [
+       -71.0687841,
+       42.3545095
+      ],
+      [
+       -71.0687723,
+       42.3545036
+      ],
+      [
+       -71.0687584,
+       42.3545015
+      ],
+      [
+       -71.0687444,
+       42.3545035
+      ],
+      [
+       -71.0687326,
+       42.3545093
+      ],
+      [
+       -71.0687246,
+       42.354518
+      ],
+      [
+       -71.0687218,
+       42.3545284
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

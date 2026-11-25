@@ -59,6 +59,17 @@ PATH_COVERS = {
     "gravel": "gravel", "fine_gravel": "gravel", "compacted": "gravel", "pebblestone": "gravel",
     "dirt": "dirt", "ground": "dirt", "earth": "dirt", "unpaved": "dirt", "woodchips": "dirt", "sand": "sand",
 }
+# Water that is a pond or lagoon, by its `water` tag, and water that is open and large. Water
+# with no `water` tag (or "yes") is a pond when it is smaller than SMALL_POND square metres.
+POND_WATER = {"pond", "lagoon", "basin", "reservoir", "pool", "fountain", "stream_pool", "wastewater"}
+OPEN_WATER = {"river", "canal", "lake", "harbour", "bay", "oxbow", "stream", "ditch", "tidal_channel"}
+SMALL_POND = 20_000.0
+# A tree that stands on the lawn of a named park or garden of at least MULCH_MIN_PARK square
+# metres is drawn with a ring of mulch round its foot, as Boston's maintained parks do (the
+# Public Garden and the Common above all). Not a tag in the data: the tree's own
+# `tree_surround=none` (set through a file in fixes/) switches it off for that tree.
+MULCH_PARKS = {"park", "garden", "common"}
+MULCH_MIN_PARK = 20_000.0
 # Sports and play surfaces that are not grass, by `surface` tag.
 HARD_COURTS = {"asphalt", "concrete", "acrylic", "tartan", "hard", "paved", "rubber"}
 BARE_GROUND = {"dirt", "clay", "sand", "earth", "ground", "gravel", "fine_gravel", "woodchips"}
@@ -91,6 +102,9 @@ BARRIERS = {
     "bollard": ("bollards", 0.9, 0.0),  # a row of bollards; no width of its own
 }
 BARRIER_LIMITS = {"height": (0.05, 6.0), "width": (0.01, 3.0)}
+# A fence whose `fence_type` says it is wire is drawn as a plain post-and-rail fence even when
+# its `material` is metal: railings (barriers.py draws those for metal, iron and steel) are bars.
+WIRE_FENCE_TYPES = {"chain_link", "wire_mesh", "wire", "mesh", "net", "netting"}
 # A stone edge round water. OpenStreetMap has no agreed tag for the masonry edge
 # of a pond, so this repository uses `edge=kerb` on the water area (set through
 # a file in fixes/), with `edge:width` and `edge:height` in metres.
@@ -191,10 +205,10 @@ class Object:
     name: str | None = None
     direction: float | None = None  # degrees clockwise from north that it faces; None where the data does not say
     height: float | None = None  # metres, where the data states it
-    size: float | None = None  # length of a bench or width of a fountain basin, where stated
+    size: float | None = None  # length of a bench or width of a fountain basin or of an animal statue, where stated
     colour: str | None = None
     material: str | None = None
-    variant: str | None = None
+    variant: str | None = None  # bench "backless"; lamp "arm"/"post"; fountain "nozzle"; statue "equestrian"/"animal"/"ground"
     tags: dict = field(default_factory=dict)
 
 
@@ -412,6 +426,17 @@ def green_cover(tags: dict) -> tuple[str, str]:
     return "green", "lawn"
 
 
+def water_cover(tags: dict, area: float) -> str:
+    """How a body of water looks: "pond" for a pond, lagoon, basin, pool or any small water of no stated kind
+    (dark olive: it reflects the trees round it), "open" for rivers, canals, docks, the harbour and the sea."""
+    kind = tags.get("water", "")
+    if kind in POND_WATER:
+        return "pond"
+    if kind in OPEN_WATER or tags.get("waterway") in ("dock", "riverbank"):
+        return "open"
+    return "pond" if area < SMALL_POND else "open"
+
+
 def bridge_rise(length: float) -> float:
     """How far a footbridge of this length arches above its ends, in metres."""
     low, high = BRIDGE_RISE_LIMITS
@@ -455,6 +480,14 @@ def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
             kind = MEMORIAL_FORMS.get(form, "sculpture" if "tourism" in tags or form else "stele")
         if kind == "plaque" and height is None and tags.get("support") in ("wall", "fence", "building"):
             return None  # fixed to something else, with nothing of its own to draw
+        # What kind of figure: `statue=equestrian` (a rider on a horse; a standard OpenStreetMap tag), `animal=*` (a
+        # duck, a turtle: drawn low and sized by `length`), `support=ground` (no pedestal). Else a person on a pedestal.
+        if tags.get("statue") == "equestrian" and kind != "plaque":
+            kind, variant = "statue", "equestrian"
+        elif tags.get("animal") and kind in ("statue", "sculpture"):
+            kind, variant, size = "statue", "animal", parse_length(tags.get("length"))
+        elif tags.get("support") == "ground" and kind == "statue":
+            variant = "ground"
     elif tags.get("amenity") == "bench":
         kind, variant = "bench", "backless" if tags.get("backrest") == "no" else None
         seats = parse_number(tags.get("seats"))
@@ -526,6 +559,8 @@ def _add_barrier(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> No
         return
     kind, height, width = entry
     material = ((tags.get("material") or tags.get("wall") or "").split(";")[0].strip().lower()) or None
+    if kind == "fence" and (tags.get("fence_type") or "").strip().lower() in WIRE_FENCE_TYPES:
+        material = "wire"
     scene.barriers.append(
         Barrier(
             ident, LineString(coords), kind, _sized(tags, "height", height), _sized(tags, "width", width) if width else 0.0,
@@ -613,7 +648,9 @@ def _add_area(scene: Scene, ident: str, tags: dict, polygons: list[Polygon]) -> 
         surface, cover = "path", path_cover(tags)
     else:
         return
-    scene.areas[surface].extend(Area(ident, polygon, tags, cover) for polygon in polygons)
+    scene.areas[surface].extend(
+        Area(ident, polygon, tags, water_cover(tags, polygon.area) if surface == "water" else cover) for polygon in polygons
+    )
 
 
 def element_id(element: dict) -> str:

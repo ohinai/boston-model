@@ -92,6 +92,9 @@ def write_glb(path: Path, layers: list[tuple[Mesh, Material]], copyright: str, e
         )
         nodes.append({"name": mesh.name, "mesh": len(meshes) - 1})
 
+    # The buffer is declared at its padded length, which is the length of the BIN chunk. (It used to be
+    # padded after it was declared, so a layer ending in an odd number of 16-bit indices made them disagree.)
+    binary.extend(b"\0" * (-len(binary) % 4))
     document = {
         "asset": {"version": "2.0", "generator": "boston-pipeline", "copyright": copyright},
         "scene": 0,

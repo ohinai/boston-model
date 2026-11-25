@@ -22,8 +22,13 @@ BENCH_BACK_FROM, BENCH_BACK_TO, BENCH_BACK_THICK = 0.5, 0.88, 0.04
 BENCH_SUPPORT_THICK, BENCH_SUPPORT_INSET = 0.06, 0.15  # end supports, distance from the ends
 
 LAMP_POST_HEIGHT, LAMP_POST_RANGE = 4.9, (2.5, 14.0)
-LAMP_BASE_RADIUS, LAMP_BASE_HEIGHT = 0.14, 0.7
-LAMP_LANTERN_RADIUS, LAMP_LANTERN_HEIGHT, LAMP_CAP_HEIGHT = 0.2, 0.55, 0.12
+# The park lamp: a slim black cast-iron post on a flared foot, a collar, an opal globe and a small cap.
+# Six sides everywhere (about 60 triangles a lamp: the pilot has over a thousand of them).
+LAMP_FOOT_RADIUS, LAMP_FOOT_HEIGHT = 0.20, 0.8  # the flared base, from its widest to where the shaft starts
+LAMP_SHAFT_RADIUS = (0.065, 0.05)  # at the foot, under the collar
+LAMP_COLLAR_RADIUS, LAMP_COLLAR_HEIGHT = 0.10, 0.12
+LAMP_GLOBE_RADIUS, LAMP_GLOBE_BELOW, LAMP_GLOBE_ABOVE = 0.19, 0.13, 0.19  # widest radius; height under and over it
+LAMP_CAP_RADIUS, LAMP_CAP_HEIGHT = 0.07, 0.07
 LAMP_ARM_HEIGHT, LAMP_ARM_LENGTH = 8.0, 1.6
 LAMP_HEAD = (0.6, 0.25, 0.12)  # along the arm, across it, thick
 
@@ -38,8 +43,17 @@ STELE_BASE = (1.3, 0.5, 0.2)
 OBELISK_HEIGHT, OBELISK_BASE_WIDTH, OBELISK_BASE_HEIGHT = 6.0, 1.6, 0.6
 OBELISK_SHAFT_WIDTHS = (1.0, 0.65)
 COLUMN_HEIGHT, COLUMN_MIN_RADIUS = 8.0, 0.25
-STATUE_HEIGHT, STATUE_PLINTH_SHARE, STATUE_MIN_PLINTH_TOTAL = 3.4, 0.45, 1.6
-STATUE_FOOT_HEIGHT, STATUE_FOOT_EXTRA = 0.15, 0.2
+
+# Statues. A statue with no stated height is 3.4 m, pedestal included: a figure a little over life size on a
+# pedestal about as tall as itself. Nothing here is measured; these are proportions for "a statue of this kind".
+STATUE_HEIGHT, STATUE_MIN_PLINTH_TOTAL = 3.4, 1.6
+STATUE_PEDESTAL_SHARE = 0.44  # of the total height, for a standing figure
+STATUE_FIGURE_MAX = 3.4  # a standing bronze is never taller than this; a taller monument gets a taller pedestal
+STATUE_PEDESTAL_WIDTH, STATUE_PEDESTAL_MAX_WIDTH = 0.34, 2.6  # the die: of the total height, up to this many metres (the footing is wider)
+EQUESTRIAN_HEIGHT, EQUESTRIAN_PEDESTAL_SHARE = 6.0, 0.42  # a rider needs a bigger statue than a walker
+EQUESTRIAN_PEDESTAL_LENGTH, EQUESTRIAN_PEDESTAL_WIDTH = 0.46, 0.28  # of the total height, along and across the horse
+STATUE_GROUND_HEIGHT = 1.2  # a statue the data says stands on the ground (`support=ground`), no pedestal
+ANIMAL_LENGTH = 0.9  # nose to tail of an animal statue (`animal=*`) when neither `length` nor `height` is given
 MONUMENT_HEIGHT, MONUMENT_MIN_BASE = 9.0, 2.5
 FOUNTAIN_DIAMETER, FOUNTAIN_DIAMETER_RANGE = 3.0, (1.2, 20.0)
 FOUNTAIN_WALL, FOUNTAIN_WALL_HEIGHT, FOUNTAIN_WATER_Z = 0.25, 0.5, 0.38
@@ -50,11 +64,11 @@ BLOCK_SIZE, BLOCK_HEIGHT = 0.6, 0.5
 
 # --- Colours -------------------------------------------------------------------
 WOOD, IRON = "#6b4a2f", "#2b2b2d"
-LAMP_POST_COLOUR, LAMP_GLASS, LAMP_ARM_COLOUR, LAMP_HEAD_COLOUR = "#23302a", "#e9e2c8", "#8a8d8f", "#4a4d50"
+LAMP_POST_COLOUR, LAMP_GLASS, LAMP_ARM_COLOUR, LAMP_HEAD_COLOUR = "#1c1e20", "#efece0", "#8a8d8f", "#4a4d50"
 BIN_COLOUR, BIN_OPENING = "#26332b", "#0f1411"
 WATER_FOUNTAIN, FLAGPOLE_COLOUR = "#6f7275", "#d8d8d4"
 PLAQUE_STONE, PLAQUE_BRONZE = "#8f8b84", "#5b4a34"
-STELE_STONE, PLINTH_STONE, MONUMENT_STONE = "#a9a59b", "#b3aea3", "#b3aea3"
+STELE_STONE, PLINTH_STONE, MONUMENT_STONE = "#a9a59b", "#7f786f", "#b3aea3"  # the plinth is warm grey granite
 FOUNTAIN_STONE, FOUNTAIN_WATER = "#a9a59b", "#3f6f85"
 BOLLARD_COLOUR, BLOCK_STONE = "#23262a", "#a9a59b"
 FIGURE_COLOURS = {
@@ -194,6 +208,48 @@ def _square_rot(direction):
     return 45.0 - direction
 
 
+def _frame(x, y, direction, base=0.0, ahead=0.0):
+    """A function from (u, v, z) to world (x, y, z): u to the right of and v ahead of (x, y) facing
+    `direction`, z up from `base`. `ahead` moves the origin that far along `direction` first."""
+    t = math.radians(direction)
+    right = np.array([math.cos(t), -math.sin(t), 0.0])
+    front = np.array([math.sin(t), math.cos(t), 0.0])
+    origin = np.array([x, y, base]) + ahead * front
+
+    def to_world(u, v, z):
+        return origin + u * right + v * front + z * np.array([0.0, 0.0, 1.0])
+
+    return to_world
+
+
+def limb(parts, colour, to_world, a, b, r0, r1=None, sides=4, flat=1.0, closed=True) -> None:
+    """A tapered bar from `a` to `b` (local (u, v, z) points, see `_frame`): circumradius r0 at a and r1 at b.
+    The cross-section is an ellipse's n-gon: `r` wide across the figure's right-hand side (where the bar allows)
+    and `r * flat` the other way. Flat-shaded. Used for the limbs, necks and tails of figures."""
+    r1 = r0 if r1 is None else r1
+    a, b = np.asarray(a, dtype=np.float64), np.asarray(b, dtype=np.float64)
+    axis = b - a
+    axis /= np.linalg.norm(axis)
+    side = np.array([1.0, 0.0, 0.0])
+    if abs(axis @ side) > 0.95:
+        side = np.array([0.0, 1.0, 0.0])
+    e1 = side - (side @ axis) * axis
+    e1 /= np.linalg.norm(e1)
+    e2 = np.cross(axis, e1)
+    angle = 2 * math.pi * (np.arange(sides) + 0.5) / sides
+    ring = np.cos(angle)[:, None] * e1 + np.sin(angle)[:, None] * flat * e2  # (sides, 3), unit-ish
+    lo, hi = a + r0 * ring, a + (b - a) + r1 * ring
+    world = lambda pts: np.array([to_world(*q) for q in pts])  # noqa: E731
+    lo, hi = world(lo), world(hi)
+    nxt = np.roll(np.arange(sides), -1)
+    triangles = [np.stack([lo, lo[nxt], hi[nxt]], axis=1), np.stack([lo, hi[nxt], hi], axis=1)]
+    if closed:
+        fan = np.arange(1, sides - 1)
+        triangles.append(np.stack([lo[np.zeros_like(fan)], lo[fan], lo[fan + 1]], axis=1))
+        triangles.append(np.stack([hi[np.zeros_like(fan)], hi[fan], hi[fan + 1]], axis=1))
+    _flat_triangles(parts, colour, np.concatenate(triangles), world([(a + b) / 2])[0])
+
+
 # --- Kinds ---------------------------------------------------------------------
 @dataclass
 class _Opts:
@@ -248,13 +304,19 @@ def _lamp(p, x, y, d, o: _Opts) -> None:
         box(p, colour_bytes(LAMP_HEAD_COLOUR), hx, hy, top - 0.52, top - 0.40, LAMP_HEAD[1], LAMP_HEAD[0], d)
         return
     top = o.tall(LAMP_POST_HEIGHT, *LAMP_POST_RANGE)
+    post, glass = o.paint(LAMP_POST_COLOUR), colour_bytes(LAMP_GLASS)
     cap_z = top - LAMP_CAP_HEIGHT
-    lantern_z = cap_z - LAMP_LANTERN_HEIGHT
-    post = o.paint(LAMP_POST_COLOUR)
-    prism(p, post, x, y, 0.0, LAMP_BASE_HEIGHT, LAMP_BASE_RADIUS, sides=8, top=True)
-    prism(p, post, x, y, LAMP_BASE_HEIGHT, lantern_z, 0.08, 0.05, 8)
-    prism(p, colour_bytes(LAMP_GLASS), x, y, lantern_z, cap_z, LAMP_LANTERN_RADIUS, sides=6, bottom=True)
-    pyramid(p, post, x, y, cap_z, top, LAMP_LANTERN_RADIUS + 0.06, 6)
+    globe_top = cap_z
+    globe_mid = globe_top - LAMP_GLOBE_ABOVE
+    globe_bottom = globe_mid - LAMP_GLOBE_BELOW
+    collar_bottom = globe_bottom - LAMP_COLLAR_HEIGHT
+    prism(p, post, x, y, 0.0, LAMP_FOOT_HEIGHT, LAMP_FOOT_RADIUS, LAMP_SHAFT_RADIUS[0], 6)  # flared foot
+    prism(p, post, x, y, LAMP_FOOT_HEIGHT, collar_bottom, LAMP_SHAFT_RADIUS[0], LAMP_SHAFT_RADIUS[1], 6)
+    neck = LAMP_COLLAR_RADIUS * 0.8
+    prism(p, post, x, y, collar_bottom, globe_bottom, LAMP_COLLAR_RADIUS, neck, 6)
+    prism(p, glass, x, y, globe_bottom, globe_mid, neck, LAMP_GLOBE_RADIUS, 6, bottom=True)
+    prism(p, glass, x, y, globe_mid, globe_top, LAMP_GLOBE_RADIUS, LAMP_CAP_RADIUS, 6)
+    pyramid(p, post, x, y, cap_z, top, LAMP_CAP_RADIUS, 6)
 
 
 def _waste_basket(p, x, y, d, o: _Opts) -> None:
@@ -329,25 +391,124 @@ def _column(p, x, y, d, o: _Opts) -> None:
     box(p, stone, x, y, top - cap, top, 2.6 * r, 2.6 * r, d)
 
 
-def _plinth(p, x, y, d, o: _Opts, total: float) -> float:
-    """A stone plinth under a statue (when tall enough). Returns the height the figure starts at."""
+# A pedestal's courses, bottom to top: (footprint relative to the die, from, to as fractions of its height, shade).
+# A footing, a base, the tall die that carries the inscription, and a two-step cap that overhangs the die.
+PEDESTAL_COURSES = (
+    (1.26, 0.00, 0.05, 0.90),
+    (1.12, 0.05, 0.18, 0.94),
+    (0.88, 0.18, 0.84, 1.00),
+    (0.99, 0.84, 0.93, 1.07),
+    (0.92, 0.93, 1.00, 1.10),
+)
+
+
+def _plinth(p, x, y, d, o: _Opts, total: float, *, height=None, length=None, width=None) -> float:
+    """A stepped granite pedestal under a statue (when tall enough). `length` runs along the way the figure
+    faces and `width` across it; both are the die's, the footing is wider. Returns the height it ends at."""
     if total < STATUE_MIN_PLINTH_TOTAL:
         return 0.0
-    top = STATUE_PLINTH_SHARE * total
-    width = 0.36 * total
-    stone = colour_bytes(PLINTH_STONE, o.shade)
-    box(p, stone, x, y, 0.0, STATUE_FOOT_HEIGHT, width + STATUE_FOOT_EXTRA, width + STATUE_FOOT_EXTRA, d)
-    box(p, stone, x, y, STATUE_FOOT_HEIGHT, top, width, width, d)
-    return top
+    height = STATUE_PEDESTAL_SHARE * total if height is None else height
+    square = min(STATUE_PEDESTAL_WIDTH * total, STATUE_PEDESTAL_MAX_WIDTH)
+    length = square if length is None else length
+    width = square if width is None else width
+    for scale, lo, hi, shade in PEDESTAL_COURSES:
+        box(p, colour_bytes(PLINTH_STONE, o.shade * shade), x, y, lo * height, hi * height, width * scale, length * scale, d)
+    return height
+
+
+def _standing_figure(p, x, y, d, z0, fh, colour) -> None:
+    """A person in a long coat standing with arms at the sides: legs, a flared coat, shoulders, a head.
+    It is a placeholder of the right kind and size, not a likeness. About 130 triangles."""
+    to_world = _frame(x, y, d, z0)
+    bar = lambda a, b, r0, r1=None, **k: limb(p, colour, to_world, a, b, r0, r1, **k)  # noqa: E731
+    prism(p, colour, x, y, z0, z0 + 0.035 * fh, 0.17 * fh, sides=6, top=True)  # the bronze's own base
+    for side in (-1, 1):
+        bar((side * 0.035 * fh, 0, 0.03 * fh), (side * 0.035 * fh, 0, 0.46 * fh), 0.045 * fh, 0.05 * fh)  # legs
+        bar((side * 0.135 * fh, 0, 0.80 * fh), (side * 0.15 * fh, 0.01 * fh, 0.50 * fh), 0.045 * fh, 0.035 * fh)  # arms
+    bar((0, 0, 0.30 * fh), (0, 0, 0.60 * fh), 0.125 * fh, 0.095 * fh, sides=6)  # the coat's skirt
+    bar((0, 0, 0.58 * fh), (0, 0, 0.82 * fh), 0.13 * fh, 0.20 * fh, flat=0.55)  # waist to shoulders
+    bar((0, 0, 0.80 * fh), (0, 0, 0.86 * fh), 0.035 * fh)  # neck
+    bar((0, 0, 0.84 * fh), (0, 0, fh), 0.055 * fh, 0.048 * fh, sides=6)  # head
+
+
+EQUESTRIAN_WITHERS = 0.56  # horse's height at the shoulder, of the whole bronze (hat to hoof)
+
+
+def _equestrian_figure(p, x, y, d, z0, fh, colour) -> None:
+    """A horse standing with one foreleg raised, and a rider in a cocked hat with a sword at his side.
+    Proportions are a typical bronze rider's, not any particular statue's. About 280 triangles."""
+    h = EQUESTRIAN_WITHERS * fh  # the horse's withers
+    # The horse stretches from its tail (-0.64 h) to its nose (0.95 h): centre that on the pedestal.
+    to_world = _frame(x, y, d, z0, ahead=-0.155 * h)
+    bar = lambda a, b, r0, r1=None, **k: limb(p, colour, to_world, a, b, r0, r1, **k)  # noqa: E731
+    at = lambda u, v: to_world(u, v, 0.0)[:2]  # noqa: E731
+
+    cx, cy = at(0, 0.155 * h)
+    box(p, colour, cx, cy, z0, z0 + 0.03 * h, 0.56 * h, 1.62 * h, d)  # the bronze's own base
+    for v, depth, wide, lo, hi in ((0.24 * h, 0.50 * h, 0.44 * h, 0.42 * h, 1.00 * h), (-0.23 * h, 0.46 * h, 0.46 * h, 0.45 * h, 0.96 * h)):
+        bx, by = at(0, v)
+        box(p, colour, bx, by, z0 + lo, z0 + hi, wide, depth, d)  # chest and withers; rump and loins
+    for side in (-1, 1):
+        bar((side * 0.15 * h, -0.33 * h, 0.56 * h), (side * 0.15 * h, -0.38 * h, 0.0), 0.11 * h, 0.065 * h)  # hind legs
+    bar((0.15 * h, 0.36 * h, 0.55 * h), (0.15 * h, 0.36 * h, 0.0), 0.105 * h, 0.06 * h)  # standing foreleg
+    bar((-0.15 * h, 0.36 * h, 0.55 * h), (-0.15 * h, 0.50 * h, 0.34 * h), 0.105 * h, 0.07 * h)  # raised foreleg
+    bar((-0.15 * h, 0.50 * h, 0.34 * h), (-0.15 * h, 0.44 * h, 0.12 * h), 0.07 * h, 0.06 * h)
+    bar((0, 0.40 * h, 0.80 * h), (0, 0.62 * h, 1.28 * h), 0.25 * h, 0.14 * h, flat=0.75)  # neck
+    bar((0, 0.60 * h, 1.30 * h), (0, 0.90 * h, 0.99 * h), 0.14 * h, 0.07 * h, flat=0.85)  # head
+    bar((0, -0.45 * h, 0.92 * h), (0, -0.60 * h, 0.42 * h), 0.05 * h, 0.035 * h)  # tail
+
+    seat, behind = 0.98 * h, -0.02 * h  # where the rider sits: height, and along the horse
+    for side in (-1, 1):
+        knee = (side * 0.20 * h, behind + 0.20 * h, 0.80 * h)
+        bar((side * 0.08 * fh, behind, seat + 0.01 * fh), knee, 0.055 * fh, 0.045 * fh)  # thigh
+        bar(knee, (side * 0.21 * h, behind + 0.16 * h, 0.50 * h), 0.045 * fh, 0.035 * fh)  # boot
+        bar((side * 0.12 * fh, behind, seat + 0.24 * fh), (side * 0.09 * fh, behind + 0.12 * h, seat + 0.12 * fh), 0.035 * fh, 0.03 * fh)
+    bar((0, behind, seat), (0, behind, seat + 0.26 * fh), 0.12 * fh, 0.17 * fh, flat=0.55)  # torso
+    bar((0, behind, seat + 0.24 * fh), (0, behind, seat + 0.30 * fh), 0.035 * fh)  # neck
+    top = seat + 0.28 * fh
+    bar((0, behind, top), (0, behind, 0.92 * fh), 0.055 * fh, 0.048 * fh, sides=6)  # head
+    hx, hy = at(0, behind)
+    box(p, colour, hx, hy, z0 + 0.915 * fh, z0 + 0.94 * fh, 0.22 * fh, 0.12 * fh, d)  # hat brim
+    box(p, colour, hx, hy, z0 + 0.94 * fh, z0 + fh, 0.17 * fh, 0.085 * fh, d)  # and crown
+    bar((-0.12 * fh, behind, seat + 0.03 * fh), (-0.24 * h, -0.58 * h, 0.40 * h), 0.014 * fh, 0.010 * fh)  # sword
+
+
+def _animal(p, x, y, d, o: _Opts) -> None:
+    """A low animal statue (a duck, a tortoise): body, neck and head, standing on the ground. Sized by
+    `length` (nose to tail) if stated, else by `height`, else ANIMAL_LENGTH. About 45 triangles."""
+    nose_to_tail, height_per_length = 0.82, 0.55
+    if o.size:
+        length = o.size / nose_to_tail
+    elif o.height:
+        length = o.height / height_per_length
+    else:
+        length = ANIMAL_LENGTH / nose_to_tail
+    length = min(max(length, 0.15), 10.0)
+    to_world = _frame(x, y, d, 0.0, ahead=0.01 * length)
+    colour = o.figure()
+    bar = lambda a, b, r0, r1=None, **k: limb(p, colour, to_world, a, b, r0, r1, **k)  # noqa: E731
+    k = length
+    bar((0, -0.42 * k, 0.16 * k), (0, 0.12 * k, 0.23 * k), 0.16 * k, 0.25 * k, sides=6, flat=0.85)
+    bar((0, 0.10 * k, 0.30 * k), (0, 0.24 * k, 0.48 * k), 0.12 * k, 0.075 * k)
+    bar((0, 0.23 * k, 0.48 * k), (0, 0.40 * k, 0.44 * k), 0.085 * k, 0.04 * k)
 
 
 def _statue(p, x, y, d, o: _Opts) -> None:
-    total = o.tall(STATUE_HEIGHT, 0.2)
-    z0 = _plinth(p, x, y, d, o, total)
-    fh, colour = total - z0, o.figure()
-    # Abstract standing form: a tapering six-sided body under a small eight-sided head.
-    prism(p, colour, x, y, z0, z0 + 0.8 * fh, 0.15 * fh, 0.10 * fh, 6, top=True)
-    prism(p, colour, x, y, z0 + 0.8 * fh, total, 0.075 * fh, sides=8, top=True)
+    if o.variant == "animal":
+        return _animal(p, x, y, d, o)
+    equestrian, grounded = o.variant == "equestrian", o.variant == "ground"
+    total = o.tall(EQUESTRIAN_HEIGHT if equestrian else STATUE_GROUND_HEIGHT if grounded else STATUE_HEIGHT, 0.2)
+    colour = o.figure()
+    if grounded or total < STATUE_MIN_PLINTH_TOTAL:
+        z0 = 0.0
+    elif equestrian:
+        z0 = _plinth(
+            p, x, y, d, o, total, height=EQUESTRIAN_PEDESTAL_SHARE * total,
+            length=EQUESTRIAN_PEDESTAL_LENGTH * total, width=EQUESTRIAN_PEDESTAL_WIDTH * total,
+        )
+    else:  # a standing figure is at most STATUE_FIGURE_MAX tall: a taller monument has a taller pedestal
+        z0 = _plinth(p, x, y, d, o, total, height=max(total - STATUE_FIGURE_MAX, STATUE_PEDESTAL_SHARE * total))
+    (_equestrian_figure if equestrian else _standing_figure)(p, x, y, d, z0, total - z0, colour)
 
 
 def _sculpture(p, x, y, d, o: _Opts) -> None:

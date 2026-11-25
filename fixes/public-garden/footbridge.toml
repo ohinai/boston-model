@@ -1,6 +1,9 @@
 # The Public Garden Foot Bridge, over the lagoon. See ticket #1.
 
 ["w172094381"]
-why = "The bridge is about 4.9 m wide seen from above, not 3.2 m: measured across the deck at 20 places on the MassGIS 15 cm aerial imagery of spring 2019, 2021 and 2023 (medians 4.9, 5.1 and 5.2 m)."
+why = """The bridge is about 4.9 m wide seen from above, not 3.2 m: measured across the deck at 20 places on the MassGIS 15 cm aerial imagery of spring 2019, 2021 and 2023 (medians 4.9, 5.1 and 5.2 m). \
+It is the Garden's suspension bridge (the way's own wikipedia tag, en:Boston Public Garden Foot Bridge, names the article that describes it, and the project owner asked for it drawn so). \
+OpenStreetMap maps four lamps standing in the water at the deck's edges (n7697846801 to n7697846804), two on each side at two places along the deck: where the pylons stand. \
+`bridge:structure=suspension` draws lattice railings, granite pylons carrying those lamps as globes, cables and stone abutments; every dimension is taken from the way, its width and those lamps. The deck stays walkable."""
 at = [42.35412, -71.06992]
-set = { width = "4.9" }
+set = { width = "4.9", "bridge:structure" = "suspension" }

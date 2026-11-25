@@ -1,0 +1,28 @@
+# Statues of people that the data calls an `artwork_type=sculpture`. A sculpture is drawn as an abstract
+# block on a pedestal; a statue is drawn as a person on a stepped pedestal. Each node's own wikipedia tag
+# (or description) names it as a statue of a person.
+
+["n4074813883"]
+why = "A statue of Tadeusz Kosciuszko, as the node's own description says; tagged only as a generic sculpture."
+at = [42.35256, -71.06909]
+set = { artwork_type = "statue" }
+
+["n4074813882"]
+why = "The node's own wikipedia tag is 'Statue of Charles Sumner (Boston)'; tagged only as a generic sculpture."
+at = [42.35241, -71.06983]
+set = { artwork_type = "statue" }
+
+["n7610246670"]
+why = "The node's own wikipedia tag is 'Statue of Wendell Phillips'; tagged only as a generic sculpture."
+at = [42.35270, -71.06843]
+set = { artwork_type = "statue" }
+
+["n7610246671"]
+why = "The node's own wikipedia tag is 'Statue of Thomas Cass'; tagged only as a generic sculpture."
+at = [42.35263, -71.06878]
+set = { artwork_type = "statue" }
+
+["n358277291"]
+why = "The node's own wikipedia tag is 'Statue of William Ellery Channing' and its name says 'Statue'; tagged only as a generic sculpture."
+at = [42.35219, -71.07068]
+set = { artwork_type = "statue" }

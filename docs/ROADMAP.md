@@ -66,17 +66,44 @@ recognises them at eye level.
   among the gaps seen most often.
 - **Know where you are.** The viewer shows the name of the park you are in, and
   notes record it and what you were looking at, down to the tree or statue.
+- **Statues on pedestals, and park lamps.** Statues stand on stepped granite
+  pedestals. Washington and Hooker are a horse and rider (`statue=equestrian`,
+  set by a fix), the Make Way for Ducklings ducks are low animals rather than
+  nine statues, and a park lamp is a black post with a white globe.
+- **Iron railings and chain fences.** Metal fences are pointed iron railings;
+  chains have ball-topped posts and a sagging chain. The first ground check
+  called the Garden's fences missing: they were in the data, and only looked
+  missing from model pictures taken at the wrong spots.
+- **The suspension footbridge and the Swan Boat landing.** The bridge has
+  lattice railings, granite pylons with globe lamps, cables and stone piers
+  (`bridge:structure=suspension`, set by a fix). The landing is an open hip-roofed
+  pavilion on a dock with a painted edge. The first ground check said the bridge
+  was missing: it was in the model, but the photograph's recorded position was
+  65 m out and from there it was a grey sliver.
+- **Trees that read as trees.** Crowns are lumpy skins with leaf-clump lobes,
+  smooth-shaded, on flared and forking trunks. Conifers, pines, spires and
+  clipped domes are told apart, and willows are domes with hanging strands.
+  Trees cost about 18% more triangles.
+- **Ground that looks like a park.** Ponds and lagoons are dark olive, asphalt
+  is a neutral grey, lawns and beds vary in colour, and trees on a park's lawn
+  stand in mulch rings.
+- **More of the aerial audit applied.** Three inventory trees standing on bare
+  lawn were removed and nine small trees added, checked against NAIP and the
+  MassGIS leaf-off photographs of 2023 and 2025. Leaf-off is much clearer than
+  NAIP for deciding whether a tree is there, and NAIP leans tall crowns to the
+  north-north-east, so a shift under about 4 m is not evidence. Not yet checked
+  on site.
 
 ### Still to do
 
 **Draw what the data has, and what it does not**
 
-- Gates. A gate stands open for now, and is not drawn.
-- Lamp posts in their real styles. The ones in the parks have globes.
-- Pedestals and likenesses for statues.
+- Gates and stone gate piers. A gate stands open for now, and is not drawn. The
+  clipped yew hedges behind the street fences are not in the data either; the
+  MassGIS leaf-off imagery would show them.
+- Lamp posts with arms, and lamps on piers, in their real styles.
 - The skyline and landmark buildings, such as the Arlington Street Church
   spire.
-- Check whether asphalt paths are now drawn too light.
 - Likenesses for statues, and hand-made models of landmarks, in place of the
   placeholders.
 
@@ -96,19 +123,16 @@ recognises them at eye level.
   needs a reader for LAZ files. Heights cannot be read from the aerial
   photographs, which only give crown width and whether a crown exists.
 - Trunks you can bump into. Trees are not solid yet.
-- More varied, less blocky canopies.
+- Crown undersides are dark and featureless.
 
 **Water**
 
-- The Swan Boat dock. It is drawn as a brick box; it is an open pavilion on a
-  floating dock.
 - Frog Pond on the Common, which is not mapped as water.
 
 **Ground**
 
 - Real terrain from USGS elevation, so the Common slopes up to Beacon Street.
   This is the largest single item and benefits the whole model.
-- Grass that is not one flat colour.
 
 After that, parks improve through notes: walk, press N, fix.
 

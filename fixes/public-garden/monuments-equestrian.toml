@@ -1,0 +1,13 @@
+# Statues of a rider on a horse. The pipeline draws `statue=equestrian` (the standard OpenStreetMap tag, already
+# on the Paul Revere statue, n2481241593) as a horse and rider on a stepped pedestal; without it they are drawn
+# as a person standing on a pedestal.
+
+["n358276954"]
+why = "This is the equestrian statue of George Washington: the node's own wikipedia tag is 'Equestrian statue of George Washington (Boston)', and the project owner describes it as a bronze horse and rider on a tall granite pedestal. The existing material=granite is the pedestal's; the figure is bronze, written 'bronze;granite' as on the Samuel Adams statue (n4776867029)."
+at = [42.35385, -71.07095]
+set = { statue = "equestrian", material = "bronze;granite" }
+
+["n5746127199"]
+why = "This is the equestrian statue of Joseph Hooker at the State House: the node's own wikipedia tag is 'Equestrian statue of Joseph Hooker'."
+at = [42.35800, -71.06314]
+set = { statue = "equestrian" }

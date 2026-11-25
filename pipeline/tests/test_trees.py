@@ -4,7 +4,11 @@ import numpy as np
 import pytest
 
 from boston_pipeline.mesh import MeshBuilder
-from boston_pipeline.trees import CROWN_BASE, FORMS, TreeShape, _assemble, _lobe, add_tree, describe
+from boston_pipeline.trees import CROWN_BASE, EVERGREEN_FORMS, FORMS, TreeShape, _assemble, _lobe, add_tree, describe
+
+# The most triangles any tree may take. A crown is a skin with lobes seated on it, and the detail grows with its
+# width (a sapling takes about 40, a big elm about 200, the biggest weeping willow, which has hundreds of strands, 600).
+MAX_TRIANGLES = 600
 
 CM = 100 / math.pi  # girth (m) to diameter (cm): d = circumference * CM
 
@@ -15,7 +19,7 @@ def girth(d_cm):
 
 def shape(form, height=15.0, width=None, trunk=0.25):
     base = CROWN_BASE[form] * height
-    if form != "conifer":
+    if form not in EVERGREEN_FORMS:
         base = max(base, min(2.2, 0.45 * height))
     return TreeShape(form, height, width or 0.8 * height, base, trunk, "#55803c", "#5b4a3c", None, True)
 
@@ -115,7 +119,7 @@ def test_derived_limits():
         assert s.height >= 2 and 1.2 <= s.crown_width <= 0.28 * (0.2 * CM) + 1.5 + 1e-6
         assert 0.05 <= s.trunk_radius <= 1.2 and s.crown_base < s.height
     assert describe({"species": "Tilia"}).crown_base >= min(2.2, 0.45 * describe({"species": "Tilia"}).height) - 1e-9
-    assert describe({"species": "Pinus"}).crown_base == pytest.approx(0.12 * describe({"species": "Pinus"}).height, abs=0.01)
+    assert describe({"species": "Picea"}).crown_base == pytest.approx(0.12 * describe({"species": "Picea"}).height, abs=0.01)
 
 
 # --- geometry -----------------------------------------------------------------------------------
@@ -128,7 +132,7 @@ def test_limits_ground_budget_and_feature(form, height):
     s = shape(form, height, trunk=0.1 + height / 60)
     for seed in range(5):
         mesh = build(s, seed=seed, feature=9)
-        assert len(mesh.indices) > 0 and len(mesh.indices) // 3 <= 150
+        assert len(mesh.indices) > 0 and len(mesh.indices) // 3 <= MAX_TRIANGLES
         east, north, up = enu(mesh).T
         assert up.min() >= -1e-6 and up.max() <= height * 1.03
         assert np.hypot(east - 3.0, north + 4.0).max() <= s.crown_width / 2 * 1.25 + 1e-6
@@ -142,14 +146,16 @@ def test_every_form_reaches_near_its_height_and_is_young_tree_single_lobe(form):
     s = shape(form, 15.0)
     assert enu(build(s))[:, 2].max() > 15.0 * 0.9
     young = shape(form, 6.0, trunk=0.06)
-    parts = _assemble(young)
-    assert [p.kind for p in parts] == ["trunk", "canopy"]
+    kinds = [p.kind for p in _assemble(young)]
+    # A sapling is a trunk and one blob. Evergreens keep their own shapes at every age: a small cone, a column, a dome.
+    expected = {"conifer": ["trunk"] + ["cone"] * (len(kinds) - 1), "clipped": ["canopy"]}.get(form, ["trunk", "canopy"])
+    assert kinds == expected and (form != "conifer" or len(kinds) >= 4)
 
 
 def test_triangle_counts_are_in_the_expected_range():
     for form in FORMS:
         count = len(build(shape(form)).indices) // 3
-        assert 40 <= count <= 150, (form, count)
+        assert 40 <= count <= MAX_TRIANGLES, (form, count)
 
 
 @pytest.mark.parametrize("form", [f for f in FORMS if f != "conifer"])
@@ -175,7 +181,7 @@ def test_lobe_is_an_indexed_icosahedron_and_deterministic():
     assert p[:, 2].max() <= 5 + 3 * 1.12 + 1e-9 and p[:, 2].min() >= 5 - 3 * 1.12 - 1e-9
 
 
-@pytest.mark.parametrize("form", FORMS)
+@pytest.mark.parametrize("form", [f for f in FORMS if f != "clipped"])  # a clipped dome stands on the ground, no trunk
 def test_trunk_faces_point_away_from_the_axis(form):
     trunk = _assemble(shape(form))[0]
     assert trunk.kind == "trunk"
@@ -194,9 +200,9 @@ def test_canopy_gets_lighter_with_height(form):
     assert brightness[z > np.percentile(z, 75)].mean() > brightness[z < np.percentile(z, 25)].mean()
 
 
-def test_conifer_is_darker_and_pointed():
+def test_conifer_is_a_stack_of_tiers_and_pointed():
     parts = _assemble(shape("conifer", 14.0))
-    assert sum(p.kind == "cone" for p in parts) == 3
+    assert sum(p.kind == "cone" for p in parts) >= 4
     assert max(p.positions[:, 2].max() for p in parts) == pytest.approx(14.0)
 
 
@@ -227,8 +233,9 @@ def test_vase_foliage_is_higher_than_round_and_trunk_and_limbs_show():
     for seed in range(5):
         assert foliage_z(shape("vase", 20.0), seed).min() > foliage_z(shape("round", 20.0), seed).min() + 1.0
     parts = _assemble(shape("vase", 20.0))
-    assert sum(p.kind == "limb" for p in parts) == 3
-    assert parts[0].positions[:, 2].max() == pytest.approx(0.6 * 20.0)
+    assert sum(p.kind == "limb" for p in parts) >= 3
+    # The trunk forks just under the crown, so the limbs show from below.
+    assert parts[0].positions[:, 2].max() == pytest.approx(shape("vase", 20.0).crown_base, abs=0.02 * 20.0)
 
 
 # Changed: the weeping form is now a dome plus a hanging skirt (not lobes plus narrow cones), so
@@ -255,34 +262,34 @@ def test_weeping_hem_is_ragged_and_skirt_is_visible_from_inside():
     s = shape("weeping", 15.0, trunk=0.3)
     parts = _assemble(s, 4)
     skirt = [p for p in parts if p.kind == "skirt"]
-    assert len(skirt) == 1
-    p = skirt[0]
-    hem = np.unique(np.round(p.positions[p.positions[:, 2] < 4, 2], 3))
-    assert len(hem) >= 5 and hem.min() >= 1.2 - 1e-6 and hem.max() <= 3.0 + 1e-6
-    # Every triangle has a twin with the same three positions and the opposite winding.
-    def key(face):
-        return tuple(sorted(tuple(np.round(p.positions[i], 6)) for i in face))
-    def signed(face):
-        a, b, c = p.positions[face]
-        return np.cross(b - a, c - a)
-    seen = {}
-    for face in p.faces:
-        seen.setdefault(key(face), []).append(signed(face))
-    assert all(len(v) == 2 and np.allclose(v[0], -v[1]) for v in seen.values())
-    # Outward-facing half faces away from the axis; the skirt tapers (wider at the top).
-    for face in p.faces[: len(p.faces) // 2]:
-        a, b, c = p.positions[face]
-        centroid = (a + b + c) / 3
-        assert np.dot(signed(face), [centroid[0], centroid[1], 0]) > 0
-    top, bottom = p.positions[:, 2] > 5, p.positions[:, 2] < 5
-    assert np.hypot(*p.positions[top, :2].T).mean() > np.hypot(*p.positions[bottom, :2].T).mean()
+    assert len(skirt) == 2  # an outer ring of strands and an inner one
+    for p in skirt:
+        hem = np.unique(np.round(p.positions[p.positions[:, 2] < 4, 2], 3))
+        assert len(hem) >= 5 and hem.min() >= 1.2 - 1e-6 and hem.max() <= 3.0 + 1e-6
+        # The first half faces away from the axis, the second half is the same strands facing in, a hand's width nearer
+        # the trunk so the two never share a plane (sharing one made the shadow map stripe them).
+        half = len(p.faces) // 2
+
+        def signed(face):
+            a, b, c = p.positions[face]
+            return np.cross(b - a, c - a)
+
+        for out, back in zip(p.faces[:half], p.faces[half:]):
+            a, b, c = p.positions[out]
+            centroid = (a + b + c) / 3
+            assert np.dot(signed(out), [centroid[0], centroid[1], 0]) > 0
+            assert np.dot(signed(back), [centroid[0], centroid[1], 0]) < 0
+            gap = np.hypot(*p.positions[out, :2].T).mean() - np.hypot(*p.positions[back, :2].T).mean()
+            assert 0.01 < gap < 0.2
+        top, bottom = p.positions[:, 2] > 5, p.positions[:, 2] < 5
+        assert np.hypot(*p.positions[top, :2].T).mean() > np.hypot(*p.positions[bottom, :2].T).mean()
 
 
 def test_weeping_trunk_rises_to_half_height_with_limbs_and_colours_darken_downward():
     s = shape("weeping", 15.0, trunk=0.3)
     parts = _assemble(s, 1)
-    assert parts[0].kind == "trunk" and parts[0].positions[:, 2].max() == pytest.approx(7.5)
-    assert sum(p.kind == "limb" for p in parts) == 3
+    assert parts[0].kind == "trunk" and parts[0].positions[:, 2].max() == pytest.approx(0.4 * 15.0)
+    assert sum(p.kind == "limb" for p in parts) == 4
     skirt = next(p for p in parts if p.kind == "skirt")
     z = skirt.positions[:, 2]
     brightness = skirt.colours[:, :3].sum(axis=1, dtype=float)
@@ -294,7 +301,7 @@ def test_weeping_geometry_is_deterministic_and_within_budget_for_big_and_small_t
         s = shape("weeping", height, width=height, trunk=trunk)
         a, b = build(s, seed=2), build(s, seed=2)
         assert np.array_equal(a.positions, b.positions) and np.array_equal(a.colours, b.colours)
-        assert len(a.indices) // 3 <= 150
+        assert len(a.indices) // 3 <= MAX_TRIANGLES
         assert not np.array_equal(a.positions, build(s, seed=3).positions)
 
 
@@ -338,7 +345,7 @@ def test_described_trees_build_within_budget():
         for d in (8, 30, 100):
             s = describe({"species": species, "circumference": girth(d)}, 1)
             mesh = build(s)
-            assert len(mesh.indices) // 3 <= 150
+            assert len(mesh.indices) // 3 <= MAX_TRIANGLES
             assert enu(mesh)[:, 2].max() <= s.height * 1.03
 
 

@@ -1,0 +1,62 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "natural": "tree", "diameter_crown": "2.4", "leaf_type": "needleleaved", "leaf_cycle": "evergreen", "height": "3.5",
+        "why": "A clipped evergreen at the north end of the central lawn (audit cell c_-6_-5, 432,66), in the rows of them that the first aerial audit found, but missed because its crown touches the canopy of bprd:900093513. It is a dark solid cone with a sharp shadow in both the MassGIS 15 cm leaf-off photographs (spring 2023 and spring 2025), so it is evergreen; its crown, about 2.4 m across, is read from that cone. Not separable in the USGS NAIP photograph of 7 July 2023. Height 3.5 m as for the others in the row (trees-seen-from-above.geojson)."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0711458, 42.3543074] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "natural": "tree", "diameter_crown": "2.6", "leaf_type": "needleleaved", "leaf_cycle": "evergreen", "height": "3.5",
+        "why": "A clipped evergreen on the central lawn (audit cell c_-6_-5, 675,681), in the rows of them that the first aerial audit found, but this one was not proposed. Its crown, 2.6 m across, is a dark round crown in the USGS NAIP photograph of 7 July 2023; it is a solid dark cone with a sharp shadow in the MassGIS 15 cm leaf-off photographs (spring 2023 and spring 2025), so it is evergreen. Height 3.5 m as for the others in the row (trees-seen-from-above.geojson)."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0707960, 42.3536414] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "natural": "tree", "diameter_crown": "2.3", "leaf_type": "needleleaved", "leaf_cycle": "evergreen", "height": "3.5",
+        "why": "A clipped evergreen on the central lawn (audit cell c_-6_-5, 455,758), in the rows of them that the first aerial audit found, but this one was not proposed. Its crown, 2.3 m across, is a dark round crown in the USGS NAIP photograph of 7 July 2023; it is a solid dark cone with a sharp shadow in the MassGIS 15 cm leaf-off photographs (spring 2023 and spring 2025), so it is evergreen. Height 3.5 m as for the others in the row (trees-seen-from-above.geojson)."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0711168, 42.3535596] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "natural": "tree", "diameter_crown": "3.2", "leaf_type": "needleleaved", "leaf_cycle": "evergreen", "height": "3.5",
+        "why": "One of two evergreens in the oval bed at the south edge of audit cell c_-6_-4. Crown 3.2 m across, a dark round crown in the USGS NAIP photograph of 7 July 2023 (proposed crown C3 in audit cell c_-6_-4); it is a solid dark teal blob in both MassGIS 15 cm leaf-off photographs (spring 2023 and spring 2025), so it is evergreen. Height 3.5 m is an assumption, matching the clipped evergreens elsewhere in the Garden; it was not measured."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0712638, 42.3544530] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "natural": "tree", "diameter_crown": "3.0", "leaf_type": "needleleaved", "leaf_cycle": "evergreen", "height": "3.5",
+        "why": "The second of two evergreens in the oval bed at the south edge of audit cell c_-6_-4, 7 m south of the first. Crown 3.0 m across, a dark round crown in the USGS NAIP photograph of 7 July 2023 (it lies on the edge of two audit cells, so the audit did not propose it); a solid dark teal blob in both MassGIS 15 cm leaf-off photographs (spring 2023 and spring 2025), so it is evergreen. Height 3.5 m is an assumption, matching the clipped evergreens elsewhere in the Garden; it was not measured."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0712311, 42.3543905] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "natural": "tree", "diameter_crown": "2.5", "leaf_type": "needleleaved", "leaf_cycle": "evergreen", "height": "3.5",
+        "why": "A clipped evergreen at the lawn edge by the path at the west side of audit cell c_-5_-5 (proposed crown C5 in audit cell c_-5_-5, left 'unsure' by the first pass). Crown 2.5 m across, a dark round crown at the lawn edge in the USGS NAIP photograph of 7 July 2023; a solid dark cone with a sharp shadow in both MassGIS 15 cm leaf-off photographs (spring 2023 and spring 2025), the same as the evergreens already added along the walks, so it is evergreen. Height 3.5 m as for those."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0702835, 42.3539857] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "natural": "tree", "diameter_crown": "2.0", "leaf_type": "needleleaved", "leaf_cycle": "evergreen", "height": "3.5",
+        "why": "A clipped evergreen at the edge of the walk (proposed crown C4 in audit cell c_-5_-4, left 'unsure' by the first pass). Crown about 2 m across, a dark round crown in the USGS NAIP photograph of 7 July 2023; a solid dark cone with a sharp shadow in both MassGIS 15 cm leaf-off photographs (spring 2023 and spring 2025), the same as the evergreens already added along the walks, so it is evergreen. Height 3.5 m as for those."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0689655, 42.3544079] }
+    }
+  ]
+}
+

@@ -1,0 +1,23 @@
+# Inventory trees that stand on bare lawn: no crown in the summer photograph and no tree or
+# trunk in either spring photograph. Found by the aerial audit (.claude/commands/audit.md),
+# then checked again against three independent aerial surveys.
+#
+# Checked and kept, so nobody removes it by mistake: bprd:56139 (smooth hawthorn, c_-6_-4).
+# The summer crown is not on its point, but a trunk with branches stands 2 to 3 m to the
+# north-east of it in both the 2023 and 2025 leaf-off photographs, so the tree is there and its
+# point is a few metres out.
+
+["bprd:900092859"]
+why = "Kwanzan cherry that is not there. The USGS NAIP photograph of 7 July 2023 (leaf-on) shows plain lawn inside the 7 m crown circle, with no crown and no shadow. The MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no tree, trunk or branch shadow at the point (a faint bare-soil ring in 2023 only). The nearest dark crown, 6.5 m to the south, is the mapped Chinese fringe tree. A tree of the inventory's 25 cm trunk would be seen in all three."
+at = [42.354578, -71.071122]
+delete = true
+
+["bprd:900092747"]
+why = "Sweetbay that is not there. The USGS NAIP photograph of 7 July 2023 (leaf-on) shows plain lawn under the 6 m crown circle. The MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no tree, trunk or planting ring at the point. The small dark crown 4 m to the south-east belongs to the next sweetbay, bprd:900092749, which stays."
+at = [42.354567, -71.071412]
+delete = true
+
+["bprd:900092850"]
+why = "Sweetbay that is not there. The USGS NAIP photograph of 7 July 2023 (leaf-on) shows plain lawn under the 6.5 m crown circle; the only crown near is the small one of bprd:900092749, 4 m to the east, which stays. The MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no tree or trunk at the point. A tree planted after spring 2025 would not show in any of the three photographs."
+at = [42.354521, -71.071424]
+delete = true

@@ -1,0 +1,16 @@
+# The Swan Boat landing on the lagoon's north-east shore, just east of the footbridge:
+# a floating dock with an open, hip-roofed pavilion at its shore end. OpenStreetMap has the
+# pavilion as a closed `building=boathouse`, which the model draws as a brick box with windows.
+
+["w212125104"]
+why = """The pavilion is a roof on posts, open on every side, not a boathouse with walls: OpenStreetMap itself tags the piers under it covered=yes (w839099507, w839099508, w823657990) and nothing mapped there has walls, and the way is mapped roof:colour=grey and colour=green (the posts), which is also how the roof and the painted fences beside it look. \
+The USGS NAIP imagery of 7 July 2023 shows a single grey roof over the landing's end, 6 to 8 m across, which the footprint matches. The roof is hipped (the project owner's description). \
+`building=roof` with `roof:shape=hipped` and no `min_height` draws posts, a beam and a hipped roof. The height of 3 m is the way's own, and is the ridge."""
+at = [42.35402, -71.06966]
+set = { building = "roof", "roof:shape" = "hipped" }
+
+["w823657990"]
+why = """The landing is a floating dock whose edge is painted green (the project owner's description; the railings along it are mapped colour=green in OpenStreetMap, w824367562, w839188541). \
+A pier area with a `colour` has its sides painted that colour, from the water up to the deck."""
+at = [42.35399, -71.06966]
+set = { colour = "green", floating = "yes" }
