@@ -8,6 +8,7 @@ import json
 import time
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 # Public Overpass servers, tried in order. Each is run by volunteers or a
@@ -20,6 +21,10 @@ ENDPOINTS = [
 ROUNDS = 3  # passes over the whole server list before giving up
 ROUND_PAUSE = 30  # seconds to wait before the second pass; doubled for the third
 USER_AGENT = "city-model-pipeline/0.1"
+# A server whose copy of the map is older than this many days is passed over.
+# Servers normally run minutes behind, but in November 2026 one of them
+# answered with a copy four months old, and the site was built from it.
+MAX_AGE_DAYS = 3
 
 # Everything the builder knows how to use. `out geom` inlines coordinates so no
 # second pass over nodes is needed.
@@ -87,6 +92,18 @@ def fetch(bbox_wsen: tuple[float, float, float, float], dest: Path, force: bool 
     raise RuntimeError(f"every Overpass server failed {ROUNDS} times; the last error was: {last_error}")
 
 
+def data_age(payload: dict, now: datetime | None = None) -> float | None:
+    """How many days old the server's copy of the map is, or None if the reply does not say."""
+    stamp = (payload.get("osm3s") or {}).get("timestamp_osm_base")
+    try:
+        base = datetime.fromisoformat(str(stamp).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if base.tzinfo is None:
+        base = base.replace(tzinfo=timezone.utc)
+    return ((now or datetime.now(timezone.utc)) - base).total_seconds() / 86400
+
+
 def _query(url: str, body: bytes) -> dict:
     print(f"querying {url} ...")
     request = urllib.request.Request(url, data=body, headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip"})
@@ -97,6 +114,12 @@ def _query(url: str, body: bytes) -> dict:
     payload = json.loads(raw)
     if not payload.get("elements"):
         raise ValueError(f"no elements returned: {payload.get('remark', 'empty response')}")
+    age = data_age(payload)
+    if age is None:
+        raise ValueError("the reply does not say how old its copy of the map is")
+    if age > MAX_AGE_DAYS:
+        stamp = payload["osm3s"]["timestamp_osm_base"]
+        raise ValueError(f"its copy of the map is {age:.0f} days old ({stamp}); the limit is {MAX_AGE_DAYS} days")
     return payload
 
 

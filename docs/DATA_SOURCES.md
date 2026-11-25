@@ -27,7 +27,9 @@ this page in the same pull request.
   for single districts. Its usage policy asks for fewer than 10 000 queries and
   1 GB per day, and no parallel requests. For the whole city, use the
   [Geofabrik Massachusetts extract](https://download.geofabrik.de/north-america/us/massachusetts-latest.osm.pbf)
-  (about 300 MB) instead.
+  (about 300 MB) instead. Three public Overpass servers are tried in turn. A
+  server whose copy of the map is more than 3 days old is passed over, and
+  the download fails if none has a current copy.
 
 ### City of Boston tree inventory
 
