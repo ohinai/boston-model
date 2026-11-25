@@ -3,12 +3,13 @@
 An open, walkable 3D model of Boston, built from open data.
 
 **[Walk it in your browser](https://ohinai.github.io/boston-model/)** (needs a
-keyboard and mouse; about 22 MB to load).
+keyboard and mouse; about 25 MB to load).
 
-![Downtown Boston from the air: the Common, the Public Garden lagoon, Beacon Hill and the Financial District](docs/images/aerial.jpg)
+![Downtown Boston from the air: the Charles River, the Public Garden lagoon, the Common, Beacon Hill and the Financial District](docs/images/aerial.jpg)
 
 | | |
 |---|---|
+| ![The footbridge over the Public Garden lagoon, with willows on the banks](docs/images/public-garden-footbridge.jpg) | ![Benches and lamp posts on Boston Common, near Liberty Mall](docs/images/common-benches.jpg) |
 | ![Looking across Boston Common to Park Street Church](docs/images/park-street.jpg) | ![Washington Street at Downtown Crossing](docs/images/washington-street.jpg) |
 
 The goal is a city that feels real to walk through, and that later carries
