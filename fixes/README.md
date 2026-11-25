@@ -27,6 +27,10 @@ unset = ["building:levels"]
 ["n987654321"]
 why = "This tree came down in the March 2025 storm; seen on site."
 delete = true
+
+["n555000111"]
+why = "This bench looks out over the pond, not at the path behind it; seen on site."
+set = { direction = "250" }          # degrees clockwise from north, the way a sitter looks
 ```
 
 - `why` is required: what was wrong, and where the right value comes from.

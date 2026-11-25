@@ -24,6 +24,7 @@ from shapely.strtree import STRtree
 from . import world
 from .barriers import add_barrier
 from .bridges import add_bridge, deck_height
+from .facing import bench_facings
 from .features import Building, Scene, bridge_rise, polygons_of
 from .furniture import add_object
 from .gltf import Material, write_glb
@@ -164,6 +165,7 @@ class Context:
     barriers: dict[tuple[int, int], list] = field(default_factory=dict)  # (barrier, its line cut to the tile) by tile
     path_areas: PolygonIndex | None = None  # paths drawn as areas (docks, piers, plazas)
     deck_strips: PolygonIndex | None = None  # the footprint of every raised footbridge deck
+    facing: dict[str, float] = field(default_factory=dict)  # direction of each bench that states none, by id
 
 
 ROAD_BRIDGE_REACH = 6.0  # a footway this close to a carriageway is part of a road bridge
@@ -271,6 +273,7 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
         barriers=barriers,
         path_areas=PolygonIndex([a.polygon for a in scene.areas["path"]]),
         deck_strips=PolygonIndex(strips),
+        facing=bench_facings(scene.objects, scene.ways, [a.polygon for a in scene.areas["path"]], surfaces["water"]),
     )
 
 
@@ -591,6 +594,8 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
     monuments = MeshBuilder("monuments", colours=True, features=True)
     for thing in ctx.objects.get((tx, ty), []):
         base, height = 0.0, thing.height
+        # What the data says, else what the thing would look at (benches), else north.
+        direction = thing.direction if thing.direction is not None else ctx.facing.get(thing.id, 0.0)
         pier = _pier(ctx, thing)
         if pier:
             way, base, outline = pier
@@ -601,7 +606,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
                 height = PIER_LAMP
         add_object(
             monuments if thing.kind in MONUMENT_KINDS else furniture, thing.kind, thing.x - x0, thing.y - y0,
-            direction=thing.direction, height=height, size=thing.size, colour=thing.colour,
+            direction=direction, height=height, size=thing.size, colour=thing.colour,
             material=thing.material, variant=thing.variant, seed=zlib.crc32(thing.id.encode()),
             feature=register(thing.id, thing.kind, thing.x, thing.y, thing.name), base=base,
         )

@@ -79,6 +79,11 @@ The note is usually about `looking_at`, not about where the author stood.
    downloaded and drawn, so a wrong or missing one is a fix file with ordinary
    `barrier=` tags. Gates are not drawn (a gate stands open), so a note about
    one is a request for new drawing code.
+
+   A bench that faces the wrong way is a data problem too. Which way an
+   unmarked bench faces is a guess (see the table of what is drawn), so set
+   `direction` on it by id in a `.toml` file: degrees clockwise from north, or
+   a compass point such as `NE`, the way a person sitting on it looks.
 4. **Write the fix.** [fixes/README.md](fixes/README.md) has both formats:
    `.toml` to change or delete an existing feature by id, `.geojson` to add or
    redraw one. Every entry needs a `why`.
@@ -221,7 +226,7 @@ Tags not listed here are kept in the data and ignored when drawing.
 | Grass and planting | `leisure=park/garden/pitch/playground/common/dog_park/golf_course`, `landuse=grass/forest/meadow/cemetery/recreation_ground/village_green/flowerbed`, `natural=wood/scrub/grassland`. Told apart as lawn, pitch, artificial turf, hard court, playground surface, bare dirt, garden, scrub, wood and meadow, using `surface`, `leisure`, `landuse` and `natural` |
 | Planted beds | `leisure=garden` with `garden:type=flowerbed`, or `landuse=flowerbed`. Drawn in the `beds` layer: soil at the edge, planting 0.35 m high |
 | Trees | a point tagged `natural=tree`, from OpenStreetMap, the city inventory or a fix. `species`, `genus`, `species:en`, `leaf_type` (shape and colour); `height`, `diameter_crown`; `circumference`, `denotation` (trunk size) |
-| Park furniture | Points: `amenity=bench` (`backrest`, `seats`, `length`), `highway=street_lamp` (`lamp_mount`, `support`, `height`), `amenity=waste_basket`, `amenity=drinking_water`, `man_made=flagpole`, `barrier=bollard`, `barrier=block`. Also `direction`, `colour`, `material` |
+| Park furniture | Points: `amenity=bench` (`backrest`, `seats`, `length`), `highway=street_lamp` (`lamp_mount`, `support`, `height`), `amenity=waste_basket`, `amenity=drinking_water`, `man_made=flagpole`, `barrier=bollard`, `barrier=block`. Also `direction`, `colour`, `material`. A bench with no `direction` is turned to face the nearest path within 20 m; inside a paved area (a plaza, a wharf) it looks in from the nearest edge; with water within 10 m on the side away from the path it looks at the water. With none of these it faces north |
 | Barriers | Lines: `barrier=fence`, `chain`, `wall`, `city_wall`, `retaining_wall`, `hedge`, `guard_rail`, `kerb`, `bollard` (a row of bollards). `height`, `width`, `colour`, `material` or `wall` (stone, granite, dry_stone, concrete, brick). Default heights and widths are in `BARRIERS` in `features.py`. `barrier=gate` ways are not drawn. Drawn in the `barriers` layer. A barrier is opened where a path crosses it and cut where it lies in a carriageway, inside a building or under a raised footbridge deck; a path that only runs beside it does not cut it |
 | Monuments | Points: `historic=monument` (drawn as a statue when `memorial` or `artwork_type` says it is one); `historic=memorial` or `tourism=artwork` with `memorial` or `artwork_type` (`statue`, `bust`, `plaque`, `obelisk`, `column`, `stele`, `war_memorial`; anything else becomes a sculpture or memorial stone); `amenity=fountain` (`fountain=nozzle`, `diameter`). `height` and `name` are used. These are placeholders of the right kind and size, not likenesses |
 | Named places (data only) | `shop`, `amenity`, `tourism`, `historic`, stations, with a `name` |
@@ -261,6 +266,7 @@ smaller one shows (a pitch inside a lawn inside a park).
 | `pipeline/boston_pipeline/trees.py` | Tree species and trunk size to shape, size and colour |
 | `pipeline/boston_pipeline/inventory.py` | Downloads the city tree inventory and merges it with OpenStreetMap trees |
 | `pipeline/boston_pipeline/furniture.py` | Shapes for benches, lamps, bins, statues, fountains and the rest |
+| `pipeline/boston_pipeline/facing.py` | Which way a bench with no `direction` faces |
 | `pipeline/boston_pipeline/bridges.py` | Raised footbridge decks and railings |
 | `pipeline/boston_pipeline/barriers.py` | Shapes for fences, walls, hedges, chains, guard rails, kerbs and rows of bollards |
 | `pipeline/boston_pipeline/lookup.py` | The `inspect` command |

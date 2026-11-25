@@ -68,6 +68,13 @@ BARE_GROUND = {"dirt", "clay", "sand", "earth", "ground", "gravel", "fine_gravel
 BRIDGE_RISE = 0.025
 BRIDGE_RISE_LIMITS = (0.3, 0.8)
 
+# A bench with no `direction` is turned to look at the nearest path, if one is
+# within BENCH_REACH metres (see facing.py). Farther than that the guess is no
+# better than chance, so the bench is left facing north. A bench with water within
+# BENCH_WATERSIDE metres on the side away from that path looks at the water.
+BENCH_REACH = 20.0
+BENCH_WATERSIDE = 10.0
+
 # Barriers along a line, by their `barrier` tag: (kind, default height, default
 # width) in metres. A `height` or `width` tag wins when it is within BARRIER_LIMITS.
 # `barrier=gate` ways are left out on purpose: a gate is mapped across a way in
@@ -182,7 +189,7 @@ class Object:
     y: float
     kind: str  # one of furniture.KINDS
     name: str | None = None
-    direction: float = 0.0  # degrees clockwise from north that it faces
+    direction: float | None = None  # degrees clockwise from north that it faces; None where the data does not say
     height: float | None = None  # metres, where the data states it
     size: float | None = None  # length of a bench or width of a fountain basin, where stated
     colour: str | None = None
@@ -472,7 +479,7 @@ def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
         return None
     material = (tags.get("material") or "").split(";")[0] or None
     return Object(
-        ident, x, y, kind, tags.get("name"), parse_direction(tags.get("direction")) or 0.0,
+        ident, x, y, kind, tags.get("name"), parse_direction(tags.get("direction")),
         height if height and height > 0 else None, size, parse_colour(tags.get("colour")), material, variant, tags,
     )
 
