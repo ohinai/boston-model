@@ -62,12 +62,13 @@ What is not accurate yet:
 - The ground is flat. Beacon Hill is not.
 - Building heights are measured for only 17% of buildings. Another 34% are
   estimated from storey counts and 48% are a default guess by building type.
-- Roofs are flat and facades are a generic window grid.
+- Roofs are flat, and facades are drawn by rule from wall colour and storeys,
+  not from each building's real face.
 - Street widths are estimated from lane counts.
 - Tree heights and crown widths are estimates from species and trunk size, not
-  measurements, and you can walk through trees.
+  measurements. You can walk under crowns, but trunks are solid.
 - Statues and fountains are placeholders, not likenesses. Lamp posts are not
-  drawn in their real styles. Gates are not drawn: a gate stands open.
+  drawn in their real styles. Gates are drawn open, as plain placeholders.
 - Road bridges, bridges over roads and rail, and elevated roads are drawn at
   ground level, and tunnels are left out.
 

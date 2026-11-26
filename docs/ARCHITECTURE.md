@@ -92,16 +92,17 @@ with the same name:
 | `trees` | Trees as low-poly shapes whose form, size and colour follow species and trunk size, with per-vertex colour | |
 | `furniture` | Benches, lamp posts, litter bins, drinking fountains, flagpoles, with per-vertex colour | |
 | `monuments` | Statues, sculptures, memorials, monuments, plaques and fountains. Placeholders of the right kind and size in the right place, not likenesses | |
+| `figures` | Hand-made statue figures from `assets/` (today the equestrian statues), with per-vertex colour. Solid, casts shadows, and is shaded smooth by the viewer, so its parts need welded shared vertices. The pedestal stays in `monuments` | |
 | `bridges` | Raised footbridge decks with railings, and the stone piers of things standing in the water beside them | up to about 2 m |
 | `barriers` | Fences, walls, retaining walls, hedges, post-and-chain fences, guard rails, kerbs and rows of bollards, with per-vertex colour. Solid. Bollards on their own and stone blocks are in `furniture` | up to about 1.2 m by default |
 
 Clients may rely on these names. The browser viewer uses them to decide what is
-solid (everything except `trees`) and to swap in its own materials.
+solid (everything except the crowns in `trees`; it makes trunks solid from each tree's `trunk`, see below) and to swap in its own materials.
 
 Vertices in `building_walls` and `building_roofs` carry a `_FEATURE_ID_0`
 attribute (declared with the `EXT_mesh_features` extension): the building's
 position in the `buildings` list of the tile's data file. Vertices in `trees`,
-`furniture`, `monuments`, `bridges` and `barriers` carry it too, as a position in the
+`furniture`, `monuments`, `figures`, `bridges` and `barriers` carry it too, as a position in the
 `objects` list. That is how a client tells what a click or a line of sight has
 hit.
 
@@ -122,7 +123,14 @@ Wall UVs count facade cells rather than metres. Along each wall `u` runs from 0
 to the number of window bays, and `v` from 0 to the number of storeys, so one UV
 unit is always one whole bay by one whole storey. A client draws windows by
 repeating a pattern or texture once per unit. Walls too short for a bay have
-`u = 0` throughout.
+`u = 0` (blank), except a run of such walls adding to 4.5 m or more (a curved
+front), where `u` runs on from facet to facet. Building walls also carry two
+whole numbers that leave a repeating pattern unchanged: `u` starts at
+`256 × (seed 0 to 3, +4 if the wall starts above the ground)` and `v` starts at
+`64 × storeys` (0 above 62). Read them as `floor((u + 0.5) / 256)` and
+`floor(v / 64 + 0.004)` and subtract them before counting cells. The browser
+viewer's facade shader uses them for the seed (style) and to know where the
+wall's top is.
 
 **Tile `.json` files** describe the same square as data, in world metres:
 
@@ -155,11 +163,12 @@ piece of furniture, monument, raised bridge, fence and wall. Each entry has `id`
 (`tree`, `bench`, `lamp`, `waste_basket`, `drinking_water`, `flagpole`,
 `bollard`, `block`, `plaque`, `stele`, `obelisk`, `column`, `statue`,
 `sculpture`, `monument`, `fountain`, `bridge`, or a barrier: `fence`, `chain`,
-`wall`, `retaining_wall`, `hedge`, `guard_rail`, `kerb` or `bollards`), `pos`,
+`wall`, `retaining_wall`, `hedge`, `guard_rail`, `kerb`, `bollards` or `gate`), `pos`,
 and where known `name`. A barrier is listed once per tile, at the middle of its
 longest piece. A tree also has
 `species` (a common name) and `height` in metres. The height is an estimate
-unless the data gave one. `areas` lists the named parks, gardens, pitches and
+unless the data gave one. It also has `trunk`, the radius in metres of its drawn
+trunk at 1.3 m (absent when no trunk is drawn). `areas` lists the named parks, gardens, pitches and
 playgrounds that overlap the tile: `id`, `name`, `kind`, `area` in square metres
 of the whole feature, and `rings`, the outlines of the part inside this tile.
 A client uses them to say which park someone is standing in.
@@ -234,8 +243,9 @@ levels.
 Barriers come from `barrier` ways in the OpenStreetMap download (fence, wall,
 retaining wall, hedge, chain, guard rail, kerb, bollard and city wall), with
 shapes in [`barriers.py`](../pipeline/boston_pipeline/barriers.py). A single
-bollard or stone block is a point and goes in `furniture`. Gate ways are not
-drawn, so a gate stands open. Each barrier is opened where it would block a
+bollard or stone block is a point and goes in `furniture`. A gate way is the
+opening in a fence or wall and is drawn open, with a stone pier at each end and
+iron leaves swung back, in the tile of its middle (kind `gate`). Each barrier is opened where it would block a
 walker. A path that crosses it cuts a gap as wide as the path plus 0.4 m, and no
 barrier is drawn within 0.5 m of a path's centre line. It is also cut where it
 lies in a carriageway, inside a building or under a raised footbridge deck, and
@@ -396,7 +406,7 @@ where the city is edited.
   22 MB. Tiles are already written without normals, with shared vertices and
   16-bit indices where they fit. Quantisation and mesh compression are standard
   glTF extensions and are not applied yet.
-- **Trees are not solid** and their sizes are estimates. Bridges over roads and
-  rail, road bridges and tunnels are not modelled. Gates are not drawn.
+- **Tree crowns are not solid** (trunks are) and tree sizes are estimates.
+  Bridges over roads and rail, road bridges and tunnels are not modelled.
 - **Overpass for downloads.** Fine for a district. A whole-city build should
   read a regional extract instead.

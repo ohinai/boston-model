@@ -41,6 +41,7 @@ LINE = [(0, 0), (10, 0)]
         ({"barrier": "guard_rail"}, "guard_rail", 0.7, 0.1),
         ({"barrier": "kerb"}, "kerb", 0.15, 0.3),
         ({"barrier": "bollard"}, "bollards", 0.9, 0.0),
+        ({"barrier": "gate", "fence_type": "iron", "height": "2"}, "gate", 2.0, 0.06),
         ({"barrier": "fence", "height": "50"}, "fence", 1.2, 0.06),  # not a sensible height
         ({"barrier": "fence", "height": "tall"}, "fence", 1.2, 0.06),
     ],
@@ -60,9 +61,8 @@ def test_colour_and_material_are_read():
     assert barrier.colour is None and barrier.material == "dry_stone"
 
 
-def test_gates_underground_and_other_roles_are_not_barriers():
+def test_underground_and_other_roles_are_not_barriers():
     scene = classify([
-        _way(1, {"barrier": "gate", "fence_type": "iron"}, LINE),
         _way(2, {"barrier": "fence", "tunnel": "yes"}, LINE),
         _way(3, {"barrier": "fence", "layer": "-1"}, LINE),
         _way(4, {"barrier": "fence", "indoor": "yes"}, LINE),

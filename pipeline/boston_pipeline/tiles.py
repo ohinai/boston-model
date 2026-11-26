@@ -22,7 +22,7 @@ from shapely.ops import polygonize, substring, unary_union
 from shapely.strtree import STRtree
 
 from . import world
-from .barriers import add_barrier
+from .barriers import add_barrier, add_gate, gate_plan, gate_swing_side, join_gates
 from .bridges import SUSPENSION, add_bridge, bridge_style, deck_height
 from .facing import bench_facings
 from .features import MULCH_MIN_PARK, MULCH_PARKS, Building, Scene, bridge_rise, parse_colour, polygons_of
@@ -57,6 +57,7 @@ MATERIALS = {
     "trees": Material("#ffffff", 1.0),
     "furniture": Material("#ffffff", 0.7),
     "monuments": Material("#ffffff", 0.8),
+    "figures": Material("#ffffff", 0.8),  # hand-made statues: drawn smooth-shaded (see assets.py)
     "bridges": Material("#ffffff", 0.85),
     "barriers": Material("#ffffff", 0.8),
 }
@@ -261,7 +262,12 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
         objects[world.tile_of(thing.x, thing.y)].append(thing)
 
     barriers = defaultdict(list)
-    for barrier in scene.barriers:
+    for barrier in join_gates(scene.barriers):
+        if barrier.kind == "gate":  # a gate is drawn whole, in the tile of its middle
+            middle = barrier.line.interpolate(0.5, normalized=True)
+            if (tile := world.tile_of(middle.x, middle.y)) in tiles:
+                barriers[tile].append((barrier, barrier.line))
+            continue
         for tile, piece in _split_by_tile(barrier.line, tiles):
             barriers[tile].append((barrier, piece))
     strips = [polygon for decks in decks.values() for way, line in decks for polygon in polygons_of(line.buffer(way.width / 2, quad_segs=2))]
@@ -352,6 +358,31 @@ def _path_crossings(ctx: Context, line):
         if not crossing.is_empty:
             gaps.append(crossing.buffer(way.width / 2 + BARRIER_GAP, quad_segs=2))
     return unary_union(gaps)
+
+
+GATE_REACH = 4.0  # round a gate, what stands in the way of its leaves decides which way they swing
+GATE_MEETS = 0.3  # a fence or wall whose line comes this close to an end of a gate runs into it
+GATE_NEIGHBOURS = ("fence", "wall", "retaining_wall", "hedge")
+
+
+def _draw_gate(ctx: Context, builder: MeshBuilder, gate, origin: np.ndarray, feature: int) -> None:
+    """One gate (see barriers.py). Its leaves swing to the side with less in the way (carriageways,
+    paths, water, buildings), then to the side with more lawn; a pier that would stand inside a
+    building is left out."""
+    reach = gate.line.buffer(GATE_REACH, quad_segs=2)
+    near = lambda index: unary_union(index.near(reach))  # noqa: E731
+    blocked = unary_union([near(ctx.layers["road"]), near(ctx.layers["path"]), near(ctx.layers["water"]), near(ctx.footprints)])
+    line = np.asarray(gate.line.coords)[:, :2]
+    side = gate_swing_side(line, gate.height, blocked, near(ctx.layers["green"]))
+    plan = gate_plan(line, gate.height)
+    walls = unary_union(ctx.footprints.near(reach))
+    piers = (True, True) if plan is None else tuple(
+        not walls.contains(ShapelyPoint(plan.pier_centre(k))) for k in (0, 1)
+    )
+    # The piers are at least as tall as any fence or wall that runs into the gate.
+    ends = unary_union([ShapelyPoint(line[0]), ShapelyPoint(line[-1])]).buffer(GATE_MEETS)
+    fence = max((b.height for b in ctx.scene.barriers if b.kind in GATE_NEIGHBOURS and b.line.intersects(ends)), default=0.0)
+    add_gate(builder, line - origin, gate.height, gate.colour, gate.material, feature, side, gate.tags, piers, fence)
 
 
 def _beside_deck(decks: dict, water: PolygonIndex, thing) -> tuple | None:
@@ -635,7 +666,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             continue
         wall = colour_bytes(building.wall_colour)
         roof = colour_bytes(building.roof_colour)
-        add_walls(walls, building.polygon, building.min_height, building.height, origin, wall, feature=index)
+        add_walls(walls, building.polygon, building.min_height, building.height, origin, wall, feature=index, facade=True)
         add_flat(roofs, building.polygon, building.height, origin, roof, feature=index)
         if building.min_height > 0.5:
             underside = colour_bytes(building.wall_colour, 0.6)
@@ -656,7 +687,9 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
         seed = zlib.crc32(tree.id.encode())
         shape = describe(tree.tags, seed)
         index = register(tree.id, "tree", tree.x, tree.y, tree.tags.get("name"), species=shape.name, height=round(shape.height, 1))
-        add_tree(trees, shape, tree.x - x0, tree.y - y0, seed, feature=index)
+        trunk = add_tree(trees, shape, tree.x - x0, tree.y - y0, seed, feature=index)
+        if trunk > 0:  # the drawn trunk's radius at 1.3 m: the viewer makes it solid (web/src/trunks.ts)
+            objects[index]["trunk"] = _round(trunk)
 
     bridges = MeshBuilder("bridges", colours=True, features=True)
     listed: dict[str, int] = {}
@@ -684,6 +717,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
 
     furniture = MeshBuilder("furniture", colours=True, features=True)
     monuments = MeshBuilder("monuments", colours=True, features=True)
+    figures = MeshBuilder("figures", colours=True, features=True)
     for thing in ctx.objects.get((tx, ty), []):
         base, height = 0.0, thing.height
         # What the data says, else what the thing would look at (benches), else north.
@@ -704,7 +738,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             monuments if thing.kind in MONUMENT_KINDS else furniture, thing.kind, thing.x - x0, thing.y - y0,
             direction=direction, height=height, size=thing.size, colour=thing.colour,
             material=thing.material, variant=thing.variant, seed=zlib.crc32(thing.id.encode()),
-            feature=register(thing.id, thing.kind, thing.x, thing.y, thing.name), base=base,
+            feature=register(thing.id, thing.kind, thing.x, thing.y, thing.name), base=base, figures=figures,
         )
 
     # Fences, walls and the like: each is listed once in this tile however many pieces are left of it.
@@ -714,6 +748,10 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
         cut, paved = _openings(ctx, tile_box)
         listed_barriers: dict[tuple[str, str], int] = {}
         for barrier, piece in wanted:
+            if barrier.kind == "gate":
+                middle = piece.interpolate(0.5, normalized=True)
+                _draw_gate(ctx, barriers, barrier, origin, register(barrier.id, "gate", middle.x, middle.y, barrier.tags.get("name")))
+                continue
             # A kerb may have a path running along it, so paths never open it.
             through = piece.intersection(paved)  # the stretch that crosses a paved area, plus a margin
             left = piece.difference(cut).difference(through.buffer(BARRIER_INSIDE + BARRIER_GAP, quad_segs=2))
@@ -734,7 +772,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
 
     layers = [
         (builder.finish(), MATERIALS[builder.name])
-        for builder in (*flat.values(), beds, curbs, walls, roofs, trees, furniture, monuments, bridges, barriers)
+        for builder in (*flat.values(), beds, curbs, walls, roofs, trees, furniture, monuments, figures, bridges, barriers)
         if not builder.empty
     ]
     name = f"{tx}_{ty}"

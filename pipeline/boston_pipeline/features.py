@@ -88,8 +88,9 @@ BENCH_WATERSIDE = 10.0
 
 # Barriers along a line, by their `barrier` tag: (kind, default height, default
 # width) in metres. A `height` or `width` tag wins when it is within BARRIER_LIMITS.
-# `barrier=gate` ways are left out on purpose: a gate is mapped across a way in
-# and is drawn open, so nobody is walled in. Nodes (bollard, block) are objects.
+# A `barrier=gate` way is the opening in a fence or wall. It is drawn open, so nobody is
+# walled in: a stone pier at each end and the iron leaves swung back (see barriers.py).
+# Nodes (bollard, block) are objects.
 BARRIERS = {
     "fence": ("fence", 1.2, 0.06),  # a railing or paling, mostly 1 to 1.5 m in the parks
     "chain": ("chain", 0.6, 0.05),  # low posts joined by a hanging chain, along paths
@@ -100,8 +101,11 @@ BARRIERS = {
     "guard_rail": ("guard_rail", 0.7, 0.1),  # a steel beam on posts
     "kerb": ("kerb", 0.15, 0.3),  # a stone edge, not a full-height curb
     "bollard": ("bollards", 0.9, 0.0),  # a row of bollards; no width of its own
+    "gate": ("gate", 1.5, 0.06),  # the way is the opening; its height is the leaves' (the parks' railings are 1.5 m)
 }
 BARRIER_LIMITS = {"height": (0.05, 6.0), "width": (0.01, 3.0)}
+# `gate=*` values that are not a swing gate in a fence: a turnstile or ticket gate stands indoors, in a station.
+NOT_SWING_GATES = {"ticket_barrier", "turnstile", "kissing", "full-height_turnstile", "lift"}
 # A fence whose `fence_type` says it is wire is drawn as a plain post-and-rail fence even when
 # its `material` is metal: railings (barriers.py draws those for metal, iron and steel) are bars.
 WIRE_FENCE_TYPES = {"chain_link", "wire_mesh", "wire", "mesh", "net", "netting"}
@@ -182,7 +186,7 @@ class Area:
 
 @dataclass
 class Barrier:
-    """A fence, wall, hedge, chain, kerb or row of bollards along a line."""
+    """A fence, wall, hedge, chain, kerb, row of bollards or gate along a line (a gate's line is its opening)."""
 
     id: str
     line: LineString
@@ -558,6 +562,8 @@ def _add_barrier(scene: Scene, ident: str, tags: dict, coords: np.ndarray) -> No
     if entry is None or len(coords) < 2 or _is_underground(tags):
         return
     kind, height, width = entry
+    if kind == "gate" and (tags.get("gate") or "").strip().lower() in NOT_SWING_GATES:
+        return
     material = ((tags.get("material") or tags.get("wall") or "").split(";")[0].strip().lower()) or None
     if kind == "fence" and (tags.get("fence_type") or "").strip().lower() in WIRE_FENCE_TYPES:
         material = "wire"

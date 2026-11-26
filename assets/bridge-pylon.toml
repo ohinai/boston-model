@@ -1,0 +1,10 @@
+file = "bridge-pylon.glb"
+height = 4.9              # metres above the deck's top surface, to the top of the globe (the lamps' height in the data)
+max_triangles = 900       # the bridge has four of them
+author = "Claude (Sonnet 5.5), scripted in Blender"
+licence = "MIT"
+why = """Stands for each pylon of the Public Garden Foot Bridge (way w172094381, bridge:structure=suspension), where OpenStreetMap maps a lamp in the water at the deck's edge (n7697846801 to n7697846804, height 4.9 m). \
+The pipeline places one at each of those lamps, turned to the bridge's direction, and scales it to the lamp's height, so the globe's top is at that height above the deck. \
+Modelled to look like a nineteenth-century granite pylon, from the kind of thing it is and not from any one photograph: a broad dark base with a moulding, a plain lighter die 1.1 m square with a recessed panel on each face, a projecting cornice, a hipped capstone, then a pale blue-green iron lamp post with a white globe. \
+The die is 1.1 m wide, and the pipeline runs the cables into it 2.1 m above the deck. The pier below the deck stays procedural."""
+source = "src/bridge_pylon.py"

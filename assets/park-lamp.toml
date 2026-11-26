@@ -1,0 +1,11 @@
+file = "park-lamp.glb"
+height = 4.9              # metres, lowest to highest vertex
+max_triangles = 110       # the budget; the build fails if the model is over it
+author = "Claude (Sonnet 5.5), scripted in Blender"
+licence = "MIT"
+why = """The park street lamps: every `highway=street_lamp` point that is not `lamp_mount=arm`, in the Public Garden, \
+the Common, the Commonwealth Avenue Mall and the other pilot parks (909 in the pilot data). Modelled to look like a \
+Boston park lamp: a slim black cast-iron post on a flared octagonal foot, a collar cup, a round opal globe and a small \
+pointed cap, 4.9 m tall (the `height` most of them carry). The pipeline places it at each point and scales it to the \
+lamp's `height`. The shape is the project's own simplification, not traced from any photograph."""
+source = "src/park_lamp.py"

@@ -7,8 +7,11 @@ and stone abutments. Every other footbridge keeps the plain look.
 
 from __future__ import annotations
 
+import math
+
 import numpy as np
 
+from . import assets
 from .mesh import MeshBuilder, colour_bytes
 
 STATION = 1.5  # target spacing of cross-sections along the centre line, metres
@@ -39,6 +42,11 @@ PYLON_CAP, PYLON_TOP = 1.0, 2.6  # the cap tapers from CAP to half of it
 PYLON_STAY = 2.1  # height above the deck where the cables run into the pylon
 LAMP_POST, GLOBE_RADIUS = 0.1, 0.3
 LAMP_HEIGHT = 4.9  # above the deck, when the data gives no height for the lamp
+# A hand-made pylon (assets/bridge-pylon.glb: granite pylon, iron lamp post and globe, its top at the lamp's height) is
+# used when it exists; the procedural pylon above is the fallback. It is scaled to the lamp's height from the data, but
+# only within this range, so that its 1.1 m shaft still meets the railings and the cables at PYLON_STAY.
+PYLON_ASSET = "bridge-pylon"
+PYLON_ASSET_SCALE = (0.8, 1.25)
 ABUTMENT_LENGTH = 1.5  # stone block under each end of the deck, along the bridge
 LATTICE_PITCH, LATTICE_BAR = 0.6, 0.035
 LATTICE_FOOT, LATTICE_HEAD = 0.23, 1.07  # the lattice fills the space between the two rails
@@ -367,6 +375,7 @@ def _pylons_and_cables(builder, frame: _Frame, half: float, towers, water_z: flo
     if not towers:
         return
     granite, base_stone, iron, globe = (colour_bytes(c) for c in (GRANITE, GRANITE_BASE, IRONWORK, GLOBE))
+    pylon = assets.load(PYLON_ASSET)  # None when there is none or BOSTON_NO_ASSETS is set: the procedural pylon
     # Pylons come in pairs, one each side at the same place along the bridge: line each pair up.
     groups: list[list[float]] = []
     for along, _, _ in sorted(towers, key=lambda tower: tower[0]):
@@ -386,6 +395,14 @@ def _pylons_and_cables(builder, frame: _Frame, half: float, towers, water_z: flo
         for side in sides:
             xy = frame.centre(a) + frame.offset(a) * (side * half)
             _frustum(builder, base_stone, xy, t, l, water_z, deck - LIP, PYLON_PIER / 2, PYLON_PIER / 2, feature)
+            if pylon is not None:
+                # The asset stands on the pier with its top (the globe) at the lamp's height above the deck.
+                lamp = lamp_height.get((index, side)) or LAMP_HEIGHT
+                scale = min(max((lamp + LIP) / pylon.height, PYLON_ASSET_SCALE[0]), PYLON_ASSET_SCALE[1])
+                heading = math.degrees(math.atan2(t[0], t[1]))  # clockwise from north: it faces along the bridge
+                positions, normals, indices, colours = assets.place(pylon, xy[0], xy[1], heading, deck - LIP, scale)
+                builder.add(positions, normals, indices, colour=colours, feature=feature)
+                continue
             _frustum(builder, granite, xy, t, l, deck - LIP, deck + PYLON_PLINTH_TOP, PYLON_PLINTH / 2, PYLON_PLINTH / 2, feature)
             _frustum(builder, granite, xy, t, l, deck + PYLON_PLINTH_TOP, deck + PYLON_SHAFT_TOP, PYLON_SHAFT / 2, PYLON_SHAFT / 2,
                      feature, top=False)

@@ -875,7 +875,33 @@ def _assemble(shape: TreeShape, seed: int = 0) -> list[_Part]:
     return _finish(shape, parts, seed)
 
 
-def add_tree(builder: MeshBuilder, shape: TreeShape, x: float, y: float, seed: int = 0, feature: int = 0) -> None:
-    """A tree of `shape` standing at (x, y), relative to the tile origin."""
-    for part in _assemble(shape, seed):
+BREAST_HEIGHT = 1.3  # metres: where a trunk's size is read (and where a walker meets it)
+
+
+def trunk_radius(parts: list[_Part], at: float = BREAST_HEIGHT) -> float:
+    """Radius in metres of the trunk as drawn, `at` metres above the ground, flare of the roots left out.
+
+    Read off the trunk's own rings (each a flat ring of vertices), so it is what a walker can see and touch,
+    whatever the form of the tree. Above the top of the trunk the last ring's radius is returned. A tree
+    with no trunk drawn (a clipped evergreen is a dome of foliage to the ground) has none: 0."""
+    for part in parts:
+        if part.kind != "trunk":
+            continue
+        z = np.round(part.positions[:, 2], 4)
+        levels = np.unique(z)
+        radii = []
+        for level in levels:
+            ring = part.positions[z == level][:, :2]
+            radii.append(float(np.hypot(*(ring - ring.mean(axis=0)).T).mean()))
+        return float(np.interp(at, levels, radii))
+    return 0.0
+
+
+def add_tree(builder: MeshBuilder, shape: TreeShape, x: float, y: float, seed: int = 0, feature: int = 0) -> float:
+    """A tree of `shape` standing at (x, y), relative to the tile origin.
+
+    Returns the radius of its trunk at breast height (`trunk_radius`), for the tile's data file."""
+    parts = _assemble(shape, seed)
+    for part in parts:
         builder.add(part.positions + np.array([x, y, 0.0]), part.normals, part.faces, colour=part.colours, feature=feature)
+    return trunk_radius(parts)

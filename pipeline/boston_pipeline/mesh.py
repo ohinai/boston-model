@@ -15,6 +15,14 @@ from shapely.geometry.polygon import orient
 
 BAY_WIDTH = 3.0  # metres per facade bay (one window column)
 FLOOR_HEIGHT = 3.5  # metres per facade floor (one window row)
+# Whole numbers carried in a building wall's UVs (see add_walls). The shader reads them back as
+# floor(u / SEED_STRIDE) and floor(v / STOREY_STRIDE), so the strides must exceed the largest u
+# (bays in a wall: 255 is 765 m) and the largest v (MAX_STOREYS).
+FACADE_SEEDS = 4  # a wall that starts above the ground adds FACADE_SEEDS to its seed, so seeds 4..7 mean "raised"
+SEED_STRIDE = 256.0
+STOREY_STRIDE = 64.0
+MAX_STOREYS = 62
+CURVE_MIN = 4.5  # metres: a run of walls each too short for a bay, this long in all, is a curved front
 
 
 def srgb_to_linear(hex_colour: str) -> tuple[float, float, float]:
@@ -144,14 +152,71 @@ def add_flat(
     builder.add(positions, (0, 0, 1 if up else -1), triangles, colour=colour, feature=feature)
 
 
+def facade_seeds(starts: np.ndarray) -> np.ndarray:
+    """A small integer (0..FACADE_SEEDS - 1) per wall, from where the wall starts (tile-local metres, n x 2).
+
+    The viewer's facade shader uses it to vary details between walls (window style, shop fronts), so two
+    neighbouring walls with the same colour do not repeat each other's pattern.
+    """
+    x = np.round(starts[:, 0] * 100).astype(np.int64)
+    y = np.round(starts[:, 1] * 100).astype(np.int64)
+    return ((x * 73856093) ^ (y * 19349663)) % FACADE_SEEDS
+
+
+def facade_u(
+    a: np.ndarray, length: np.ndarray, bays: np.ndarray, raised: bool = False
+) -> tuple[np.ndarray, np.ndarray]:
+    """u at the start and at the end of each wall of a ring, for `add_walls(facade=True)`.
+
+    A wall with bays starts at its seed times SEED_STRIDE and runs `bays` units. A wall that starts
+    above the ground (`raised`: the upper part of a building that stands on a podium) adds FACADE_SEEDS
+    to its seed, so the shader draws no shop front or base course on its first storey. A wall too short for a
+    bay is blank (u = 0 throughout), except in a run of such walls whose lengths add up to CURVE_MIN or
+    more: that is a curved front drawn as many small facets, and u runs on from one facet to the next so
+    the windows carry round the curve instead of the whole front being left bare.
+    """
+    seeds = (facade_seeds(a) + (FACADE_SEEDS if raised else 0)) * SEED_STRIDE
+    start = np.where(bays > 0, seeds, 0.0)
+    end = start + bays
+    short = bays == 0
+    count, i = len(length), 0
+    while i < count:
+        if not short[i]:
+            i += 1
+            continue
+        j = i
+        while j < count and short[j]:
+            j += 1
+        if length[i:j].sum() >= CURVE_MIN:
+            along = np.concatenate([[0.0], np.cumsum(length[i:j])]) / BAY_WIDTH
+            start[i:j] = seeds[i] + along[:-1]
+            end[i:j] = seeds[i] + along[1:]
+        i = j
+    return start, end
+
+
 def add_walls(
-    builder: MeshBuilder, polygon: Polygon, z0: float, z1: float, origin, colour=None, feature: int = 0
+    builder: MeshBuilder,
+    polygon: Polygon,
+    z0: float,
+    z1: float,
+    origin,
+    colour=None,
+    feature: int = 0,
+    facade: bool = False,
 ) -> None:
     """Outward-facing vertical walls around every ring of `polygon`.
 
     UVs count facade cells: u runs 0..bays along each wall and v runs 0..floors
     up it, so one UV unit is always one whole window bay by one whole storey.
     Walls too short for a bay get u = 0 throughout (no windows).
+
+    With `facade=True` (building walls) the UVs also carry two whole numbers the viewer's facade
+    shader reads, which leave the pattern unchanged because it repeats once per unit: u starts at
+    a per-wall seed times SEED_STRIDE (see `facade_seeds`), and v starts at the number of storeys
+    times STOREY_STRIDE, so the shader knows where the top of the wall is (for the cornice).
+    Walls with no bays keep u = 0, so they stay blank, except along a curved front (see `facade_u`).
+    A wall of more than MAX_STOREYS storeys carries no storey count (the shader then draws no cornice).
     """
     polygon = orient(polygon, 1.0)
     floors = max(1, round((z1 - z0) / FLOOR_HEIGHT))
@@ -177,14 +242,18 @@ def add_walls(
             ],
             axis=1,
         )
-        zeros = np.zeros(count)
-        tops = np.full(count, float(floors))
+        start, end = np.zeros(count), bays
+        bottom = np.zeros(count)
+        if facade:
+            start, end = facade_u(a, length, bays, raised=z0 > 0.5)
+            bottom = np.full(count, float(floors * STOREY_STRIDE if floors <= MAX_STOREYS else 0))
+        tops = bottom + float(floors)
         uvs = np.stack(
             [
-                np.column_stack([zeros, zeros]),
-                np.column_stack([bays, zeros]),
-                np.column_stack([bays, tops]),
-                np.column_stack([zeros, tops]),
+                np.column_stack([start, bottom]),
+                np.column_stack([end, bottom]),
+                np.column_stack([end, tops]),
+                np.column_stack([start, tops]),
             ],
             axis=1,
         )

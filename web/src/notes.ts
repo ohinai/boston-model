@@ -81,6 +81,7 @@ const LAYER_NAMES: Record<string, string> = {
   beds: 'a planted bed',
   furniture: 'park furniture',
   monuments: 'a monument',
+  figures: 'a statue',
   bridges: 'a bridge',
   barriers: 'a fence or wall',
 };

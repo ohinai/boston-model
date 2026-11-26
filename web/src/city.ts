@@ -14,7 +14,9 @@ import {
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { type ExtendedTriangle, MeshBVH } from 'three-mesh-bvh';
+import { facade } from './facade';
 import type { WorldFrame } from './geo';
+import { Trunks } from './trunks';
 
 export interface Place {
   name: string;
@@ -51,6 +53,8 @@ export interface ObjectInfo extends Named {
   kind: string;
   species?: string;
   height?: number;
+  /** For a tree: the radius in metres its trunk is drawn with at 1.3 m. Absent when no trunk is drawn. */
+  trunk?: number;
 }
 
 /** A named park, garden, playground, pitch or pond, clipped to one tile. */
@@ -115,45 +119,14 @@ interface Tile {
   /** Scene-space bounds of everything solid in the tile. */
   bounds?: Box3;
   semantics?: Semantics;
+  /** The trees' trunks, which are solid although the `trees` layer is not (see trunks.ts). */
+  trunks?: Trunks;
 }
 
-/** Layers a walker passes straight through. */
+/** Layers a walker passes straight through: crowns, and a willow's hanging skirt. Trunks are solid (trunks.ts). */
 const NOT_SOLID = new Set(['trees']);
-const CASTS_SHADOW = new Set(['building_walls', 'building_roofs', 'trees', 'furniture', 'monuments', 'bridges', 'barriers']);
-
-// Building walls carry UVs counted in facade cells: one unit of u is a window
-// bay, one unit of v a storey. This draws glazing into each cell and fades to
-// a flat average tint once cells shrink below a few pixels.
-const FACADE_GLSL = /* glsl */ `
-  vec2 facadeCell = fract(vUv);
-  bool streetLevel = vUv.y < 1.0;
-  vec2 paneMin = streetLevel ? vec2(0.08, 0.06) : vec2(0.26, 0.3);
-  vec2 paneMax = streetLevel ? vec2(0.92, 0.76) : vec2(0.74, 0.8);
-  vec2 facadeBlur = fwidth(vUv) + 1e-5;
-  vec2 pane = smoothstep(paneMin - facadeBlur, paneMin + facadeBlur, facadeCell)
-    * (1.0 - smoothstep(paneMax - facadeBlur, paneMax + facadeBlur, facadeCell));
-  float paneShare = (paneMax.x - paneMin.x) * (paneMax.y - paneMin.y);
-  float facadeDetail = 1.0 - smoothstep(0.12, 0.45, max(facadeBlur.x, facadeBlur.y));
-  // Walls too short for a bay have u == 0 everywhere and stay blank.
-  float glazing = mix(paneShare, pane.x * pane.y, facadeDetail) * step(1e-6, fwidth(vUv.x));
-  diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.1, 0.14, 0.19), glazing * 0.85);
-`;
-
-function facade(material: MeshStandardMaterial): void {
-  material.defines = { ...material.defines, USE_UV: '' };
-  material.onBeforeCompile = (shader) => {
-    shader.fragmentShader = shader.fragmentShader
-      .replace('#include <color_fragment>', `#include <color_fragment>\n${FACADE_GLSL}`)
-      .replace(
-        '#include <roughnessmap_fragment>',
-        '#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, 0.08, glazing);',
-      )
-      .replace(
-        '#include <metalnessmap_fragment>',
-        '#include <metalnessmap_fragment>\nmetalnessFactor = mix(metalnessFactor, 0.6, glazing);',
-      );
-  };
-}
+const SMOOTH = new Set(['trees', 'figures']); // layers shaded smooth, not faceted: lumpy crowns, hand-made statues
+const CASTS_SHADOW = new Set(['building_walls', 'building_roofs', 'trees', 'furniture', 'monuments', 'figures', 'bridges', 'barriers']);
 
 function distanceToPath(x: number, y: number, path: [number, number][]): number {
   let best = Infinity;
@@ -275,6 +248,8 @@ export class City {
    */
   collide(segment: Line3, radius: number): void {
     const { box, trianglePoint, capsulePoint } = this;
+    // Trunks first: whatever then pushes back (a wall, the ground) has the last word.
+    for (const tile of this.tiles.values()) tile.trunks?.collide(segment, radius);
     for (const tile of this.tiles.values()) {
       if (!tile.bvh || !tile.bounds) continue;
       box.makeEmpty().expandByPoint(segment.start).expandByPoint(segment.end).expandByScalar(radius);
@@ -394,7 +369,7 @@ export class City {
         if (!(node instanceof Mesh)) return;
         const layer = node.name;
         node.material = this.materialFor(layer, node.material as MeshStandardMaterial);
-        if (layer === 'trees') node.geometry.computeVertexNormals(); // crowns are lumpy skins: smooth them, not faceted
+        if (SMOOTH.has(layer)) node.geometry.computeVertexNormals(); // crowns are lumpy skins: smooth them, not faceted
         node.castShadow = CASTS_SHADOW.has(layer);
         node.receiveShadow = true;
         if (!NOT_SOLID.has(layer)) {
@@ -414,6 +389,7 @@ export class City {
       group.matrixAutoUpdate = false;
       tile.group = group;
       tile.semantics = semantics;
+      tile.trunks = Trunks.from(semantics?.objects, tile.origin);
       this.tileOfGroup.set(group, tile);
       tile.state = 'ready';
       this.scene.add(group);
@@ -430,7 +406,7 @@ export class City {
       if (node instanceof Mesh) node.geometry.dispose();
     });
     if (tile.group) this.scene.remove(tile.group);
-    tile.group = tile.bvh = tile.bounds = tile.semantics = undefined;
+    tile.group = tile.bvh = tile.bounds = tile.semantics = tile.trunks = undefined;
     tile.state = 'idle';
   }
 
@@ -444,7 +420,7 @@ export class City {
         metalness: source.metalness,
         vertexColors: source.vertexColors,
         // Tiles carry no normals: every face is shaded flat, as the loader has already worked out.
-        flatShading: layer === 'trees' ? false : source.flatShading, // trees are smooth-shaded, everything else flat
+        flatShading: SMOOTH.has(layer) ? false : source.flatShading, // trees and statues are smooth-shaded, everything else flat
       });
       if (layer === 'building_walls') facade(created);
       if (layer === 'water') created.metalness = 0.55;

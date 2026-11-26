@@ -50,7 +50,7 @@ recognises them at eye level.
   post-and-chain fences (2.2 km), 19 guard rails (3.8 km) and rows of bollards
   (8 rows and 58 single bollards), plus 11 stone blocks. They are opened where
   paths cross them and cut where they lie in a carriageway, a building or under
-  a footbridge deck. Gates are not drawn.
+  a footbridge deck.
 - **The lagoon's stone edge.** The Public Garden lagoon has a low stone kerb
   along its shore, set in `fixes/` with the project's own `edge=kerb` tag. It
   comes from MassGIS spring 2023 imagery, where a light band about 0.45 m wide
@@ -93,19 +93,46 @@ recognises them at eye level.
   NAIP for deciding whether a tree is there, and NAIP leans tall crowns to the
   north-north-east, so a shift under about 4 m is not evidence. Not yet checked
   on site.
+- **Hand-made assets (a pilot).** `assets/` holds Blender models, made by
+  scripts in headless Blender, that the pipeline places where it would draw a
+  procedural shape; a missing asset falls back to the procedural one. Three were
+  made: a park lamp (94 triangles, about 860 copies), a bridge pylon (746, four
+  copies) and an equestrian figure (3,224, two copies, in a smooth-shaded
+  `figures` layer). The horse and rider is clearly better than the procedural
+  bars. The lamp and the pylon are only modestly better (the lamp is
+  indistinguishable from 40 m) and a procedural lathe could do much the same. So
+  assets pay where the shape is organic, not where it is a solid of revolution
+  or a block. The three together add about 29,000 triangles (+2.2%). Tabled on
+  26 November 2026: the three stay, and new shapes are drawn procedurally.
+- **Gates.** Every `barrier=gate` (29 in the pilot) has a granite pier at each
+  end, with an urn, ball or pyramid on top, and open iron leaves, clear for a
+  walker. About 380 triangles each. The first ground check found the Garden's
+  entrances bare.
+- **Trunks you can bump into.** A tree's trunk is solid; the walker still
+  passes under crowns and through a willow's skirt. Each tree's tile entry
+  carries the trunk radius, so no triangles were added.
+- **Facades.** Brick with coursing, recessed sash windows, stone sills,
+  lintels, cornices and shop fronts; ashlar stone; ribbon-window slabs; and glass
+  curtain walls, all drawn by one shader with no textures, from each wall's
+  colour and storeys (not from each building's real face). Curved fronts now
+  have windows. Style choices are hashed per wall, not data.
 
 ### Still to do
 
 **Draw what the data has, and what it does not**
 
-- Gates and stone gate piers. A gate stands open for now, and is not drawn. The
-  clipped yew hedges behind the street fences are not in the data either; the
-  MassGIS leaf-off imagery would show them.
+- The clipped yew hedges behind the street fences are not in the data; the
+  MassGIS leaf-off imagery would show them. Gates are plain: no arched
+  overthrow or scrollwork, and a gate between two buildings shows only its leaves.
 - Lamp posts with arms, and lamps on piers, in their real styles.
 - The skyline and landmark buildings, such as the Arlington Street Church
   spire.
 - Likenesses for statues, and hand-made models of landmarks, in place of the
   placeholders.
+- A human-sculpted horse and rider to replace the scripted one (its face and
+  hands are blobs and the rider is stiff), and statues made the same way.
+  Washington's data height of 11.58 m scales the bronze to about 6.7 m, so it
+  overhangs its pedestal by about 0.9 m: model the pedestal with the figure.
 
 **Checking against photographs**
 
@@ -122,7 +149,8 @@ recognises them at eye level.
 - Measured heights and crown widths, from the 2021 USGS lidar point cloud. This
   needs a reader for LAZ files. Heights cannot be read from the aerial
   photographs, which only give crown width and whether a crown exists.
-- Trunks you can bump into. Trees are not solid yet.
+- Foliage that reaches the ground (spruce, thuja) can still be entered up to
+  the trunk, and the 43 clipped domes have no trunk to bump into.
 - Crown undersides are dark and featureless.
 
 **Water**

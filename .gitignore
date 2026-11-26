@@ -18,3 +18,7 @@ web/dist/
 .claude/settings.local.json
 .DS_Store
 Thumbs.db
+
+# Asset previews and Blender backups
+assets/*-preview.png
+*.blend1

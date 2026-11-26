@@ -13,6 +13,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from . import assets
 from .mesh import MeshBuilder, colour_bytes
 
 # --- Dimensions (metres) -------------------------------------------------------
@@ -29,6 +30,8 @@ LAMP_SHAFT_RADIUS = (0.065, 0.05)  # at the foot, under the collar
 LAMP_COLLAR_RADIUS, LAMP_COLLAR_HEIGHT = 0.10, 0.12
 LAMP_GLOBE_RADIUS, LAMP_GLOBE_BELOW, LAMP_GLOBE_ABOVE = 0.19, 0.13, 0.19  # widest radius; height under and over it
 LAMP_CAP_RADIUS, LAMP_CAP_HEIGHT = 0.07, 0.07
+LAMP_ASSET = "park-lamp"  # assets/park-lamp.glb stands in for the shape above when it is there (see assets/README.md)
+LAMP_GLASS_MIN_BYTE = 60  # in the asset's linear colours, a vertex brighter than this is the globe, darker is iron
 LAMP_ARM_HEIGHT, LAMP_ARM_LENGTH = 8.0, 1.6
 LAMP_HEAD = (0.6, 0.25, 0.12)  # along the arm, across it, thick
 
@@ -91,6 +94,14 @@ class _Parts:
         self._i: list[np.ndarray] = []
         self._c: list[np.ndarray] = []
         self._count = 0
+        self._smooth: _Parts | None = None
+
+    def smooth(self) -> _Parts:
+        """A second collector for geometry that is drawn smooth-shaded, in the `figures` layer (hand-made
+        sculpture, see assets.py). It goes into the ordinary builder when `flush` is given no `figures` one."""
+        if self._smooth is None:
+            self._smooth = _Parts()
+        return self._smooth
 
     def add(self, positions, normals, indices, colour) -> None:
         positions = np.asarray(positions, dtype=np.float64).reshape(-1, 3)
@@ -101,11 +112,14 @@ class _Parts:
         self._c.append(np.broadcast_to(np.asarray(colour, dtype=np.uint8), (count, 4)))
         self._count += count
 
-    def flush(self, builder: MeshBuilder, feature: int, base: float = 0.0) -> None:
-        builder.add(
-            np.concatenate(self._p) + np.array([0.0, 0.0, base]), np.concatenate(self._n), np.concatenate(self._i),
-            colour=np.concatenate(self._c), feature=feature,
-        )
+    def flush(self, builder: MeshBuilder, feature: int, base: float = 0.0, figures: MeshBuilder | None = None) -> None:
+        if self._count:
+            builder.add(
+                np.concatenate(self._p) + np.array([0.0, 0.0, base]), np.concatenate(self._n), np.concatenate(self._i),
+                colour=np.concatenate(self._c), feature=feature,
+            )
+        if self._smooth is not None:
+            self._smooth.flush(builder if figures is None else figures, feature, base)
 
 
 _QUAD = np.array([0, 1, 2, 0, 2, 3])
@@ -293,6 +307,16 @@ def _bench(p, x, y, d, o: _Opts) -> None:
             box(p, iron, px, py, seat_bottom, BENCH_BACK_TO - 0.02, BENCH_SUPPORT_THICK, BENCH_BACK_THICK, d)
 
 
+def _asset_lamp(p, asset, x, y, d, o: _Opts, top: float) -> None:
+    """The hand-made park lamp standing at (x, y), enlarged to `top` metres. It has two colours, the iron and the
+    opal globe; where the data names the lamp's colour the iron is repainted that colour and the globe is left."""
+    positions, normals, indices, colours = assets.place(asset, x, y, d, 0.0, assets.scale_to(asset, top))
+    if o.colour:
+        colours = colours.copy()
+        colours[colours[:, :3].mean(axis=1) < LAMP_GLASS_MIN_BYTE] = colour_bytes(o.colour)
+    p.add(positions, normals, indices, colours)
+
+
 def _lamp(p, x, y, d, o: _Opts) -> None:
     if o.variant == "arm":
         top = o.tall(LAMP_ARM_HEIGHT, 2.5, 14.0)
@@ -304,6 +328,10 @@ def _lamp(p, x, y, d, o: _Opts) -> None:
         box(p, colour_bytes(LAMP_HEAD_COLOUR), hx, hy, top - 0.52, top - 0.40, LAMP_HEAD[1], LAMP_HEAD[0], d)
         return
     top = o.tall(LAMP_POST_HEIGHT, *LAMP_POST_RANGE)
+    asset = assets.load(LAMP_ASSET)
+    if asset is not None:  # the hand-made lamp (assets/park-lamp.glb); without it, the shape below
+        _asset_lamp(p, asset, x, y, d, o, top)
+        return
     post, glass = o.paint(LAMP_POST_COLOUR), colour_bytes(LAMP_GLASS)
     cap_z = top - LAMP_CAP_HEIGHT
     globe_top = cap_z
@@ -508,7 +536,23 @@ def _statue(p, x, y, d, o: _Opts) -> None:
         )
     else:  # a standing figure is at most STATUE_FIGURE_MAX tall: a taller monument has a taller pedestal
         z0 = _plinth(p, x, y, d, o, total, height=max(total - STATUE_FIGURE_MAX, STATUE_PEDESTAL_SHARE * total))
+    if equestrian and _equestrian_asset(p, x, y, d, z0, total - z0, o):
+        return
     (_equestrian_figure if equestrian else _standing_figure)(p, x, y, d, z0, total - z0, colour)
+
+
+def _equestrian_asset(p, x, y, d, z0, fh, o: _Opts) -> bool:
+    """Draw the hand-made horse and rider (assets/equestrian-figure.glb) on the pedestal, turned to `d` and as tall
+    as the procedural figure would be. It is painted in bronze, so a statue the data says is of another material or
+    colour (`colour`, or a `material` such as marble) keeps the procedural figure. False when there is no asset
+    (or BOSTON_NO_ASSETS is set): the caller draws the procedural figure."""
+    if o.colour or FIGURE_COLOURS.get((o.material or "bronze").lower(), FIGURE_COLOURS["bronze"]) != FIGURE_COLOURS["bronze"]:
+        return False
+    asset = assets.load("equestrian-figure")
+    if asset is None:
+        return False
+    p.smooth().add(*assets.place(asset, x, y, d, z0, assets.scale_to(asset, fh)))
+    return True
 
 
 def _sculpture(p, x, y, d, o: _Opts) -> None:
@@ -586,13 +630,15 @@ def add_object(
     seed: int = 0,
     feature: int = 0,
     base: float = 0.0,
+    figures: MeshBuilder | None = None,
 ) -> None:
     """Add one piece of furniture at (x, y) (tile-relative metres) facing `direction`
     (degrees clockwise from north). Dimensions are in metres; None means the default.
-    `base` is the height it stands at: 0 for the ground, more on a bridge pier."""
+    `base` is the height it stands at: 0 for the ground, more on a bridge pier. `figures` is the builder of the
+    smooth-shaded `figures` layer, where a hand-made statue goes (with it left out, into `builder`)."""
     if kind not in _KINDS:
         raise ValueError(f"unknown furniture kind {kind!r}; expected one of {', '.join(KINDS)}")
     shade = 1.0 + (np.random.default_rng(seed & 0xFFFFFFFF).random() - 0.5) * 0.08  # +-4%
     parts = _Parts()
     _KINDS[kind](parts, x, y, direction, _Opts(height, size, colour, material, variant, shade))
-    parts.flush(builder, feature, base)
+    parts.flush(builder, feature, base, figures)

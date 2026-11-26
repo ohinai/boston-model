@@ -1,0 +1,7 @@
+file = "equestrian-figure.glb"
+height = 3.5              # metres, hat to hoof (the pipeline scales it to the statue's height less its pedestal)
+max_triangles = 3500
+author = "Claude (Sonnet 5.5), scripted in Blender"
+licence = "MIT"
+why = "Stands for every statue tagged statue=equestrian in the data (George Washington at the Public Garden's Arlington Street gate, n358276954; Joseph Hooker at the State House, n5746127199; Paul Revere, n2481241593, where he is in the built tiles), set on the pipeline's own stepped pedestal. Modelled to look like a heroic bronze horse and rider: the horse on three legs with one foreleg raised, an arched neck and a flowing tail; the rider upright in a cocked hat, one arm held out, a sword at his hip. Proportions are a typical bronze rider's, not any particular statue's, and nothing is traced from a photograph."
+source = "src/equestrian_figure.py"
