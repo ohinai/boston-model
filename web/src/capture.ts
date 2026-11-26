@@ -1,6 +1,7 @@
 import type { Object3D, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three';
 import type { City } from './city';
 import type { Geo } from './geo';
+import type { Lod } from './lod';
 import type { Input, Player } from './player';
 
 /** What capture mode needs from the rest of the viewer. */
@@ -15,6 +16,8 @@ export interface CaptureHost {
   geo: Geo;
   /** Size the canvas and camera to the picture: pixel ratio 1, aspect and vertical field of view in degrees. */
   resize(width: number, height: number, fov: number): void;
+  /** Move the camera's near plane out as it climbs, as the live viewer does (matters for a view from the air). */
+  fitNearPlane(): void;
   /** Keep the shadow box on the ground around a position. */
   updateShadows(position: Vector3): void;
   /** Forget where the shadow box was, so the next update re-centres it. */
@@ -27,6 +30,8 @@ interface CaptureView {
   lon: number;
   heading: number;
   pitch: number;
+  /** Metres above the ground; more than 2 means flying (no settling onto the ground). Absent or 0: standing. */
+  altitude?: number;
 }
 
 interface CaptureJob {
@@ -83,7 +88,11 @@ function validate(job: CaptureJob): void {
     typeof job.post === 'string' &&
     Array.isArray(job.views) &&
     job.views.every(
-      (v) => typeof v.id === 'string' && Number.isFinite(v.lat) && Number.isFinite(v.lon),
+      (v) =>
+        typeof v.id === 'string' &&
+        Number.isFinite(v.lat) &&
+        Number.isFinite(v.lon) &&
+        (v.altitude === undefined || Number.isFinite(v.altitude)),
     );
   if (!ok) throw new Error('The views file is malformed');
 }
@@ -113,10 +122,20 @@ export async function runCapture(host: CaptureHost, jobUrl: string): Promise<voi
 
   host.resize(job.width, job.height, job.fov);
   const failed: Failure[] = [];
+  const drawn: { id: string; triangles: number; calls: number; tiles: number; lod?: ReturnType<Lod['stats']> }[] = [];
   let captured = 0;
   for (const [index, view] of job.views.entries()) {
     try {
       await captureView(host, job, view, index === 0 ? FIRST_TIMEOUT : LATER_TIMEOUT);
+      // What the last render drew (the renderer counts one frame at a time), so a picture comes with its cost.
+      // Also how many full tiles are loaded and what the simplified model has showing (see lod.ts): the two should cover every tile once.
+      drawn.push({
+        id: String(view.id),
+        triangles: host.renderer.info.render.triangles,
+        calls: host.renderer.info.render.calls,
+        tiles: host.city.loadedTiles(),
+        lod: host.city.lod?.stats(),
+      });
       captured++;
     } catch (error) {
       console.error(`Capture of ${view.id} failed`, error);
@@ -124,7 +143,7 @@ export async function runCapture(host: CaptureHost, jobUrl: string): Promise<voi
     }
   }
   try {
-    await post(`${job.post}done`, JSON.stringify({ captured, failed }), 'application/json');
+    await post(`${job.post}done`, JSON.stringify({ captured, failed, drawn }), 'application/json');
   } catch (error) {
     console.error(error);
   }
@@ -134,22 +153,25 @@ export async function runCapture(host: CaptureHost, jobUrl: string): Promise<voi
 async function captureView(host: CaptureHost, job: CaptureJob, view: CaptureView, timeout: number): Promise<void> {
   const { player, city, camera, renderer, scene, sky } = host;
   const [x, y] = host.geo.toLocal(view.lon, view.lat);
-  player.flying = false;
-  player.teleport(x, y, view.heading || 0, 0, view.pitch || 0);
+  const altitude = view.altitude ?? 0;
+  player.flying = altitude > 2;
+  player.teleport(x, y, view.heading || 0, altitude, view.pitch || 0);
 
   // Ask for tiles until everything wanted around the spot has arrived.
   const deadline = performance.now() + timeout;
   for (;;) {
     city.update(player.position);
     const { ready, wanted } = city.progress(player.position);
-    if (ready >= wanted && city.groundReady(player.position)) break;
-    if (performance.now() > deadline) throw new Error(`Timed out waiting for tiles (${ready} of ${wanted} ready)`);
+    const lod = city.lodPending(player.position); // blocks of the simplified model are part of the picture too
+    if (ready >= wanted && lod === 0 && (player.flying || city.groundReady(player.position))) break;
+    if (performance.now() > deadline) throw new Error(`Timed out waiting for tiles (${ready} of ${wanted} ready, ${lod} simplified blocks to come)`);
     await sleep(POLL);
   }
 
   // Let the walker fall onto the ground with no keys pressed.
   for (let i = 0; i < SETTLE_STEPS; i++) player.update(1 / 30, IDLE_INPUT);
   player.applyTo(camera);
+  host.fitNearPlane();
   camera.updateMatrixWorld();
   sky.position.copy(camera.position);
   host.resetShadows();

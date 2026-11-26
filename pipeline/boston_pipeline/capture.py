@@ -4,7 +4,7 @@ The viewer (`web/dist`) has a capture mode. This module serves the built site on
 a headless Chromium-based browser at `/?capture=/__capture/views.json`, and receives the pictures the
 page posts back:
 
-    GET  /__capture/views.json         {"width", "height", "fov", "post", "views": [{id, lat, lon, heading, pitch}]}
+    GET  /__capture/views.json         {"width", "height", "fov", "post", "views": [{id, lat, lon, heading, pitch[, altitude]}]}
     POST /__capture/shot/<id>.jpg      the JPEG bytes
     POST /__capture/shot/done          {"captured": n, "failed": [{"id", "reason"}], "error": optional}
 
@@ -209,13 +209,14 @@ def check_site(site_dir: Path) -> None:
 
 def capture(
     views: list[dict], out_dir: Path, *, site_dir: Path, width: int = 1024, height: int = 768, fov: float = 70,
-    timeout: float | None = None,
+    timeout: float | None = None, query: str = "",
 ) -> dict:
     """Render every view in the model, writing `<out_dir>/<id>.jpg`.
 
-    `views` are dicts with id, lat, lon, heading, pitch. Returns the viewer's own summary
-    (captured, failed, error) plus `arrived` (ids whose pictures were received) and `completed`
-    (whether the viewer reported it was done before the timeout).
+    `views` are dicts with id, lat, lon, heading, pitch, and optionally altitude (metres; above 2 is flying).
+    `query` is added to the viewer's address, for the viewer's own switches such as `lod=0` (see web/src/city.ts).
+    Returns the viewer's own summary (captured, failed, error) plus `arrived` (ids whose pictures
+    were received) and `completed` (whether the viewer reported it was done before the timeout).
     """
     site_dir, out_dir = Path(site_dir), Path(out_dir)
     check_site(site_dir)
@@ -236,7 +237,7 @@ def capture(
     profile = Path(tempfile.mkdtemp(prefix="boston-capture-"))
     process = None
     try:
-        url = f"http://127.0.0.1:{server.server_address[1]}/?capture={VIEWS_PATH}"
+        url = f"http://127.0.0.1:{server.server_address[1]}/?capture={VIEWS_PATH}" + (f"&{query}" if query else "")
         print(f"capturing {len(views)} views of the model ...")
         process = _launch(url, width, height, profile)
         deadline = time.monotonic() + timeout

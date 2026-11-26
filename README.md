@@ -44,7 +44,8 @@ What works today:
   kerbs and bollards, opened where paths cross them. The Public Garden lagoon
   has its stone edge, and willows are drawn weeping.
 - Walking in a browser with collision against buildings and curbs, plus a fly
-  mode for an overview.
+  mode for an overview. Far away the viewer draws simplified buildings, so the
+  skyline is visible for kilometres.
 - The street you are on, the park you are in and the nearest named place, read
   from a data layer that ships alongside the geometry.
 - Notes: press `N` anywhere to report something, with your exact position
@@ -64,9 +65,11 @@ What is not accurate yet:
 - The ground is flat. Beacon Hill is not.
 - Building heights are measured for only 17% of buildings in the pilot. Another
   34% are estimated from storey counts and 48% are a default guess by building
-  type. Across the whole `boston` area 68% are a guess, most of them in the west.
-- Brookline has only the trees mapped in OpenStreetMap: the city's tree
-  inventory stops at the town line, and Brookline's own data states no licence.
+  type. Across the whole `boston` area 52% are a guess.
+- Brookline's trees and many of its building heights come from the Town of
+  Brookline's public layers, which state no licence; they are used on the project
+  owner's judgement (see docs/DATA_SOURCES.md). Brookline's trunk sizes and
+  heights are less checked than Boston's.
 - Roofs are flat, and facades are drawn by rule from wall colour and storeys,
   not from each building's real face.
 - Street widths are estimated from lane counts.
@@ -155,6 +158,9 @@ Built tiles contain OpenStreetMap data, © OpenStreetMap contributors, and are
 distributed under the [Open Database License 1.0](https://opendatacommons.org/licenses/odbl/1-0/),
 as are the files in `fixes/`.
 Tree positions and species also come from the City of Boston tree inventory,
-released under the Open Data Commons Public Domain Dedication and License.
+released under the Open Data Commons Public Domain Dedication and License. In the
+`boston` area, Brookline's trees and many building heights come from the Town of
+Brookline's public ArcGIS layers, which state no licence (credit: Town of
+Brookline; see docs/DATA_SOURCES.md).
 Anything that displays the model must show that credit, as the viewer does.
 [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) lists every source and its terms.

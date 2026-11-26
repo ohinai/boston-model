@@ -56,6 +56,47 @@ this page in the same pull request.
   continuously, so a fresh download can differ from the one a build used. Trees
   missing from it or removed since are corrected in `fixes/`.
 
+### Town of Brookline: tree inventory and building footprints
+
+- **Used for:** the `boston` area only (the line `extra_sources = ["brookline"]` in its table in `areas.toml`). Trees: position,
+  species and trunk size of Brookline's street and park trees, which the city's inventory does not cover. Buildings: the height
+  of OpenStreetMap buildings that have no `height` or `building:levels` of their own. Code: `pipeline/boston_pipeline/brookline.py`.
+- **Licence: none stated.** Neither ArcGIS layer carries a licence, terms of use or copyright text (checked 26 November 2026).
+  They are used on the project owner's judgement of 26 November 2026, knowing there is no explicit grant. This is the one
+  exception to "Anything with no stated licence" below. Credit: "Town of Brookline" (written into every tile and into
+  `tileset.json` as "Town of Brookline tree inventory and building footprints"). To remove the data, delete the
+  `extra_sources` line from `[boston]` in `areas.toml` and rebuild: nothing else changes and the pilot never used it.
+- **Services (public, no key):**
+  - Trees: https://services1.arcgis.com/Oknk0tvfHOElpgGU/arcgis/rest/services/Brookline_Tree_Viewer_Web_WFL1/FeatureServer/0
+    (16,348 records in the whole town; 7,383 in the area's box).
+  - Buildings: https://services1.arcgis.com/Oknk0tvfHOElpgGU/arcgis/rest/services/BuildingFootprint/FeatureServer/0
+    (13,708 in the whole town; 7,218 in the box).
+  `boston-pipeline fetch boston` pages through both (2,000 records a page) into `data/raw/boston/brookline_trees.json` and
+  `brookline_buildings.json`.
+- **Fields used.** Trees: ID, OBJECTID, ScientificName, CommonName, Cultivar, DBH, YR_PLANT, IsStump, CONDITION, PARKTREE,
+  CG_NOTES. Buildings: TYPE, NUMSTORIES, BLDGHEIGHT, TOP_GL, COMMENT, COMMENTS.
+- **Units, as checked.** DBH is in inches (trees planted in 2007 to 2009 read 1.5 to 2, a planting caliper; per-species medians
+  match Boston's inventory, which is inches). BLDGHEIGHT is in feet and is the Town's storey count times 13 ft (2.55 storeys is
+  33.15 ft): an assessed figure, not a survey. TOP_GL is a LiDAR top above ground in feet.
+- **Trees.** Ids `brk:<ID>` (the 109 usable records with no ID get `brk:<1,000,000 + OBJECTID>`), so fixes can change or delete
+  one like any tree. Stumps, dead trees (CONDITION 4) and records with neither species nor size are left out (47 of 7,383), and a
+  DBH above 100 inches is a typing error (455 and 1,721 occur) and gives no size. For trees planted after the 1994 baseline
+  the DBH is the caliper at planting and was never updated, so 0.3 inch a year since planting is added (this makes the median 3
+  inches into 11, close to the 12 of the 1994 baseline trees). The 122 newest records have no ScientificName: it is taken from the same common name elsewhere in the layer.
+  Records whose species is "Unknown" take it from the Town's own free-text note where that is one of 24 exact notes ("pine",
+  "european beech"). Merging with OpenStreetMap: within 4 m is one tree and the Town's is kept (42 merges); unlike Boston's
+  inventory it does not drop OpenStreetMap trees in parks (the Town's inventory is not a survey of every park tree, and 112 of the
+  123 OpenStreetMap-only trees there are more than 15 m from any Town tree). The result is 7,336 trees.
+- **Buildings.** BLDGHEIGHT in feet times 0.3048, or NUMSTORIES times the Town's typical height for that many storeys when the
+  height is blank; a footprint marked "DEMOLISHED 2021" (526), a covered walkway or foundation is ignored; an outbuilding (TYPE
+  OUTBLDG, whose figure is copied from the house) takes its LiDAR top when that is 7 to 20 ft; a claim above 60 ft is dropped
+  where the LiDAR top is under 55% of it (32 of the 37 are Village Way rowhouses). A footprint matches a building when it overlaps
+  half of the smaller of the two; several footprints give the figure that covers most of the building's area. OpenStreetMap's own
+  `height`, `building:levels` and `min_height` win; fixes win over everything. The built tile entry says `"height_source": "town"`.
+  In the `boston` build 4,095 of 24,946 buildings (16%) get a height this way: "from default" falls from 68% to 52%.
+- **Cannot tell:** when a DBH was measured (every record is stamped 6 March 2026, a migration), whether the 1994 baseline trees
+  have been remeasured, which stems a multi-trunk tree's DBH counts, or what is under the 183 footprints with no height.
+
 ### USGS NAIP aerial imagery
 
 - **Used for:** checking the model against a leaf-on photograph: whether a tree
@@ -243,7 +284,6 @@ are the practical check.
   terms forbid deriving data from them. Do not trace, measure or copy from them.
 - **Anything with no stated licence.** Ask the publisher or leave it out. Two
   Analyze Boston datasets fall here today: `tree-canopy-change-assessment` and
-  `2016-land-cover`. The Town of Brookline's public tree inventory and building
-  footprints with heights (ArcGIS layers on `maps.brooklinema.gov`) also state no
-  licence, so Brookline is drawn from OpenStreetMap alone until the Town's GIS
-  office gives permission in writing.
+  `2016-land-cover`. The one exception, by the project owner's decision of
+  26 November 2026, is the Town of Brookline's tree inventory and building
+  footprints (see above); it can be removed with one line in `areas.toml`.

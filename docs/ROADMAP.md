@@ -131,10 +131,17 @@ recognises them at eye level.
   detailed standing statues on bell and shaft pedestals, Washington's horse fitted
   to a warm-grey pedestal, fountain figures, the Japanese lantern and a flag at
   the Goody memorial.
+- **Far view.** Simplified copies of every tile (36 files, 17 MB) show the skyline out to
+  7 km, and the viewer loads full tiles only within 1.2 km, so a walker sees Back Bay and
+  downtown from Coolidge Corner and the whole area from the air. The full tiles are
+  untouched. Pitched roofs are flat in the far copy.
 - **The west.** A second area, `boston`, adds Back Bay, Kenmore, Fenway, the
   Longwood edge and North Brookline out to Coolidge Corner and Washington Square
-  (434 tiles). The map is downloaded in strips. Brookline has only the trees and
-  heights in OpenStreetMap: the Town's tree and building layers state no licence.
+  (434 tiles). The map is downloaded in strips. Brookline's street and park trees
+  (7,336) and the heights of 4,095 buildings come from the Town of Brookline's
+  public layers, which state no licence and are used on the owner's judgement.
+  Boston's side still guesses about half of its building heights: the city's
+  `boston-buildings-with-roof-breaks` (PDDL, see DATA_SOURCES) would fix them.
 
 ### Still to do
 
@@ -204,8 +211,8 @@ After that, parks improve through notes: walk, press N, fix.
   download, so feature ids cannot shift under the fixes that refer to them.
 - **Regional extract.** Read OpenStreetMap from the Geofabrik extract rather
   than the Overpass API.
-- **Levels of detail.** Simplified parent tiles so a skyline is cheap to draw
-  and only nearby tiles load in full.
+- **A second level of detail.** A coarser 16 x 16 level for the whole city, and
+  simplified silhouettes for landmark buildings.
 - **Smaller tiles.** glTF quantisation and mesh compression.
 - **Hosting.** Somewhere that can hold a whole city of tiles, since they do not
   belong in git.

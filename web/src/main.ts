@@ -45,7 +45,12 @@ renderer.toneMappingExposure = 0.9;
 renderer.shadowMap.enabled = true;
 
 const scene = new Scene();
-scene.fog = new FogExp2(HORIZON, 0.00028);
+// Exponential-squared fog leaves a surface exp(-(d * density)^2) of its own colour at distance d: with the simplified model drawing the whole
+// district out to 7 km, 0.00018 leaves 44% of a building's own colour at 5 km and 31% at 6 km, so the skyline stays readable;
+// the earlier 0.00028 (14% at 5 km) was chosen when nothing was drawn past 1.8 km. `?fog=<density>` overrides it, for comparing.
+const FOG_DENSITY = 0.00018;
+const fogOverride = Number(new URLSearchParams(window.location.search).get('fog'));
+scene.fog = new FogExp2(HORIZON, fogOverride > 0 ? fogOverride : FOG_DENSITY);
 const NEAR = 0.2; // metres: the closest thing drawn when on foot
 const camera = new PerspectiveCamera(70, 1, NEAR, 16000);
 
@@ -215,6 +220,7 @@ async function boot(): Promise<void> {
           camera.fov = fov;
           camera.updateProjectionMatrix();
         },
+        fitNearPlane,
         updateShadows,
         resetShadows: () => shadowCentre.set(Infinity, 0, 0),
       },
@@ -379,7 +385,9 @@ async function boot(): Promise<void> {
   credit.target = '_blank';
   credit.rel = 'noopener';
   credit.textContent = 'OpenStreetMap contributors';
-  element('attribution').append('Map data © ', credit, date ? `, ${date}` : '');
+  // The tileset's own credit names every source the area uses beyond OpenStreetMap (today: the Town of Brookline).
+  const town = city.attribution.includes('Town of Brookline') ? ', Town of Brookline' : '';
+  element('attribution').append('Map data © ', credit, town, date ? `, ${date}` : '');
 
   let last = performance.now();
   let slowTick = 0;

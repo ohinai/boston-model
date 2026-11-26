@@ -144,12 +144,18 @@ def elements(payload: dict) -> list[dict]:
     return out
 
 
-def reconcile(scene) -> dict:
-    """Merge inventory trees and OpenStreetMap trees in `scene.trees`, in place; returns counts."""
+def reconcile(scene, prefix: str = "bprd:", other: tuple[str, ...] = (), drop_in_parks: bool = True) -> dict:
+    """Merge inventory trees and OpenStreetMap trees in `scene.trees`, in place; returns counts.
+
+    `prefix` says which trees are the inventory (the city's by default). Trees whose ids start with one of the `other`
+    prefixes belong to another inventory and are left alone, as are trees from fixes/. With `drop_in_parks` False an
+    OpenStreetMap tree the inventory does not list is kept in a park too (the Town of Brookline's inventory, brookline.py).
+    """
     # A tree added by a file in fixes/ was put there on purpose: it is never merged or dropped.
     added = [t for t in scene.trees if t.id.startswith("fix:")]
-    inventory = [t for t in scene.trees if t.id.startswith("bprd:")]
-    osm = [t for t in scene.trees if not t.id.startswith(("bprd:", "fix:"))]
+    passed = [t for t in scene.trees if other and t.id.startswith(other)]
+    inventory = [t for t in scene.trees if t.id.startswith(prefix)]
+    osm = [t for t in scene.trees if not t.id.startswith(("fix:", prefix, *other))]
     # Reshaped so that an empty list is still a list of 2D points.
     inv_pts = points(np.array([(t.x, t.y) for t in inventory], dtype=float).reshape(-1, 2))
     osm_pts = points(np.array([(t.x, t.y) for t in osm], dtype=float).reshape(-1, 2))
@@ -188,7 +194,7 @@ def reconcile(scene) -> dict:
     ]
     inventoried = [
         park for park in parks if sum(1 for t, p in zip(inventory, inv_pts) if "bprd:park" in t.tags and park.contains(p)) >= MIN_PARK_TREES
-    ]
+    ] if drop_in_parks else []
     kept, dropped = [], 0
     for j, tree in enumerate(osm):
         if j in matched_osm:
@@ -198,7 +204,7 @@ def reconcile(scene) -> dict:
         else:
             kept.append(tree)
 
-    scene.trees[:] = merged_trees + kept + added
+    scene.trees[:] = merged_trees + kept + added + passed
     return {
         "inventory": len(inventory), "osm": len(osm), "merged": len(matched_inv), "dropped": dropped,
         "kept_osm": len(kept), "added": len(added),

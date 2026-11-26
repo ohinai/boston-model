@@ -37,6 +37,12 @@ from .streetfurniture import street_objects
 from .trees import add_tree, describe
 
 ATTRIBUTION = "© OpenStreetMap contributors (ODbL 1.0)"
+BROOKLINE_ATTRIBUTION = "Town of Brookline tree inventory and building footprints"
+
+
+def attribution(area: dict | None = None) -> str:
+    """The credit written into the tiles of an area: OpenStreetMap's, and the Town of Brookline's where the area uses its data."""
+    return f"{ATTRIBUTION}; {BROOKLINE_ATTRIBUTION}" if "brookline" in (area or {}).get("extra_sources", []) else ATTRIBUTION
 
 ROAD_Z = -0.12  # carriageways sit a curb's height below the pavement
 WATER_Z = -0.6
@@ -609,7 +615,7 @@ def _cover_colour(layer: str, cover: str) -> np.ndarray:
     return _colour_cache[key]
 
 
-def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
+def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path, credit: str = ATTRIBUTION) -> dict:
     """Write one tile's .glb and .json; return its entry for the tileset."""
     x0, y0, x1, y1 = bounds = world.tile_bounds(tx, ty)
     tile_box = box(*bounds)
@@ -796,7 +802,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
         if not builder.empty
     ]
     name = f"{tx}_{ty}"
-    write_glb(out_dir / "tiles" / f"{name}.glb", layers, ATTRIBUTION, extras={"tile": [tx, ty]})
+    write_glb(out_dir / "tiles" / f"{name}.glb", layers, credit, extras={"tile": [tx, ty]})
     semantics = _semantics(ctx, tx, ty, tile_box, objects)
     (out_dir / "tiles" / f"{name}.json").write_text(json.dumps(semantics, separators=(",", ":")), encoding="utf-8")
 
@@ -818,7 +824,9 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
     }
 
 
-def write_tileset(out_dir: Path, entries: list[dict], area: dict, source_timestamp: str | None) -> None:
+def write_tileset(
+    out_dir: Path, entries: list[dict], area: dict, source_timestamp: str | None, lod: dict | None = None
+) -> None:
     lows, highs = [], []
     for entry in entries:
         centre = np.array(entry["boundingVolume"]["box"][:3]) + np.array(entry["transform"][12:15])
@@ -843,7 +851,7 @@ def write_tileset(out_dir: Path, entries: list[dict], area: dict, source_timesta
         },
         "extras": {
             "name": area.get("name"),
-            "attribution": ATTRIBUTION,
+            "attribution": attribution(area),
             "source_timestamp": source_timestamp,
             "world": {
                 "crs": world.WORLD_CRS,
@@ -855,6 +863,8 @@ def write_tileset(out_dir: Path, entries: list[dict], area: dict, source_timesta
             "places": places,
         },
     }
+    if lod:  # the simplified cells for what is beyond the full tiles (see lod.py)
+        tileset["extras"]["lod"] = lod
     (out_dir / "tileset.json").write_text(json.dumps(tileset, indent=1), encoding="utf-8")
 
 
@@ -863,10 +873,13 @@ def build(scene: Scene, tiles: list[tuple[int, int]], out_dir: Path, area: dict,
     ctx = prepare(scene, tiles)
     entries = []
     for number, (tx, ty) in enumerate(tiles, 1):
-        entries.append(build_tile(ctx, tx, ty, out_dir))
+        entries.append(build_tile(ctx, tx, ty, out_dir, attribution(area)))
         print(f"\r  tile {number}/{len(tiles)}", end="", flush=True)
     print()
-    write_tileset(out_dir, entries, area, source_timestamp)
+    from .lod import build as build_lod  # imported here because lod.py imports this module
+
+    lod = build_lod(ctx, tiles, out_dir)
+    write_tileset(out_dir, entries, area, source_timestamp, lod["extras"])
     sources = defaultdict(int)
     for building in scene.buildings:
         sources[building.height_source] += 1
@@ -880,5 +893,6 @@ def build(scene: Scene, tiles: list[tuple[int, int]], out_dir: Path, area: dict,
         "bridges": sum(len(decks) for decks in ctx.decks.values()),
         "barriers": len(scene.barriers),
         "streets": len(scene.ways),
+        "lod": {key: value for key, value in lod.items() if key != "extras"},
         "megabytes": round(sum(f.stat().st_size for f in (out_dir / "tiles").glob("*.glb")) / 1e6, 1),
     }

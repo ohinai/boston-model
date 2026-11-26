@@ -175,9 +175,33 @@ playgrounds that overlap the tile: `id`, `name`, `kind`, `area` in square metres
 of the whole feature, and `rings`, the outlines of the part inside this tile.
 A client uses them to say which park someone is standing in.
 `height_source` is `height` (a measured height tag), `levels` (storey count),
-`default` (a guess by building type) or `override`. This file is where
+`default` (a guess by building type), `override` or `town` (a height from the Town
+of Brookline's footprints). This file is where
 simulation will hang: signals, shop fronts and transit stops are positions and
 facts here long before they are models.
+
+### Levels of detail
+
+Beyond the tiles a viewer has loaded in full, it draws a much simpler copy of the model, so a skyline is visible for
+kilometres without loading every tile. The build writes it after the tiles (`lod.py`):
+
+- **Files.** One glTF per super tile of 4 x 4 base tiles (1,024 m): `lod1/<I>_<J>.glb`, with `I = floor(tx / 4)` and
+  `J = floor(ty / 4)`. `boston` has 36 of them, about 17 MB (11% of the full tiles' size).
+- **Nodes.** Each base tile is its own node, `cell_<tx>_<ty>`, translated from the super tile's south-west corner (glTF axes,
+  like a tile's own file), so a client can hide one cell at a time. A cell with nothing in it has no node. Each node has two
+  meshes: `lod_land` (buildings, tree crowns, ground, lawn, roads: vertex colours, flat shaded) and `lod_water`.
+- **Content.** Buildings are extruded from simplified footprints (sheds under 60 m2 and 6 m tall are dropped, a pitched roof is
+  flat at the eaves plus 40% of its rise, wall colour is the far tint the facade shader fades to). The flat surfaces are the
+  full tiles' own cut, non-overlapping, at z = 0 and cut at tile edges, simplified to 3 m as one coverage so shared edges stay
+  shared. Trees of 6 m crown or more are 8-triangle double pyramids. Paths narrower than 4 m, rail, furniture, barriers, paint
+  and monuments are left out. There is no semantics file, no feature ids and nothing to collide with or pick.
+- **In `tileset.json`.** `extras.lod = {"levels": [{"level": 1, "super": 4, "tiles": [{"uri": "lod1/I_J.glb", "super":
+  [I, J], "cells": [[tx, ty], ...]}]}]}`. `levels` is a list so a coarser level 2 (16 x 16) can be added for a whole city.
+- **Clients** show a cell only while its full tile is not loaded: the district is visible at once, each cell swaps out as its
+  full tile arrives, and swaps back when it is unloaded. The browser viewer fetches the files by distance (out to 9 km),
+  keeps full tiles within 1.2 km when LOD is present (1.8 km otherwise), thins the fog (0.00018) and draws no shadows on
+  the far copy. Address switches: `?lod=0` turns it off, `?lod=tint` colours the far cells pink to show the seam, `?radius=`
+  sets the full-tile radius and `?fog=` the fog density. Capture views take an `altitude` (above 2 m is flying).
 
 ## Pipeline
 
@@ -341,6 +365,8 @@ any address given as `?tileset=<url>`.
   up the water broke into stripes where the depth buffer ran out of precision.
 - [`notes.ts`](../web/src/notes.ts) and [`notepad.ts`](../web/src/notepad.ts)
   handle notes, described next.
+- [`lod.ts`](../web/src/lod.ts) loads the far copy and shows each of its cells
+  only while the matching full tile is not loaded.
 - [`capture.ts`](../web/src/capture.ts) is the capture mode (`?capture=<url>`)
   that takes pictures for the ground check, described above.
 
@@ -399,14 +425,16 @@ where the city is edited.
 
 ## Known limits of the current design
 
-- **No levels of detail.** Every tile in range loads at full detail. A whole
-  city needs a tile hierarchy with simplified parents, which 3D Tiles supports.
+- **One level of detail.** Far away, the viewer draws a simplified copy of each
+  tile (see Levels of detail). A whole city needs a second, coarser level, and
+  the far copy has flat roofs and no paths narrower than 4 m.
 - **Flat-earth placement.** The whole tileset is placed on the globe as one
   plane, which drifts from the curved surface by about 8 m at 10 km from the
   origin. Per-tile placement fixes this when the area grows.
-- **Uncompressed geometry.** The `boston` area is 434 tiles, about 5.8 million
-  triangles and 149 MB (the downtown pilot inside it is 70 tiles and about 1.5
-  million triangles). The viewer loads the tiles within 1.8 km of you, about 130. Tiles are already written without normals, with shared vertices and
+- **Uncompressed geometry.** The `boston` area is 434 tiles, about 6.6 million
+  triangles and 166 MB, plus 17 MB of far-view files (the downtown pilot inside it
+  is 70 tiles and about 1.5 million triangles). The viewer loads the tiles within
+  1.2 km of you, about 70, and draws the far copy beyond. Tiles are already written without normals, with shared vertices and
   16-bit indices where they fit. Quantisation and mesh compression are standard
   glTF extensions and are not applied yet.
 - **Tree crowns are not solid** (trunks are) and tree sizes are estimates.

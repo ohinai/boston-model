@@ -61,6 +61,9 @@ description = "The pilot district, plus Back Bay, Kenmore, Fenway, the Longwood 
 # Built as one rectangle so the sea and water edges close the same way as in the pilot. The pilot's own tiles come out
 # identical; fetch downloads the map in strips (see osm.fetch_area).
 bbox = [-71.1420, 42.3350, -71.0480, 42.3640]
+# Optional data beyond OpenStreetMap and the city's tree inventory. "brookline" adds the Town of Brookline's tree inventory
+# and building heights (pipeline/boston_pipeline/brookline.py, docs/DATA_SOURCES.md). Delete this line to turn it off.
+extra_sources = ["brookline"]
 
 [[boston.places]]
 name = "Massachusetts State House"

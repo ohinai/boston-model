@@ -31,6 +31,9 @@ DEFAULT_HEIGHTS = {
     "kiosk": 3.0, "roof": 4.5, "service": 3.5, "toilets": 3.2,
 }
 FALLBACK_HEIGHT = 12.0
+# The `height:source` of a `height` that came from the Town of Brookline's building footprints (brookline.py), not from
+# OpenStreetMap: such a building's height_source is "town".
+HEIGHT_FROM_TOWN = "Town of Brookline building footprints"
 # A building tagged `amenity=shelter` (a bus shelter, a sun or weather shelter, a picnic gazebo; 15 in the pilot, 7 to 85 m²)
 # with no height is a small structure, not a 12 m block.
 SHELTER_HEIGHT = 3.0
@@ -207,7 +210,7 @@ class Building:
     polygon: Polygon
     height: float
     min_height: float
-    height_source: str  # "height", "levels", "default" or "override"
+    height_source: str  # "height", "levels", "default", "override" or "town" (the Town of Brookline's footprints)
     wall_colour: str
     roof_colour: str
     tags: dict
@@ -345,6 +348,8 @@ def building_height(tags: dict) -> tuple[float, float, str]:
         else:
             height = SHELTER_HEIGHT if tags.get("amenity") == "shelter" else DEFAULT_HEIGHTS.get(kind, FALLBACK_HEIGHT)
             source = "default"
+    if source == "height" and tags.get("height:source") == HEIGHT_FROM_TOWN:
+        source = "town"
     base = parse_length(tags.get("min_height"))
     if base is None:
         min_level = parse_number(tags.get("building:min_level"))

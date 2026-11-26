@@ -16,6 +16,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { type ExtendedTriangle, MeshBVH } from 'three-mesh-bvh';
 import { facade } from './facade';
 import type { WorldFrame } from './geo';
+import { Lod } from './lod';
 import { Trunks } from './trunks';
 
 export interface Place {
@@ -44,7 +45,7 @@ export interface BuildingInfo extends Named {
   part_of?: string;
   height: number;
   /** Where the height came from: a measured tag, a storey count, a guess, or a fix in the repository. */
-  height_source: 'height' | 'levels' | 'default' | 'override';
+  height_source: 'height' | 'levels' | 'default' | 'override' | 'town';
 }
 
 /** Something drawn in a tile that is not a building: a bench, a statue, a bridge, a tree. */
@@ -104,10 +105,14 @@ interface TilesetJson {
     source_timestamp: string | null;
     world: WorldFrame;
     places: Place[];
+    /** The simplified cells for what lies beyond the full tiles (see lod.ts). Absent in tilesets built before they existed. */
+    lod?: ConstructorParameters<typeof Lod>[0];
   };
 }
 
 interface Tile {
+  /** `<tx>_<ty>`: how the tile is named in the tileset and in the levels of detail. */
+  key: string;
   glb: string;
   semanticsUrl: string;
   /** Scene position of the tile's own origin (its south-west corner). */
@@ -122,6 +127,14 @@ interface Tile {
   /** The trees' trunks, which are solid although the `trees` layer is not (see trunks.ts). */
   trunks?: Trunks;
 }
+
+/**
+ * With the simplified model (lod.ts) filling in beyond them, full tiles need load only this far from the walker. A facade's
+ * windows are a few pixels across by a kilometre and the shader has already faded them to the wall's average colour, so
+ * a simplified building swapped in beyond this is close to what it replaces (compare `?radius=700` and `?radius=3500`).
+ * Without the simplified model the tiles load as far as 1800 m, as before.
+ */
+const LOD_LOAD_RADIUS = 1200;
 
 /** Layers a walker passes straight through: crowns, a willow's hanging skirt, and paint on the road. Trunks are solid (trunks.ts). */
 const NOT_SOLID = new Set(['trees', 'markings']);
@@ -162,8 +175,13 @@ export class City {
   readonly places: Place[];
   /** World-metre rectangle covered by tiles: [min x, min y, max x, max y]. */
   readonly extent: [number, number, number, number];
-  /** Tiles whose centre is within this many metres of the focus are kept loaded. */
+  /** Tiles whose centre is within this many metres of the focus are kept loaded. (`?radius=<metres>` in the address overrides it.) */
   loadRadius = 1800;
+  /**
+   * The simplified model that fills in what the full tiles do not cover; undefined if the tileset has none or `?lod=0` is in the
+   * address. (`?lod=tint` paints it pink, to see where it is drawn.)
+   */
+  readonly lod?: Lod;
 
   private readonly tiles = new Map<string, Tile>();
   private readonly materials = new Map<string, Material>();
@@ -195,6 +213,7 @@ export class City {
       // 3D Tiles transforms are column-major; elements 12..14 are the translation (z up).
       const [x, y, z] = child.transform.slice(12, 15);
       this.tiles.set(`${tx}_${ty}`, {
+        key: `${tx}_${ty}`,
         glb: new URL(child.content.uri, base).href,
         semanticsUrl: new URL(child.extras.semantics, base).href,
         origin: new Vector3(x, z, -y),
@@ -207,6 +226,13 @@ export class City {
       extent[3] = Math.max(extent[3], y + size);
     }
     this.extent = extent;
+    const query = new URLSearchParams(window.location.search);
+    if (extras.lod && query.get('lod') !== '0') {
+      this.lod = new Lod(extras.lod, base, size, scene, query.get('lod') === 'tint');
+      this.loadRadius = LOD_LOAD_RADIUS;
+    }
+    const radius = Number(query.get('radius'));
+    if (radius >= 1) this.loadRadius = radius;
   }
 
   /** Start loading what is near `focus` (a scene position) and drop what is far. */
@@ -222,6 +248,19 @@ export class City {
       if (this.loading >= 6) break;
       void this.load(tile);
     }
+    this.lod?.update(focus); // after the tiles, which come first
+  }
+
+  /** How many full tiles are loaded, near or far. */
+  loadedTiles(): number {
+    let count = 0;
+    for (const tile of this.tiles.values()) if (tile.state === 'ready') count++;
+    return count;
+  }
+
+  /** How many blocks of the simplified model within range of `focus` have yet to arrive (0 without one). */
+  lodPending(focus: Vector3): number {
+    return this.lod?.pending(focus) ?? 0;
   }
 
   /** How many tiles in range of `focus` are loaded, out of how many should be. */
@@ -393,6 +432,7 @@ export class City {
       this.tileOfGroup.set(group, tile);
       tile.state = 'ready';
       this.scene.add(group);
+      this.lod?.setFull(tile.key, true); // the full tile replaces its simplified cell
     } catch (error) {
       console.error(`tile ${tile.glb} failed to load`, error);
       tile.state = 'idle';
@@ -408,6 +448,7 @@ export class City {
     if (tile.group) this.scene.remove(tile.group);
     tile.group = tile.bvh = tile.bounds = tile.semantics = tile.trunks = undefined;
     tile.state = 'idle';
+    this.lod?.setFull(tile.key, false); // and the simplified cell comes back
   }
 
   /** One shared material per layer, taking its colour and finish from the tile data. */
