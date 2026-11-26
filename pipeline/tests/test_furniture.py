@@ -4,7 +4,7 @@ import pytest
 from boston_pipeline.furniture import KINDS, add_object
 from boston_pipeline.mesh import MeshBuilder
 
-BUDGETS = {"bench": 80, "lamp": 80, "waste_basket": 40, "bollard": 40, "block": 13}
+BUDGETS = {"bench": 100, "lamp": 80, "waste_basket": 40, "bollard": 40, "block": 13}  # a bench has slats now: 88 triangles
 
 
 def _build(kind, x=10.0, y=20.0, **options):

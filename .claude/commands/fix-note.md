@@ -14,7 +14,8 @@ Otherwise, follow "Fixing a note" in AGENTS.md for that issue:
 1. `gh issue view <number>` and read the note and its JSON position block.
 2. Run `boston-pipeline inspect` at the `looking_at` position (or `standing` if
    there is none) to see the source features there. Build the area first if
-   `data/raw/pilot/osm.json` or the tiles are missing.
+   `data/raw/pilot/osm.json` (or `data/raw/boston/osm.json` for a note west of
+   Arlington Street) or the tiles are missing.
 3. Say what kind of problem this is (wrong data for one place, something drawn
    wrongly everywhere, something not drawn at all, or a viewer issue) and what
    you intend to change. If the note does not give enough to act on, or the fix

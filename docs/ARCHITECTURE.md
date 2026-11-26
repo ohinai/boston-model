@@ -34,7 +34,7 @@ Every tool and client shares one coordinate system, defined in
 | Projection | NAD83 / Massachusetts Mainland, metres (EPSG:26986) |
 | Origin | State Plane E 236 000, N 901 000, which is on Beacon Hill at 42.358669° N, 71.063006° W |
 | Axes | x east, y north, z up, all in metres |
-| Heights | metres above NAVD88; the pilot is flat at z = 0 |
+| Heights | metres above NAVD88; the model is flat at z = 0 |
 
 A state plane projection was chosen over latitude and longitude or a
 tangent-plane frame because Massachusetts publishes its data in it, distances
@@ -83,14 +83,15 @@ with the same name:
 | `green` | Parks, lawns, pitches, playgrounds, cemeteries, with per-vertex colour by kind of surface | 0 |
 | `beds` | Planted beds: soil under the whole bed, bare at the edge, and a low mass of planting in from it, with per-vertex colour. Solid | 0, planting 0.35 m |
 | `paths` | Footpaths, plazas, piers, platforms, with per-vertex colour by surface (asphalt, brick, gravel and so on) | 0 |
-| `roads` | Carriageways | −0.12 m |
+| `roads` | Carriageways, with per-vertex colour (worn asphalt) | −0.12 m |
+| `markings` | Road paint: crosswalks, centre lines, lane lines, stop lines, with per-vertex colour. Not solid, no feature ids | 4 cm above the road |
 | `rail` | Surface track | 0 |
 | `water` | Rivers, ponds, harbour | −0.6 m |
 | `curbs` | Vertical faces around roads and water | up to 0 |
 | `building_walls` | Walls, with per-vertex colour and facade UVs | |
-| `building_roofs` | Roofs and undersides, with per-vertex colour | |
+| `building_roofs` | Flat and pitched roofs (from `roof:shape`: gabled, hipped, pyramidal, skillion, mansard, gambrel, barrel, dome) and undersides, with per-vertex colour. The wall between the eaves and the ridge is in `building_walls` with UV (0, 0) | |
 | `trees` | Trees as low-poly shapes whose form, size and colour follow species and trunk size, with per-vertex colour | |
-| `furniture` | Benches, lamp posts, litter bins, drinking fountains, flagpoles, with per-vertex colour | |
+| `furniture` | Benches, lamp posts, litter bins, drinking fountains, flagpoles, traffic signals, stop signs, post boxes, bicycle racks and bus stops, with per-vertex colour | |
 | `monuments` | Statues, sculptures, memorials, monuments, plaques and fountains. Placeholders of the right kind and size in the right place, not likenesses | |
 | `figures` | Hand-made statue figures from `assets/` (today the equestrian statues), with per-vertex colour. Solid, casts shadows, and is shaded smooth by the viewer, so its parts need welded shared vertices. The pedestal stays in `monuments` | |
 | `bridges` | Raised footbridge decks with railings, and the stone piers of things standing in the water beside them | up to about 2 m |
@@ -161,6 +162,7 @@ the id of the building it belongs to, and takes that building's name.
 `objects` lists everything drawn as a thing standing in the tile: each tree,
 piece of furniture, monument, raised bridge, fence and wall. Each entry has `id`, `kind`
 (`tree`, `bench`, `lamp`, `waste_basket`, `drinking_water`, `flagpole`,
+`signal`, `stop_sign`, `post_box`, `bicycle_parking`, `bus_stop`, `lantern`,
 `bollard`, `block`, `plaque`, `stele`, `obelisk`, `column`, `statue`,
 `sculpture`, `monument`, `fountain`, `bridge`, or a barrier: `fence`, `chain`,
 `wall`, `retaining_wall`, `hedge`, `guard_rail`, `kerb`, `bollards` or `gate`), `pos`,
@@ -402,8 +404,9 @@ where the city is edited.
 - **Flat-earth placement.** The whole tileset is placed on the globe as one
   plane, which drifts from the curved surface by about 8 m at 10 km from the
   origin. Per-tile placement fixes this when the area grows.
-- **Uncompressed geometry.** The pilot is 70 tiles, about 904,000 triangles and
-  22 MB. Tiles are already written without normals, with shared vertices and
+- **Uncompressed geometry.** The `boston` area is 434 tiles, about 5.8 million
+  triangles and 149 MB (the downtown pilot inside it is 70 tiles and about 1.5
+  million triangles). The viewer loads the tiles within 1.8 km of you, about 130. Tiles are already written without normals, with shared vertices and
   16-bit indices where they fit. Quantisation and mesh compression are standard
   glTF extensions and are not applied yet.
 - **Tree crowns are not solid** (trunks are) and tree sizes are estimates.

@@ -23,9 +23,11 @@ here.
 
 ## Status
 
-Early. One pilot district is built: about 4.6 km² of downtown covering Boston
-Common, the Public Garden, Beacon Hill, Downtown Crossing, Government Center,
-the Financial District and the waterfront.
+Early. Two areas can be built. The pilot is about 4.6 km² of downtown covering
+Boston Common, the Public Garden, Beacon Hill, Downtown Crossing, Government
+Center, the Financial District and the waterfront. The published area, `boston`,
+adds Back Bay, Kenmore, Fenway, the Longwood edge and North Brookline out to
+Coolidge Corner and Washington Square: about 28 km², 434 tiles.
 
 What works today:
 
@@ -60,8 +62,11 @@ What works today:
 What is not accurate yet:
 
 - The ground is flat. Beacon Hill is not.
-- Building heights are measured for only 17% of buildings. Another 34% are
-  estimated from storey counts and 48% are a default guess by building type.
+- Building heights are measured for only 17% of buildings in the pilot. Another
+  34% are estimated from storey counts and 48% are a default guess by building
+  type. Across the whole `boston` area 68% are a guess, most of them in the west.
+- Brookline has only the trees mapped in OpenStreetMap: the city's tree
+  inventory stops at the town line, and Brookline's own data states no licence.
 - Roofs are flat, and facades are drawn by rule from wall colour and storeys,
   not from each building's real face.
 - Street widths are estimated from lane counts.
@@ -86,6 +91,9 @@ python -m venv .venv
 pip install -e "./pipeline[dev]"
 boston-pipeline fetch pilot       # downloads about 13 MB: OpenStreetMap and the city tree inventory
 boston-pipeline build pilot       # writes web/public/tiles
+# or the whole published area, Back Bay to Coolidge Corner (about 45 MB of map data, fetched in strips)
+boston-pipeline fetch boston
+boston-pipeline build boston      # 434 tiles, a couple of minutes
 
 # 2. Walk around
 cd web

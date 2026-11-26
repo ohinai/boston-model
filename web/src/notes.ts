@@ -37,7 +37,7 @@ export interface NoteContext {
     z: number;
     distance: number;
     /**
-     * Tile layer hit: ground, green, beds, water, roads, paths, rail, curbs, building_walls,
+     * Tile layer hit: ground, green, beds, water, roads, markings, paths, rail, curbs, building_walls,
      * building_roofs, trees, furniture, monuments or bridges.
      */
     layer: string;
@@ -72,6 +72,7 @@ const LAYER_NAMES: Record<string, string> = {
   green: 'grass or planting',
   water: 'water',
   roads: 'a road',
+  markings: 'road paint',
   paths: 'a path',
   rail: 'rail track',
   curbs: 'a curb or bank',
@@ -101,6 +102,12 @@ const KIND_NAMES: Record<string, string> = {
   statue: 'a statue',
   sculpture: 'a sculpture',
   fountain: 'a fountain',
+  lantern: 'a stone lantern',
+  signal: 'a traffic signal',
+  stop_sign: 'a stop sign',
+  post_box: 'a post box',
+  bicycle_parking: 'a bicycle rack',
+  bus_stop: 'a bus stop',
   bridge: 'a bridge',
   tree: 'a tree',
   fence: 'a fence',

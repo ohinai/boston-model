@@ -29,8 +29,11 @@ from .features import MULCH_MIN_PARK, MULCH_PARKS, Building, Scene, bridge_rise,
 from .furniture import add_object
 from .gltf import Material, write_glb
 from .groundlook import add_bed_planting, add_lawn, add_mulch, bed_style, mulch_radius
+from .markings import add_asphalt, add_paint, plan as plan_markings
 from .mesh import MeshBuilder, add_flat, add_skirt, add_walls, colour_bytes
 from .pavilions import add_dock_edge, add_pavilion, painted_pier, roof_shape
+from .roofs import add_roof, plan_roof
+from .streetfurniture import street_objects
 from .trees import add_tree, describe
 
 ATTRIBUTION = "© OpenStreetMap contributors (ODbL 1.0)"
@@ -48,7 +51,8 @@ MATERIALS = {
     "green": Material("#ffffff", 1.0),
     "beds": Material("#ffffff", 1.0),
     "water": Material("#ffffff", 0.15),
-    "roads": Material("#6b6d70", 0.9),
+    "roads": Material("#ffffff", 0.92),  # worn asphalt, coloured per vertex (see markings.py)
+    "markings": Material("#ffffff", 0.75),  # paint on the roads: crosswalks, centre and lane lines, stop lines
     "paths": Material("#ffffff", 0.9),
     "rail": Material("#6b6259", 1.0),
     "curbs": Material("#8d8c88", 0.8),
@@ -102,7 +106,7 @@ PIER_ABOVE_DECK = 1.1
 PIER_STONE = "#a9a59b"
 PIER_LAMP = 2.8  # a lamp on a pier is a lantern on a short post, not a full lamp post
 # Objects drawn in the `monuments` layer; every other kind goes in `furniture`.
-MONUMENT_KINDS = {"plaque", "stele", "obelisk", "column", "statue", "sculpture", "monument", "fountain"}
+MONUMENT_KINDS = {"plaque", "stele", "obelisk", "column", "statue", "sculpture", "monument", "fountain", "lantern"}
 MIN_AREA = 0.05  # square metres; smaller slivers are dropped
 # A fence, wall or hedge is opened where a path crosses it, so nobody is walled in
 # by one mapped straight over a gateway, and cut where it lies in a carriageway.
@@ -179,6 +183,7 @@ class Context:
     facing: dict[str, float] = field(default_factory=dict)  # direction of each bench that states none, by id
     towers: dict[str, list] = field(default_factory=dict)  # pylons of each suspension footbridge, by way id (see _towers)
     docks: dict[tuple[int, int], list] = field(default_factory=dict)  # painted pier areas, by the tile of a point inside each
+    markings: object = None  # every piece of road paint in the district (see markings.plan)
 
 
 ROAD_BRIDGE_REACH = 6.0  # a footway this close to a carriageway is part of a road bridge
@@ -258,7 +263,7 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
     for tree in scene.trees:
         trees[world.tile_of(tree.x, tree.y)].append(tree)
     objects = defaultdict(list)
-    for thing in scene.objects:
+    for thing in street_objects(scene):  # the scene's objects, with signals made and street furniture placed (streetfurniture.py)
         objects[world.tile_of(thing.x, thing.y)].append(thing)
 
     barriers = defaultdict(list)
@@ -294,6 +299,7 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
         facing=bench_facings(scene.objects, scene.ways, [a.polygon for a in scene.areas["path"]], surfaces["water"]),
         towers=_towers(decks, water, scene.objects),
         docks=_docks(scene.areas["path"]),
+        markings=plan_markings(scene, roads),
     )
 
 
@@ -610,7 +616,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
     origin = np.array([x0, y0])
     surfaces = _partition(ctx, tile_box)
 
-    flat = {name: MeshBuilder(name, colours=name in COVERS) for name in ("ground", "green", "water", "roads", "paths", "rail")}
+    flat = {name: MeshBuilder(name, colours=name in COVERS or name == "roads") for name in ("ground", "green", "water", "roads", "paths", "rail")}
     curbs = MeshBuilder("curbs")
     heights = {"roads": ROAD_Z, "water": WATER_Z}
     for name, pieces in surfaces.items():
@@ -620,6 +626,8 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
         for polygon, cover in pieces:
             if name == "green" and cover in PATCHY_GREEN:
                 add_lawn(flat[name], polygon, z, origin, COVERS[name][cover], PATCHY_GREEN[cover])
+            elif name == "roads":
+                add_asphalt(flat[name], polygon, z, origin)
             else:
                 add_flat(flat[name], polygon, z, origin, _cover_colour(name, cover) if name in COVERS else None)
             if z < 0 and name != "water":
@@ -628,6 +636,10 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             # One wall round the water's whole outline, not round each kind of water.
             for polygon in _pieces(unary_union([polygon for polygon, _ in pieces])):
                 add_skirt(curbs, polygon, z, 0.0, origin, bounds)
+
+    # Paint on the carriageway, a few centimetres above it (see markings.py).
+    paint = MeshBuilder("markings", colours=True)
+    add_paint(paint, ctx.markings, tile_box, [polygon for polygon, _ in surfaces["roads"]], ROAD_Z, origin)
 
     # Planted beds: bare soil at the edge, and a low mass of planting in from it.
     beds = MeshBuilder("beds", colours=True)
@@ -666,8 +678,15 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             continue
         wall = colour_bytes(building.wall_colour)
         roof = colour_bytes(building.roof_colour)
-        add_walls(walls, building.polygon, building.min_height, building.height, origin, wall, feature=index, facade=True)
-        add_flat(roofs, building.polygon, building.height, origin, roof, feature=index)
+        # A gabled, hipped, ... roof from the roof tags, else None: a flat slab (see roofs.py).
+        pitched = plan_roof(building, [p for p in ctx.footprints.near(building.polygon.buffer(1.0)) if p is not building.polygon]) if building.roof else None
+        if pitched is None:
+            add_walls(walls, building.polygon, building.min_height, building.height, origin, wall, feature=index, facade=True)
+            add_flat(roofs, building.polygon, building.height, origin, roof, feature=index)
+        else:
+            if pitched.eave - building.min_height > 0.05:  # a spire starts where the part below it ends
+                add_walls(walls, building.polygon, building.min_height, pitched.eave, origin, wall, feature=index, facade=True)
+            add_roof(walls, roofs, building, pitched, origin, feature=index)
         if building.min_height > 0.5:
             underside = colour_bytes(building.wall_colour, 0.6)
             add_flat(roofs, building.polygon, building.min_height, origin, underside, up=False, feature=index)
@@ -739,6 +758,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
             direction=direction, height=height, size=thing.size, colour=thing.colour,
             material=thing.material, variant=thing.variant, seed=zlib.crc32(thing.id.encode()),
             feature=register(thing.id, thing.kind, thing.x, thing.y, thing.name), base=base, figures=figures,
+            tags=thing.tags,
         )
 
     # Fences, walls and the like: each is listed once in this tile however many pieces are left of it.
@@ -772,7 +792,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path) -> dict:
 
     layers = [
         (builder.finish(), MATERIALS[builder.name])
-        for builder in (*flat.values(), beds, curbs, walls, roofs, trees, furniture, monuments, figures, bridges, barriers)
+        for builder in (*flat.values(), paint, beds, curbs, walls, roofs, trees, furniture, monuments, figures, bridges, barriers)
         if not builder.empty
     ]
     name = f"{tx}_{ty}"

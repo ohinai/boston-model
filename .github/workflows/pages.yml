@@ -1,4 +1,4 @@
-# Builds the pilot district and publishes the viewer to GitHub Pages.
+# Builds the Boston area (the pilot plus Back Bay to Coolidge Corner) and publishes the viewer to GitHub Pages.
 # One-time setup: repository Settings > Pages > Source: "GitHub Actions".
 name: Publish viewer
 
@@ -35,8 +35,8 @@ jobs:
         with:
           path: data/raw
           key: osm-${{ hashFiles('areas.toml', 'pipeline/boston_pipeline/osm.py', 'pipeline/boston_pipeline/inventory.py') }}
-      - run: boston-pipeline fetch pilot
-      - run: boston-pipeline build pilot
+      - run: boston-pipeline fetch boston
+      - run: boston-pipeline build boston
 
       - uses: actions/setup-node@v4
         with:

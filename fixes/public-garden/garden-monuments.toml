@@ -1,0 +1,48 @@
+# Which shape each landmark of the Public Garden is drawn in. The pipeline draws statues, fountains and memorials from
+# their tags (monuments.py); OpenStreetMap has no tags for the shape of a pedestal, how many figures a group has, or
+# whether a figure is a child, so these are the project's own, as `edge=kerb` is for a pond's kerb:
+#
+#   pedestal = bell | shaft   a round bell-shaped granite pedestal; a tall tapering granite shaft
+#   figures  = 2 | 3          a group: a second figure lying at the first one's feet (statue); that many round a fountain's pier
+#   figure   = child          a child's proportions on a statue or a fountain; a fountain with a `figure` or an `animal` tag has a
+#                             bronze figure on a stone pier in its basin
+#   animal   = panther        the animal on a fountain (the names of statues and fountains say what they are)
+#   artwork_type = lantern    a Japanese stone lantern (it is mapped as a street lamp that is a work of art)
+#
+# The kind of thing comes from the names OpenStreetMap gives each monument and from the project owner's direction for
+# the Garden; no shape, size or position is taken from a photograph.
+
+["n4408379857"]
+why = "The Edward Everett Hale statue (named so in OpenStreetMap) stands on a round bell-shaped granite pedestal: the project owner's direction for this monument."
+at = [42.35453, -71.06876]
+set = { pedestal = "bell" }
+
+["n358276904"]
+why = "The Ether Monument (named so in OpenStreetMap, 12 m tall, alt_name 'The Good Samaritan', so a group of figures): the project owner's direction is a tall granite shaft with a figure group on top."
+at = [42.35483, -71.07145]
+set = { pedestal = "shaft", figures = "2" }
+
+["n4408379858"]
+why = "The Boy and Bird fountain (named so in OpenStreetMap; bronze, 1.5 m): a bronze child on a pier in the basin, as the project owner describes it."
+at = [42.35363, -71.07121]
+set = { figure = "child" }
+
+["n4408379859"]
+why = "The Small Child fountain (named so in OpenStreetMap; bronze, 1.5 m): a bronze child on a pier in the basin, as the project owner describes it."
+at = [42.35389, -71.07133]
+set = { figure = "child" }
+
+["n4408379867"]
+why = "The Triton Babies Fountain (named so in OpenStreetMap; bronze, 1 m): its name is plural, so two bronze babies round a pier in the basin, as the project owner describes it. The count is the least the name implies, not a count from the data."
+at = [42.35465, -71.06947]
+set = { figure = "child", figures = "2" }
+
+["n4408379864"]
+why = "The Bagheera Fountain (named so in OpenStreetMap): Bagheera is the panther of Kipling's Jungle Book, so a bronze panther on a pier in the basin, as the project owner describes it."
+at = [42.35414, -71.06916]
+set = { animal = "panther" }
+
+["n7693302800"]
+why = "The Japanese Lantern (named so in OpenStreetMap; a gift of 1904): a Japanese stone lantern, as the project owner describes it. It is mapped as a street lamp that is a work of art with artwork_type=installation, which draws as a plain block."
+at = [42.35439, -71.07029]
+set = { artwork_type = "lantern" }

@@ -18,9 +18,12 @@ from .mesh import MeshBuilder, colour_bytes
 
 # --- Dimensions (metres) -------------------------------------------------------
 BENCH_LENGTH, BENCH_LENGTH_RANGE = 1.8, (1.0, 4.0)
-BENCH_DEPTH, BENCH_SEAT_TOP, BENCH_SEAT_THICK = 0.45, 0.45, 0.05
-BENCH_BACK_FROM, BENCH_BACK_TO, BENCH_BACK_THICK = 0.5, 0.88, 0.04
-BENCH_SUPPORT_THICK, BENCH_SUPPORT_INSET = 0.06, 0.15  # end supports, distance from the ends
+BENCH_DEPTH, BENCH_SEAT_TOP, BENCH_SEAT_THICK = 0.45, 0.45, 0.035
+BENCH_BACK_FROM, BENCH_BACK_TO, BENCH_BACK_THICK = 0.5, 0.88, 0.025
+BENCH_SLATS, BENCH_BACK_SLATS, BENCH_SLAT_GAP = 4, 4, 0.02  # wooden slats in the seat and in the back, and the gaps between
+BENCH_ARM_TOP, BENCH_ARM_THICK = 0.59, 0.04  # an armrest's top (kept under 0.6 m: only the backrest stands above that) and thickness
+BENCH_LEG_V = 0.175  # a front leg's distance from the middle of the seat
+BENCH_POST_BASE_V, BENCH_POST_TOP_V = -0.19, -0.245  # a rear post's foot and its top, behind the middle of the seat: it leans back
 
 LAMP_POST_HEIGHT, LAMP_POST_RANGE = 4.9, (2.5, 14.0)
 # The park lamp: a slim black cast-iron post on a flared foot, a collar, an opal globe and a small cap.
@@ -32,8 +35,10 @@ LAMP_GLOBE_RADIUS, LAMP_GLOBE_BELOW, LAMP_GLOBE_ABOVE = 0.19, 0.13, 0.19  # wide
 LAMP_CAP_RADIUS, LAMP_CAP_HEIGHT = 0.07, 0.07
 LAMP_ASSET = "park-lamp"  # assets/park-lamp.glb stands in for the shape above when it is there (see assets/README.md)
 LAMP_GLASS_MIN_BYTE = 60  # in the asset's linear colours, a vertex brighter than this is the globe, darker is iron
-LAMP_ARM_HEIGHT, LAMP_ARM_LENGTH = 8.0, 1.6
-LAMP_HEAD = (0.6, 0.25, 0.12)  # along the arm, across it, thick
+# A street light on a bracket arm (a bent mast, or any lamp over LAMP_ARM_MIN_HEIGHT in features.py): 8 m if no height is stated;
+# the arm reaches out 1.4 m plus 0.12 m for each metre of pole, between 1.6 and 2.6 m.
+LAMP_ARM_HEIGHT = 8.0
+LAMP_ARM_REACH_BASE, LAMP_ARM_REACH_PER_METRE, LAMP_ARM_REACH = 1.4, 0.12, (1.6, 2.6)
 
 BIN_RADIUS, BIN_HEIGHT = 0.28, 0.95
 FOUNTAIN_PEDESTAL_HEIGHT_RANGE = (0.8, 12.0)
@@ -53,8 +58,11 @@ STATUE_HEIGHT, STATUE_MIN_PLINTH_TOTAL = 3.4, 1.6
 STATUE_PEDESTAL_SHARE = 0.44  # of the total height, for a standing figure
 STATUE_FIGURE_MAX = 3.4  # a standing bronze is never taller than this; a taller monument gets a taller pedestal
 STATUE_PEDESTAL_WIDTH, STATUE_PEDESTAL_MAX_WIDTH = 0.34, 2.6  # the die: of the total height, up to this many metres (the footing is wider)
-EQUESTRIAN_HEIGHT, EQUESTRIAN_PEDESTAL_SHARE = 6.0, 0.42  # a rider needs a bigger statue than a walker
-EQUESTRIAN_PEDESTAL_LENGTH, EQUESTRIAN_PEDESTAL_WIDTH = 0.46, 0.28  # of the total height, along and across the horse
+EQUESTRIAN_HEIGHT, EQUESTRIAN_PEDESTAL_SHARE = 6.0, 0.50  # a rider needs a bigger statue than a walker; half stone, half bronze
+# Of the total height, along and across the horse. The die is 0.88 of this and the cap 0.99, and the horse (the hand-made
+# one or the procedural one) is at most 0.96 of the figure's height long: at half the monument's height that is 0.48 of
+# it, so the whole horse stands on the cap with a little to spare at each end instead of overhanging.
+EQUESTRIAN_PEDESTAL_LENGTH, EQUESTRIAN_PEDESTAL_WIDTH = 0.52, 0.28
 STATUE_GROUND_HEIGHT = 1.2  # a statue the data says stands on the ground (`support=ground`), no pedestal
 ANIMAL_LENGTH = 0.9  # nose to tail of an animal statue (`animal=*`) when neither `length` nor `height` is given
 MONUMENT_HEIGHT, MONUMENT_MIN_BASE = 9.0, 2.5
@@ -67,11 +75,11 @@ BLOCK_SIZE, BLOCK_HEIGHT = 0.6, 0.5
 
 # --- Colours -------------------------------------------------------------------
 WOOD, IRON = "#6b4a2f", "#2b2b2d"
-LAMP_POST_COLOUR, LAMP_GLASS, LAMP_ARM_COLOUR, LAMP_HEAD_COLOUR = "#1c1e20", "#efece0", "#8a8d8f", "#4a4d50"
+LAMP_POST_COLOUR, LAMP_GLASS, LAMP_ARM_COLOUR, LAMP_HEAD_COLOUR = "#1c1e20", "#efece0", "#7b7f82", "#55585b"
 BIN_COLOUR, BIN_OPENING = "#26332b", "#0f1411"
 WATER_FOUNTAIN, FLAGPOLE_COLOUR = "#6f7275", "#d8d8d4"
 PLAQUE_STONE, PLAQUE_BRONZE = "#8f8b84", "#5b4a34"
-STELE_STONE, PLINTH_STONE, MONUMENT_STONE = "#a9a59b", "#7f786f", "#b3aea3"  # the plinth is warm grey granite
+STELE_STONE, PLINTH_STONE, MONUMENT_STONE = "#a9a59b", "#706a61", "#b3aea3"  # the plinth is warm grey granite
 FOUNTAIN_STONE, FOUNTAIN_WATER = "#a9a59b", "#3f6f85"
 BOLLARD_COLOUR, BLOCK_STONE = "#23262a", "#a9a59b"
 FIGURE_COLOURS = {
@@ -264,6 +272,41 @@ def limb(parts, colour, to_world, a, b, r0, r1=None, sides=4, flat=1.0, closed=T
     _flat_triangles(parts, colour, np.concatenate(triangles), world([(a + b) / 2])[0])
 
 
+def face(parts, colour, points, toward) -> None:
+    """A flat convex polygon (three or more 3-D points in order) wound to face the direction `toward`. One normal."""
+    pts = np.asarray(points, dtype=np.float64)
+    normal = np.cross(pts[1] - pts[0], pts[2] - pts[0])
+    normal /= np.linalg.norm(normal)
+    if normal @ np.asarray(toward, dtype=np.float64) < 0:
+        pts, normal = pts[::-1], -normal
+    k = np.arange(1, len(pts) - 1)
+    parts.add(pts, normal, np.column_stack([np.zeros_like(k), k, k + 1]), colour)
+
+
+_CUBOID_FACES = {  # the faces of a box with corners (u0, v0, z0) and (u1, v1, z1): corners, and the way each faces
+    "t": (((0, 0, 1), (1, 0, 1), (1, 1, 1), (0, 1, 1)), (0, 0, 1)),
+    "b": (((0, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0)), (0, 0, -1)),
+    "f": (((0, 1, 0), (1, 1, 0), (1, 1, 1), (0, 1, 1)), (0, 1, 0)),
+    "r": (((0, 0, 0), (1, 0, 0), (1, 0, 1), (0, 0, 1)), (0, -1, 0)),
+    "l": (((0, 0, 0), (0, 1, 0), (0, 1, 1), (0, 0, 1)), (-1, 0, 0)),
+    "R": (((1, 0, 0), (1, 1, 0), (1, 1, 1), (1, 0, 1)), (1, 0, 0)),
+}
+
+
+def cuboid(parts, colour, to_world, u0, u1, v0, v1, z0, z1, faces="tbfrlR") -> None:
+    """A box between (u0, v0, z0) and (u1, v1, z1) in the frame of `_frame`, with only the faces named: t(op), b(ottom),
+    f(ront, +v), r(ear, -v), l(eft, -u), R(ight, +u). Leave out the faces nobody can see; a box costs 2 triangles a face."""
+    lo, hi = np.array([u0, v0, z0]), np.array([u1, v1, z1])
+    origin = to_world(0.0, 0.0, 0.0)
+    for name in faces:
+        corners, toward = _CUBOID_FACES[name]
+        face(parts, colour, [to_world(*(lo + np.array(c) * (hi - lo))) for c in corners], to_world(*toward) - origin)
+
+
+# The shapes of the park's landmarks live in monuments.py, which uses the helpers above (so it is imported only now).
+from . import monuments  # noqa: E402
+
+
 # --- Kinds ---------------------------------------------------------------------
 @dataclass
 class _Opts:
@@ -273,6 +316,8 @@ class _Opts:
     material: str | None
     variant: str | None
     shade: float  # small per-object lightness variation
+    tags: dict | None = None  # the object's own tags, where a shape reads more than the fields above (see monuments.py)
+    seed: int = 0  # the same number the shade came from: what varies between two statues' poses
 
     def paint(self, default: str) -> np.ndarray:
         """The object's main material: the stated colour exactly, else the default with variation."""
@@ -288,23 +333,44 @@ class _Opts:
 
 
 def _bench(p, x, y, d, o: _Opts) -> None:
+    """A park bench: a seat and a back of wooden slats on two cast-iron ends (a front leg, an armrest, and a rear post that
+    leans back to carry the backrest). The sitter looks along `d`. About 90 triangles; a backless bench about 50.
+    Only the faces anyone can see are drawn: slats show their tops and edges, the legs no tops or bottoms."""
     length = min(max(o.size if o.size is not None else BENCH_LENGTH, BENCH_LENGTH_RANGE[0]), BENCH_LENGTH_RANGE[1])
     wood, iron = o.paint(WOOD), colour_bytes(IRON)
+    W = _frame(x, y, d)
+    half, deep = length / 2, BENCH_DEPTH / 2
     seat_bottom = BENCH_SEAT_TOP - BENCH_SEAT_THICK
-    sx, sy = _at(x, y, d, 0, 0)
-    box(p, wood, sx, sy, seat_bottom, BENCH_SEAT_TOP, length, BENCH_DEPTH, d)
-    rear = -BENCH_DEPTH / 2 + BENCH_BACK_THICK / 2  # the sitter looks along `d`, so the back is behind them
+    # The seat: an edge band, then the slats' tops with a dark strip below so the gaps between them read as gaps.
+    cuboid(p, wood, W, -half, half, -deep, deep, seat_bottom, BENCH_SEAT_TOP, "frlR")
+    slat = (BENCH_DEPTH - (BENCH_SLATS - 1) * BENCH_SLAT_GAP) / BENCH_SLATS
+    for k in range(BENCH_SLATS):
+        v0 = -deep + k * (slat + BENCH_SLAT_GAP)
+        cuboid(p, wood, W, -half, half, v0, v0 + slat, BENCH_SEAT_TOP, BENCH_SEAT_TOP, "t")
+    cuboid(p, iron, W, -half, half, -deep, deep, BENCH_SEAT_TOP - 0.004, BENCH_SEAT_TOP - 0.004, "t")
     backless = o.variant == "backless"
-    if not backless:
-        bx, by = _at(x, y, d, 0, rear)
-        box(p, wood, bx, by, BENCH_BACK_FROM, BENCH_BACK_TO, length, BENCH_BACK_THICK, d)
+    # The ends stand flush with the bench's ends. `lean` is how far a rear post leans back with each metre of height.
+    post_u, post_half = half - 0.025, 0.0198
+    lean = (BENCH_POST_TOP_V - BENCH_POST_BASE_V) / BENCH_BACK_TO
+    if not backless:  # the back: slats between the posts, each shown from the front and from behind
+        rows = (BENCH_BACK_TO - BENCH_BACK_FROM + BENCH_SLAT_GAP) / BENCH_BACK_SLATS - BENCH_SLAT_GAP  # a slat's height
+        inner, origin, t = post_u - post_half, W(0.0, 0.0, 0.0), BENCH_BACK_THICK / 2
+        for k in range(BENCH_BACK_SLATS):
+            z0 = BENCH_BACK_FROM + k * (rows + BENCH_SLAT_GAP)
+            for side, toward in ((1, (0, 1, 0)), (-1, (0, -1, 0))):
+                corners = [W(u, BENCH_POST_BASE_V + lean * z + side * t, z) for u, z in ((-inner, z0), (inner, z0), (inner, z0 + rows), (-inner, z0 + rows))]
+                face(p, wood, corners, W(*toward) - origin)
+        v = BENCH_POST_BASE_V + lean * BENCH_BACK_TO
+        face(p, wood, [W(u, v + s * t, BENCH_BACK_TO) for u, s in ((-inner, -1), (inner, -1), (inner, 1), (-inner, 1))], (0, 0, 1))
     for side in (-1, 1):
-        u = side * (length / 2 - BENCH_SUPPORT_INSET)
-        ex, ey = _at(x, y, d, u, 0)
-        box(p, iron, ex, ey, 0.0, seat_bottom, BENCH_SUPPORT_THICK, BENCH_DEPTH * 0.9, d)
-        if not backless:  # a rear post carrying the backrest
-            px, py = _at(x, y, d, u, rear)
-            box(p, iron, px, py, seat_bottom, BENCH_BACK_TO - 0.02, BENCH_SUPPORT_THICK, BENCH_BACK_THICK, d)
+        u = side * post_u
+        leg_top = seat_bottom if backless else BENCH_ARM_TOP - BENCH_ARM_THICK
+        for v in ((BENCH_LEG_V, -BENCH_LEG_V) if backless else (BENCH_LEG_V,)):  # a front leg; a backless bench has a rear one too
+            cuboid(p, iron, W, u - 0.02, u + 0.02, v - 0.025, v + 0.025, 0.0, leg_top, "frlR")
+        if not backless:
+            # (the post starts a hair above the ground: the leaning post's square end would otherwise dip a millimetre under it)
+            limb(p, iron, W, (u, BENCH_POST_BASE_V, 0.003), (u, BENCH_POST_BASE_V + lean * BENCH_BACK_TO, BENCH_BACK_TO), 0.028, 0.024, sides=4, closed=False)
+            cuboid(p, iron, W, u - 0.027, u + 0.027, -0.20, deep - 0.005, BENCH_ARM_TOP - BENCH_ARM_THICK, BENCH_ARM_TOP, "tfrlR")
 
 
 def _asset_lamp(p, asset, x, y, d, o: _Opts, top: float) -> None:
@@ -317,16 +383,25 @@ def _asset_lamp(p, asset, x, y, d, o: _Opts, top: float) -> None:
     p.add(positions, normals, indices, colours)
 
 
+def _arm_lamp(p, x, y, d, o: _Opts) -> None:
+    """A street light on a bracket arm: a tapering pole, an arm that rises out over the road along `d` with a brace under
+    it, and a cobra-head luminaire hanging at its end. The top of the luminaire is 3 cm under the stated height. 54 triangles."""
+    top = o.tall(LAMP_ARM_HEIGHT, 2.5, 14.0)
+    pole = o.paint(LAMP_ARM_COLOUR)
+    W = _frame(x, y, d)
+    reach = min(max(LAMP_ARM_REACH_BASE + LAMP_ARM_REACH_PER_METRE * top, LAMP_ARM_REACH[0]), LAMP_ARM_REACH[1])
+    prism(p, pole, x, y, 0.0, top - 0.12, 0.11, 0.065, 8, top=True)
+    limb(p, pole, W, (0.0, 0.0, top - 0.30), (0.0, reach - 0.25, top - 0.06), 0.05, 0.035, sides=4)
+    limb(p, pole, W, (0.0, 0.0, top - 1.10), (0.0, 0.55 * reach, top - 0.20), 0.025, 0.02, sides=4, closed=False)
+    head = colour_bytes(LAMP_HEAD_COLOUR)
+    v0, v1 = reach - 0.62, reach + 0.12  # the housing stands over the end of the arm, mostly out beyond it
+    cuboid(p, head, W, -0.15, 0.15, v0, v1, top - 0.24, top - 0.03, "tfrlR")
+    cuboid(p, colour_bytes(LAMP_GLASS), W, -0.12, 0.12, v0 + 0.05, v1 - 0.05, top - 0.241, top - 0.241, "b")  # the lens
+
+
 def _lamp(p, x, y, d, o: _Opts) -> None:
     if o.variant == "arm":
-        top = o.tall(LAMP_ARM_HEIGHT, 2.5, 14.0)
-        pole = o.paint(LAMP_ARM_COLOUR)
-        prism(p, pole, x, y, 0.0, top, 0.10, 0.06, 8, top=True)
-        ax, ay = _at(x, y, d, 0, LAMP_ARM_LENGTH / 2)
-        box(p, pole, ax, ay, top - 0.40, top - 0.32, 0.08, LAMP_ARM_LENGTH, d)
-        hx, hy = _at(x, y, d, 0, LAMP_ARM_LENGTH - LAMP_HEAD[0] / 2 + 0.1)
-        box(p, colour_bytes(LAMP_HEAD_COLOUR), hx, hy, top - 0.52, top - 0.40, LAMP_HEAD[1], LAMP_HEAD[0], d)
-        return
+        return _arm_lamp(p, x, y, d, o)
     top = o.tall(LAMP_POST_HEIGHT, *LAMP_POST_RANGE)
     asset = assets.load(LAMP_ASSET)
     if asset is not None:  # the hand-made lamp (assets/park-lamp.glb); without it, the shape below
@@ -366,6 +441,8 @@ def _flagpole(p, x, y, d, o: _Opts) -> None:
     ball = FLAGPOLE_BALL_RADIUS
     prism(p, colour, x, y, 0.0, top - ball, 0.07, 0.04, 8)
     octahedron(p, colour_bytes("#c9a24a"), x, y, top - ball, ball)
+    if monuments.flies_us_flag(o.tags or {}):  # the data says which flag it carries
+        monuments.flag(p, x, y, d, top)
 
 
 def _bollard(p, x, y, d, o: _Opts) -> None:
@@ -409,6 +486,8 @@ def _obelisk(p, x, y, d, o: _Opts) -> None:
 
 
 def _column(p, x, y, d, o: _Opts) -> None:
+    if o.variant == "flag":  # a memorial that is a flagpole (a granite column carrying the pole and its flag)
+        return monuments.flag_memorial(p, x, y, d, o, o.tall(FLAGPOLE_HEIGHT, 3.0, 60.0))
     top = o.tall(COLUMN_HEIGHT, 1.5)
     r = max(top / 22, COLUMN_MIN_RADIUS)
     step, cap = min(0.18, 0.04 * top), min(0.25, 0.06 * top)
@@ -444,9 +523,14 @@ def _plinth(p, x, y, d, o: _Opts, total: float, *, height=None, length=None, wid
     return height
 
 
-def _standing_figure(p, x, y, d, z0, fh, colour) -> None:
+def _standing_figure(p, x, y, d, z0, fh, colour, o: _Opts | None = None) -> None:
     """A person in a long coat standing with arms at the sides: legs, a flared coat, shoulders, a head.
-    It is a placeholder of the right kind and size, not a likeness. About 130 triangles."""
+    It is a placeholder of the right kind and size, not a likeness. About 130 triangles; a figure at least
+    DETAIL_MIN_HEIGHT tall (one given `o`) is drawn in full by monuments.person instead, with boots, hands, a face
+    and one of four poses chosen by the statue's seed (about 330 triangles)."""
+    if o is not None and fh >= monuments.DETAIL_MIN_HEIGHT:
+        child = str((o.tags or {}).get("figure", "")).lower() == "child"
+        return monuments.person(p, x, y, d, z0, fh, colour, pose=o.seed % 4, child=child)
     to_world = _frame(x, y, d, z0)
     bar = lambda a, b, r0, r1=None, **k: limb(p, colour, to_world, a, b, r0, r1, **k)  # noqa: E731
     prism(p, colour, x, y, z0, z0 + 0.035 * fh, 0.17 * fh, sides=6, top=True)  # the bronze's own base
@@ -503,7 +587,11 @@ def _equestrian_figure(p, x, y, d, z0, fh, colour) -> None:
 
 def _animal(p, x, y, d, o: _Opts) -> None:
     """A low animal statue (a duck, a tortoise): body, neck and head, standing on the ground. Sized by
-    `length` (nose to tail) if stated, else by `height`, else ANIMAL_LENGTH. About 45 triangles."""
+    `length` (nose to tail) if stated, else by `height`, else ANIMAL_LENGTH. About 45 triangles. A duck, goose, dog,
+    lion, turtle and the like (`animal=*`, see monuments.species_family) is drawn by monuments.animal instead."""
+    family = monuments.species_family(o.tags)
+    if family:
+        return monuments.animal(p, x, y, d, family, monuments.animal_extent(family, o.size, o.height, ANIMAL_LENGTH), o.figure())
     nose_to_tail, height_per_length = 0.82, 0.55
     if o.size:
         length = o.size / nose_to_tail
@@ -535,10 +623,22 @@ def _statue(p, x, y, d, o: _Opts) -> None:
             length=EQUESTRIAN_PEDESTAL_LENGTH * total, width=EQUESTRIAN_PEDESTAL_WIDTH * total,
         )
     else:  # a standing figure is at most STATUE_FIGURE_MAX tall: a taller monument has a taller pedestal
-        z0 = _plinth(p, x, y, d, o, total, height=max(total - STATUE_FIGURE_MAX, STATUE_PEDESTAL_SHARE * total))
+        style = str((o.tags or {}).get("pedestal", "")).lower()  # the project's own tag, see monuments.py
+        square = min(STATUE_PEDESTAL_WIDTH * total, STATUE_PEDESTAL_MAX_WIDTH)
+        stone_height = max(total - STATUE_FIGURE_MAX, STATUE_PEDESTAL_SHARE * total)
+        if style == "bell":  # round, with the footing as wide as a stepped pedestal's
+            z0 = monuments.bell_pedestal(p, x, y, stone_height, 0.63 * square, o.shade)
+        elif style == "shaft":  # a tall shaft for a group: the figures take about a quarter of the height
+            z0 = monuments.shaft_pedestal(p, x, y, d, total - min(0.27 * total, STATUE_FIGURE_MAX), min(0.21 * total, 3.2), o.shade)
+        else:
+            z0 = _plinth(p, x, y, d, o, total, height=stone_height)
     if equestrian and _equestrian_asset(p, x, y, d, z0, total - z0, o):
         return
-    (_equestrian_figure if equestrian else _standing_figure)(p, x, y, d, z0, total - z0, colour)
+    if equestrian:
+        return _equestrian_figure(p, x, y, d, z0, total - z0, colour)
+    _standing_figure(p, x, y, d, z0, total - z0, colour, o)
+    if z0 > 0 and monuments.number((o.tags or {}).get("figures"), 1) >= 2:  # a group: a second figure at the first one's feet
+        monuments.lying_figure(p, x, y, d, z0, total - z0, colour)
 
 
 def _equestrian_asset(p, x, y, d, z0, fh, o: _Opts) -> bool:
@@ -587,12 +687,19 @@ def _fountain(p, x, y, d, o: _Opts) -> None:
     disc(p, colour_bytes(FOUNTAIN_WATER), x, y, FOUNTAIN_WATER_Z, inner, sides)
     top = o.tall(FOUNTAIN_HEIGHT, *FOUNTAIN_PEDESTAL_HEIGHT_RANGE)
     pr = max(0.12, 0.12 * radius)
-    if o.variant == "nozzle":
-        prism(p, stone, x, y, 0.0, top, pr * 0.8, pr * 0.6, 8, top=True)
-        return
+    if monuments.is_sculpted_fountain(o.tags):  # the data says it carries a bronze figure (a child, an animal)
+        return monuments.fountain_figures(p, x, y, d, o, top, radius, stone, o.figure())
+    if o.variant == "nozzle":  # a nozzle in the middle and the jets it throws, up to the stated height
+        stem = 0.35 * top
+        prism(p, stone, x, y, 0.0, stem, pr * 0.8, pr * 0.6, 8, top=True)
+        return monuments.spray(p, x, y, stem, top - stem, 0.4 * min(radius, 3.0))
     prism(p, stone, x, y, 0.0, top, pr, pr * 0.7, 8, top=True)
     bowl = min(0.12, 0.1 * top)
     prism(p, stone, x, y, top - 0.15 * top - bowl, top - 0.15 * top, pr * 1.3, pr * 2.8, 8, top=True)
+
+
+def _lantern(p, x, y, d, o: _Opts) -> None:
+    monuments.lantern(p, x, y, d, o)  # a Japanese stone lantern, as a memorial or work of art (not a street lamp)
 
 
 _KINDS = {
@@ -611,6 +718,7 @@ _KINDS = {
     "sculpture": _sculpture,
     "monument": _monument,
     "fountain": _fountain,
+    "lantern": _lantern,
 }
 KINDS: tuple[str, ...] = tuple(_KINDS)
 
@@ -631,14 +739,21 @@ def add_object(
     feature: int = 0,
     base: float = 0.0,
     figures: MeshBuilder | None = None,
+    tags: dict | None = None,
 ) -> None:
     """Add one piece of furniture at (x, y) (tile-relative metres) facing `direction`
     (degrees clockwise from north). Dimensions are in metres; None means the default.
     `base` is the height it stands at: 0 for the ground, more on a bridge pier. `figures` is the builder of the
-    smooth-shaded `figures` layer, where a hand-made statue goes (with it left out, into `builder`)."""
-    if kind not in _KINDS:
+    smooth-shaded `figures` layer, where a hand-made statue goes (with it left out, into `builder`). `tags` are the
+    object's own tags, which a landmark's shape reads for what the fields above do not say (monuments.py)."""
+    shape = _KINDS.get(kind)
+    if shape is None:
+        from . import streetfurniture  # signals, stop signs, post boxes, racks, bus stops; it imports this module, so not at the top
+
+        shape = streetfurniture.SHAPES.get(kind)
+    if shape is None:
         raise ValueError(f"unknown furniture kind {kind!r}; expected one of {', '.join(KINDS)}")
     shade = 1.0 + (np.random.default_rng(seed & 0xFFFFFFFF).random() - 0.5) * 0.08  # +-4%
     parts = _Parts()
-    _KINDS[kind](parts, x, y, direction, _Opts(height, size, colour, material, variant, shade))
+    shape(parts, x, y, direction, _Opts(height, size, colour, material, variant, shade, tags, seed & 0xFFFFFFFF))
     parts.flush(builder, feature, base, figures)

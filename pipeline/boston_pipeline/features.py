@@ -31,6 +31,9 @@ DEFAULT_HEIGHTS = {
     "kiosk": 3.0, "roof": 4.5, "service": 3.5, "toilets": 3.2,
 }
 FALLBACK_HEIGHT = 12.0
+# A building tagged `amenity=shelter` (a bus shelter, a sun or weather shelter, a picnic gazebo; 15 in the pilot, 7 to 85 m²)
+# with no height is a small structure, not a 12 m block.
+SHELTER_HEIGHT = 3.0
 
 # Carriageway width in metres by highway class, used when no width or lanes tag exists.
 ROAD_WIDTHS = {
@@ -86,6 +89,10 @@ BRIDGE_RISE_LIMITS = (0.3, 0.8)
 BENCH_REACH = 20.0
 BENCH_WATERSIDE = 10.0
 
+# A street lamp is drawn as a park lamp (a globe on a post) unless it is on a bracket arm: a `lamp_mount` of bent_mast
+# or any arm, or a stated height above this many metres, taller than the park lamps (4 to 5 m; the pilot's tall ones are 7).
+LAMP_ARM_MIN_HEIGHT = 5.5
+
 # Barriers along a line, by their `barrier` tag: (kind, default height, default
 # width) in metres. A `height` or `width` tag wins when it is within BARRIER_LIMITS.
 # A `barrier=gate` way is the opening in a fence or wall. It is drawn open, so nobody is
@@ -135,6 +142,42 @@ STONE = ["#b8b0a2", "#a9a296", "#c2b9a8", "#9d978c", "#cfc6b4"]
 CONCRETE = ["#a7a7a3", "#b5b4ae", "#96969a", "#bcbab2"]
 GLASS = ["#6f8796", "#5f7888", "#7b93a1", "#8097a8", "#62737f"]
 ROOFS = ["#5a5a5c", "#6b6a68", "#4f5052", "#65625e"]
+
+# Roofs (see roofs.py). `roof:shape` values that are drawn as a roof, and the shape roofs.py builds for each; `flat`,
+# and any value not listed here, keeps the flat slab. A value with several (`hipped;pyramidal`) takes its first one
+# that is listed. `pitched` is OpenStreetMap's word for a roof of two slopes with no more said; `cone` is drawn as a
+# pyramid over the footprint (a conical roof on a round tower has a many-sided footprint, so it comes out smooth).
+ROOF_SHAPES = {
+    "gabled": "gable", "gable": "gable", "pitched": "gable", "hipped": "hip", "hip": "hip",
+    "half-hipped": "half_hip", "half_hipped": "half_hip", "pyramidal": "pyramid", "cone": "pyramid",
+    "skillion": "skillion", "gambrel": "gambrel", "mansard": "mansard",
+    # Mappers use quadruple_saltbox (four slopes round a raised middle) for the mansard roofs of rowhouses.
+    "quadruple_saltbox": "mansard", "round": "barrel", "dome": "dome",
+}
+# `building:levels` counts storeys below the roof; a roof's `roof:levels` are the storeys inside it, about this tall each.
+ROOF_LEVEL_HEIGHT = 2.5
+# A building known only by `building:levels` is given its levels x LEVEL_HEIGHT plus this much for a parapet or a
+# flat roof's thickness (see building_height). A pitched roof stands on the walls without it.
+ROOF_ALLOWANCE = 1.0
+# What a roof is covered in, by `roof:material`; the colour is used when there is no `roof:colour`.
+ROOF_MATERIAL_COLOURS = {
+    "slate": "#4a535c", "copper": "#5d9a85", "roof_tiles": "#a0523a", "tile": "#a0523a", "tiles": "#a0523a",
+    "clay_tiles": "#a0523a", "metal": "#8b9095", "steel": "#8b9095", "zinc": "#8b9095", "tin": "#8b9095",
+    "aluminium": "#9a9fa4", "metal_sheet": "#8b9095", "asphalt": "#3e3f42", "shingle": "#3e3f42",
+    "asphalt_shingle": "#3e3f42", "tar_paper": "#3e3f42", "bitumen": "#3e3f42", "roofing_felt": "#3e3f42",
+    "concrete": "#8f8f8b", "gravel": "#7d7a74", "stone": "#9a948a", "glass": "#86a9ba", "gold": "#d3a22b",
+    "grass": "#6b8f4a", "green_roof": "#6b8f4a", "wood": "#6e5742", "wood_shingle": "#6e5742", "thatch": "#8a7550",
+    "plastic": "#7b7e80", "fibre_cement": "#7b7e80", "eternit": "#7b7e80",
+}
+# A pitched roof with no colour or material is slate on a church, a public building or a mansard, and on brick
+# generally, and dark asphalt shingle on a house.
+SLATE_ROOFS = ["#46505a", "#3f4a54", "#525c66", "#4a525c"]
+SHINGLE_ROOFS = ["#414143", "#4a4849", "#3b3c3f", "#53504d"]
+SLATE_BUILDINGS = {
+    "church", "cathedral", "chapel", "synagogue", "mosque", "temple", "civic", "public", "government", "school",
+    "university", "college", "hospital", "train_station",
+}
+SHINGLE_BUILDINGS = {"house", "detached", "semidetached_house", "terrace", "residential", "apartments", "dormitory", "garage", "garages", "shed", "hut"}
 MATERIAL_PALETTES = {
     "brick": BRICK, "stone": STONE, "sandstone": STONE, "limestone": STONE, "granite": STONE,
     "concrete": CONCRETE, "plaster": STONE, "glass": GLASS, "metal": CONCRETE, "steel": GLASS,
@@ -145,6 +188,17 @@ NAMED_COLOURS = {
     "tan": "#c4a77d", "green": "#557a55", "blue": "#52718f", "orange": "#c97a3d",
     "cream": "#e8dcc0", "silver": "#b9bcc0", "maroon": "#6e2b2b", "pink": "#d9a5a5",
 }
+
+
+@dataclass
+class RoofTags:
+    """What the `roof:*` tags say about a roof of a shape we draw (see roof_tags)."""
+
+    shape: str  # a value of ROOF_SHAPES
+    height: float | None = None  # `roof:height`: the roof's own height, metres
+    levels: float | None = None  # `roof:levels`: storeys inside the roof
+    direction: float | None = None  # `roof:direction`: degrees clockwise from north the roof slopes down toward
+    orientation: str | None = None  # `roof:orientation`: "along" or "across" the footprint's long side (the ridge)
 
 
 @dataclass
@@ -161,6 +215,7 @@ class Building:
     # For a part: the building it belongs to, whose own outline is not drawn.
     part_of: str | None = None
     part_of_name: str | None = None
+    roof: RoofTags | None = None  # set where the tags describe a pitched roof; None is a flat slab
 
 
 @dataclass
@@ -209,10 +264,12 @@ class Object:
     name: str | None = None
     direction: float | None = None  # degrees clockwise from north that it faces; None where the data does not say
     height: float | None = None  # metres, where the data states it
-    size: float | None = None  # length of a bench or width of a fountain basin or of an animal statue, where stated
+    size: float | None = None  # length of a bench or width of a fountain basin or of an animal statue, where stated; capacity of a bicycle rack
     colour: str | None = None
     material: str | None = None
-    variant: str | None = None  # bench "backless"; lamp "arm"/"post"; fountain "nozzle"; statue "equestrian"/"animal"/"ground"
+    # bench "backless"; lamp "arm"/"post"; fountain "nozzle"; statue "equestrian"/"animal"/"ground"; signal "post"/"mast"/
+    # "pedestrian"; post_box "ups"; bicycle_parking the `bicycle_parking` tag; bus_stop "shelter"/"shelter+bench" (see streetfurniture.py)
+    variant: str | None = None
     tags: dict = field(default_factory=dict)
 
 
@@ -238,6 +295,7 @@ class Scene:
     coastlines: list[LineString] = field(default_factory=list)
     trees: list[Point] = field(default_factory=list)
     signals: list[Point] = field(default_factory=list)
+    roadnodes: list[Point] = field(default_factory=list)  # `highway=crossing` and `highway=stop` nodes: paint on the road (markings.py)
     pois: list[Point] = field(default_factory=list)
 
 
@@ -282,10 +340,10 @@ def building_height(tags: dict) -> tuple[float, float, str]:
     if height is None or height <= 0:
         levels = parse_number(tags.get("building:levels"))
         if levels and levels > 0:
-            height = levels * LEVEL_HEIGHT + 1.0
+            height = levels * LEVEL_HEIGHT + ROOF_ALLOWANCE
             source = "levels"
         else:
-            height = DEFAULT_HEIGHTS.get(kind, FALLBACK_HEIGHT)
+            height = SHELTER_HEIGHT if tags.get("amenity") == "shelter" else DEFAULT_HEIGHTS.get(kind, FALLBACK_HEIGHT)
             source = "default"
     base = parse_length(tags.get("min_height"))
     if base is None:
@@ -300,6 +358,37 @@ def building_height(tags: dict) -> tuple[float, float, str]:
 
 def _pick(palette: list[str], seed: int) -> str:
     return palette[seed % len(palette)]
+
+
+def roof_tags(tags: dict) -> RoofTags | None:
+    """The roof of a building, when its `roof:shape` is one we draw as a pitched roof (ROOF_SHAPES); else None.
+
+    A `building=roof` is not a building with a roof but a roof alone (pavilions.py draws it on posts, or it is a slab).
+    """
+    if tags.get("building") == "roof":
+        return None
+    shape = next((ROOF_SHAPES[w.strip().lower()] for w in str(tags.get("roof:shape", "")).split(";") if w.strip().lower() in ROOF_SHAPES), None)
+    if shape is None:
+        return None
+    height, levels = parse_length(tags.get("roof:height")), parse_number(tags.get("roof:levels"))
+    orientation = str(tags.get("roof:orientation", "")).strip().lower()
+    return RoofTags(
+        shape, height if height and height > 0 else None, levels if levels and levels > 0 else None,
+        parse_direction(tags.get("roof:direction")), orientation if orientation in ("along", "across") else None,
+    )
+
+
+def _default_roof_colour(tags: dict, wall: str, seed: int) -> str:
+    """A roof with no `roof:colour` or `roof:material`. A flat roof is one of the dark greys in ROOFS; a pitched roof
+    is slate or asphalt shingle (see SLATE_BUILDINGS)."""
+    pitched = roof_tags(tags)
+    if pitched is None:
+        return _pick(ROOFS, seed >> 16)
+    kind = tags.get("building") or tags.get("building:part") or "yes"
+    red, green = (int(wall[i : i + 2], 16) for i in (1, 3))
+    brick = red > 1.4 * green
+    slate = kind in SLATE_BUILDINGS or tags.get("amenity") == "place_of_worship" or pitched.shape == "mansard"
+    return _pick(SLATE_ROOFS if slate or (brick and kind not in SHINGLE_BUILDINGS) else SHINGLE_ROOFS, seed >> 16)
 
 
 def building_colours(ident: str, tags: dict, height: float) -> tuple[str, str]:
@@ -317,7 +406,8 @@ def building_colours(ident: str, tags: dict, height: float) -> tuple[str, str]:
             else:
                 palette = BRICK if roll < 65 else STONE if roll < 90 else CONCRETE
         wall = _pick(palette, seed >> 8)
-    roof = parse_colour(tags.get("roof:colour")) or _pick(ROOFS, seed >> 16)
+    material = ROOF_MATERIAL_COLOURS.get(str(tags.get("roof:material", "")).split(";")[0].strip().lower())
+    roof = parse_colour(tags.get("roof:colour")) or material or _default_roof_colour(tags, wall, seed)
     return wall, roof
 
 
@@ -462,8 +552,18 @@ def parse_direction(value) -> float | None:
 MEMORIAL_FORMS = {
     "statue": "statue", "bust": "statue", "plaque": "plaque", "blue_plaque": "plaque",
     "obelisk": "obelisk", "column": "column", "stele": "stele", "stone": "stele", "tablet": "stele",
-    "war_memorial": "monument",
+    "war_memorial": "monument", "lantern": "lantern",
 }
+
+
+def flies_us_flag(tags: dict) -> bool:
+    """Whether a flagpole carries the national flag of the United States: Wikidata's Q42537 in `flag:wikidata`, or
+    the name in `flag:name`, or `country=US` on a `flag:type` pole. Other flags are not drawn (a pole stays bare)."""
+    return (
+        tags.get("flag:wikidata") == "Q42537"
+        or str(tags.get("flag:name", "")).split(";")[0].strip().lower() == "united states"
+        or (str(tags.get("country", "")).strip().lower() == "us" and "flag:type" in tags)
+    )
 
 
 def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
@@ -472,8 +572,9 @@ def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
         return None
     kind = variant = size = None
     height = parse_length(tags.get("height"))
+    colour = parse_colour(tags.get("colour"))
     if tags.get("amenity") == "fountain":
-        kind, variant = "fountain", "nozzle" if tags.get("fountain") == "nozzle" else None
+        kind, variant = "fountain", "nozzle" if tags.get("fountain") in ("nozzle", "jet_water") else None  # both throw jets
         size = parse_length(tags.get("diameter") or tags.get("width"))
     elif tags.get("historic") in ("monument", "memorial") or tags.get("tourism") == "artwork":
         form = tags.get("memorial") or tags.get("artwork_type") or ""
@@ -492,6 +593,8 @@ def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
             kind, variant, size = "statue", "animal", parse_length(tags.get("length"))
         elif tags.get("support") == "ground" and kind == "statue":
             variant = "ground"
+        if kind == "column" and flies_us_flag(tags):
+            variant = "flag"  # a memorial column that is a flagpole carrying the national flag (a `man_made=flagpole` too)
     elif tags.get("amenity") == "bench":
         kind, variant = "bench", "backless" if tags.get("backrest") == "no" else None
         seats = parse_number(tags.get("seats"))
@@ -503,7 +606,25 @@ def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
             return None
         if height is not None and height < 1.5:
             return None  # a light set into the ground
-        kind, variant = "lamp", "arm" if "bent" in mount or "arm" in mount else "post"
+        # A lamp on a bracket arm: a bent mast, or any lamp too tall to be a park lamp (a globe on a post).
+        arm = "bent" in mount or "arm" in mount or (height is not None and height > LAMP_ARM_MIN_HEIGHT)
+        kind, variant = "lamp", "arm" if arm else "post"
+    # Street furniture beside a carriageway (drawn by streetfurniture.py, which also works out which way each faces).
+    elif tags.get("highway") == "stop":
+        kind = "stop_sign"
+    elif tags.get("amenity") == "post_box":
+        kind = "post_box"
+        owner = f"{tags.get('operator', '')} {tags.get('brand', '')}".lower()
+        variant = "ups" if "ups" in owner.split() or "united parcel" in owner else None
+        if tags.get("colour") == "blue":
+            colour = None  # "blue" is the Postal Service's own blue, the default; the NAMED_COLOURS blue is paler
+    elif tags.get("amenity") == "bicycle_parking":
+        kind, variant = "bicycle_parking", tags.get("bicycle_parking")
+        size = parse_number(tags.get("capacity"))
+    elif tags.get("highway") == "bus_stop":
+        kind = "bus_stop"
+        if tags.get("shelter") == "yes":  # a bench is only drawn inside a shelter
+            variant = "shelter+bench" if tags.get("bench") == "yes" else "shelter"
     elif tags.get("amenity") == "waste_basket":
         kind = "waste_basket"
     elif tags.get("amenity") == "drinking_water":
@@ -517,7 +638,7 @@ def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
     material = (tags.get("material") or "").split(";")[0] or None
     return Object(
         ident, x, y, kind, tags.get("name"), parse_direction(tags.get("direction")),
-        height if height and height > 0 else None, size, parse_colour(tags.get("colour")), material, variant, tags,
+        height if height and height > 0 else None, size, colour, material, variant, tags,
     )
 
 
@@ -545,7 +666,7 @@ def _add_building(scene: Scene, ident: str, tags: dict, polygons: list[Polygon],
     for polygon in polygons:
         if polygon.area >= 2.0:
             scene.buildings.append(
-                Building(ident, polygon, height, base, source, wall, roof, tags, part="building:part" in tags)
+                Building(ident, polygon, height, base, source, wall, roof, tags, part="building:part" in tags, roof=roof_tags(tags))
             )
 
 
@@ -675,6 +796,8 @@ def classify(elements: list[dict]) -> Scene:
         patched = set(element.get("patched", ()))
         if kind == "node":
             x, y = (float(v) for v in world.to_local(element["lon"], element["lat"]))
+            if tags.get("highway") in ("crossing", "stop"):  # kept as well as, not instead of, whatever else the node is
+                scene.roadnodes.append(Point(ident, x, y, kind=tags["highway"], tags=tags))
             if tags.get("natural") == "tree":
                 scene.trees.append(Point(ident, x, y, tags=tags))
             elif tags.get("highway") == "traffic_signals":

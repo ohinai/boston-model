@@ -54,3 +54,101 @@ name = "Acorn Street, Beacon Hill"
 lat = 42.35762
 lon = -71.06905
 heading = 250
+
+[boston]
+name = "Boston core and North Brookline"
+description = "The pilot district, plus Back Bay, Kenmore, Fenway, the Longwood edge and North Brookline out to Coolidge Corner and Washington Square"
+# Built as one rectangle so the sea and water edges close the same way as in the pilot. The pilot's own tiles come out
+# identical; fetch downloads the map in strips (see osm.fetch_area).
+bbox = [-71.1420, 42.3350, -71.0480, 42.3640]
+
+[[boston.places]]
+name = "Massachusetts State House"
+lat = 42.35745
+lon = -71.06368
+heading = 0
+
+[[boston.places]]
+name = "Boston Common (Brewer Fountain)"
+lat = 42.35606
+lon = -71.06262
+heading = 240
+
+[[boston.places]]
+name = "Public Garden"
+lat = 42.35405
+lon = -71.07010
+heading = 300
+
+[[boston.places]]
+name = "Downtown Crossing"
+lat = 42.35550
+lon = -71.06045
+heading = 40
+
+[[boston.places]]
+name = "Old State House"
+lat = 42.35868
+lon = -71.05790
+heading = 270
+
+[[boston.places]]
+name = "Faneuil Hall"
+lat = 42.36000
+lon = -71.05690
+heading = 90
+
+[[boston.places]]
+name = "Long Wharf"
+lat = 42.36020
+lon = -71.05080
+heading = 90
+
+[[boston.places]]
+name = "Acorn Street, Beacon Hill"
+lat = 42.35762
+lon = -71.06905
+heading = 250
+
+# West of the pilot: Back Bay, Kenmore and Fenway, and North Brookline.
+[[boston.places]]
+name = "Commonwealth Avenue Mall"
+lat = 42.35255
+lon = -71.07378
+heading = 270
+
+[[boston.places]]
+name = "Newbury Street"
+lat = 42.35130
+lon = -71.07950
+heading = 270
+
+[[boston.places]]
+name = "Copley Square"
+lat = 42.34985
+lon = -71.07700
+heading = 270
+
+[[boston.places]]
+name = "Kenmore Square"
+lat = 42.34866
+lon = -71.09545
+heading = 90
+
+[[boston.places]]
+name = "Fenway Park"
+lat = 42.34670
+lon = -71.09720
+heading = 0
+
+[[boston.places]]
+name = "Coolidge Corner, Brookline"
+lat = 42.34235
+lon = -71.12125
+heading = 90
+
+[[boston.places]]
+name = "Washington Square, Brookline"
+lat = 42.33960
+lon = -71.13562
+heading = 90

@@ -1,54 +1,61 @@
-# Animal statues. The pipeline draws `animal=*` as a low animal (body, neck and head) standing on the ground,
-# sized by `length` where there is one, instead of a person on a pedestal. `support=ground` is the standard
-# OpenStreetMap tag for a statue with no pedestal (already on Myrtle the Turtle, n7831030800).
-# Sizes are not in the data, so these are drawn at a default 0.9 m nose to tail. The nine ducks are mapped in a line,
-# Mrs. Mallard at its south-western end with the ducklings following behind, so they face south-west (225).
+# Animal statues. The pipeline draws `animal=*` as a low animal standing on the ground, sized by `length` (nose to
+# tail) where there is one, instead of a person on a pedestal: a duck, goose or swan as a bird, a dog or lion as a
+# four-legged animal, a turtle with its shell (monuments.py); any other animal as a simple low one.
+# `support=ground` is the standard OpenStreetMap tag for a statue with no pedestal (already on Myrtle the Turtle,
+# n7831030800).
+#
+# The nine ducks are mapped in a curving line, Mrs. Mallard at its south-western end with the ducklings following
+# behind her, 0.6 to 0.95 m apart. Each faces the one ahead of it along that line (the bearing from its own point to
+# the previous point, computed from the OpenStreetMap coordinates), so they walk in file toward the south-west.
+# The sizes are not in the data. 0.9 m for the mother and 0.42 m for each duckling are plausible sizes for a bronze
+# duck group, chosen so that the nine fit the spacing of their points without overlapping: they are NOT measured
+# (see "needs data" in the lane report).
 
 # Make Way for Ducklings: Mrs. Mallard and her eight ducklings, named in the data after the book's characters.
 ["n2446221110"]
-why = "Mrs. Mallard, from the Make Way for Ducklings group named by the project owner: a duck, standing on the ground along the path, not a person on a pedestal. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Mrs. Mallard, from the Make Way for Ducklings group named by the project owner: a duck, standing on the ground along the path, not a person on a pedestal. She leads the line, so she faces the way it runs, south-west (239 degrees). Drawn 0.9 m from bill to tail: a plausible size, not measured."
 at = [42.35550, -71.06977]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "239", length = "0.9" }
 
 ["n2446221098"]
-why = "Jack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Jack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground, facing Mrs. Mallard in front of him (239 degrees). Drawn 0.42 m long: a plausible size, not measured."
 at = [42.35550, -71.06977]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "239", length = "0.42" }
 
 ["n2446221103"]
-why = "Kack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Kack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground, facing Jack in front of him (226 degrees). Drawn 0.42 m long: a plausible size, not measured."
 at = [42.35551, -71.06976]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "226", length = "0.42" }
 
 ["n2446221105"]
-why = "Lack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Lack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground, facing Kack in front of him (220 degrees). Drawn 0.42 m long: a plausible size, not measured."
 at = [42.35551, -71.06975]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "220", length = "0.42" }
 
 ["n2446221108"]
-why = "Mack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Mack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground, facing Lack in front of him (222 degrees). Drawn 0.42 m long: a plausible size, not measured."
 at = [42.35552, -71.06975]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "222", length = "0.42" }
 
 ["n2446221112"]
-why = "Nack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Nack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground, facing Mack in front of him (203 degrees). Drawn 0.42 m long: a plausible size, not measured."
 at = [42.35552, -71.06974]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "203", length = "0.42" }
 
 ["n2446221115"]
-why = "Ouack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Ouack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground, facing Nack in front of him (208 degrees). Drawn 0.42 m long: a plausible size, not measured."
 at = [42.35553, -71.06974]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "208", length = "0.42" }
 
 ["n2446221117"]
-why = "Pack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Pack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground, facing Ouack in front of him (206 degrees). Drawn 0.42 m long: a plausible size, not measured."
 at = [42.35554, -71.06973]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "206", length = "0.42" }
 
 ["n2446221119"]
-why = "Quack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground. Faces south-west, the way the line of nine mapped points runs toward Mrs. Mallard at its south-western end."
+why = "Quack, one of the eight ducklings of the Make Way for Ducklings group named by the project owner: a duckling standing on the ground, facing Pack in front of him (194 degrees). Drawn 0.42 m long: a plausible size, not measured."
 at = [42.35554, -71.06973]
-set = { animal = "duck", support = "ground", direction = "225" }
+set = { animal = "duck", support = "ground", direction = "194", length = "0.42" }
 
 ["n7055171485"]
 why = "The Tortoise and the Hare, as its name says, is a pair of animals; the data already says it stands on the ground (support=ground), so it is not a person on a pedestal."

@@ -243,4 +243,7 @@ are the practical check.
   terms forbid deriving data from them. Do not trace, measure or copy from them.
 - **Anything with no stated licence.** Ask the publisher or leave it out. Two
   Analyze Boston datasets fall here today: `tree-canopy-change-assessment` and
-  `2016-land-cover`.
+  `2016-land-cover`. The Town of Brookline's public tree inventory and building
+  footprints with heights (ArcGIS layers on `maps.brooklinema.gov`) also state no
+  licence, so Brookline is drawn from OpenStreetMap alone until the Town's GIS
+  office gives permission in writing.

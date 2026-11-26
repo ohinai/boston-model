@@ -83,7 +83,7 @@ YELLOW, ORANGE = "#ffe600", "#ff8c00"  # inventory trees, other trees
 CYAN, WHITE, MAGENTA = "#00e5ff", "#ffffff", "#ff3df2"
 BLUE, RED, GREY = "#3d7bff", "#ff4040", "#9a9a9a"
 DARK = "#101010"
-MONUMENT_KINDS = {"plaque", "stele", "obelisk", "column", "statue", "sculpture", "monument", "fountain"}
+MONUMENT_KINDS = {"plaque", "stele", "obelisk", "column", "statue", "sculpture", "monument", "fountain", "lantern"}
 
 Bounds = tuple[float, float, float, float]
 

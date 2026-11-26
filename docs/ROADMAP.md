@@ -116,6 +116,25 @@ recognises them at eye level.
   curtain walls, all drawn by one shader with no textures, from each wall's
   colour and storeys (not from each building's real face). Curved fronts now
   have windows. Style choices are hashed per wall, not data.
+- **Road paint.** Crosswalks, double yellow centre lines, dashed lane lines and
+  stop lines, in a new `markings` layer 4 cm above a darker, warmer asphalt.
+  About 4% more triangles. Bike lanes, edge lines and turn arrows have no data.
+- **Pitched roofs.** 353 buildings in the pilot with a `roof:shape` of gabled,
+  hipped, pyramidal, skillion, mansard, gambrel, barrel or dome have a roof, and a
+  row of mansards is one roof. Most buildings still have a flat roof, because
+  they carry no roof tag. No eave overhang, dormers or chimneys yet.
+- **Street furniture from the data.** Traffic signals with mast arms and
+  pedestrian heads, stop signs, post boxes, bicycle racks, bus stops and shelters,
+  slatted benches and bracket-arm street lamps. About 1,500 things in the pilot
+  that were in the data and never drawn.
+- **Garden landmarks.** Make Way for Ducklings as a mother and eight ducklings,
+  detailed standing statues on bell and shaft pedestals, Washington's horse fitted
+  to a warm-grey pedestal, fountain figures, the Japanese lantern and a flag at
+  the Goody memorial.
+- **The west.** A second area, `boston`, adds Back Bay, Kenmore, Fenway, the
+  Longwood edge and North Brookline out to Coolidge Corner and Washington Square
+  (434 tiles). The map is downloaded in strips. Brookline has only the trees and
+  heights in OpenStreetMap: the Town's tree and building layers state no licence.
 
 ### Still to do
 
@@ -124,15 +143,13 @@ recognises them at eye level.
 - The clipped yew hedges behind the street fences are not in the data; the
   MassGIS leaf-off imagery would show them. Gates are plain: no arched
   overthrow or scrollwork, and a gate between two buildings shows only its leaves.
-- Lamp posts with arms, and lamps on piers, in their real styles.
+- Lamps on stone piers, in their real style.
 - The skyline and landmark buildings, such as the Arlington Street Church
-  spire.
-- Likenesses for statues, and hand-made models of landmarks, in place of the
-  placeholders.
-- A human-sculpted horse and rider to replace the scripted one (its face and
-  hands are blobs and the rider is stiff), and statues made the same way.
-  Washington's data height of 11.58 m scales the bronze to about 6.7 m, so it
-  overhangs its pedestal by about 0.9 m: model the pedestal with the figure.
+  spire. The data has no tower parts or heights for it or for Emmanuel Church,
+  so this needs part outlines from a source we may use.
+- Likenesses for statues: the figures are plausible but blocky up close, and
+  the Ether Monument's shaft is plain. The hand-made horse's arm is held out
+  like a salute from the front.
 
 **Checking against photographs**
 

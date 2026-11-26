@@ -65,7 +65,7 @@ def cmd_fetch(args) -> None:
     tiles = world.tiles_covering(tuple(_area(args.area)["bbox"]))
     # A margin so features straddling the outermost tiles arrive whole.
     bounds = world.lonlat_bounds(tiles, margin=60.0)
-    osm.fetch(bounds, _raw_path(args.area), force=args.force)
+    osm.fetch_area(bounds, _raw_path(args.area), force=args.force)
     inventory.fetch(bounds, _trees_path(args.area), force=args.force)
 
 

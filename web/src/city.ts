@@ -123,8 +123,8 @@ interface Tile {
   trunks?: Trunks;
 }
 
-/** Layers a walker passes straight through: crowns, and a willow's hanging skirt. Trunks are solid (trunks.ts). */
-const NOT_SOLID = new Set(['trees']);
+/** Layers a walker passes straight through: crowns, a willow's hanging skirt, and paint on the road. Trunks are solid (trunks.ts). */
+const NOT_SOLID = new Set(['trees', 'markings']);
 const SMOOTH = new Set(['trees', 'figures']); // layers shaded smooth, not faceted: lumpy crowns, hand-made statues
 const CASTS_SHADOW = new Set(['building_walls', 'building_roofs', 'trees', 'furniture', 'monuments', 'figures', 'bridges', 'barriers']);
 

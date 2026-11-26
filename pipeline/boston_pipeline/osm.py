@@ -5,6 +5,7 @@ from __future__ import annotations
 import gzip
 import http.client
 import json
+import math
 import time
 import urllib.parse
 import urllib.request
@@ -25,6 +26,8 @@ USER_AGENT = "city-model-pipeline/0.1"
 # Servers normally run minutes behind, but in November 2026 one of them
 # answered with a copy four months old, and the site was built from it.
 MAX_AGE_DAYS = 3
+# The widest box, in degrees of longitude (about 1.6 km here), one query asks for; wider areas are fetched in strips.
+STRIP_DEGREES = 0.02
 
 # Everything the builder knows how to use. `out geom` inlines coordinates so no
 # second pass over nodes is needed.
@@ -90,6 +93,56 @@ def fetch(bbox_wsen: tuple[float, float, float, float], dest: Path, force: bool 
             print(f"wrote {dest} ({len(payload['elements'])} elements, {dest.stat().st_size / 1e6:.1f} MB)")
             return dest
     raise RuntimeError(f"every Overpass server failed {ROUNDS} times; the last error was: {last_error}")
+
+
+def strips(bbox_wsen: tuple[float, float, float, float], width: float = STRIP_DEGREES) -> list[tuple[float, float, float, float]]:
+    """Cut a box into equal north-south strips no wider than `width` degrees of longitude."""
+    w, s, e, n = bbox_wsen
+    count = max(1, math.ceil((e - w) / width - 1e-9))
+    step = (e - w) / count
+    return [(w + k * step, s, w + (k + 1) * step, n) for k in range(count)]
+
+
+def merge(payloads: list[dict]) -> dict:
+    """One payload from several: each element once (a way crossing two strips arrives in both), the oldest timestamp."""
+    seen: set[tuple[str, int]] = set()
+    elements = []
+    for payload in payloads:
+        for element in payload["elements"]:
+            key = (element["type"], element["id"])
+            if key not in seen:
+                seen.add(key)
+                elements.append(element)
+    boxes = [p["bbox_wsen"] for p in payloads if "bbox_wsen" in p]
+    merged = {**payloads[0], "elements": elements}
+    # ISO timestamps in one format sort as text, so the smallest is the oldest copy of the map.
+    merged["osm3s"] = {**payloads[0].get("osm3s", {}), "timestamp_osm_base": min(p["osm3s"]["timestamp_osm_base"] for p in payloads)}
+    if boxes:
+        merged["bbox_wsen"] = [min(b[0] for b in boxes), min(b[1] for b in boxes), max(b[2] for b in boxes), max(b[3] for b in boxes)]
+    return merged
+
+
+def fetch_area(bbox_wsen: tuple[float, float, float, float], dest: Path, force: bool = False) -> Path:
+    """Like `fetch`, but a box wider than `STRIP_DEGREES` is fetched in strips (each cached beside `dest`) and merged.
+
+    One Overpass query for several kilometres of city can run past the server's time limit, so a wide area asks for
+    a strip at a time. A narrow box is one query, exactly as before.
+    """
+    parts = strips(bbox_wsen)
+    if len(parts) == 1:
+        return fetch(bbox_wsen, dest, force)
+    if dest.exists() and not force:
+        print(f"using cached {dest} (pass --force to refresh)")
+        return dest
+    payloads = []
+    for number, part in enumerate(parts, 1):
+        print(f"strip {number} of {len(parts)}")
+        cache = dest.with_name(f"{dest.stem}_strip{number}{dest.suffix}")
+        payloads.append(load(fetch(part, cache, force)))
+    merged = merge(payloads)
+    dest.write_text(json.dumps(merged, separators=(",", ":")), encoding="utf-8")
+    print(f"wrote {dest} ({len(merged['elements'])} elements, {dest.stat().st_size / 1e6:.1f} MB)")
+    return dest
 
 
 def data_age(payload: dict, now: datetime | None = None) -> float | None:
