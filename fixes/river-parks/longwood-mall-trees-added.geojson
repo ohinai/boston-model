@@ -1,0 +1,275 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1104309,
+     42.3433855
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1104225,
+     42.3433358
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1105342,
+     42.3431633
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111081,
+     42.3431458
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111059,
+     42.3430787
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1118131,
+     42.3431223
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1119209,
+     42.3431205
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112803,
+     42.3430924
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1116504,
+     42.3430461
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114269,
+     42.3429308
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1122366,
+     42.3429227
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1116863,
+     42.3428906
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1125196,
+     42.3428524
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1125895,
+     42.3428418
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_-15), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1132981,
+     42.3427146
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_-16), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1130426,
+     42.3425797
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.3",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 11.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_-16), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1131504,
+     42.3425715
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Longwood Mall: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_-16), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1132356,
+     42.3424572
+    ]
+   }
+  }
+ ]
+}

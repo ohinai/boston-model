@@ -1,0 +1,33 @@
+# Charles River Esplanade: crown widths of trees whose mapped point is right but whose drawn crown is far too big.
+# Source: USGS NAIP aerial imagery of 7 July 2023 (leaf-on), enlarged and measured by eye against the 0.12 m pixels; each of these
+# stands alone, beside the Storrow Drive carriageway, so its crown can be told from its neighbours. The model draws 8.6 to 11.3 m by default.
+
+["n7757237567"]
+why = "A single tree seen in the USGS NAIP photograph of 7 July 2023 (audit cell c_-13_-5): a small crown about 3.5 m across at the road edge, 2 to 3 m off the mapped point; the default drawn crown is 8.59 m. The point is kept; only the crown width is set."
+at = [42.353824, -71.081769]
+set = { diameter_crown = "3.5" }
+
+["n7757237565"]
+why = "A single tree seen in the USGS NAIP photograph of 7 July 2023 (audit cell c_-14_-5): a small crown about 3.5 m across at the road edge, 3 m off the mapped point; the default drawn crown is 10.22 m. The point is kept; only the crown width is set."
+at = [42.353742, -71.082082]
+set = { diameter_crown = "3.5" }
+
+["n7757237564"]
+why = "A single tree seen in the USGS NAIP photograph of 7 July 2023 (audit cell c_-14_-5): a small crown about 4 m across at the road edge, 4 m off the mapped point; the default drawn crown is 9.92 m. The point is kept; only the crown width is set."
+at = [42.353704, -71.082226]
+set = { diameter_crown = "4" }
+
+["n7757237561"]
+why = "A single tree seen in the USGS NAIP photograph of 7 July 2023 (audit cell c_-14_-5): a small crown about 3.5 m across at the road edge, 3 to 4 m off the mapped point; the default drawn crown is 10.17 m. The point is kept; only the crown width is set."
+at = [42.353574, -71.082714]
+set = { diameter_crown = "3.5" }
+
+["n7733148684"]
+why = "A single tree seen in the USGS NAIP photograph of 7 July 2023 (audit cell c_-18_-7): a round crown about 6.5 m across, 4 m off the mapped point; the default drawn crown is 9.49 m. The point is kept; only the crown width is set."
+at = [42.352166, -71.0889]
+set = { diameter_crown = "6.5" }
+
+["n7747390813"]
+why = "A single tree seen in the USGS NAIP photograph of 7 July 2023 (audit cell c_-19_-7): a crown about 5 m across, 3 to 4 m off the mapped point; the default drawn crown is 11.34 m. The point is kept; only the crown width is set."
+at = [42.351441, -71.090102]
+set = { diameter_crown = "5" }

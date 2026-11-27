@@ -1,0 +1,8 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {"type": "Feature",
+     "properties": {"natural": "tree", "diameter_crown": "8", "why": "A tree of Elliot Norton Park that is in neither the city inventory nor OpenStreetMap (the inventory has no tree under this crown): a dense dark-green crown about 8 m across in the USGS NAIP photograph of 7 July 2023, at 42.34914,-71.06606. The crown is a disc fitted to the canopy of that photograph's vegetation-index picture by circle packing and checked by eye against the photograph in the places with most trees; where crowns touch, the number and positions of the trees are the packing's best reading, not a count of trunks. Species and leaf type cannot be told from above, so none is set; height is left to the pipeline's estimate from the crown width."},
+     "geometry": {"type": "Point", "coordinates": [-71.0660614,42.3491415]}}
+  ]
+}

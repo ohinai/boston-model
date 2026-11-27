@@ -1,0 +1,265 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "amenity": "fountain",
+    "diameter": "14.5",
+    "why": "The centre of Franklin Square: in the USGS NAIP photograph of 7 July 2023 and the MassGIS 15 cm leaf-off photograph of spring 2023 a round paved plaza about 24 m across (inside the ring path that is already mapped) holds a stone-rimmed round fountain basin about 14.5 m across, with the fountain itself at its centre. Added as a fountain of that diameter; the pipeline's standard basin and central pedestal stand in for its design (the pipeline draws every basin with water, although this one looks dry or planted in both photographs)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.072535,
+     42.3388234
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "highway": "pedestrian",
+    "area": "yes",
+    "why": "The centre of Franklin Square: in the USGS NAIP photograph of 7 July 2023 and the MassGIS 15 cm leaf-off photograph of spring 2023 a round paved plaza about 24 m across (inside the ring path that is already mapped) holds a stone-rimmed round fountain basin about 14.5 m across, with the fountain itself at its centre. The plaza is a pale paved surface (not lawn) out to the ring path; its material is not clear from either photograph, so it is drawn as ordinary pavement."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.0723893,
+       42.3388229
+      ],
+      [
+       -71.0723941,
+       42.3388508
+      ],
+      [
+       -71.0724085,
+       42.3388769
+      ],
+      [
+       -71.0724315,
+       42.3388994
+      ],
+      [
+       -71.0724615,
+       42.3389167
+      ],
+      [
+       -71.0724966,
+       42.3389276
+      ],
+      [
+       -71.0725342,
+       42.3389314
+      ],
+      [
+       -71.0725719,
+       42.3389279
+      ],
+      [
+       -71.0726071,
+       42.3389172
+      ],
+      [
+       -71.0726374,
+       42.3389002
+      ],
+      [
+       -71.0726607,
+       42.3388779
+      ],
+      [
+       -71.0726754,
+       42.3388519
+      ],
+      [
+       -71.0726806,
+       42.3388239
+      ],
+      [
+       -71.0726758,
+       42.338796
+      ],
+      [
+       -71.0726614,
+       42.3387699
+      ],
+      [
+       -71.0726384,
+       42.3387474
+      ],
+      [
+       -71.0726084,
+       42.3387301
+      ],
+      [
+       -71.0725734,
+       42.3387192
+      ],
+      [
+       -71.0725357,
+       42.3387154
+      ],
+      [
+       -71.072498,
+       42.3387189
+      ],
+      [
+       -71.0724628,
+       42.3387296
+      ],
+      [
+       -71.0724325,
+       42.3387466
+      ],
+      [
+       -71.0724092,
+       42.3387689
+      ],
+      [
+       -71.0723945,
+       42.3387949
+      ],
+      [
+       -71.0723893,
+       42.3388229
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "amenity": "fountain",
+    "diameter": "15.0",
+    "why": "The centre of Blackstone Square: in the USGS NAIP photograph of 7 July 2023 and the MassGIS 15 cm leaf-off photograph of spring 2023 a round paved plaza about 25 m across (inside the ring path that is already mapped) holds a stone-rimmed round fountain basin about 15.0 m across, with the fountain itself at its centre. Added as a fountain of that diameter; the pipeline's standard basin and central pedestal stand in for its design (the pipeline draws every basin with water, although this one looks dry or planted in both photographs)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0735554,
+     42.3396614
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "highway": "pedestrian",
+    "area": "yes",
+    "why": "The centre of Blackstone Square: in the USGS NAIP photograph of 7 July 2023 and the MassGIS 15 cm leaf-off photograph of spring 2023 a round paved plaza about 25 m across (inside the ring path that is already mapped) holds a stone-rimmed round fountain basin about 15.0 m across, with the fountain itself at its centre. The plaza is a pale paved surface (not lawn) out to the ring path; its material is not clear from either photograph, so it is drawn as ordinary pavement."
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -71.0734037,
+       42.3396609
+      ],
+      [
+       -71.0734087,
+       42.33969
+      ],
+      [
+       -71.0734237,
+       42.3397172
+      ],
+      [
+       -71.0734476,
+       42.3397406
+      ],
+      [
+       -71.0734789,
+       42.3397586
+      ],
+      [
+       -71.0735154,
+       42.33977
+      ],
+      [
+       -71.0735546,
+       42.339774
+      ],
+      [
+       -71.0735939,
+       42.3397703
+      ],
+      [
+       -71.0736306,
+       42.3397592
+      ],
+      [
+       -71.0736621,
+       42.3397414
+      ],
+      [
+       -71.0736864,
+       42.3397182
+      ],
+      [
+       -71.0737017,
+       42.3396911
+      ],
+      [
+       -71.0737071,
+       42.339662
+      ],
+      [
+       -71.0737021,
+       42.3396328
+      ],
+      [
+       -71.0736872,
+       42.3396056
+      ],
+      [
+       -71.0736632,
+       42.3395822
+      ],
+      [
+       -71.0736319,
+       42.3395642
+      ],
+      [
+       -71.0735954,
+       42.3395529
+      ],
+      [
+       -71.0735562,
+       42.3395489
+      ],
+      [
+       -71.0735169,
+       42.3395526
+      ],
+      [
+       -71.0734802,
+       42.3395637
+      ],
+      [
+       -71.0734487,
+       42.3395815
+      ],
+      [
+       -71.0734244,
+       42.3396047
+      ],
+      [
+       -71.0734091,
+       42.3396318
+      ],
+      [
+       -71.0734037,
+       42.3396609
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

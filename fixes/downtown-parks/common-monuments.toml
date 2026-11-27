@@ -1,0 +1,16 @@
+# Monuments on Boston Common whose shape or size the data does not give.
+
+["n358277245"]
+why = """The Soldiers and Sailors Monument on Flagstaff Hill is a tall column topped by a statue, but OpenStreetMap gives it only a name (no form, no height), so it was drawn as a 9 m block. Its height is measured from its shadow in the USGS NAIP photograph of 7 July 2023: the shadow runs from the monument's node to a tip 12.6 m away on a bearing of about 58 degrees, so the sun is at azimuth about 238 degrees. On 7 July at 42.35 degrees north that azimuth means a sun elevation of about 60 degrees, so the shadow is 0.59 times the height: about 21 m (19 to 24 m for the uncertainty in the azimuth and in where the tip is). The MassGIS leaf-off photograph of spring 2025 shows a longer shadow (about 15 m), as a lower spring sun gives. Drawn as a column on its stepped base."""
+at = [42.35547, -71.06641]
+set = { memorial = "column", height = "21" }
+
+["n7610330937"]
+why = "The Victory monument (granite) is mapped twice at the same spot, 0.1 m apart: this named node, and an unnamed node tagged memorial=obelisk (n12883597563), so the model drew a 9 m block and a 6 m obelisk through each other. The two are one monument. The form (an obelisk) comes from the unnamed node; this fix keeps the named one and gives it that form."
+at = [42.35428, -71.06441]
+set = { memorial = "obelisk" }
+
+["n12883597563"]
+why = "Duplicate of the named Victory monument (n7610330937), 0.1 m away; its obelisk form is now on the named node. See that entry."
+at = [42.35428, -71.06441]
+delete = true

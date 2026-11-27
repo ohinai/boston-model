@@ -1,0 +1,3110 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0761839,
+     42.3560687
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0769569,
+     42.355916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0764822,
+     42.3558991
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0774031,
+     42.3558528
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0762993,
+     42.3557947
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0765563,
+     42.3557071
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0767167,
+     42.3556839
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0768948,
+     42.355624
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.076701,
+     42.3554116
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0769051,
+     42.3553886
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0772868,
+     42.3553748
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.076952,
+     42.3553433
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0773609,
+     42.3551871
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-10_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0771425,
+     42.355169
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0777696,
+     42.3559233
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0779301,
+     42.3558914
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0784295,
+     42.3557053
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0786573,
+     42.3556154
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0777346,
+     42.3554996
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.07793,
+     42.3554701
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 11.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0777568,
+     42.3552361
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0776462,
+     42.3552206
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0778648,
+     42.3551998
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0780105,
+     42.3551938
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0778161,
+     42.35507
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0779008,
+     42.3550465
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0784251,
+     42.3550463
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0786148,
+     42.3549973
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0779159,
+     42.3549536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0789652,
+     42.3548797
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0787272,
+     42.3547384
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0792012,
+     42.3553062
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.079811,
+     42.3547337
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0801054,
+     42.3547067
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0801146,
+     42.3546376
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.080237,
+     42.3546207
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0791448,
+     42.3545843
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0803131,
+     42.3545735
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.080276,
+     42.3544545
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0803988,
+     42.3543837
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0802914,
+     42.3543314
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 11.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.080254,
+     42.3542535
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0804552,
+     42.3542348
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-12_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0804673,
+     42.3541678
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0806998,
+     42.3551172
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0807208,
+     42.3550374
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0808027,
+     42.3545364
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0816129,
+     42.354481
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0814011,
+     42.3543592
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0808301,
+     42.3543571
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0806061,
+     42.3543174
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0808319,
+     42.3540979
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-13_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0815524,
+     42.3539514
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0843622,
+     42.3541431
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0844708,
+     42.3540182
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0845382,
+     42.3539622
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0845643,
+     42.3535323
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0847376,
+     42.3533191
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0840594,
+     42.3532323
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0846664,
+     42.3530682
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0851499,
+     42.3535258
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0850918,
+     42.353504
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0850082,
+     42.3533741
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0850505,
+     42.3531409
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0849312,
+     42.3531253
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0850984,
+     42.3529379
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0860368,
+     42.352883
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0858126,
+     42.3528627
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0859089,
+     42.3528393
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-16_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0857868,
+     42.3527956
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0871391,
+     42.3527076
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0863965,
+     42.3526747
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0875885,
+     42.3525817
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.087274,
+     42.3525611
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0865779,
+     42.3525414
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0871344,
+     42.3525347
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0867703,
+     42.3525226
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0871816,
+     42.3524463
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0874758,
+     42.3524366
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0869865,
+     42.3524262
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0877355,
+     42.3523791
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-17_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0875756,
+     42.3523181
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-18_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0879095,
+     42.35249
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-18_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0879971,
+     42.3524687
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-18_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.088105,
+     42.3524388
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-18_-6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0880968,
+     42.3523588
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-21_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0931326,
+     42.3515859
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-21_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0935737,
+     42.3513844
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-22_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0945752,
+     42.3510163
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-23_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0958168,
+     42.350917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-23_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0955838,
+     42.3509161
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-23_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0953334,
+     42.3508958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-23_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0957735,
+     42.3508628
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-24_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0966119,
+     42.3509349
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-24_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0967257,
+     42.3509137
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-24_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0970521,
+     42.3508802
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-25_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0990695,
+     42.3510817
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-25_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0991657,
+     42.3510734
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-25_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0984612,
+     42.3509997
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-25_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.098884,
+     42.350945
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-25_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0986336,
+     42.3509268
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-25_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0987502,
+     42.3509121
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-25_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0984356,
+     42.3509088
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-26_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1007786,
+     42.3516754
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-26_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1002922,
+     42.3511984
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-26_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1004704,
+     42.3511234
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-26_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0999115,
+     42.3510652
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-27_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1010758,
+     42.35167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-27_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1013496,
+     42.3516687
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-27_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1015773,
+     42.3515853
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 10.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-27_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1022214,
+     42.3515443
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-27_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1019886,
+     42.3515024
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-27_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1011772,
+     42.3512965
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-27_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1010637,
+     42.3512702
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-27_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.102293,
+     42.3512636
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-28_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1030347,
+     42.351452
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-28_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1032183,
+     42.3514289
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-28_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1024705,
+     42.3513096
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-28_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1026425,
+     42.3512821
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-28_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1028788,
+     42.3512203
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-28_-8), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1027014,
+     42.3511721
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-29_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1039296,
+     42.3513471
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-29_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1044163,
+     42.3513163
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-31_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1081583,
+     42.3519752
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-31_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1077896,
+     42.3517644
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-32_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1090024,
+     42.3520796
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-32_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1087497,
+     42.3519686
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-32_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1087937,
+     42.3519125
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-32_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1086075,
+     42.3518795
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-32_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1082965,
+     42.3517596
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-32_-7), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1084713,
+     42.351758
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-5_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0701544,
+     42.3649527
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-5_6), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0698418,
+     42.365496
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0708721,
+     42.3639485
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.070645,
+     42.3639239
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 10.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710006,
+     42.3639036
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0706543,
+     42.3638504
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0711964,
+     42.3638157
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0709692,
+     42.3638106
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0707305,
+     42.3637816
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0711618,
+     42.3637616
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0708093,
+     42.3637581
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0707115,
+     42.3635806
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710364,
+     42.3633527
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0711532,
+     42.3633186
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.071332,
+     42.3631551
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0715015,
+     42.3630757
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0710462,
+     42.364915
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0703256,
+     42.3642014
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_-1), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727184,
+     42.3584737
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0728188,
+     42.3595652
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0726034,
+     42.3595406
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727933,
+     42.3594592
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0724234,
+     42.3594492
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0728753,
+     42.3593947
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0724326,
+     42.3593866
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727275,
+     42.3592883
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0726024,
+     42.3588362
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0726671,
+     42.3587371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_1), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0724179,
+     42.3602573
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0726958,
+     42.3618183
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0729455,
+     42.3610933
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.2",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 12.2 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727267,
+     42.3628599
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0720983,
+     42.362715
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727866,
+     42.3626117
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.3",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 11.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0722245,
+     42.3625815
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.072278,
+     42.3624304
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727443,
+     42.3624019
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 10.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0723454,
+     42.3623767
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0726047,
+     42.3623625
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727455,
+     42.3622291
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0725828,
+     42.362155
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0725146,
+     42.364067
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0726062,
+     42.3638772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0728017,
+     42.3634047
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0720338,
+     42.3645016
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0722709,
+     42.3643361
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0740562,
+     42.3570958
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0741765,
+     42.3569688
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0742324,
+     42.356889
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0733032,
+     42.3568704
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0743587,
+     42.3567296
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0734648,
+     42.3566658
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0745896,
+     42.3566138
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0744207,
+     42.3566045
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.073568,
+     42.3564803
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0744364,
+     42.3564339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 10.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0737934,
+     42.3563234
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0739102,
+     42.3562785
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0743152,
+     42.3562692
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0740833,
+     42.356102
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0744303,
+     42.3560536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0743932,
+     42.3559281
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_0), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.074509,
+     42.3590745
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-1), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0748636,
+     42.3583325
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-1), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0748898,
+     42.3579027
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0748771,
+     42.3576196
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.074875,
+     42.3575007
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0751145,
+     42.3569744
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0752653,
+     42.3562101
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0753707,
+     42.356137
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.8",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 10.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0748945,
+     42.3558911
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0761039,
+     42.3558393
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0753875,
+     42.3557957
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0758919,
+     42.3557284
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0756939,
+     42.3557276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in the Charles River Esplanade: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0760444,
+     42.3555777
+    ]
+   }
+  }
+ ]
+}

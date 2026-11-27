@@ -1,0 +1,13 @@
+# The Muddy River along the Riverway, dark olive in the aerial photograph.
+# The source data tags it `water=river`, which the pipeline draws as the open blue of the Charles; the
+# pipeline picks the olive of a pond, lagoon or basin from `water=pond`. The outline is unchanged.
+
+["r1337303"]
+why = "The Muddy River along the Riverway and Olmsted Park is slow, shaded, dark olive-green water in the USGS NAIP aerial photograph of 7 July 2023, like the Fens' water upstream, not the tidal blue of the Charles. Tagged `water=pond` only so the model draws it in the pond colour; the outline is not changed."
+at = [42.33924, -71.10959]
+set = { water = "pond" }
+
+["w494808062"]
+why = "A stretch of the Muddy River at the east end of the Riverway (Park Drive side): the same still, dark olive-green water in the USGS NAIP aerial photograph of 7 July 2023. Tagged `water=pond` only so the model draws it in the pond colour; the outline is not changed."
+at = [42.34356, -71.10363]
+set = { water = "pond" }

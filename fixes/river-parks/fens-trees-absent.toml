@@ -1,0 +1,13 @@
+# Back Bay Fens: city-inventory trees with no crown under them in the aerial photograph.
+# Source: USGS NAIP aerial imagery of 7 July 2023 (leaf-on), audit cells c_-21_-15 and c_-25_-18, enlarged and looked at by eye.
+# Only trees with a large trunk and a large modelled crown are listed: a tree this size would show.
+
+["bprd:55729"]
+why = "White willow (trunk circumference 152 cm, modelled crown 19 m) at the mown shore of the Muddy River. The USGS NAIP photograph of 7 July 2023 shows smooth lawn and low scrub under the whole of its modelled crown, with the nearest crowns beginning about 8 m east; a willow of this size would be a dome 15 to 20 m across. Judged gone (medium confidence); the inventory record is older than the photograph."
+at = [42.34291, -71.092595]
+delete = true
+
+["bprd:55425"]
+why = "Silver maple (trunk circumference 102 cm, modelled crown 14.8 m) listed at the edge of the Muddy River. The USGS NAIP photograph of 7 July 2023 shows half of its modelled crown over water and the other half over a smooth light-green meadow bank, with the woodland crowns starting about 7 m east: no crown of this size stands there. Judged gone or recorded far from where it stood (medium confidence)."
+at = [42.339579, -71.098764]
+delete = true

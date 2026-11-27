@@ -1,0 +1,650 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1148841,
+     42.3620819
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1147328,
+     42.3620381
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.2",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 12.2 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.114835,
+     42.3620082
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.114885,
+     42.3619349
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1150045,
+     42.3619267
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1151795,
+     42.3618819
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1150543,
+     42.3618707
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1152762,
+     42.3618044
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1147566,
+     42.3629219
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1148996,
+     42.3628879
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1153279,
+     42.3628763
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1148356,
+     42.3628682
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1150192,
+     42.3628537
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.2",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 12.2 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1152145,
+     42.3628479
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1146816,
+     42.3627899
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1146704,
+     42.3627229
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1151339,
+     42.3626855
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.7",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 12.7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1151402,
+     42.3626013
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1146428,
+     42.3624635
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.114774,
+     42.3624553
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.115281,
+     42.3624397
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1150979,
+     42.3623743
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.114623,
+     42.362364
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1149699,
+     42.3623371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1146818,
+     42.36228
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1150405,
+     42.3622293
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1146387,
+     42.3621848
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1149418,
+     42.362175
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-36_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1148925,
+     42.3621273
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1158341,
+     42.3620397
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1156625,
+     42.3619872
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1157619,
+     42.3619357
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1156164,
+     42.3619115
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1158787,
+     42.3618994
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1155235,
+     42.3628208
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1158731,
+     42.3628155
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.115442,
+     42.3627989
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1157393,
+     42.3627805
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1155937,
+     42.3627692
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1158358,
+     42.362716
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1157934,
+     42.3625062
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.115651,
+     42.3624474
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Riverside Press Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-37_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1155783,
+     42.3624191
+    ]
+   }
+  }
+ ]
+}

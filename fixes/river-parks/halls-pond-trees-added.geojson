@@ -1,0 +1,1415 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1109482,
+     42.3468833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111262,
+     42.3468299
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1108496,
+     42.3468138
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1107157,
+     42.3468069
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1109171,
+     42.3467276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111034,
+     42.346674
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1109119,
+     42.3466282
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1107285,
+     42.3466146
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111305,
+     42.346603
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1108776,
+     42.34652
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111102,
+     42.3465057
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1107585,
+     42.3464764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1107734,
+     42.3464224
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1110036,
+     42.3464081
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1108643,
+     42.3463126
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1110538,
+     42.3462894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1109756,
+     42.3462114
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111097,
+     42.3461946
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1110546,
+     42.3461598
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.8",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 10.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1108537,
+     42.3461483
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1110637,
+     42.346108
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1110318,
+     42.3460711
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1109592,
+     42.3460514
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.8",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 11.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111254,
+     42.3460217
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1110094,
+     42.3459392
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.3",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 11.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1108987,
+     42.3459367
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-33_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111107,
+     42.3456933
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112421,
+     42.3469275
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1113063,
+     42.3469126
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1113242,
+     42.3468456
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111319,
+     42.3467462
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112144,
+     42.346707
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114069,
+     42.3466644
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1117681,
+     42.3466505
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 12.7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1115876,
+     42.3466348
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114886,
+     42.3466345
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112355,
+     42.3465882
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.3",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 11.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1113492,
+     42.3465692
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1118736,
+     42.3465536
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1117512,
+     42.3465532
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114513,
+     42.3465371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112712,
+     42.3464673
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114027,
+     42.34639
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112748,
+     42.3463528
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111935,
+     42.346305
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1113423,
+     42.3462666
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112317,
+     42.3462619
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112407,
+     42.3462166
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.112007,
+     42.3461738
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.11125,
+     42.3461151
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1119666,
+     42.3461024
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1118389,
+     42.3460371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1115275,
+     42.3459885
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1113033,
+     42.345977
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1117786,
+     42.3458986
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1116184,
+     42.3458938
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-12), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111432,
+     42.3458931
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1117936,
+     42.3458274
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114849,
+     42.345822
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112548,
+     42.3458169
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1113888,
+     42.3458131
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111733,
+     42.3458015
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1115754,
+     42.3457878
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.11136,
+     42.3457503
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1115087,
+     42.3457378
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1117039,
+     42.345732
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1118175,
+     42.3457302
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1119661,
+     42.3457221
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111279,
+     42.3456722
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114392,
+     42.3456641
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1118092,
+     42.3456546
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1116287,
+     42.345641
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1121093,
+     42.3456405
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1119522,
+     42.3456162
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 12.7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111832,
+     42.3456136
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1115999,
+     42.3455804
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1117514,
+     42.3455788
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114749,
+     42.3455519
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.8",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 11.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112739,
+     42.3455447
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1120079,
+     42.3455451
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111711,
+     42.3455138
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1115858,
+     42.3455069
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114518,
+     42.3455064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1120664,
+     42.3455064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1119384,
+     42.3454908
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1118598,
+     42.3454776
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1120231,
+     42.3454522
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1121018,
+     42.3454287
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1117989,
+     42.3454255
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1121572,
+     42.3454202
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1119796,
+     42.3454088
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1120701,
+     42.3453854
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1119508,
+     42.3453569
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hall's Pond Sanctuary: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_-13), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1120558,
+     42.3453378
+    ]
+   }
+  }
+ ]
+}

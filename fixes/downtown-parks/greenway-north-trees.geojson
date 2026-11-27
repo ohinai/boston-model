@@ -1,0 +1,14 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {"type": "Feature",
+     "properties": {"natural": "tree", "diameter_crown": "7.9", "leaf_type": "broadleaved", "why": "A tree on the lawn of the Rose Kennedy Greenway's northern end that is in neither the city inventory nor OpenStreetMap (audit cell c_4_3, pixel 89,188): an isolated, dense, round crown 7.9 m across in the USGS NAIP photograph of 7 July 2023 (the audit's proposed crown C2, checked by eye), standing alone on the lawn with no tree in the data under it. The MassGIS 15 cm leaf-off photograph of spring 2023 shows a bare, spreading, branched crown at the same place, so it is a broadleaved deciduous tree. Species is not clear from above; height is left to the pipeline's estimate from the crown width."},
+     "geometry": {"type": "Point", "coordinates": [-71.0570201,42.3627646]}},
+    {"type": "Feature",
+     "properties": {"natural": "tree", "diameter_crown": "8.4", "leaf_type": "broadleaved", "why": "A tree on the lawn of the Rose Kennedy Greenway's northern end that is in neither the city inventory nor OpenStreetMap (audit cell c_4_3, pixel 334,377): an isolated, dense, round crown 8.4 m across in the USGS NAIP photograph of 7 July 2023 (the audit's proposed crown C4, checked by eye), standing alone on the lawn with no tree in the data under it. The MassGIS 15 cm leaf-off photograph of spring 2023 shows a bare, spreading, branched crown at the same place, so it is a broadleaved deciduous tree. Species is not clear from above; height is left to the pipeline's estimate from the crown width."},
+     "geometry": {"type": "Point", "coordinates": [-71.0566649,42.3625587]}},
+    {"type": "Feature",
+     "properties": {"natural": "tree", "diameter_crown": "7.2", "leaf_type": "broadleaved", "why": "A tree on the lawn of the Rose Kennedy Greenway's northern end that is in neither the city inventory nor OpenStreetMap (audit cell c_4_3, pixel 871,760): an isolated, dense, round crown 7.2 m across in the USGS NAIP photograph of 7 July 2023 (the audit's proposed crown C11, checked by eye), standing alone on the lawn with no tree in the data under it. The MassGIS 15 cm leaf-off photograph of spring 2023 shows a bare, spreading, branched crown at the same place, so it is a broadleaved deciduous tree. Species is not clear from above; height is left to the pipeline's estimate from the crown width."},
+     "geometry": {"type": "Point", "coordinates": [-71.0558864,42.3621422]}}
+  ]
+}

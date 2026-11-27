@@ -1,0 +1,93 @@
+# Brookline street trees that the photographs show are gone, along Beacon Street, Harvard Street and Washington
+# Street (and the streets off them): Town of Brookline inventory records with a trunk of 20 cm or more (so a crown of 5 m or
+# more) at points that are bare in all three surveys: USGS NAIP 7 July 2023 (leaf-on), and MassGIS 15 cm leaf-off spring
+# 2023 and spring 2025 (credit MassGIS). Found by the aerial audit (.claude/commands/audit.md), each checked by eye.
+#
+# Checked and kept (a crown, bare branches or a planting ring stands at or beside the point in at least one survey, or the
+# point is in shade in all three, or the record is too new for the photographs): brk:582, 581, 22, 14203, 11497, 11498,
+# 2831, 10385, 10662, 9939, 10684, 10483, 10487, 3136, 170, 169, 1893, 10395, 2693, 2692, 316, 317, 14202, 1016325, 1016285.
+
+["brk:3887"]
+why = "Town of Brookline inventory record for a London planetree (trunk 25 cm) that is no longer there. The tree pit at this point is bare in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown, only a little pit weed) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.338941, -71.136139]
+delete = true
+
+["brk:3886"]
+why = "Town of Brookline inventory record for a London planetree (trunk 27 cm) that is no longer there. The tree pit at this point is bare in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown, only a little pit weed) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.338896, -71.136321]
+delete = true
+
+["brk:3883"]
+why = "Town of Brookline inventory record for a Littleleaf linden (trunk 32 cm) that is no longer there. The tree pit at this point is bare in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown, only a little pit weed) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.338780, -71.136791]
+delete = true
+
+["brk:10627"]
+why = "Town of Brookline inventory record for a Okame cherry (trunk 31 cm) that is no longer there. The tree pit at this point is bare in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown, only a little pit weed) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.338579, -71.137003]
+delete = true
+
+["brk:10486"]
+why = "Town of Brookline inventory record for a Ginkgo 'Princeton Sentry' (trunk 26 cm) that is no longer there. The tree pit at this point is bare in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown, only a little pit weed) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.338480, -71.136814]
+delete = true
+
+["brk:10450"]
+why = "Town of Brookline inventory record for a Ginkgo (trunk 28 cm) that is no longer there. This spot is in the shadow of a building in the USGS NAIP photograph of 7 July 2023 and in the MassGIS spring 2023 photograph, so those two cannot show it; the MassGIS 15 cm leaf-off photograph of spring 2025 shows plain pavement with no trunk, branches or branch shadow at the point. A tree with the record's trunk size would show. The neighbouring records of this block are in the same state."
+at = [42.340485, -71.120342]
+delete = true
+
+["brk:10451"]
+why = "Town of Brookline inventory record for a Korean mountain ash (trunk 26 cm) that is no longer there. This spot is in the shadow of a building in the USGS NAIP photograph of 7 July 2023 and in the MassGIS spring 2023 photograph, so those two cannot show it; the MassGIS 15 cm leaf-off photograph of spring 2025 shows plain pavement with no trunk, branches or branch shadow at the point. A tree with the record's trunk size would show. The neighbouring records of this block are in the same state."
+at = [42.340475, -71.120285]
+delete = true
+
+["brk:10452"]
+why = "Town of Brookline inventory record for a Korean mountain ash (trunk 26 cm) that is no longer there. This spot is in the shadow of a building in the USGS NAIP photograph of 7 July 2023 and in the MassGIS spring 2023 photograph, so those two cannot show it; the MassGIS 15 cm leaf-off photograph of spring 2025 shows plain pavement with no trunk, branches or branch shadow at the point. A tree with the record's trunk size would show. The neighbouring records of this block are in the same state."
+at = [42.340466, -71.120231]
+delete = true
+
+["brk:10456"]
+why = "Town of Brookline inventory record for a European hornbeam (trunk 28 cm) that is no longer there. This spot is in the shadow of a building in the USGS NAIP photograph of 7 July 2023 and in the MassGIS spring 2023 photograph, so those two cannot show it; the MassGIS 15 cm leaf-off photograph of spring 2025 shows plain pavement with no trunk, branches or branch shadow at the point. A tree with the record's trunk size would show. The neighbouring records of this block are in the same state."
+at = [42.340399, -71.120354]
+delete = true
+
+["brk:10459"]
+why = "Town of Brookline inventory record for a Ginkgo 'Princeton Sentry' (trunk 26 cm) that is no longer there. The tree pit at this point is bare in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown, only a little pit weed) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.340410, -71.132635]
+delete = true
+
+["brk:10460"]
+why = "Town of Brookline inventory record for a Ginkgo 'Princeton Sentry' (trunk 26 cm) that is no longer there. The tree pit at this point is bare in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown, only a little pit weed) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.340408, -71.132593]
+delete = true
+
+["brk:13490"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 31 cm) that is no longer there. The point is plain pavement or grass strip in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.345645, -71.122296]
+delete = true
+
+["brk:308"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 25 cm) that is no longer there. The point is plain pavement or grass strip in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.345609, -71.122075]
+delete = true
+
+["brk:11478"]
+why = "Town of Brookline inventory record for a London planetree (trunk 20 cm) that is no longer there. The point is plain pavement or grass strip in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.341589, -71.123730]
+delete = true
+
+["brk:11477"]
+why = "Town of Brookline inventory record for a London planetree (trunk 20 cm) that is no longer there. The point is plain pavement or grass strip in the USGS NAIP photograph of 7 July 2023 (leaf-on: no crown) and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 (no trunk, no branches, no branch shadow). A tree with the record's trunk size would show in all three. The neighbouring records of this block are in the same state."
+at = [42.341559, -71.123875]
+delete = true
+
+["brk:11347"]
+why = "Town of Brookline inventory record for a Callery pear 'Aristocrat' (trunk 31 cm) that is no longer there. This spot is in the shadow of a building in the USGS NAIP photograph of 7 July 2023 and in the MassGIS spring 2023 photograph, so those two cannot show it; the MassGIS 15 cm leaf-off photograph of spring 2025 shows plain pavement with no trunk, branches or branch shadow at the point. A tree with the record's trunk size would show. The neighbouring records of this block are in the same state."
+at = [42.333377, -71.120394]
+delete = true
+
+["brk:11346"]
+why = "Town of Brookline inventory record for a Callery pear 'Aristocrat' (trunk 34 cm) that is no longer there. This spot is in the shadow of a building in the USGS NAIP photograph of 7 July 2023 and in the MassGIS spring 2023 photograph, so those two cannot show it; the MassGIS 15 cm leaf-off photograph of spring 2025 shows plain pavement with no trunk, branches or branch shadow at the point. A tree with the record's trunk size would show. The neighbouring records of this block are in the same state."
+at = [42.333357, -71.120293]
+delete = true

@@ -1,0 +1,740 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.112486,
+     42.3630764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.112399,
+     42.3630134
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.9",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 7.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1116398,
+     42.3642316
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1115616,
+     42.3641601
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114888,
+     42.3641598
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114483,
+     42.36411
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114488,
+     42.3640257
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1115251,
+     42.3639417
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1116157,
+     42.3638945
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111103,
+     42.3638776
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1114382,
+     42.3638593
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1116512,
+     42.3637995
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1112754,
+     42.3637983
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111328,
+     42.3637719
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.8",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 11.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1113718,
+     42.3637511
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.7",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 12.7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.111579,
+     42.3636956
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1124516,
+     42.3634609
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1122885,
+     42.3634581
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "13",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 13 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1117817,
+     42.3634283
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1123965,
+     42.3634196
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1123123,
+     42.3633804
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7.4",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 7.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1122221,
+     42.3633564
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "11.3",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 11.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1122226,
+     42.3632764
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.4",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 8.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1119364,
+     42.3643277
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.4",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 9.4 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1123298,
+     42.3643204
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "8.9",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 8.9 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1116888,
+     42.3643182
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1118287,
+     42.3643122
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1122106,
+     42.3642789
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-34_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1111007,
+     42.3642579
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1128469,
+     42.3631446
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "9.8",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 9.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.112827,
+     42.3630516
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.8",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 10.8 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1125824,
+     42.3630378
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.2",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 12.2 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1127341,
+     42.3630016
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1132356,
+     42.3629384
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1131134,
+     42.3629121
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1132067,
+     42.3628973
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.11268,
+     42.364233
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1127995,
+     42.3642183
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1127214,
+     42.3636562
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1128177,
+     42.3636306
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 6.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1127013,
+     42.3636108
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1127946,
+     42.3635852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1127336,
+     42.3635677
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "6",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 6 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.112536,
+     42.3634784
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1127461,
+     42.3634186
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1132419,
+     42.3633468
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "7",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1125284,
+     42.3632861
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "12.7",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 12.7 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.112948,
+     42.3632832
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "10.3",
+    "why": "An unmapped crown in Hoyt Field: textured, dark canopy about 10.3 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-35_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.1128551,
+     42.3632267
+    ]
+   }
+  }
+ ]
+}

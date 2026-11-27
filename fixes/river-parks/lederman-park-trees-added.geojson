@@ -1,0 +1,305 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0709006,
+     42.3636202
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0708432,
+     42.363486
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0709131,
+     42.3634841
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0709137,
+     42.3633955
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0712497,
+     42.3632606
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0711917,
+     42.3632172
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.071428,
+     42.3631813
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-6_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0714632,
+     42.3648582
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0726722,
+     42.3618658
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_2), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0728248,
+     42.3617043
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0730481,
+     42.362725
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0729611,
+     42.3626534
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727696,
+     42.3625446
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0730698,
+     42.362092
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_3), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0725662,
+     42.3620339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0727079,
+     42.3639099
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_4), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.072833,
+     42.3630829
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0717941,
+     42.3646174
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5.5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5.5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0724776,
+     42.3643628
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "natural": "tree",
+    "diameter_crown": "5",
+    "why": "An unmapped crown in Lederman Park: textured, dark canopy about 5 m across in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_5), with no tree of the city inventory or OpenStreetMap under it. Found from the photograph's texture and near-infrared band, then checked by eye against it. Where crowns touch, the point and width are those of the largest circle that fits in the visible canopy, not a counted tree. Species and height are not known (height comes from the crown width)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -71.0723582,
+     42.3643537
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+# The Muddy River in the Back Bay Fens is slow, nearly still water, dark olive in the aerial photograph.
+# The source data tags it `water=river`, which the pipeline draws as the open blue of the Charles; the
+# pipeline picks the olive of a pond, lagoon or basin from `water=pond`. The river's own outline is unchanged.
+
+["r19121065"]
+why = "The Fens' water (Muddy River and its pond-like basins) is dark olive-green, almost black in shade, in the USGS NAIP aerial photograph of 7 July 2023, with reeds and algae at the edges: it is still water held by the Fens' dams and sluice, not tidal blue water like the Charles. Tagged `water=pond` only so the model draws it in the pond colour; the outline is not changed."
+at = [42.34305, -71.09444]
+set = { water = "pond" }
+
+["r7261831"]
+why = "The western stretch of the Muddy River at the Fens (Park Drive to Brookline Avenue) is the same dark olive-green still water in the USGS NAIP aerial photograph of 7 July 2023. Tagged `water=pond` only so the model draws it in the pond colour; the outline is not changed."
+at = [42.34166, -71.10147]
+set = { water = "pond" }

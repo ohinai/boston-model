@@ -1,0 +1,181 @@
+# The rebuilt Michael Driscoll School (Washington Street, Washington Square): Town of Brookline inventory
+# trees of the old school grounds that the new building, yard and sidewalk have replaced.
+#
+# Found by the aerial audit (.claude/commands/audit.md: no crown under a modelled tree with a trunk of 25 cm
+# or more) and by listing trees whose trunk stands inside a building footprint (11 stand inside the
+# school's outline). Each checked in three independent surveys: USGS NAIP 7 July 2023 (leaf-on), and MassGIS
+# 15 cm leaf-off spring 2023 and spring 2025 (credit MassGIS). The ids 17068 to 17107 are one run of records.
+#
+# Left alone: the young records of the same run (brk:17069, 17070, 17073, 17074, 17076, trunks of 5 to 8 cm)
+# and brk:3451, 3453 (10 to 15 cm), which could be new plantings too small to see; brk:13603 (Norway maple, a
+# dark crown or bare branches stand at its point in the 2025 photograph); brk:3954 and brk:9937, across the street.
+
+["brk:3454"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 31 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340543, -71.135421]
+delete = true
+
+["brk:17107"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 36 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340531, -71.135556]
+delete = true
+
+["brk:17106"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 33 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340448, -71.135671]
+delete = true
+
+["brk:3452"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 25 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340431, -71.135318]
+delete = true
+
+["brk:17105"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 41 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340368, -71.135770]
+delete = true
+
+["brk:17104"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 36 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340313, -71.135797]
+delete = true
+
+["brk:17102"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 33 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340307, -71.135822]
+delete = true
+
+["brk:17103"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 33 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340274, -71.135762]
+delete = true
+
+["brk:17099"]
+why = "Town of Brookline inventory record for a Japanese pagodatree (trunk 61 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340266, -71.135185]
+delete = true
+
+["brk:17095"]
+why = "Town of Brookline inventory record for a Japanese pagodatree (trunk 31 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340224, -71.135128]
+delete = true
+
+["brk:17098"]
+why = "Town of Brookline inventory record for a Japanese pagodatree (trunk 41 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340197, -71.135070]
+delete = true
+
+["brk:17101"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 33 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340188, -71.135648]
+delete = true
+
+["brk:17100"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 48 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340167, -71.135609]
+delete = true
+
+["brk:17096"]
+why = "Town of Brookline inventory record for a Japanese pagodatree (trunk 46 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340164, -71.135062]
+delete = true
+
+["brk:17097"]
+why = "Town of Brookline inventory record for a Japanese pagodatree (trunk 36 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340144, -71.135131]
+delete = true
+
+["brk:17094"]
+why = "Town of Brookline inventory record for a Sugar maple (trunk 84 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340115, -71.135274]
+delete = true
+
+["brk:17092"]
+why = "Town of Brookline inventory record for a Honeylocust (trunk 46 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340067, -71.135545]
+delete = true
+
+["brk:17093"]
+why = "Town of Brookline inventory record for a Flowering cherry (trunk 31 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340060, -71.135482]
+delete = true
+
+["brk:17091"]
+why = "Town of Brookline inventory record for a American elm (trunk 23 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.339981, -71.135658]
+delete = true
+
+["brk:17090"]
+why = "Town of Brookline inventory record for a American elm (trunk 25 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.339925, -71.135734]
+delete = true
+
+["brk:17089"]
+why = "Town of Brookline inventory record for a American elm (trunk 23 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.339845, -71.135833]
+delete = true
+
+["brk:3446"]
+why = "Town of Brookline inventory record for a Green ash (trunk 25 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.339598, -71.135337]
+delete = true
+
+["brk:17068"]
+why = "Town of Brookline inventory record for a Red maple (trunk 23 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340539, -71.136183]
+delete = true
+
+["brk:17079"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 31 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340509, -71.136651]
+delete = true
+
+["brk:17077"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 33 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340492, -71.136670]
+delete = true
+
+["brk:17080"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 36 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340426, -71.136695]
+delete = true
+
+["brk:17072"]
+why = "Town of Brookline inventory record for a Sugar maple (trunk 28 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340397, -71.136652]
+delete = true
+
+["brk:17075"]
+why = "Town of Brookline inventory record for a Sugar maple (trunk 20 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340356, -71.136603]
+delete = true
+
+["brk:17083"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 53 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340184, -71.136377]
+delete = true
+
+["brk:17084"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 53 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340128, -71.136303]
+delete = true
+
+["brk:17085"]
+why = "Town of Brookline inventory record for a Sugar maple (trunk 28 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.340051, -71.136197]
+delete = true
+
+["brk:17086"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 36 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.339985, -71.136113]
+delete = true
+
+["brk:17087"]
+why = "Town of Brookline inventory record for a Norway maple (trunk 41 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.339929, -71.136027]
+delete = true
+
+["brk:17088"]
+why = "Town of Brookline inventory record for a Sugar maple (trunk 33 cm) that is no longer there. The Michael Driscoll School has been rebuilt on this site. The point now lies on the new building's roof, or on the cleared yard, car park or sidewalk beside it: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows the new roof and a cleared, partly built site with no tree crown here, and the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025 show no trunk, branch or branch shadow at the point. The neighbouring records of this block are in the same state."
+at = [42.339867, -71.135954]
+delete = true

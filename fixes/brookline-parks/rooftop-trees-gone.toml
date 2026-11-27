@@ -1,0 +1,48 @@
+# Inventory trees of the Town of Brookline that stand on a roof.
+#
+# Found by listing trees whose trunk lies inside an OpenStreetMap building outline (the Florida Ruffin Ridley School,
+# Harvard Street: six; two single trees elsewhere), then checked in three surveys: USGS NAIP 7 July 2023, MassGIS 15 cm
+# leaf-off spring 2023 and spring 2025 (credit MassGIS). The Ridley School was rebuilt; these are trees of the old grounds.
+#
+# Checked and kept: brk:16764 (green ash, 15 cm, at the school's roof edge, a bare tree may stand beside it),
+# brk:10996 (callery pear, 32 cm: foliage under it in July 2023).
+
+["brk:16759"]
+why = "Town of Brookline inventory record for a Green ash (trunk 51 cm) that is no longer there. The point lies on a flat roof inside the building outline (solar panels and roof equipment are visible) in the USGS NAIP photograph of 7 July 2023 and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025: a tree cannot stand there, and no crown or trunk shows. The neighbouring records of this block are in the same state."
+at = [42.344177, -71.123904]
+delete = true
+
+["brk:16760"]
+why = "Town of Brookline inventory record for a Green ash (trunk 28 cm) that is no longer there. The point lies on a flat roof inside the building outline (solar panels and roof equipment are visible) in the USGS NAIP photograph of 7 July 2023 and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025: a tree cannot stand there, and no crown or trunk shows. The neighbouring records of this block are in the same state."
+at = [42.344116, -71.123974]
+delete = true
+
+["brk:16765"]
+why = "Town of Brookline inventory record for a Green ash (trunk 61 cm) that is no longer there. The point lies on a flat roof inside the building outline (solar panels and roof equipment are visible) in the USGS NAIP photograph of 7 July 2023 and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025: a tree cannot stand there, and no crown or trunk shows. The neighbouring records of this block are in the same state."
+at = [42.344039, -71.123846]
+delete = true
+
+["brk:17400"]
+why = "Town of Brookline inventory record for a Red maple (trunk 15 cm) that is no longer there. The point lies on a flat roof inside the building outline (solar panels and roof equipment are visible) in the USGS NAIP photograph of 7 July 2023 and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025: a tree cannot stand there, and no crown or trunk shows. The neighbouring records of this block are in the same state."
+at = [42.345229, -71.123786]
+delete = true
+
+["brk:17401"]
+why = "Town of Brookline inventory record for a Red maple (trunk 18 cm) that is no longer there. The point lies on a flat roof inside the building outline (solar panels and roof equipment are visible) in the USGS NAIP photograph of 7 July 2023 and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025: a tree cannot stand there, and no crown or trunk shows. The neighbouring records of this block are in the same state."
+at = [42.345190, -71.123725]
+delete = true
+
+["brk:17421"]
+why = "Town of Brookline inventory record for a Sycamore (trunk 46 cm) that is no longer there. The point lies on a flat roof inside the building outline (solar panels and roof equipment are visible) in the USGS NAIP photograph of 7 July 2023 and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025: a tree cannot stand there, and no crown or trunk shows. The neighbouring records of this block are in the same state."
+at = [42.344961, -71.123134]
+delete = true
+
+["brk:16686"]
+why = "Town of Brookline inventory record for a Crabapple (trunk 8 cm) that is no longer there. The point lies on a flat roof inside the building outline (solar panels and roof equipment are visible) in the USGS NAIP photograph of 7 July 2023 and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025: a tree cannot stand there, and no crown or trunk shows. The neighbouring records of this block are in the same state."
+at = [42.341085, -71.114721]
+delete = true
+
+["brk:14663"]
+why = "Town of Brookline inventory record for a Paper birch (trunk 20 cm) that is no longer there. The point lies on a flat roof inside the building outline (solar panels and roof equipment are visible) in the USGS NAIP photograph of 7 July 2023 and in the MassGIS 15 cm leaf-off photographs of spring 2023 and spring 2025: a tree cannot stand there, and no crown or trunk shows. The neighbouring records of this block are in the same state."
+at = [42.334512, -71.119806]
+delete = true

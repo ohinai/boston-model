@@ -1,0 +1,6 @@
+# Crown widths measured from the air, for trees that stand alone.
+
+["bprd:900093618"]
+why = "Crabapple (56 cm trunk) whose crown is far wider than the 5.9 m estimated from its trunk. The USGS NAIP photograph of 7 July 2023 (leaf-on) shows one dense crown about 10 m across at the Symphony Road corner of the Southwest Corridor, and the MassGIS 15 cm leaf-off photograph of spring 2023 shows the same tree as a wide bare branch network. Width measured against the photograph's pixel scale."
+at = [42.344486, -71.087365]
+set = { diameter_crown = "10" }

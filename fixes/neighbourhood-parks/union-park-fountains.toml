@@ -1,0 +1,11 @@
+# Union Park's two fountains are mapped as points with no size, so they are drawn at the 3 m default.
+
+["n7983198576"]
+why = "Fountain basin measured at about 5 m across (the stone rim, ring of planting outside it) in the USGS NAIP photograph of 7 July 2023 and the MassGIS 15 cm leaf-off photograph of spring 2023; the default is 3 m."
+at = [42.342685, -71.071232]
+set = { diameter = "5" }
+
+["n7983198577"]
+why = "Fountain basin measured at about 5 m across (the stone rim, ring of planting outside it) in the USGS NAIP photograph of 7 July 2023 and the MassGIS 15 cm leaf-off photograph of spring 2023; the default is 3 m."
+at = [42.343027, -71.071644]
+set = { diameter = "5" }

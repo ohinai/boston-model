@@ -1,0 +1,21 @@
+# Inventory trees that stand on bare ground: no crown in the summer photograph and no trunk or branches in the
+# leaf-off photograph. Found by the aerial sweep of the Southwest Corridor (vegetation under each data tree), then
+# checked in both surveys. Checked and kept, so nobody removes them by mistake: bprd:6477 and bprd:31802 (London
+# planetrees; bare branches stand at the point in MassGIS spring 2023), bprd:28950 (red maple at a parking-lot edge,
+# unclear), bprd:29289 (Accolade elm; a crown stands 8 m east of its point), bprd:10571 and bprd:22432 (northern red
+# oaks beside Carter Playground; faint bare branches in MassGIS spring 2023, far smaller than the modelled 14 m crown).
+
+["bprd:10563"]
+why = "Northern red oak (48 cm trunk, modelled crown 14.8 m) that is not there. The USGS NAIP photograph of 7 July 2023 (leaf-on) shows a strip of bare ground and low shrubs between the Southwest Corridor path and the fence of the Carter Playground field, with no crown anywhere near 15 m across; the MassGIS 15 cm leaf-off photograph of spring 2023 shows no trunk or branches at the point. A tree with a 48 cm trunk would show in both."
+at = [42.33885, -71.0841]
+delete = true
+
+["bprd:29328"]
+why = "Littleleaf linden (48 cm trunk, modelled crown 9.7 m) that is not there. At the fence beside the community garden plots on the Southwest Corridor, the USGS NAIP photograph of 7 July 2023 (leaf-on) shows grass and path edge with no crown, and the MassGIS 15 cm leaf-off photograph of spring 2023 shows no trunk or branches. A tree with a 48 cm trunk would show in both."
+at = [42.34068, -71.079475]
+delete = true
+
+["bprd:29329"]
+why = "Littleleaf linden (48 cm trunk, modelled crown 9.3 m) that is not there. Same stretch of the Southwest Corridor, 12 m south-east of bprd:29328: the USGS NAIP photograph of 7 July 2023 (leaf-on) shows grass and path edge, and the MassGIS 15 cm leaf-off photograph of spring 2023 shows no trunk or branches at the point."
+at = [42.34058, -71.07939]
+delete = true

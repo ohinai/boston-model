@@ -1,0 +1,83 @@
+# Charles River Esplanade: trees in OpenStreetMap that the aerial photograph does not support.
+# Source: USGS NAIP aerial imagery of 7 July 2023 (leaf-on), audit cells of the Esplanade, each enlarged and looked at by eye.
+# OpenStreetMap's tree nodes here carry no species or size, so the model draws each with a 9 to 11 m crown.
+
+["n7733151473"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-8_-2): the middle of the Hatch Shell lawn: bare mown grass under the whole 11 m crown. The node is drawn as a 11.27 m crown. Judged absent."
+at = [42.356654, -71.073778]
+delete = true
+
+["n7733151256"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-5): mown lawn at a bend in the path, bare under the whole crown (a pale cross-shaped mark in the turf where a tree may have stood). The node is drawn as a 10.49 m crown. Judged absent."
+at = [42.353861, -71.084547]
+delete = true
+
+["n7733151255"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-15_-5): mown lawn at a bend in the path, bare under the whole crown (a pale cross-shaped mark in the turf where a tree may have stood). The node is drawn as a 9.63 m crown. Judged absent."
+at = [42.353823, -71.084597]
+delete = true
+
+["n12885572219"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-11_-3): a bare worn patch of lawn beside the path; the nearest crown is 5 m away and much smaller. The node is drawn as a 7.67 m crown. Judged absent."
+at = [42.355724, -71.07811]
+delete = true
+
+["n7733148677"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-19_-7): paving and a crosswalk; no crown over it. The node is drawn as a 10.51 m crown. Judged absent."
+at = [42.352104, -71.08955]
+delete = true
+
+["n7747390903"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-21_-8): the corner of a flat roof beside the water; trees do not stand on roofs. The node is drawn as a 7.35 m crown. Judged absent."
+at = [42.350239, -71.092966]
+delete = true
+
+["n7747390904"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-21_-8): a flat roof and the dark water beside it; no crown. The node is drawn as a 8.5 m crown. Judged absent."
+at = [42.350275, -71.092964]
+delete = true
+
+["n7746959821"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-23_-8): mown lawn beside the road; no crown. The node is drawn as a 10.84 m crown. Judged absent."
+at = [42.350787, -71.096401]
+delete = true
+
+["n7733859238"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-5_6): pale paving beside the seawall; no crown. The node is drawn as a 9.65 m crown. Judged absent."
+at = [42.366053, -71.06991]
+delete = true
+
+["n7733859235"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-5_6): bare lawn beside the seawall path; no crown. The node is drawn as a 10.51 m crown. Judged absent."
+at = [42.365877, -71.070073]
+delete = true
+
+["n7733859246"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-5_6): bare lawn beside the seawall path; no crown. The node is drawn as a 9.45 m crown. Judged absent."
+at = [42.365807, -71.070143]
+delete = true
+
+["n7733859244"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-5_6): bare lawn beside the seawall path; no crown. The node is drawn as a 10.76 m crown. Judged absent."
+at = [42.365797, -71.070041]
+delete = true
+
+["n7733859226"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-5_6): mown lawn between two paths; no crown. The node is drawn as a 9.32 m crown. Judged absent."
+at = [42.365397, -71.069823]
+delete = true
+
+["n7734627274"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-5_6): mown lawn between two paths; no crown. The node is drawn as a 9.41 m crown. Judged absent."
+at = [42.365335, -71.069802]
+delete = true
+
+["n7733151653"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-7_-1): the grass strip beside the Storrow Drive carriageway; no crown. The node is drawn as a 10.41 m crown. Judged absent."
+at = [42.357839, -71.072834]
+delete = true
+
+["n7733151517"]
+why = "No tree stands at this point in the USGS NAIP aerial photograph of 7 July 2023 (audit cell c_-9_-3): a crosswalk and road edge; no crown. The node is drawn as a 10.8 m crown. Judged absent."
+at = [42.356148, -71.074925]
+delete = true

@@ -1,0 +1,21 @@
+# The Boston Women's Memorial on the Commonwealth Avenue Mall (Meredith Bergmann, 2003). OpenStreetMap maps each of the three
+# bronzes as a statue with no height and no support, so the model drew each as a 3.4 m figure on a stepped granite pedestal.
+# The memorial is life-size figures set on the paving of its own plaza (the way "The Boston Women's Memorial", a 6 m paved
+# pedestrian area, is mapped round them), not figures on pedestals. `support=ground` draws a statue with no pedestal; the height
+# is the standard height of a life-size standing figure, and of a seated one for Phillis Wheatley, who sits at a writing desk.
+# That is interpretation of the kind of thing, as a tree's size is from its species: no figure's size is measured from a photograph.
+
+["n7721699110"]
+why = "Abigail Adams of the Boston Women's Memorial is a life-size standing bronze on the memorial's paving, not a 3.4 m figure on a pedestal. The plaza is mapped as the pedestrian area w827075378 round the three statues."
+at = [42.35049, -71.08334]
+set = { support = "ground", height = "1.8" }
+
+["n7721699112"]
+why = "Lucy Stone of the Boston Women's Memorial is a life-size standing bronze on the memorial's paving, not a 3.4 m figure on a pedestal. The plaza is mapped as the pedestrian area w827075378 round the three statues."
+at = [42.35049, -71.08339]
+set = { support = "ground", height = "1.8" }
+
+["n7721699111"]
+why = "Phillis Wheatley of the Boston Women's Memorial is a life-size seated bronze (at a writing desk) on the memorial's paving, not a 3.4 m figure on a pedestal. A seated figure is about 1.4 m high."
+at = [42.35052, -71.08337]
+set = { support = "ground", height = "1.4" }

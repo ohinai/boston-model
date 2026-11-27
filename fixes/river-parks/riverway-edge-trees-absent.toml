@@ -1,0 +1,13 @@
+# Riverway / Olmsted Park edge, Brookline: inventory trees with large trunks and no crown in the aerial photograph.
+# Source: USGS NAIP aerial imagery of 7 July 2023 (leaf-on), audit cell c_-33_-15, enlarged and looked at by eye.
+# Brookline's inventory is the Town's (docs/DATA_SOURCES.md); the photograph is newer than its records.
+
+["brk:16577"]
+why = "European beech (trunk 150 cm, modelled crown 15.4 m): the USGS NAIP photograph of 7 July 2023 shows a bare worn patch of dirt and short grass under the whole of its modelled crown and no crown within 8 m; a mature beech would be a dark dome 15 m across. Judged gone (medium confidence)."
+at = [42.343318, -71.111107]
+delete = true
+
+["brk:16575"]
+why = "European beech (trunk 114 cm, modelled crown 15.4 m): the USGS NAIP photograph of 7 July 2023 shows mown lawn under the whole of its modelled crown and no crown within 6 m; a mature beech would be a dark dome 15 m across. Judged gone (medium confidence)."
+at = [42.343136, -71.110866]
+delete = true
