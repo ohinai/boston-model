@@ -752,6 +752,10 @@ def add_object(
 
         shape = streetfurniture.SHAPES.get(kind)
     if shape is None:
+        from . import extras  # kinds that sports.py, playgrounds.py and stadium.py define (see extras.py)
+
+        shape = extras.shape(kind)
+    if shape is None:
         raise ValueError(f"unknown furniture kind {kind!r}; expected one of {', '.join(KINDS)}")
     shade = 1.0 + (np.random.default_rng(seed & 0xFFFFFFFF).random() - 0.5) * 0.08  # +-4%
     parts = _Parts()

@@ -21,7 +21,7 @@ from shapely.geometry import Polygon, box
 from shapely.ops import polygonize, substring, unary_union
 from shapely.strtree import STRtree
 
-from . import world
+from . import extras, stadium, world
 from .barriers import add_barrier, add_gate, gate_plan, gate_swing_side, join_gates
 from .bridges import SUSPENSION, add_bridge, bridge_style, deck_height
 from .facing import bench_facings
@@ -32,17 +32,21 @@ from .groundlook import add_bed_planting, add_lawn, add_mulch, bed_style, mulch_
 from .markings import add_asphalt, add_paint, plan as plan_markings
 from .mesh import MeshBuilder, add_flat, add_skirt, add_walls, colour_bytes
 from .pavilions import add_dock_edge, add_pavilion, painted_pier, roof_shape
+from .playgrounds import add_open_structure, add_plots
 from .roofs import add_roof, plan_roof
+from .sports import add_marks as add_sports_marks, plan as plan_sports
 from .streetfurniture import street_objects
 from .trees import add_tree, describe
 
 ATTRIBUTION = "© OpenStreetMap contributors (ODbL 1.0)"
 BROOKLINE_ATTRIBUTION = "Town of Brookline tree inventory and building footprints"
+CITY_ATTRIBUTION = "City of Boston Planning Department building heights"
 
 
 def attribution(area: dict | None = None) -> str:
-    """The credit written into the tiles of an area: OpenStreetMap's, and the Town of Brookline's where the area uses its data."""
-    return f"{ATTRIBUTION}; {BROOKLINE_ATTRIBUTION}" if "brookline" in (area or {}).get("extra_sources", []) else ATTRIBUTION
+    """The credit written into the tiles of an area: OpenStreetMap's, and the Town of Brookline's and the City of Boston's where the area uses their data."""
+    sources = (area or {}).get("extra_sources", [])
+    return "; ".join([ATTRIBUTION, *([BROOKLINE_ATTRIBUTION] if "brookline" in sources else []), *([CITY_ATTRIBUTION] if "city_heights" in sources else [])])
 
 ROAD_Z = -0.12  # carriageways sit a curb's height below the pavement
 WATER_Z = -0.6
@@ -92,6 +96,7 @@ COVERS = {
         "grass": "#6d8c4c", "lawn": "#6d8c4c", "pitch": "#74964e", "turf": "#4f8a4a", "court": "#3f6f5c",
         "playground": "#b79f7b", "dirt": "#9c8566", "garden": "#62824a", "scrub": "#5f7a48",
         "wood": "#55703f", "meadow": "#7f9455",
+        "playground_hard": "#8f8c85", "playground_sand": "#cdbb93",  # a playground's paving, and its sand (see features.green_cover)
     },
     # Ponds and lagoons are dark olive, not blue: in the NAIP aerial the Public Garden
     # lagoon is (44, 57, 49) on a 0 to 255 scale, and in photographs it is a dark green-grey
@@ -190,6 +195,7 @@ class Context:
     towers: dict[str, list] = field(default_factory=dict)  # pylons of each suspension footbridge, by way id (see _towers)
     docks: dict[tuple[int, int], list] = field(default_factory=dict)  # painted pier areas, by the tile of a point inside each
     markings: object = None  # every piece of road paint in the district (see markings.plan)
+    sports: object = None  # the lines, nets and dirt of every pitch in the district (see sports.plan)
 
 
 ROAD_BRIDGE_REACH = 6.0  # a footway this close to a carriageway is part of a road bridge
@@ -269,7 +275,7 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
     for tree in scene.trees:
         trees[world.tile_of(tree.x, tree.y)].append(tree)
     objects = defaultdict(list)
-    for thing in street_objects(scene):  # the scene's objects, with signals made and street furniture placed (streetfurniture.py)
+    for thing in (*street_objects(scene), *extras.objects(scene)):  # the scene's objects, with signals made and street furniture placed (streetfurniture.py), and what the modules in extras.py make
         objects[world.tile_of(thing.x, thing.y)].append(thing)
 
     barriers = defaultdict(list)
@@ -306,6 +312,7 @@ def prepare(scene: Scene, tiles: list[tuple[int, int]]) -> Context:
         towers=_towers(decks, water, scene.objects),
         docks=_docks(scene.areas["path"]),
         markings=plan_markings(scene, roads),
+        sports=plan_sports(scene),
     )
 
 
@@ -646,6 +653,7 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path, credit: str = ATTR
     # Paint on the carriageway, a few centimetres above it (see markings.py).
     paint = MeshBuilder("markings", colours=True)
     add_paint(paint, ctx.markings, tile_box, [polygon for polygon, _ in surfaces["roads"]], ROAD_Z, origin)
+    add_sports_marks(paint, ctx.sports, tile_box, origin)  # and the lines, dirt and nets of the pitches (see sports.py)
 
     # Planted beds: bare soil at the edge, and a low mass of planting in from it.
     beds = MeshBuilder("beds", colours=True)
@@ -667,6 +675,8 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path, credit: str = ATTR
         for polygon in _pieces(patch):
             add_flat(beds, polygon, 0.0, origin, colour_bytes(BED_SOIL))
 
+    add_plots(ctx.scene, tile_box, origin, beds)  # allotment plots: soil, rows of planting, sheds, bean tepees (see playgrounds.py)
+
     # A ring of mulch round the foot of each tree on the lawn of a large park (see groundlook.py).
     lawn = _mulched_lawn(ctx, surfaces, tile_box)
     if lawn is not None:
@@ -679,8 +689,13 @@ def build_tile(ctx: Context, tx: int, ty: int, out_dir: Path, credit: str = ATTR
     walls = MeshBuilder("building_walls", uvs=True, colours=True, features=True)
     roofs = MeshBuilder("building_roofs", colours=True, features=True)
     for index, building in enumerate(ctx.buildings.get((tx, ty), [])):
+        if (plan := stadium.part_plan(building)) is not None:  # a stand, a field wall or a part of a ballpark (see stadium.py)
+            stadium.add_part(walls, roofs, building, plan, origin, feature=index)
+            continue
         if roof_shape(building.tags):  # an open roof on posts, not a box (see pavilions.py)
             add_pavilion(walls, roofs, building, origin, feature=index)
+            continue
+        if add_open_structure(ctx, walls, roofs, building, origin, feature=index):  # a bandstand or gazebo: an open roof on posts, not a box (see playgrounds.py)
             continue
         wall = colour_bytes(building.wall_colour)
         roof = colour_bytes(building.roof_colour)

@@ -7,6 +7,10 @@ name = "Downtown pilot"
 description = "Boston Common, Beacon Hill, Downtown Crossing, Government Center, the Financial District and the waterfront"
 bbox = [-71.0760, 42.3500, -71.0480, 42.3640]
 
+# The City of Boston's building survey gives heights to buildings that have none (pipeline/boston_pipeline/cityheights.py, docs/DATA_SOURCES.md).
+# Delete this line to turn it off. The pilot lists it too, so that its tiles stay identical to the same tiles of `boston`.
+extra_sources = ["city_heights"]
+
 [[pilot.places]]
 name = "Massachusetts State House"
 lat = 42.35745
@@ -45,7 +49,7 @@ heading = 90
 
 [[pilot.places]]
 name = "Long Wharf"
-lat = 42.36020
+lat = 42.36042
 lon = -71.05080
 heading = 90
 
@@ -57,13 +61,14 @@ heading = 250
 
 [boston]
 name = "Boston core and North Brookline"
-description = "The pilot district, plus Back Bay, Kenmore, Fenway, the Longwood edge and North Brookline out to Coolidge Corner and Washington Square"
+description = "The pilot district, plus Back Bay, Kenmore, Fenway, the Longwood edge and North Brookline out to Coolidge Corner, Washington Square and the Brookline Reservoir"
 # Built as one rectangle so the sea and water edges close the same way as in the pilot. The pilot's own tiles come out
 # identical; fetch downloads the map in strips (see osm.fetch_area).
-bbox = [-71.1420, 42.3350, -71.0480, 42.3640]
+bbox = [-71.1470, 42.3315, -71.0480, 42.3640]
 # Optional data beyond OpenStreetMap and the city's tree inventory. "brookline" adds the Town of Brookline's tree inventory
-# and building heights (pipeline/boston_pipeline/brookline.py, docs/DATA_SOURCES.md). Delete this line to turn it off.
-extra_sources = ["brookline"]
+# and building heights (pipeline/boston_pipeline/brookline.py), "city_heights" the City of Boston's surveyed building heights
+# (cityheights.py); see docs/DATA_SOURCES.md. Delete a word to turn that source off.
+extra_sources = ["brookline", "city_heights"]
 
 [[boston.places]]
 name = "Massachusetts State House"
@@ -103,7 +108,7 @@ heading = 90
 
 [[boston.places]]
 name = "Long Wharf"
-lat = 42.36020
+lat = 42.36042
 lon = -71.05080
 heading = 90
 
@@ -155,3 +160,87 @@ name = "Washington Square, Brookline"
 lat = 42.33960
 lon = -71.13562
 heading = 90
+
+[[boston.places]]
+name = "Fenway Park, Van Ness Street"
+lat = 42.34573
+lon = -71.09707
+heading = 340
+
+[[boston.places]]
+name = "Fenway Park, the Green Monster from Lansdowne Street"
+lat = 42.34723
+lon = -71.09743
+heading = 180
+
+[[boston.places]]
+name = "Citgo sign, Kenmore Square"
+lat = 42.34865
+lon = -71.09681
+heading = 33
+
+[[boston.places]]
+name = "Frog Pond, Boston Common"
+lat = 42.35642
+lon = -71.06550
+heading = 180
+
+[[boston.places]]
+name = "Little League diamond, Boston Common"
+lat = 42.35453
+lon = -71.06702
+heading = 207
+
+[[boston.places]]
+name = "Kelleher Rose Garden, Back Bay Fens"
+lat = 42.34115
+lon = -71.09475
+heading = 0
+
+[[boston.places]]
+name = "Fenway Victory Gardens"
+lat = 42.34517
+lon = -71.09277
+heading = 200
+
+[[boston.places]]
+name = "Hatch Shell lawn, Esplanade"
+lat = 42.35620
+lon = -71.07350
+heading = 15
+
+[[boston.places]]
+name = "Christopher Columbus Waterfront Park"
+lat = 42.36070
+lon = -71.05160
+heading = 10
+
+[[boston.places]]
+name = "Franklin Square, South End"
+lat = 42.33875
+lon = -71.07266
+heading = 51
+
+[[boston.places]]
+name = "Southwest Corridor at Massachusetts Avenue"
+lat = 42.34415
+lon = -71.07985
+heading = 45
+
+[[boston.places]]
+name = "Amory Playground, Brookline"
+lat = 42.34546
+lon = -71.11348
+heading = 27
+
+[[boston.places]]
+name = "Longwood Playground, Brookline"
+lat = 42.33929
+lon = -71.11501
+heading = 200
+
+[[boston.places]]
+name = "Corey Hill Park, Brookline"
+lat = 42.34300
+lon = -71.13355
+heading = 180

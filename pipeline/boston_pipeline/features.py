@@ -16,7 +16,7 @@ from shapely.geometry import LineString, Polygon
 from shapely.ops import polygonize, unary_union
 from shapely.strtree import STRtree
 
-from . import world
+from . import extras, world
 
 LEVEL_HEIGHT = 3.4  # metres per storey when only building:levels is known
 
@@ -34,6 +34,8 @@ FALLBACK_HEIGHT = 12.0
 # The `height:source` of a `height` that came from the Town of Brookline's building footprints (brookline.py), not from
 # OpenStreetMap: such a building's height_source is "town".
 HEIGHT_FROM_TOWN = "Town of Brookline building footprints"
+# The same for a `height` from the City of Boston's building survey, the roof-break parts (cityheights.py): "city".
+HEIGHT_FROM_CITY = "City of Boston building roof breaks (2010 survey)"
 # A building tagged `amenity=shelter` (a bus shelter, a sun or weather shelter, a picnic gazebo; 15 in the pilot, 7 to 85 m²)
 # with no height is a small structure, not a 12 m block.
 SHELTER_HEIGHT = 3.0
@@ -79,6 +81,10 @@ MULCH_MIN_PARK = 20_000.0
 # Sports and play surfaces that are not grass, by `surface` tag.
 HARD_COURTS = {"asphalt", "concrete", "acrylic", "tartan", "hard", "paved", "rubber"}
 BARE_GROUND = {"dirt", "clay", "sand", "earth", "ground", "gravel", "fine_gravel", "woodchips"}
+# A playground whose `surface` is one of these is paving (6 of the 121 in the `boston` area are "paved"); drawn grey.
+PLAYGROUND_PAVING = {"asphalt", "concrete", "paved", "paving_stones", "tiles"}
+# Games played on a hard court: a pitch for one of these and no `surface` is drawn as a hard court (see green_cover).
+HARD_COURT_SPORTS = {"tennis", "basketball", "pickleball", "futsal", "street_hockey", "roller_skating", "skateboard", "racquet", "handball", "netball"}
 
 # A footbridge with no stated height rises this share of its length at mid-span,
 # within these limits (metres): enough to read as a bridge, gentle enough to walk.
@@ -210,7 +216,7 @@ class Building:
     polygon: Polygon
     height: float
     min_height: float
-    height_source: str  # "height", "levels", "default", "override" or "town" (the Town of Brookline's footprints)
+    height_source: str  # "height", "levels", "default", "override", "town" (the Town of Brookline's footprints) or "city" (the City of Boston's survey)
     wall_colour: str
     roof_colour: str
     tags: dict
@@ -300,6 +306,7 @@ class Scene:
     signals: list[Point] = field(default_factory=list)
     roadnodes: list[Point] = field(default_factory=list)  # `highway=crossing` and `highway=stop` nodes: paint on the road (markings.py)
     pois: list[Point] = field(default_factory=list)
+    outlines: list[Building] = field(default_factory=list)  # building outlines not drawn because they contain parts (stadium.py reads a stadium's)
 
 
 def parse_length(value) -> float | None:
@@ -350,6 +357,8 @@ def building_height(tags: dict) -> tuple[float, float, str]:
             source = "default"
     if source == "height" and tags.get("height:source") == HEIGHT_FROM_TOWN:
         source = "town"
+    elif source == "height" and tags.get("height:source") == HEIGHT_FROM_CITY:
+        source = "city"
     base = parse_length(tags.get("min_height"))
     if base is None:
         min_level = parse_number(tags.get("building:min_level"))
@@ -503,7 +512,15 @@ def green_cover(tags: dict) -> tuple[str, str]:
     surface = tags.get("surface", "")
     if landuse == "flowerbed" or (leisure == "garden" and tags.get("garden:type") == "flowerbed"):
         return "bed", "flowers"
+    if leisure == "playground" and surface in PLAYGROUND_PAVING:
+        return "green", "playground_hard"  # a paved play area is grey paving, not the dark green of a court
+    if leisure == "playground" and surface == "sand":
+        return "green", "playground_sand"
     if leisure in ("pitch", "playground", "dog_park"):
+        # A pitch for a game that is played on a hard court, with no surface stated, is a hard court: a mapped tennis or basketball
+        # court is almost never grass (USGS NAIP, 7 July 2023: painted green or red hard courts all over Boston).
+        if leisure == "pitch" and not surface and (sports := {s.strip() for s in str(tags.get("sport", "")).split(";")}) and sports <= HARD_COURT_SPORTS:
+            return "green", "court"
         if surface == "artificial_turf":
             return "green", "turf"
         if surface in HARD_COURTS:
@@ -639,7 +656,10 @@ def _object(ident: str, tags: dict, x: float, y: float) -> Object | None:
     elif tags.get("barrier") in ("bollard", "block"):
         kind = tags["barrier"]
     if kind is None:
-        return None
+        found = extras.interpret(tags)  # sports.py, playgrounds.py, stadium.py: kinds of their own (see extras.py)
+        if found is None:
+            return None
+        kind, variant, size = found
     material = (tags.get("material") or "").split(";")[0] or None
     return Object(
         ident, x, y, kind, tags.get("name"), parse_direction(tags.get("direction")),
@@ -829,6 +849,9 @@ def classify(elements: list[dict]) -> Scene:
             else:
                 _add_area(scene, ident, tags, polygons)
     _drop_outlines_with_parts(scene)
+    from . import stadium  # stands, field walls and stadium parts (stadium.py); imported here because it imports this module
+
+    stadium.augment(scene)
     return scene
 
 
@@ -844,6 +867,7 @@ def _drop_outlines_with_parts(scene: Scene) -> None:
             inside = tree.query(building.polygon, predicate="contains")
             if len(inside):
                 # The outline goes, but its parts remember whose they are.
+                scene.outlines.append(building)
                 for index in inside:
                     parts[index].part_of = building.id
                     parts[index].part_of_name = building.tags.get("name")

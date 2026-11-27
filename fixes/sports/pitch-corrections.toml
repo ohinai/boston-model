@@ -1,0 +1,16 @@
+# Pitches whose tags disagree with the aerial photograph: the Fenway Park infield, and two courts mapped as baseball.
+
+["w813683131"]
+why = "The infield of Fenway Park is grass inside the base paths and dirt round it, not dirt: USGS NAIP aerial imagery (7 July 2023) shows a green square, and the way's own type tag says Kentucky Blue Grass. The dirt of the infield and the base paths is drawn by the diamond (sports.py)."
+at = [42.34637, -71.0976]
+set = { surface = "grass" }
+
+["w696300323"]
+why = "A basketball court, not a baseball field: USGS NAIP aerial imagery (7 July 2023) shows a full court's lines (key, free-throw circle, three-point arc, centre circle) on a 26.6 by 15.1 m red surface, the same size and surface as the way next to it that is already tagged basketball (w696300325)."
+at = [42.33372, -71.09264]
+set = { sport = "basketball" }
+
+["w696300324"]
+why = "A basketball court, not a baseball field: USGS NAIP aerial imagery (7 July 2023) shows a full court's lines (key, free-throw circle, three-point arc, centre circle) on a 26.6 by 15.1 m red surface, the same size and surface as the way next to it that is already tagged basketball (w696300325)."
+at = [42.33393, -71.09238]
+set = { sport = "basketball" }

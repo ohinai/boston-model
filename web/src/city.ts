@@ -45,7 +45,7 @@ export interface BuildingInfo extends Named {
   part_of?: string;
   height: number;
   /** Where the height came from: a measured tag, a storey count, a guess, or a fix in the repository. */
-  height_source: 'height' | 'levels' | 'default' | 'override' | 'town';
+  height_source: 'height' | 'levels' | 'default' | 'override' | 'town' | 'city';
 }
 
 /** Something drawn in a tile that is not a building: a bench, a statue, a bridge, a tree. */

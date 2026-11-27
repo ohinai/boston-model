@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "man_made": "floodlight",
+        "name": "Third-base light tower",
+        "height": "27",
+        "min_height": "18",
+        "direction": "86",
+        "why": "A floodlight tower on the roof of the third-base grandstand (w813683142). Its white lattice foot is on the blue roof in the MassGIS leaf-off aerial photograph (Massachusetts_Aerial_Imagery_2025, 15 cm; credit MassGIS) and in the USGS NAIP photograph of 7 July 2023, about 63 m west and 35 m south of the field's centre (the structure's base, not its leaning top). Its height is not measured: the tower's shadow on the roof is about 9 m long in the 2025 picture, so about 9 m of tower stands on the 18 m roof (27 m above the ground in all). Direction 86 turns the lamp bank toward the pitcher's mound."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0983214, 42.3463312] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "man_made": "floodlight",
+        "name": "Left-field light tower",
+        "height": "27",
+        "min_height": "18",
+        "direction": "144",
+        "why": "A floodlight tower at the left-field end of the third-base grandstand roof (w813683142). Its lattice shows on the blue roof's north-east end in the MassGIS leaf-off aerial photograph (Massachusetts_Aerial_Imagery_2025, 15 cm; credit MassGIS), about 45 m west and 25 m north of the field's centre. Height as for the other roof towers (about 9 m on the 18 m roof). Direction 144 turns the lamp bank toward the pitcher's mound."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0980923, 42.346867] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "man_made": "floodlight",
+        "name": "First-base light tower",
+        "height": "27",
+        "min_height": "18",
+        "direction": "358",
+        "why": "A floodlight tower on the roof of the first-base grandstand along Van Ness Street (w813683144). Its lattice foot is on the blue roof in the MassGIS leaf-off aerial photograph (Massachusetts_Aerial_Imagery_2025, 15 cm; credit MassGIS) and in the USGS NAIP photograph of 7 July 2023, about 1.5 m west and 90 m south of the field's centre. Height as for the other roof towers (about 9 m on the 18 m roof). Direction 358 turns the lamp bank toward the pitcher's mound."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0975734, 42.3458298] }
+    }
+  ]
+}

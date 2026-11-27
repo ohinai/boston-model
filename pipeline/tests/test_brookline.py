@@ -353,8 +353,8 @@ def test_an_openstreetmap_height_with_the_towns_source_tag_is_not_mistaken_for_o
 
 def test_only_the_boston_area_asks_for_the_towns_data():
     areas = cli._areas()
-    assert cli._extra_sources(areas["boston"]) == ["brookline"]
-    assert cli._extra_sources(areas["pilot"]) == []
+    assert "brookline" in cli._extra_sources(areas["boston"])
+    assert "brookline" not in cli._extra_sources(areas["pilot"])  # the pilot is downtown; it asks for the city's heights only (test_cityheights.py)
     with pytest.raises(SystemExit, match="unknown extra_sources"):
         cli._extra_sources({"extra_sources": ["nowhere"]})
 

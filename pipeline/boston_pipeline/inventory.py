@@ -209,3 +209,26 @@ def reconcile(scene, prefix: str = "bprd:", other: tuple[str, ...] = (), drop_in
         "inventory": len(inventory), "osm": len(osm), "merged": len(matched_inv), "dropped": dropped,
         "kept_osm": len(kept), "added": len(added),
     }
+
+
+# A building's outline with a tree inside it: an inventory point on a roof or in a yard a footprint covers, a footprint drawn
+# over trees. The tree would stand through the roof, so it is dropped. Not for a building too low to be a building (a shed,
+# a kiosk: under TREE_BUILDING_MIN_HEIGHT), an open roof on posts (`building=roof`) or a tree a fix put there on purpose.
+TREE_BUILDING_MIN_HEIGHT = 2.5
+
+
+def drop_trees_in_buildings(scene) -> int:
+    """Remove from `scene.trees`, in place, the trees that stand inside a building's outline; returns how many."""
+    solid = [
+        b.polygon
+        for b in scene.buildings
+        if b.min_height < 1.0 and b.height >= TREE_BUILDING_MIN_HEIGHT and b.tags.get("building") != "roof" and b.tags.get("building:part") != "roof"
+    ]
+    if not solid or not scene.trees:
+        return 0
+    inside = set(STRtree(solid).query(points(np.array([(t.x, t.y) for t in scene.trees], dtype=float).reshape(-1, 2)), predicate="within")[0].tolist())
+    kept = [t for i, t in enumerate(scene.trees) if i not in inside or t.id.startswith("fix:")]
+    dropped = len(scene.trees) - len(kept)
+    scene.trees[:] = kept
+    return dropped
+

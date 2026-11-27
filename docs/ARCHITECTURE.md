@@ -84,7 +84,7 @@ with the same name:
 | `beds` | Planted beds: soil under the whole bed, bare at the edge, and a low mass of planting in from it, with per-vertex colour. Solid | 0, planting 0.35 m |
 | `paths` | Footpaths, plazas, piers, platforms, with per-vertex colour by surface (asphalt, brick, gravel and so on) | 0 |
 | `roads` | Carriageways, with per-vertex colour (worn asphalt) | −0.12 m |
-| `markings` | Road paint: crosswalks, centre lines, lane lines, stop lines, with per-vertex colour. Not solid, no feature ids | 4 cm above the road |
+| `markings` | Road paint (crosswalks, centre lines, lane lines, stop lines) and the lines and nets of pitches and courts (`sports.py`), with per-vertex colour. Not solid, no feature ids | 4 cm above the road, 5 cm above a pitch |
 | `rail` | Surface track | 0 |
 | `water` | Rivers, ponds, harbour | −0.6 m |
 | `curbs` | Vertical faces around roads and water | up to 0 |
@@ -431,8 +431,8 @@ where the city is edited.
 - **Flat-earth placement.** The whole tileset is placed on the globe as one
   plane, which drifts from the curved surface by about 8 m at 10 km from the
   origin. Per-tile placement fixes this when the area grows.
-- **Uncompressed geometry.** The `boston` area is 434 tiles, about 6.6 million
-  triangles and 166 MB, plus 17 MB of far-view files (the downtown pilot inside it
+- **Uncompressed geometry.** The `boston` area is 495 tiles, about 7.8 million
+  triangles and 195 MB, plus 20 MB of far-view files (the downtown pilot inside it
   is 70 tiles and about 1.5 million triangles). The viewer loads the tiles within
   1.2 km of you, about 70, and draws the far copy beyond. Tiles are already written without normals, with shared vertices and
   16-bit indices where they fit. Quantisation and mesh compression are standard

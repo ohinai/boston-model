@@ -19,6 +19,7 @@ FLOOR_HEIGHT = 3.5  # metres per facade floor (one window row)
 # floor(u / SEED_STRIDE) and floor(v / STOREY_STRIDE), so the strides must exceed the largest u
 # (bays in a wall: 255 is 765 m) and the largest v (MAX_STOREYS).
 FACADE_SEEDS = 4  # a wall that starts above the ground adds FACADE_SEEDS to its seed, so seeds 4..7 mean "raised"
+FACADE_STYLE_STRIDE = 8  # a wall of a special style (1: a ballpark's outside wall, see stadium.py) adds style * this to its seed
 SEED_STRIDE = 256.0
 STOREY_STRIDE = 64.0
 MAX_STOREYS = 62
@@ -164,7 +165,7 @@ def facade_seeds(starts: np.ndarray) -> np.ndarray:
 
 
 def facade_u(
-    a: np.ndarray, length: np.ndarray, bays: np.ndarray, raised: bool = False
+    a: np.ndarray, length: np.ndarray, bays: np.ndarray, raised: bool = False, style: int = 0
 ) -> tuple[np.ndarray, np.ndarray]:
     """u at the start and at the end of each wall of a ring, for `add_walls(facade=True)`.
 
@@ -173,9 +174,10 @@ def facade_u(
     to its seed, so the shader draws no shop front or base course on its first storey. A wall too short for a
     bay is blank (u = 0 throughout), except in a run of such walls whose lengths add up to CURVE_MIN or
     more: that is a curved front drawn as many small facets, and u runs on from one facet to the next so
-    the windows carry round the curve instead of the whole front being left bare.
+    the windows carry round the curve instead of the whole front being left bare. A `style` other than 0 asks the shader for a
+    special facade (web/src/facade.ts): it adds style * FACADE_STYLE_STRIDE to the seed.
     """
-    seeds = (facade_seeds(a) + (FACADE_SEEDS if raised else 0)) * SEED_STRIDE
+    seeds = (facade_seeds(a) + (FACADE_SEEDS if raised else 0) + FACADE_STYLE_STRIDE * style) * SEED_STRIDE
     start = np.where(bays > 0, seeds, 0.0)
     end = start + bays
     short = bays == 0

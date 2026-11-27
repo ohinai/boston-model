@@ -137,11 +137,25 @@ recognises them at eye level.
   untouched. Pitched roofs are flat in the far copy.
 - **The west.** A second area, `boston`, adds Back Bay, Kenmore, Fenway, the
   Longwood edge and North Brookline out to Coolidge Corner and Washington Square
-  (434 tiles). The map is downloaded in strips. Brookline's street and park trees
+  and the Brookline Reservoir (495 tiles). The map is downloaded in strips. Brookline's street and park trees
   (7,336) and the heights of 4,095 buildings come from the Town of Brookline's
   public layers, which state no licence and are used on the owner's judgement.
-  Boston's side still guesses about half of its building heights: the city's
-  `boston-buildings-with-roof-breaks` (PDDL, see DATA_SOURCES) would fix them.
+  Boston's side takes its building heights from the city's own roof-break survey
+  (2010, PDDL): 56% of the buildings in the area, so "from default" fell from
+  52% to 9%. Buildings put up since 2010 still guess.
+- **Parks, round 5.** Sports pitches (lines, nets, hoops, goals, 25 baseball diamonds),
+  playgrounds (generic equipment), allotment plots, bandstands, Fenway Park
+  (raked stands, the Green Monster, foul poles, three light towers, the Citgo
+  sign), the Frog Pond, a rebuilt rose garden, fountains and plazas in the South End
+  squares, and about 3,800 trees found in the aerial photograph in parks the
+  inventories do not cover (the Fens, the Esplanade, the Riverway, the Greenway,
+  Columbus Park, the Southwest Corridor, Cambridge). 190 trees that stood inside
+  buildings were dropped, and 81 Brookline records of trees that are gone.
+  Still open: running tracks, batting cages, dugouts, bleachers, Fenway's
+  warning track, netting and press box, pergolas, the Mall's missing statues,
+  species for the trees found from above, trees in private yards (the inventories
+  cover street and park trees only), and parks outside the area (Cambridge's
+  Science Park, Cypress Street Playground's west side).
 
 ### Still to do
 
@@ -190,10 +204,11 @@ After that, parks improve through notes: walk, press N, fix.
 
 ## Next: the rest of the pilot district
 
-- **Measured building heights.** Fill untagged heights from the city's
-  roof-break dataset. 48% are a guess today.
+- **Stepped building shapes.** The roof-break parts the heights come from say where a
+  roof steps (a tower on a podium, a penthouse); today a building takes the one
+  height that covers most of it.
 - **Roof shapes.** Read `roof:shape`, then take detailed roofs from the city's
-  3D model where it has them.
+  3D model where it has them (about 14,500 of 165,000 models; PDDL).
 - **Bridges and tunnels.** Footbridges over water are raised already. Raise
   bridges over roads and rail, road bridges and elevated roads to their real
   level and let walkers pass under them. Open up building passages.

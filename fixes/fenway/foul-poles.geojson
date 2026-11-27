@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "baseball": "foul_pole",
+        "name": "Left-field foul pole",
+        "height": "20",
+        "direction": "90",
+        "why": "Left-field foul pole, at the foot of the Green Monster on the third-base line. The line is the white one drawn from home plate to the wall in the USGS NAIP photograph of 7 July 2023 (about 18 m west of the field's centre, where it meets the wall's face). Height is the wall's 11.33 m plus the 30 ft (9.1 m) that a foul pole stands above a fence: a standard dimension for this kind of thing, not a measurement. Direction 90 is toward fair territory, where the pole's mesh screen is."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0977656, 42.3470846] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "baseball": "foul_pole",
+        "name": "Right-field foul pole",
+        "height": "12",
+        "direction": "0",
+        "why": "Right-field foul pole at the end of the first-base line. Its foot shows as a yellow speck at the line's end where it meets the stands in the USGS NAIP photograph of 7 July 2023, 93 m (306 ft) from home plate. Height is a 3 m fence plus the 30 ft (9.1 m) that a foul pole stands above a fence: a standard dimension for this kind of thing, not a measurement. Direction 0 is toward fair territory (north), where the mesh screen is."
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.0966314, 42.3462362] }
+    }
+  ]
+}

@@ -396,7 +396,7 @@ def _fetch_layer(bbox_wsen, dest: Path, endpoint: str, force: bool) -> Path:
     return dest
 
 
-def _page(endpoint: str, bbox_wsen, offset: int) -> tuple[list[dict], bool]:
+def _page(endpoint: str, bbox_wsen, offset: int, who: str = "the Brookline layer") -> tuple[list[dict], bool]:
     """One page of records starting at `offset`, and whether the server has more."""
     query = urllib.parse.urlencode({
         "where": "1=1",
@@ -430,4 +430,4 @@ def _page(endpoint: str, bbox_wsen, offset: int) -> tuple[list[dict], bool]:
         features = reply["features"]
         exceeded = reply.get("exceededTransferLimit") or (reply.get("properties") or {}).get("exceededTransferLimit")
         return features, bool(exceeded) or len(features) >= PAGE_SIZE
-    raise RuntimeError(f"the Brookline layer {layer} failed {ATTEMPTS} times; the last error was: {last_error}")
+    raise RuntimeError(f"{who} {layer} failed {ATTEMPTS} times; the last error was: {last_error}")

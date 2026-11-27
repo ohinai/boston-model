@@ -11,7 +11,7 @@ from pathlib import Path
 
 from shapely.geometry import box
 
-from . import brookline, fixes, inventory, lookup, osm, world
+from . import brookline, cityheights, fixes, inventory, lookup, osm, world
 from .features import Scene, classify
 from .tiles import build, sea_polygons
 
@@ -39,7 +39,7 @@ def _trees_path(name: str) -> Path:
     return ROOT / "data" / "raw" / name / "trees.json"
 
 
-EXTRA_SOURCES = ("brookline",)  # what an area's `extra_sources` in areas.toml may list
+EXTRA_SOURCES = ("brookline", "city_heights")  # what an area's `extra_sources` in areas.toml may list
 
 
 def _extra_sources(area: dict) -> list[str]:
@@ -72,6 +72,14 @@ def _scene(name: str) -> tuple[Scene, dict, fixes.Applied]:
             town = True
         else:
             print(f"{trees_file.parent} has no Brookline files; run `boston-pipeline fetch {name}` to download the Town of Brookline's layers")
+    # The City of Boston's building survey, for an area that asks for it.
+    city = None
+    if "city_heights" in _extra_sources(_area(name)):
+        city_file = _raw_path(name).parent / cityheights.FILE
+        if city_file.exists():
+            city = cityheights.footprints(json.loads(city_file.read_text(encoding="utf-8")))
+        else:
+            print(f"{city_file} not found; run `boston-pipeline fetch {name}` to download the City of Boston's building heights")
     try:
         applied = fixes.apply(elements, fixes.load(FIXES))
     except fixes.FixError as error:
@@ -81,11 +89,16 @@ def _scene(name: str) -> tuple[Scene, dict, fixes.Applied]:
         # After the fixes, so that a fix's `height` or `building:levels` is never overruled.
         elements, payload["brookline_heights"] = brookline.apply_heights(elements, town_footprints[0])
         payload["brookline_heights"]["set_aside"] = town_footprints[1]
+    if city is not None:
+        # After the fixes, so that a fix's `height` or `building:levels` is never overruled; before the Town's, which covers other buildings.
+        elements, payload["city_heights"] = cityheights.apply_heights(elements, city[0])
+        payload["city_heights"]["set_aside"] = city[1]
     scene = classify(elements)
     # The tree counts travel with the source payload, for the build summary.
     payload["tree_counts"] = inventory.reconcile(scene, other=(brookline.TREE_PREFIX,) if town else ())
     if town:
         payload["brookline_tree_counts"] = inventory.reconcile(scene, brookline.TREE_PREFIX, other=("bprd:",), drop_in_parks=False)
+    payload["trees_in_buildings"] = inventory.drop_trees_in_buildings(scene)  # after every inventory is in
     return scene, payload, applied
 
 
@@ -97,6 +110,8 @@ def cmd_fetch(args) -> None:
     inventory.fetch(bounds, _trees_path(args.area), force=args.force)
     if "brookline" in _extra_sources(_area(args.area)):
         brookline.fetch(bounds, _raw_path(args.area).parent, force=args.force)
+    if "city_heights" in _extra_sources(_area(args.area)):
+        cityheights.fetch(bounds, _raw_path(args.area).parent, force=args.force)
 
 
 def cmd_build(args) -> None:
@@ -117,10 +132,15 @@ def cmd_build(args) -> None:
         f" {stats['streets']:,} street and path segments\n"
         "  building heights: "
         + ", ".join(
-            f"{sources.get(k, 0) * 100 // total}% from {k}" for k in ("height", "levels", "default", "override", "town") if k != "town" or sources.get(k)
+            f"{sources.get(k, 0) * 100 // total}% from {k}" for k in ("height", "levels", "default", "override", "town", "city") if k not in ("town", "city") or sources.get(k)
         )
         + f"\n  fixes applied: {applied.patched} changed, {applied.removed} removed, {applied.added} added"
     )
+    if survey := payload.get("city_heights"):
+        print(
+            f"  City of Boston survey: {survey['given']:,} building heights from the roof-break parts ({survey['over_levels']:,} replace a count of levels;"
+            f" {survey['kept_levels']:,} keep their levels because the survey disagrees by more than a third; {survey['parts']:,} usable parts, set aside: {survey['set_aside']})"
+        )
     if heights := payload.get("brookline_heights"):
         print(
             f"  Brookline: {heights['given']:,} building heights from the Town's footprints"
@@ -135,6 +155,8 @@ def cmd_build(args) -> None:
         )
     if town := payload.get("brookline_tree_counts"):
         print(f"  Brookline trees: {town['inventory']:,} from the Town's inventory, {town['merged']:,} merged with OpenStreetMap trees (the rest of OpenStreetMap's are kept)")
+    if payload.get("trees_in_buildings"):
+        print(f"  {payload['trees_in_buildings']:,} trees dropped because they stand inside a building's outline")
     if applied.unmatched:
         print(
             f"  {len(applied.unmatched)} fixes name features this area does not contain "

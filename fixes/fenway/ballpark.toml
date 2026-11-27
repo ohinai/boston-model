@@ -1,0 +1,55 @@
+# Fenway Park (relation r18354422 and its parts). The shapes come from pipeline/boston_pipeline/stadium.py; these files say
+# which colour each thing is. Colours of surfaces seen from above are measured on the USGS NAIP photograph of 7 July 2023
+# (0.3 m, leaf-on); the brick is the kind of thing (red-brown brick), as the project owner described it.
+
+["r18354422"]
+why = """The stands of Fenway Park. Seat treads (the surface seen from the air) are rust-red in the USGS NAIP photograph of 7 July 2023, about (160, 100, 80) in the south and west stands; the seat backs, which only a walker in the stands sees, are dark green (the project owner's brief). The outside is red-brown brick."""
+set = { "building:colour" = "#86442f", "seat:colour" = "#1f4a36", "seat:tread" = "#9d5d49" }
+
+["w813683142"]
+why = "The third-base grandstand roof is pale blue-green standing-seam metal, about (170, 206, 215) in the USGS NAIP photograph of 7 July 2023 (the data says 'teal', which the model does not know)."
+set = { "building:colour" = "#86442f", "roof:colour" = "#9fc4cc" }
+
+["w813683144"]
+why = "The first-base grandstand roof along Van Ness Street is the same pale blue-green metal, about (170, 206, 215) in the USGS NAIP photograph of 7 July 2023."
+set = { "building:colour" = "#86442f", "roof:colour" = "#9fc4cc" }
+
+["r18354424"]
+why = "The right-field corner's roof is the same pale blue-green metal (USGS NAIP photograph of 7 July 2023)."
+set = { "building:colour" = "#86442f", "roof:colour" = "#9fc4cc" }
+
+["w813683143"]
+why = "The grandstand behind home plate has a pale grey roof with a dark roof deck on top, light grey (about 205, 210, 212) in the USGS NAIP photograph of 7 July 2023 (the data says 'black')."
+set = { "building:colour" = "#86442f", "roof:colour" = "#c9ced1" }
+
+["w813710192"]
+why = "Right-field corner building: red-brown brick, like the rest of the park."
+set = { "building:colour" = "#86442f" }
+
+["w813739687"]
+why = "Outdoor seating deck on the third-base side: red-brown brick, like the rest of the park."
+set = { "building:colour" = "#86442f" }
+
+["w813683149"]
+why = "Outdoor seating deck on the third-base side: red-brown brick, like the rest of the park."
+set = { "building:colour" = "#86442f" }
+
+["w814020183"]
+why = "Outdoor seating deck on the first-base side: red-brown brick, like the rest of the park."
+set = { "building:colour" = "#86442f" }
+
+["w814360194"]
+why = "The low wing along Jersey Street (two storeys) is red-brown brick, like the rest of the park."
+set = { "building:colour" = "#86442f" }
+
+["w813683134"]
+why = "The right-field bleachers have dark green seats with grey aisles in the USGS NAIP photograph of 7 July 2023 (about (95, 100, 85) in shade), and a grey roof."
+set = { "seat:colour" = "#1f4a36", "seat:tread" = "#6f766f", "building:colour" = "#86442f" }
+
+["r11192244"]
+why = "The right-field corner seats are rust-red in the USGS NAIP photograph of 7 July 2023 (as the data says, colour red), with green seat backs like the rest of the park."
+set = { "seat:colour" = "#1f4a36", "seat:tread" = "#a5604d" }
+
+["w813683146"]
+why = "The Green Monster is a dark green wall: 37 ft 2 in (11.33 m) in the data, with its hand-operated scoreboard in the middle. Painted green is the kind of thing; its scoreboard is drawn as a dark panel with pale lines."
+set = { "building:colour" = "#245a3f", "stand:scoreboard" = "yes" }

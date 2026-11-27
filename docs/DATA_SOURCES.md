@@ -97,6 +97,16 @@ this page in the same pull request.
 - **Cannot tell:** when a DBH was measured (every record is stamped 6 March 2026, a migration), whether the 1994 baseline trees
   have been remeasured, which stems a multi-trunk tree's DBH counts, or what is under the 183 footprints with no height.
 
+### City of Boston building survey: roof-break parts
+
+- **Used for:** the `pilot` and `boston` areas (the word `city_heights` in `extra_sources` in `areas.toml`). The height of OpenStreetMap buildings that have no `height` of their own, and a measured height in place of a count of `building:levels` where the two agree. Code: `pipeline/boston_pipeline/cityheights.py`.
+- **Licence:** Open Data Commons Public Domain Dedication and License (PDDL), stated on the Planning Department's [3D data download page](https://www.bostonplans.org/3d-data-maps/3d-smart-model/3d-data-download) (read 27 November 2026), and on data.boston.gov for this dataset. No condition on use; the credit "City of Boston Planning Department building heights" is a courtesy, written into every tile and into `tileset.json`.
+- **Service (public, no key):** https://gis.bostonplans.org/hosting/rest/services/Boston_Buildings/FeatureServer/9 (128,608 parts citywide; 22,920 in the `boston` box). `boston-pipeline fetch` pages through it (2,000 a page) into `data/raw/<area>/city_heights.json`.
+- **Fields used:** IEL_TYPE (BLDG, OUTBLDG; others are ignored), BLDG_HGT_2010.
+- **Units, as checked.** BLDG_HGT_2010 is in FEET above the ground (`ROOF_ELEV_2010` minus `GRND_ELEV_2010`): against the 451 OpenStreetMap buildings of the box with a metric `height` the ratio is 3.29 (74% within 15% of 3.2808), the tallest part is 788 ft (the John Hancock Tower) and a level is 11.8 ft (3.6 m) in the median. It is a 2010 LiDAR survey: a newer building is missing, a demolished one is still there.
+- **How it is used.** A part belongs to an OpenStreetMap building when it overlaps at least half of the smaller of the two; the parts together cover 30% of the building; the height that covers most of the building's area (the area-weighted median) is its height, so a rooftop bulkhead does not make a house a tower. OpenStreetMap's own `height`, `min_height` and `building:min_level` win, so do fixes, and so does a `start_date` after 2010. A count of levels is replaced only when the survey is within 0.7 to 1.4 times what the levels give. In the `boston` build 16,134 buildings get a height this way (3,362 of them had only a count of levels; 643 kept theirs because the survey disagrees): "from default" falls from 52% to 9%. The built tile entry says `"height_source": "city"`.
+- **Not used yet:** the parts' different heights within one building (stepped roofs), and the detailed roof models (see "Building shapes" below).
+
 ### USGS NAIP aerial imagery
 
 - **Used for:** checking the model against a leaf-on photograph: whether a tree
@@ -165,17 +175,6 @@ roughly in the order they would improve accuracy.
 - **Caveat:** the files are LAZ, so the pipeline needs a LAZ reader before it
   can use them.
 
-### Building heights: Boston buildings with roof breaks
-
-- **Would fix:** the 48% of buildings whose height is currently a guess.
-- **What:** city building polygons split at roof-height changes, with
-  `BLDG_HGT_2010`, `ROOF_ELEV_2010` and `GRND_ELEV_2010` attributes. Units are
-  not confirmed (probably feet).
-- **Licence:** Open Data Commons Public Domain Dedication and License (PDDL).
-- **Access:** <https://data.boston.gov/dataset/boston-buildings-with-roof-breaks>;
-  [feature service](https://gis.bostonplans.org/hosting/rest/services/Boston_Buildings/FeatureServer/9)
-  in EPSG:6492.
-
 ### Building shapes: Boston Planning Department 3D model
 
 - **Would fix:** flat roofs, on the buildings the city has modelled in detail.
@@ -185,7 +184,7 @@ roughly in the order they would improve accuracy.
   models, roughly 150 000 are extruded footprints or roofprints and about
   14 500 have real roof detail. These counts were read off the city's scene
   layer statistics and should be re-checked before relying on them.
-- **Licence:** PDDL, stated on the download page.
+- **Licence:** PDDL, stated on the download page (read again 27 November 2026; the project owner has said to use it).
 - **Access:** <https://www.bostonplans.org/3d-data-maps/3d-smart-model/3d-data-download>.
   Files follow
   `https://maps.bostonplans.org/3d/Bos3d_BldgModels_<date>_OBJ/<tile>_BldgModels_OBJ.zip`;

@@ -1,0 +1,127 @@
+# Baseball and softball diamonds: where home plate is and which way it faces (the tags `home_plate`, `direction`, `base_distance`,
+# `infield`; sports.fit_diamond reads them). Fitted to the infield dirt in USGS NAIP (7 July 2023), checked by eye.
+
+["w101673365"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.39) and checked by eye on the photograph. The same photograph shows grass over the outfield, not the bare ground this pitch's surface tag draws, so the surface is set to grass."
+at = [42.351066, -71.137012]
+set = { surface = "grass", home_plate = "42.351066,-71.137012", direction = "320", base_distance = "60 ft" }
+
+["w1164771450"]
+why = "Home plate and direction of the diamond, read off USGS NAIP aerial imagery (7 July 2023): home plate is where the path from the pitching mound ends and the direction runs from it through the mound; 60-foot bases (the mound is 13 to 14 m from home plate) with a grass infield."
+at = [42.336293, -71.142892]
+set = { home_plate = "42.336293,-71.142892", direction = "34", base_distance = "60 ft" }
+
+["w1215881063"]
+why = "Home plate and direction of the diamond, read off USGS NAIP aerial imagery (7 July 2023): home plate is where the path from the pitching mound ends and the direction runs from it through the mound; 60-foot bases (the mound is 13 to 14 m from home plate) with a grass infield."
+at = [42.365449, -71.130727]
+set = { home_plate = "42.365449,-71.130727", direction = "112", base_distance = "60 ft" }
+
+["w1215881064"]
+why = "The outfield is grass, not bare ground: USGS NAIP aerial imagery (7 July 2023) shows dry grass over the whole fan, with a big circle of dirt for the infield (not drawn: where home plate stands could not be worked out)."
+at = [42.365774, -71.130632]
+set = { surface = "grass" }
+
+["w1215881065"]
+why = "The outfield is grass, not bare ground: USGS NAIP aerial imagery (7 July 2023) shows dry grass over the whole fan, with a big circle of dirt for the infield (not drawn: where home plate stands could not be worked out)."
+at = [42.365649, -71.131186]
+set = { surface = "grass" }
+
+["w264946698"]
+why = "Home plate and direction of the diamond, read off USGS NAIP aerial imagery (7 July 2023): home plate is where the path from the pitching mound ends and the direction runs from it through the mound; 60-foot bases (the mound is 13 to 14 m from home plate) with a grass infield."
+at = [42.364625, -71.071424]
+set = { home_plate = "42.364625,-71.071424", direction = "219", base_distance = "60 ft" }
+
+["w264946699"]
+why = "Home plate and direction of the diamond, read off USGS NAIP aerial imagery (7 July 2023): home plate is where the path from the pitching mound ends and the direction runs from it through the mound; 60-foot bases (the mound is 13 to 14 m from home plate) with a grass infield."
+at = [42.363513, -71.072585]
+set = { home_plate = "42.363513,-71.072585", direction = "43", base_distance = "60 ft" }
+
+["w264946700"]
+why = "Home plate and direction of the diamond, read off USGS NAIP aerial imagery (7 July 2023): home plate is where the path from the pitching mound ends and the direction runs from it through the mound; 60-foot bases (the mound is 13 to 14 m from home plate) with a grass infield."
+at = [42.363335, -71.072620]
+set = { home_plate = "42.363335,-71.072620", direction = "140", base_distance = "60 ft" }
+
+["w296376666"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 90-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.27) and checked by eye on the photograph."
+at = [42.357675, -71.099201]
+set = { home_plate = "42.357675,-71.099201", direction = "193", base_distance = "90 ft" }
+
+["w296376668"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with dirt all the way in, placed to overlap the dirt in the photograph as much as it can (overlap 0.40) and checked by eye on the photograph."
+at = [42.357167, -71.100431]
+set = { home_plate = "42.357167,-71.100431", direction = "186", base_distance = "60 ft", infield = "dirt" }
+
+["w304751833"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 70-foot diamond with dirt all the way in, placed to overlap the dirt in the photograph as much as it can (overlap 0.50) and checked by eye on the photograph. The same photograph shows grass over the outfield, not the bare ground this pitch's surface tag draws, so the surface is set to grass."
+at = [42.366282, -71.129888]
+set = { surface = "grass", home_plate = "42.366282,-71.129888", direction = "350", base_distance = "70 ft", infield = "dirt" }
+
+["w307312629"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.37) and checked by eye on the photograph."
+at = [42.339470, -71.115779]
+set = { home_plate = "42.339470,-71.115779", direction = "52", base_distance = "60 ft" }
+
+["w307312631"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.36) and checked by eye on the photograph."
+at = [42.340088, -71.114850]
+set = { home_plate = "42.340088,-71.114850", direction = "223", base_distance = "60 ft" }
+
+["w307318380"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with dirt all the way in, placed to overlap the dirt in the photograph as much as it can (overlap 0.54) and checked by eye on the photograph."
+at = [42.335034, -71.113031]
+set = { home_plate = "42.335034,-71.113031", direction = "166", base_distance = "60 ft", infield = "dirt" }
+
+["w327517389"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 90-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.54) and checked by eye on the photograph."
+at = [42.345495, -71.113456]
+set = { home_plate = "42.345495,-71.113456", direction = "27", base_distance = "90 ft" }
+
+["w327517390"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with dirt all the way in, placed to overlap the dirt in the photograph as much as it can (overlap 0.42) and checked by eye on the photograph."
+at = [42.346465, -71.113855]
+set = { home_plate = "42.346465,-71.113855", direction = "33", base_distance = "60 ft", infield = "dirt" }
+
+["w33526318"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with dirt all the way in, placed to overlap the dirt in the photograph as much as it can (overlap 0.64) and checked by eye on the photograph."
+at = [42.364182, -71.111773]
+set = { home_plate = "42.364182,-71.111773", direction = "236", base_distance = "60 ft", infield = "dirt" }
+
+["w34404715"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.32) and checked by eye on the photograph."
+at = [42.354495, -71.067041]
+set = { home_plate = "42.354495,-71.067041", direction = "207", base_distance = "60 ft" }
+
+["w34404716"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with dirt all the way in, placed to overlap the dirt in the photograph as much as it can (overlap 0.63) and checked by eye on the photograph."
+at = [42.353219, -71.067046]
+set = { home_plate = "42.353219,-71.067046", direction = "13", base_distance = "60 ft", infield = "dirt" }
+
+["w43196788"]
+why = "Home plate and direction of the diamond, read off USGS NAIP aerial imagery (7 July 2023): home plate is where the path from the pitching mound ends and the direction runs from it through the mound; 60-foot bases (the mound is 13 to 14 m from home plate) with a grass infield."
+at = [42.354839, -71.111261]
+set = { home_plate = "42.354839,-71.111261", direction = "41", base_distance = "60 ft" }
+
+["w44239473"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.33) and checked by eye on the photograph."
+at = [42.354122, -71.112914]
+set = { home_plate = "42.354122,-71.112914", direction = "331", base_distance = "60 ft" }
+
+["w580619780"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 90-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.50) and checked by eye on the photograph."
+at = [42.336705, -71.113728]
+set = { home_plate = "42.336705,-71.113728", direction = "324", base_distance = "90 ft" }
+
+["w813965222"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 90-foot diamond with dirt all the way in, placed to overlap the dirt in the photograph as much as it can (overlap 0.45) and checked by eye on the photograph."
+at = [42.333867, -71.080821]
+set = { home_plate = "42.333867,-71.080821", direction = "335", base_distance = "90 ft", infield = "dirt" }
+
+["w85465437"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 90-foot diamond with dirt all the way in, placed to overlap the dirt in the photograph as much as it can (overlap 0.36) and checked by eye on the photograph."
+at = [42.354071, -71.123788]
+set = { home_plate = "42.354071,-71.123788", direction = "236", base_distance = "90 ft", infield = "dirt" }
+
+["w98649637"]
+why = "Home plate, direction and base distance of the diamond fitted to the infield dirt in USGS NAIP aerial imagery (7 July 2023): the predicted skin of a 60-foot diamond with a grass infield, placed to overlap the dirt in the photograph as much as it can (overlap 0.34) and checked by eye on the photograph."
+at = [42.343370, -71.066824]
+set = { home_plate = "42.343370,-71.066824", direction = "342", base_distance = "60 ft" }

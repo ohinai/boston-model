@@ -385,9 +385,12 @@ async function boot(): Promise<void> {
   credit.target = '_blank';
   credit.rel = 'noopener';
   credit.textContent = 'OpenStreetMap contributors';
-  // The tileset's own credit names every source the area uses beyond OpenStreetMap (today: the Town of Brookline).
-  const town = city.attribution.includes('Town of Brookline') ? ', Town of Brookline' : '';
-  element('attribution').append('Map data © ', credit, town, date ? `, ${date}` : '');
+  // The tileset's own credit names every source the area uses beyond OpenStreetMap (today: the Town of Brookline, the City of Boston).
+  const others = [
+    ...(city.attribution.includes('Town of Brookline') ? ['Town of Brookline'] : []),
+    ...(city.attribution.includes('City of Boston') ? ['City of Boston'] : []),
+  ].map((name) => `, ${name}`).join('');
+  element('attribution').append('Map data © ', credit, others, date ? `, ${date}` : '');
 
   let last = performance.now();
   let slowTick = 0;

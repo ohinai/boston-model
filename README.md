@@ -27,7 +27,7 @@ Early. Two areas can be built. The pilot is about 4.6 km² of downtown covering
 Boston Common, the Public Garden, Beacon Hill, Downtown Crossing, Government
 Center, the Financial District and the waterfront. The published area, `boston`,
 adds Back Bay, Kenmore, Fenway, the Longwood edge and North Brookline out to
-Coolidge Corner and Washington Square: about 28 km², 434 tiles.
+Coolidge Corner, Washington Square and the Brookline Reservoir: about 32 km², 495 tiles.
 
 What works today:
 
@@ -35,10 +35,12 @@ What works today:
   from OpenStreetMap.
 - About 5,800 trees, mostly from the City of Boston tree inventory, drawn by
   species and trunk size.
-- Park detail: paths in the colour of their surface, lawns, pitches and
-  playgrounds told apart, planted beds, benches, lamp posts, litter bins,
-  drinking fountains, and statues, memorials and fountains as placeholders of
-  the right kind and size.
+- Park detail: paths in the colour of their surface, lawns, planted beds,
+  benches, lamp posts, litter bins, drinking fountains, and statues, memorials
+  and fountains as placeholders of the right kind and size. Pitches and courts
+  have their lines, nets, hoops, goals and diamonds; playgrounds have equipment,
+  and allotments their plots. Fenway Park has raked stands, the Green Monster,
+  foul poles and light towers.
 - Footbridges over water drawn as raised decks with railings.
 - Fences, walls, retaining walls, hedges, post-and-chain fences, guard rails,
   kerbs and bollards, opened where paths cross them. The Public Garden lagoon
@@ -96,7 +98,7 @@ boston-pipeline fetch pilot       # downloads about 13 MB: OpenStreetMap and the
 boston-pipeline build pilot       # writes web/public/tiles
 # or the whole published area, Back Bay to Coolidge Corner (about 45 MB of map data, fetched in strips)
 boston-pipeline fetch boston
-boston-pipeline build boston      # 434 tiles, a couple of minutes
+boston-pipeline build boston      # 495 tiles, a few minutes
 
 # 2. Walk around
 cd web

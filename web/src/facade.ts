@@ -6,8 +6,8 @@ import type { MeshStandardMaterial } from 'three';
  * cornice here is computed from the cell coordinates, so it costs no extra triangles or downloads.
  *
  * What the shader reads from a wall:
- *   vUv.x  = (per-wall seed, 0 to 3, plus 4 if the wall starts above the ground) * 256 + the bay number
- *            along the wall.
+ *   vUv.x  = (per-wall seed, 0 to 3, plus 4 if the wall starts above the ground, plus 8 times the wall's style) * 256
+ *            + the bay number along the wall. Style 1 is a ballpark's outside wall (pipeline/boston_pipeline/stadium.py).
  *   vUv.y  = (number of storeys) * 64 + the storey number up the wall, so the top of the wall is known
  *            (for the cornice). Both offsets are whole numbers; the cell pattern repeats once per unit
  *            and does not notice them. mesh.py (`add_walls(facade=True)`) writes them.
@@ -127,15 +127,8 @@ const FACADE_FUNCTIONS = /* glsl */ `
     return mix(base * 1.3, vec3(0.36, 0.34, 0.31), 0.65);
   }
 
-  // Walls of brick or cut stone with punched windows.
-  vec3 fPunched(vec3 base, vec2 f, vec2 id, vec2 fw, float floors, float v, float topDist,
-                float seed, bool brick, float detail, float fine) {
-    bool ground = id.y < 0.5 && !fRaised;
-    bool topRow = floors > 0.5 && id.y > floors - 1.5;
-    float seed2 = fHash(vec2(seed * 13.7, 2.1));
-    float seed3 = fHash(vec2(seed * 5.3, 8.7));
-
-    // The wall itself: courses of brick, or blocks of stone.
+  // The wall itself: courses of brick, or blocks of stone (with a heavier bed joint on a ground floor of stone).
+  vec3 fCourses(vec3 base, vec2 f, vec2 id, vec2 fw, float seed, bool brick, bool ground) {
     float courses = brick ? 46.0 : 9.0;
     float perBay = brick ? 15.0 : 3.0;
     float bed = brick ? 0.16 : (ground ? 0.16 : 0.07);
@@ -163,6 +156,18 @@ const FACADE_FUNCTIONS = /* glsl */ `
     vec3 wall = mix(block, mortar, joints);
     // A cell's tone drifts a little from one bay to the next.
     wall *= mix(1.0, mix(0.95, 1.05, fHash(id + seed)), fVary);
+    return wall;
+  }
+
+  // Walls of brick or cut stone with punched windows.
+  vec3 fPunched(vec3 base, vec2 f, vec2 id, vec2 fw, float floors, float v, float topDist,
+                float seed, bool brick, float detail, float fine) {
+    bool ground = id.y < 0.5 && !fRaised;
+    bool topRow = floors > 0.5 && id.y > floors - 1.5;
+    float seed2 = fHash(vec2(seed * 13.7, 2.1));
+    float seed3 = fHash(vec2(seed * 5.3, 8.7));
+
+    vec3 wall = fCourses(base, f, id, fw, seed, brick, ground);
 
     // Trim: pale limestone round brick, a moulded surround on stone.
     vec3 trim = brick ? vec3(0.46, 0.44, 0.40) : base * 1.14;
@@ -215,6 +220,66 @@ const FACADE_FUNCTIONS = /* glsl */ `
     colour = mix(colour, trim, cornice * trimVis);
 
     return colour;
+  }
+
+  // Whether a point of a cell lies inside an arch (metres, so that the semicircle is round): a box from y0 to the springing line
+  // and a semicircle over it up to y1, centred on cx and halfW wide each side, all in cell fractions. 1 inside, 0 outside, smooth at the edge.
+  float fArch(vec2 f, vec2 fw, float cx, float halfW, float y0, float y1) {
+    float r = halfW * BAY;
+    vec2 p = vec2((f.x - cx) * BAY, f.y * STOREY);
+    float yc = y1 * STOREY - r;
+    float dBox = max(abs(p.x) - r, max(y0 * STOREY - p.y, p.y - yc));
+    float dCirc = length(p - vec2(0.0, yc)) - r;
+    float px = max(max(fw.x * BAY, fw.y * STOREY), 1e-4);
+    return clamp(0.5 - min(dBox, dCirc) / px, 0.0, 1.0);
+  }
+
+  // The outside of a ballpark: brick with lighter pilasters at the bay lines, an arched steel gate in every third bay of the ground
+  // storey (a recessed brick panel in the others), tall arched windows above, a dark base course, a band under the cornice.
+  vec3 fBallpark(vec3 base, vec2 f, vec2 id, vec2 fw, float floors, float topDist, float seed, float fine) {
+    bool ground = id.y < 0.5 && !fRaised;
+    bool topRow = floors > 0.5 && id.y > floors - 1.5;
+    vec3 wall = fCourses(base, f, id, fw, seed, true, ground);
+    float trimVis = 1.0 - smoothstep(0.08, 0.22, max(fw.x, fw.y));
+    float pilaster = clamp(fBand(f.x, -0.07, 0.07, fw.x), 0.0, 1.0) * trimVis;
+    wall = mix(wall, base * 0.95 + vec3(0.02), pilaster * 0.55);
+    vec3 trim = vec3(0.46, 0.44, 0.40);
+    vec3 colour = wall;
+    fGlass = 0.0;
+    fEmit = vec3(0.0);
+    bool gate = ground && mod(id.x + floor(seed * 3.0), 3.0) < 0.5;
+    if (gate) {
+      float hole = fArch(f, fw, 0.5, 0.31, 0.0, 0.82);
+      float ring = fArch(f, fw, 0.5, 0.35, 0.0, 0.88) - hole;
+      float bars = fBand(f.x * 6.0 + 0.5, -0.07, 0.07, fw.x * 6.0);
+      vec3 steel = mix(vec3(0.012, 0.055, 0.035), vec3(0.035, 0.11, 0.07), clamp(bars, 0.0, 1.0) * trimVis);
+      colour = mix(colour, trim, clamp(ring, 0.0, 1.0) * trimVis);
+      colour = mix(colour, steel, hole);
+    } else if (ground) {
+      float panel = fBox(f, vec2(0.17, 0.12), vec2(0.83, 0.74), fw);
+      colour *= 1.0 - 0.22 * panel * trimVis;
+    } else {
+      float hole = fArch(f, fw, 0.5, 0.19, 0.20, topRow ? 0.74 : 0.80);
+      float ring = fArch(f, fw, 0.5, 0.225, 0.17, topRow ? 0.775 : 0.835) - hole;
+      colour = mix(colour, trim, clamp(ring, 0.0, 1.0) * trimVis);
+      vec3 pane = fInterior(id, 0.0);
+      float mullion = fBox(f, vec2(0.485, 0.0), vec2(0.515, 1.0), fw) * fine;
+      colour = mix(colour, mix(pane, vec3(0.05, 0.055, 0.05), mullion), hole);
+      fGlass = hole * (1.0 - mullion);
+      fEmit = fReflection(0.10, id, vec3(1.0)) * fGlass;
+    }
+    if (ground) {
+      float plinth = fCover(f.y, 0.0, 0.10, fw.y);
+      colour = mix(colour, base * 0.35 + vec3(0.012), plinth * trimVis);
+    }
+    if (topRow) {
+      float band = fBox(f, vec2(-1.0, 0.85), vec2(2.0, 0.97), fw);
+      colour = mix(colour, base * 0.45 + vec3(0.0, 0.012, 0.006), band * trimVis);
+    }
+    float cornice = fCover(topDist, 0.0, 0.10, fw.y) * step(0.0, 8.0 - topDist);
+    float eaves = fCover(topDist, 0.10, 0.16, fw.y) * step(0.0, 8.0 - topDist);
+    colour *= 1.0 - 0.45 * eaves * trimVis;
+    return mix(colour, trim, cornice * trimVis);
   }
 
   // Concrete and stone towers: bands of glass between precast spandrels.
@@ -275,6 +340,8 @@ const FACADE_FUNCTIONS = /* glsl */ `
     float floors = floor(raw.y / 64.0 + 0.004);   // the number of storeys in this wall; 0 if not known
     float v = raw.y - 64.0 * floors;              // storeys up the wall
     float wallSeed = floor((raw.x + 0.5) / 256.0);
+    float special = floor(wallSeed / 8.0);        // 8 or more: a special style of wall (mesh.py FACADE_STYLE_STRIDE); 1 is a ballpark's outside
+    wallSeed -= 8.0 * special;
     fRaised = wallSeed > 3.5;                     // seeds 4 to 7 mark a wall that starts above the ground (mesh.py FACADE_SEEDS)
     if (fRaised) wallSeed -= 4.0;
 
@@ -326,7 +393,9 @@ const FACADE_FUNCTIONS = /* glsl */ `
 
     vec3 nearColour = farColour;
     if (detail > 0.004) {
-      if (style == 2) {
+      if (special > 0.5) {
+        nearColour = fBallpark(base, f, id, fw, floors, topDist, seed, fine);
+      } else if (style == 2) {
         nearColour = fCurtain(base, f, id, fw, floors, topDist, seed, detail, fine);
       } else if (style == 1) {
         nearColour = fRibbon(base, f, id, fw, floors, topDist, seed, detail, fine);
