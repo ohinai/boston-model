@@ -208,7 +208,9 @@ After that, parks improve through notes: walk, press N, fix.
   roof steps (a tower on a podium, a penthouse); today a building takes the one
   height that covers most of it.
 - **Roof shapes.** Read `roof:shape`, then take detailed roofs from the city's
-  3D model where it has them (about 14,500 of 165,000 models; PDDL).
+  3D model where it has them: 86% of the 11,235 buildings in the `boston` area have real roofs in it (about a quarter pitched, a third
+  stepped; PDDL). The plan, with the matching rule, the vertical rule and a cost of about +1.7 million triangles (half that with
+  simplification), is in [CITY_3D_MODEL.md](CITY_3D_MODEL.md).
 - **Bridges and tunnels.** Footbridges over water are raised already. Raise
   bridges over roads and rail, road bridges and elevated roads to their real
   level and let walkers pass under them. Open up building passages.

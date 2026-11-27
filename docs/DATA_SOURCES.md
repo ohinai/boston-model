@@ -177,20 +177,12 @@ roughly in the order they would improve accuracy.
 
 ### Building shapes: Boston Planning Department 3D model
 
-- **Would fix:** flat roofs, on the buildings the city has modelled in detail.
-- **What:** a citywide 3D model in 5 000 ft tiles. Per tile: SketchUp scene,
-  per-building OBJ with JSON attributes, terrain mesh, ground plan.
-- **Caveat:** most of it is block massing, not detailed roofs. Of about 165 000
-  models, roughly 150 000 are extruded footprints or roofprints and about
-  14 500 have real roof detail. These counts were read off the city's scene
-  layer statistics and should be re-checked before relying on them.
+- **Would fix:** flat roofs and plain blocks: pitched roofs on about a quarter of the buildings, stepped roofs (podium, tower, penthouses) on a third.
 - **Licence:** PDDL, stated on the download page (read again 27 November 2026; the project owner has said to use it).
-- **Access:** <https://www.bostonplans.org/3d-data-maps/3d-smart-model/3d-data-download>.
-  Files follow
-  `https://maps.bostonplans.org/3d/Bos3d_BldgModels_<date>_OBJ/<tile>_BldgModels_OBJ.zip`;
-  the date changes with each release.
-- **Coordinates:** Massachusetts State Plane feet (EPSG:2249), NAVD88 feet, with
-  models offset from a local origin at X 731 100 ft, Y 2 902 900 ft.
+- **What it holds** (measured 27 November 2026; the full study, with the tile grid, the file structure, the placement formula and the traps, is [CITY_3D_MODEL.md](CITY_3D_MODEL.md)): 103 tiles of 5,000 ft, `BOS_<column A to O>_<row 1 to 13>`; per tile a zip of one nested zip per model (an OBJ in US survey feet, EPSG:2249, z up, triangles, normals, no colours or UVs; a 50-key JSON; a white material) and a catalog with WGS84 footprints. Our area needs 22 tiles (208 MB, 16 of them hold nearly every building). Citywide 169,030 models, 119,443 of them buildings; in our area 11,235 existing ones, of which 86.5% are CyberCity 3D models with real roofs (the city labels most of them "LOD 1.5") and 11.9% plain extrusions. In two central tiles 27% had pitched roofs, 31% stepped flat roofs and 41% one flat roof. The earlier belief that only 14,500 of 165,000 have roof detail was wrong: that counts `Model_LOD` 2 and up.
+- **Registration:** the OBJ frame is the project's own (world metres = (feet + origin) x 1200/3937 - world origin, to 0.1 mm); the measured offset to OpenStreetMap is 0.11 m east, 0.68 m north. There is no key shared with OpenStreetMap or the roof-break layer: match by geometry (58% of models sit inside one OpenStreetMap polygon, 28% span several, 14% have none).
+- **Traps:** `Height_Ft` and `Gnd_El_Ft` run about 22 ft high (use the geometry's z, which agrees with the roof-break layer to about 3 ft); 9.5% of the buildings are `History` (demolished); the model does not cover Brookline proper.
+- **Access:** the download page links to an ArcGIS Experience whose web map holds the tile index layer (`Bos3D_TileGrid_PopUps_<date>`); the file link template is in that layer item's popup. Today `https://maps.bostonplans.org/3d/Bos3d_BldgModels_20260624_OBJ/<tile>_BldgModels_OBJ.zip`; the release changes about twice a year and the old index service vanishes, so a pipeline step must look the current one up.
 
 ### Street detail: Analyze Boston
 
